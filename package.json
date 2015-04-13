@@ -1,0 +1,11 @@
+{
+  "name": "Mastering-Data-Mining-and-Analytics",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www.js"
+  },
+  "dependencies": {
+    "elasticsearch": "^4.0.2"
+  }
+}
