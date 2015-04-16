@@ -3,9 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www.js"
+    "start": "node ./main.js"
   },
   "dependencies": {
-    "elasticsearch": "^4.0.2"
+    "cli-table": "^0.3.1",
+    "elasticsearch": "^4.0.2",
+    "twitter": "^1.2.5"
   }
 }
