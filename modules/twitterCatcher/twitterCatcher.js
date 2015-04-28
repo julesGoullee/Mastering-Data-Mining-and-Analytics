@@ -4,7 +4,7 @@ var twtClient = require('./twitterConnector.js').client();
 var config = require('../../config/config.js');
 var esConnector = require('../elasticSearch/elasticSearchConnector.js');
 var esClient = esConnector.client();
-var socketHandler = require('../socketHandler/socketHandler.js');
+var clientNotifier = require('../clientNotifier/clientNotifier.js');
 var Table = require('cli-table');
 
 function esData ( author, lang, content){
@@ -46,7 +46,7 @@ module.exports = {
                             debugger;
                         }
                         else{
-                            socketHandler.onNewTweet();
+                            clientNotifier.onNewTweet();
                         }
                     });
                 }
