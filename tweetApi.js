@@ -17,7 +17,7 @@ var client = new Twitter({
     access_token_secret: "rNz13tQIIpat5j4vVUDzzgxXcjQzVrUNyuWbLI6mtjmAX"
 });
 
-var track = 'trackhastag';
+var track = 'mdma';
 
 client.stream('statuses/filter', {track: track},  function( stream ){
 

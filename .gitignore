@@ -1,4 +1,4 @@
 node_modules/
-elasticsearch-head/
 .idea/
 text
+utils/elasticsearch-head
