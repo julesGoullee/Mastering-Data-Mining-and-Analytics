@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/css/style.css' />
-    <script src='socket.io/socket.io.js'></script>
-    <script src='modules/socket.js'></script>
-  </head>
-  <body>
+    <head>
+        <title><%= title %></title>
+        <meta charset="UTF-8">
+
+        <!--Script Module-->
+        <% dependances.scripts.forEach(function(script, index) { %>
+        <script src="<%= script %>.js"></script>
+        <% }); %>
+
+        <!--CSS Module-->
+        <% dependances.css.forEach(function(css, index) { %>
+        <link rel="stylesheet" type="text/css" href="<%= css %>.css">
+        <% }); %>
+
+    </head>
+<body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
-  <table  ><tbody id="tab"></tbody></table>
-  </body>
+    <table>
+        <tbody id="tab"></tbody>
+    </table>
+</body>
 </html>

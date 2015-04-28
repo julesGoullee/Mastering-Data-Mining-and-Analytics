@@ -113,35 +113,6 @@ module.exports = function(grunt) {
             },
             bowerDev:{
                 files : [
-                    //bootstrap
-                    {
-                        src: "bower_components/bootstrap/dist/css/bootstrap.css",
-                        dest: "public/external/bootstrap.css"
-                    },
-                    {
-                        src: "bower_components/bootstrap/dist/css/bootstrap.css.map",
-                        dest: "public/external/bootstrap.css.map"
-                    },
-                    {
-                        src: "bower_components/bootstrap/dist/css/bootstrap-theme.css.map",
-                        dest: "public/external/bootstrap-theme.css.map"
-                    },
-                    {
-                        src: "bower_components/bootstrap/dist/css/bootstrap-theme.css",
-                        dest: "public/external/bootstrap-theme.css"
-                    },
-                    {
-                        src: "bower_components/bootstrap/dist/js/bootstrap.js",
-                        dest: "public/external/bootstrap.js"
-                    },
-                    {
-                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
-                        dest: "public/fonts/glyphicons-halflings-regular.ttf"
-                    },
-                    {
-                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
-                        dest: "public/fonts/glyphicons-halflings-regular.woff"
-                    },
                     //jquery
                     {
                         src: "bower_components/jquery/dist/jquery.js",

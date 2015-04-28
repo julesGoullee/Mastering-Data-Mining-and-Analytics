@@ -52,8 +52,8 @@ app.use(function(err, req, res, next) {
 });
 
 
-var twitterCatcher = require('./modules/twitterCatcher/twitterCatcher.js');
-
-twitterCatcher.start();
+//var twitterCatcher = require('./modules/twitterCatcher/twitterCatcher.js');
+//
+//twitterCatcher.start();
 
 module.exports = app;
