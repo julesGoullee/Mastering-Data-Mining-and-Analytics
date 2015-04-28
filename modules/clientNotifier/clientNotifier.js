@@ -20,7 +20,7 @@ function search(){
                 test: {
                     terms: {
                         field: "content",
-                        min_doc_count: 2,
+                        min_doc_count: 3,
                         "size" : 1000
                     }
                 }
@@ -78,10 +78,10 @@ function search(){
         var tab = [];
         for( var i = 0; i < aggr.length; i++ ){
 
-            //if( aggr[i].key.length > 4){
+            if( aggr[i].key.length > 4){
             tab.push([aggr[i].key + " " + aggr[i].doc_count]);
             table.push([aggr[i].key,  aggr[i].doc_count]);
-            //}
+            }
         }
         socketHandler.notifyAll("newRepresentation" , tab );
         console.log(table.toString());

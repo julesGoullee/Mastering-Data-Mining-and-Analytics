@@ -1,0 +1,8 @@
+{
+  "name": "Mastering-Data-Mining-and-Analytics",
+  "version": "0.0.0",
+  "dependencies": {
+    "jquery": "latest",
+    "bootstrap": "latest"
+  }
+}
