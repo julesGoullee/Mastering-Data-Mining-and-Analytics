@@ -78,6 +78,7 @@ module.exports = function(grunt) {
             bowerProd:{
 
                 files : [
+                    //bootstrap
                     {
                         src: "bower_components/bootstrap/dist/css/bootstrap.min.css",
                         dest: "public/external/bootstrap.css"
@@ -91,26 +92,28 @@ module.exports = function(grunt) {
                         dest: "public/external/bootstrap.js"
                     },
                     {
-                        src: "bower_components/jquery/dist/jquery.min.js",
-                        dest: "public/external/jquery.js"
-                    },
-                    {
-                        src: "bower_components/jquery/dist/jquery.min.map",
-                        dest: "public/external/jquery.min.map"
-                    },
-                    {
                         src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
                         dest: "public/fonts/glyphicons-halflings-regular.ttf"
                     },
                     {
                         src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
                         dest: "public/fonts/glyphicons-halflings-regular.woff"
+                    },
+                    //jquery
+                    {
+                        src: "bower_components/jquery/dist/jquery.min.js",
+                        dest: "public/external/jquery.js"
+                    },
+                    {
+                        src: "bower_components/jquery/dist/jquery.min.map",
+                        dest: "public/external/jquery.min.map"
                     }
 
                 ]
             },
             bowerDev:{
                 files : [
+                    //bootstrap
                     {
                         src: "bower_components/bootstrap/dist/css/bootstrap.css",
                         dest: "public/external/bootstrap.css"
@@ -132,6 +135,15 @@ module.exports = function(grunt) {
                         dest: "public/external/bootstrap.js"
                     },
                     {
+                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
+                        dest: "public/fonts/glyphicons-halflings-regular.ttf"
+                    },
+                    {
+                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
+                        dest: "public/fonts/glyphicons-halflings-regular.woff"
+                    },
+                    //jquery
+                    {
                         src: "bower_components/jquery/dist/jquery.js",
                         dest: "public/external/jquery.js"
                     },
@@ -139,13 +151,30 @@ module.exports = function(grunt) {
                         src: "bower_components/jquery/dist/jquery.min.map",
                         dest: "public/external/jquery.min.map"
                     },
+                    //angularjs
                     {
-                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
-                        dest: "public/fonts/glyphicons-halflings-regular.ttf"
+                        src: "bower_components/angular/angular.js",
+                        dest: "public/external/angular.js"
                     },
                     {
-                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
-                        dest: "public/fonts/glyphicons-halflings-regular.woff"
+                        src: "bower_components/angular/angular.js",
+                        dest: "public/external/angular.js"
+                    },
+                    {
+                        src: "bower_components/angular-animate/angular-animate.js",
+                        dest: "public/external/angular-animate.js"
+                    },
+                    {
+                        src: "bower_components/angular-aria/angular-aria.js",
+                        dest: "public/external/angular-aria.js"
+                    },
+                    {
+                        src: "bower_components/angular-material/angular-material.js",
+                        dest: "public/external/angular-material.js"
+                    },
+                    {
+                        src: "bower_components/angular-material/angular-material.css",
+                        dest: "public/external/angular-material.css"
                     }
                 ]
             }

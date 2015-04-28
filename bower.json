@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "dependencies": {
     "jquery": "latest",
-    "bootstrap": "latest"
+    "bootstrap": "latest",
+    "angular": "latest",
+    "angular-material": "latest"
   }
 }
