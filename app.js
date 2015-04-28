@@ -1,10 +1,11 @@
+'use strict';
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -18,9 +19,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
+//routes
 app.use('/', routes);
 app.use('/users', users);
 
@@ -51,5 +52,9 @@ app.use(function(err, req, res, next) {
   });
 });
 
+
+var twitterCatcher = require('./modules/twitterCatcher/twitterCatcher.js');
+
+twitterCatcher.start();
 
 module.exports = app;

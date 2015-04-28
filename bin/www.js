@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+'use strict';
 
 var app = require('../app');
 var debug = require('debug')('mastering-data-mining-and-analytics:server');

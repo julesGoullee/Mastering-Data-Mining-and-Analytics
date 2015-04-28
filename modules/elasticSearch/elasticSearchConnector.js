@@ -1,9 +1,23 @@
 "use strict";
 
 var elasticsearch = require('elasticsearch');
+
 var client = new elasticsearch.Client({
     host: '192.168.56.102:9200'
 });
+
+module.exports = {
+    client : function(){
+        return client;
+    }
+};
+
+//client.count(function (error, response, status) {
+//    // check for and handle error
+//    var count = response.count;
+//    //debugger;
+//});
+
 
 //client.ping({
 //    // ping usually has a 3000ms timeout
@@ -51,15 +65,3 @@ var client = new elasticsearch.Client({
 //
 //});
 //
-
-
-
-
-module.exports = {
-    client : client
-};
-//client.count(function (error, response, status) {
-//    // check for and handle error
-//    var count = response.count;
-//    //debugger;
-//});

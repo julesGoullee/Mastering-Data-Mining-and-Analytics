@@ -1,5 +1,6 @@
 "use strict";
-var clientES = require("./elasticSearch/elasticSearch.js").client;
+
+var esClient = require("./elasticSearch/elasticSearchConnector.js").client();
 var fs = require("fs");
 var Table = require('cli-table');
 
@@ -11,7 +12,7 @@ function insertFiletext(){
 
     for ( var i = 0; i < quotes.length; i++ ){
 
-        var insertDataEs = clientES.create({
+        var insertDataEs = esClient.create({
             index: 'text',
             type: 'test',
             body: {
@@ -35,7 +36,7 @@ function insertFiletext(){
 
 function search(){
 
-    var req = clientES.search({
+    var req = esClient.search({
         index: "twitter",
         body:{
             query: {
