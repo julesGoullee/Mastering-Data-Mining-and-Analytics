@@ -1,1 +1,22 @@
-body{padding:50px;font:14px "Lucida Grande",Helvetica,Arial,sans-serif}a{color:#00B7FF}
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+.home-container {
+  height: 100%;
+  width: 100%;
+}
+.home-container img {
+  height: 100%;
+  width: 100%;
+}
+.home-container .title {
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  text-align: center;
+  left: 35%;
+}
