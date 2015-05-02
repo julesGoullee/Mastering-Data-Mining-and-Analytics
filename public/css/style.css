@@ -3,7 +3,6 @@ body {
   margin: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
 }
 .home-container {
   height: 100%;
@@ -19,4 +18,18 @@ body {
   width: 30%;
   text-align: center;
   left: 35%;
+}
+.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 1.5px;
+}
+.node circle {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+text {
+  font: 10px sans-serif;
+  pointer-events: none;
 }

@@ -5,6 +5,7 @@
     "jquery": "latest",
     "angular": "latest",
     "angular-material": "latest",
-    "angular-socket-io": "latest"
+    "angular-socket-io": "latest",
+    "d3": "latest"
   }
 }

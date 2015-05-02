@@ -1,0 +1,973 @@
+[
+  {
+    "level": 0,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "royalbaby",
+        "occurence": 25,
+        "date": "Sat May 02 2015",
+        "references": []
+      }
+    ]
+  },
+  {
+    "level": 1,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "princess",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royalbaby"
+        ]
+      },
+      {
+        "word": "names",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royalbaby"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "hospital",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "princess"
+        ]
+      },
+      {
+        "word": "usnxoao3si",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "names"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 3,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "prince",
+        "occurence": 17,
+        "date": "Sat May 02 2015",
+        "references": [
+          "hospital"
+        ]
+      },
+      {
+        "word": "heardonfriends",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "usnxoao3si"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 4,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "william",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "prince"
+        ]
+      },
+      {
+        "word": "looks",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "prince"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 5,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "royal",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "william"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 6,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "their",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royal"
+        ]
+      },
+      {
+        "word": "daughter",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royal"
+        ]
+      },
+      {
+        "word": "bridge",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royal"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 7,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "catherine",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "daughter",
+          "their"
+        ]
+      },
+      {
+        "word": "3n4qhpq2zu",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "daughter",
+          "their"
+        ]
+      },
+      {
+        "word": "couple",
+        "occurence": 17,
+        "date": "Sat May 02 2015",
+        "references": [
+          "their",
+          "daughter"
+        ]
+      },
+      {
+        "word": "bbcbreaking",
+        "occurence": 17,
+        "date": "Sat May 02 2015",
+        "references": [
+          "daughter",
+          "their"
+        ]
+      },
+      {
+        "word": "leave",
+        "occurence": 18,
+        "date": "Sat May 02 2015",
+        "references": [
+          "daughter",
+          "their"
+        ]
+      },
+      {
+        "word": "carrying",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "daughter",
+          "their"
+        ]
+      },
+      {
+        "word": "middleton",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "their",
+          "daughter"
+        ]
+      },
+      {
+        "word": "tower",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "bridge"
+        ]
+      },
+      {
+        "word": "_snape_",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "daughter"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 8,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "world",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "couple"
+        ]
+      },
+      {
+        "word": "hours",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "couple"
+        ]
+      },
+      {
+        "word": "britishroyals",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "bbcbreaking"
+        ]
+      },
+      {
+        "word": "9wivmszz2x",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "middleton"
+        ]
+      },
+      {
+        "word": "gg_quotes",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "middleton"
+        ]
+      },
+      {
+        "word": "middleton's",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "_snape_"
+        ]
+      },
+      {
+        "word": "adorable",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "middleton"
+        ]
+      },
+      {
+        "word": "absolutely",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "middleton"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 9,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "https",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "world"
+        ]
+      },
+      {
+        "word": "first",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "hours",
+          "world"
+        ]
+      },
+      {
+        "word": "katemiddleton",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "hours"
+        ]
+      },
+      {
+        "word": "cuteness",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "9wivmszz2x",
+          "gg_quotes"
+        ]
+      },
+      {
+        "word": "royallykate",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "world"
+        ]
+      },
+      {
+        "word": "about",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "world"
+        ]
+      },
+      {
+        "word": "charles_hrh",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "world"
+        ]
+      },
+      {
+        "word": "can't",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "hours",
+          "world"
+        ]
+      },
+      {
+        "word": "today",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "hours"
+        ]
+      },
+      {
+        "word": "possibly",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "middleton's"
+        ]
+      },
+      {
+        "word": "successful",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "middleton's"
+        ]
+      },
+      {
+        "word": "closeup",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "britishroyals"
+        ]
+      },
+      {
+        "word": "rgbfo28r",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "britishroyals"
+        ]
+      },
+      {
+        "word": "stillwell",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "britishroyals"
+        ]
+      },
+      {
+        "word": "eonline",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "adorable"
+        ]
+      },
+      {
+        "word": "video",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "world"
+        ]
+      },
+      {
+        "word": "better",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "hours",
+          "world"
+        ]
+      },
+      {
+        "word": "bbcnews",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "world"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 10,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "after",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "delivery",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "george",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "https"
+        ]
+      },
+      {
+        "word": "perfect",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "birth",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "duchess",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "cambridge",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "looking",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton",
+          "https"
+        ]
+      },
+      {
+        "word": "emerges",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "royalblowout",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "mikesington",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "il59rfhqsd",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "congratulations",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "people",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "little",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "glimpse",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "https"
+        ]
+      },
+      {
+        "word": "congrats",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "beautiful",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "welcome",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "newborn",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "cambridge's",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "family",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "diana",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https"
+        ]
+      },
+      {
+        "word": "already",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "she's",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "about"
+        ]
+      },
+      {
+        "word": "gives",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "watch",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "about"
+        ]
+      },
+      {
+        "word": "could",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "sister",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "https"
+        ]
+      },
+      {
+        "word": "friend",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "can't"
+        ]
+      },
+      {
+        "word": "hotelt",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "can't"
+        ]
+      },
+      {
+        "word": "mhdp0jqx81",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "can't"
+        ]
+      },
+      {
+        "word": "dennis",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "can't"
+        ]
+      },
+      {
+        "word": "goals",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royallykate"
+        ]
+      },
+      {
+        "word": "royalbabygirl",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "https"
+        ]
+      },
+      {
+        "word": "break",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royallykate"
+        ]
+      },
+      {
+        "word": "ladies",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royallykate"
+        ]
+      },
+      {
+        "word": "brother",
+        "occurence": 16,
+        "date": "Sat May 02 2015",
+        "references": [
+          "today"
+        ]
+      },
+      {
+        "word": "j7yik11v32",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royallykate"
+        ]
+      },
+      {
+        "word": "internet",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royallykate"
+        ]
+      },
+      {
+        "word": "gentlemen",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royallykate"
+        ]
+      },
+      {
+        "word": "outside",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "usroyalbaby",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "about"
+        ]
+      },
+      {
+        "word": "usweekly",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "about"
+        ]
+      },
+      {
+        "word": "mtvuk",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "today"
+        ]
+      },
+      {
+        "word": "lovely",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https",
+          "today"
+        ]
+      },
+      {
+        "word": "hello",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "royallykate"
+        ]
+      },
+      {
+        "word": "giving",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https",
+          "about",
+          "can't"
+        ]
+      },
+      {
+        "word": "itvnews",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "https"
+        ]
+      },
+      {
+        "word": "introduce",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "video",
+          "first"
+        ]
+      },
+      {
+        "word": "proud",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "https"
+        ]
+      },
+      {
+        "word": "every",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "m2y56cqydx",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first"
+        ]
+      },
+      {
+        "word": "second",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "photo",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "https",
+          "today"
+        ]
+      },
+      {
+        "word": "should",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "about"
+        ]
+      },
+      {
+        "word": "kate's",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https",
+          "royallykate"
+        ]
+      },
+      {
+        "word": "happy",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "https",
+          "katemiddleton"
+        ]
+      },
+      {
+        "word": "lindo",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "can't"
+        ]
+      },
+      {
+        "word": "british",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "first",
+          "today"
+        ]
+      }
+    ]
+  },
+  {
+    "level": 11,
+    "date": "Sat May 02 2015",
+    "content": [
+      {
+        "word": "famous",
+        "occurence": 15,
+        "date": "Sat May 02 2015",
+        "references": [
+          "already"
+        ]
+      }
+    ]
+  }
+]
