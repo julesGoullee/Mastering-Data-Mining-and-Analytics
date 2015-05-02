@@ -10,9 +10,11 @@ var dependances = {
         "external/angular-aria",
         "external/angular-animate",
         "external/angular-material",
+        "external/angular-socket-io",
 
         //modules
-        "modules/socket"
+        "main",
+        "controller/mainController"
     ],
     css:[
         "external/angular-material",

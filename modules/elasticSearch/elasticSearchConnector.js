@@ -1,6 +1,7 @@
 "use strict";
 
 var elasticsearch = require('elasticsearch');
+var config = require('../../config/config.js');
 
 var client = new elasticsearch.Client({
     host: '192.168.56.102:9200'
@@ -9,6 +10,19 @@ var client = new elasticsearch.Client({
 module.exports = {
     client : function(){
         return client;
+    },
+    dropIndex: function(){
+        return client.deleteByQuery({
+            index: 'twitter',
+            type: 'tweet',
+            body: {
+                query: {
+                    match: {
+                        tags: config.TwitterKeyWord
+                    }
+                }
+            }
+        });
     }
 };
 

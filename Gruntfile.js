@@ -146,6 +146,10 @@ module.exports = function(grunt) {
                     {
                         src: "bower_components/angular-material/angular-material.css",
                         dest: "public/external/angular-material.css"
+                    },
+                    {
+                        src: "bower_components/angular-socket-io/socket.js",
+                        dest: "public/external/angular-socket-io.js"
                     }
                 ]
             }

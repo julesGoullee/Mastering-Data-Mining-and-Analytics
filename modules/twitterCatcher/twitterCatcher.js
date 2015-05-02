@@ -7,6 +7,9 @@ var esClient = esConnector.client();
 var clientNotifier = require('../clientNotifier/clientNotifier.js');
 var Table = require('cli-table');
 
+var isReady = true;
+var onStack = false;
+
 function esData ( author, lang, content){
     return  {
         index: 'twitter',
@@ -21,44 +24,57 @@ function esData ( author, lang, content){
         }
     }
 }
+var callbackOnNewTweet = function(){
+    isReady = true;
 
+    if( onStack && isReady) {
+        onStack = false;
+        isReady = false;
+        clientNotifier.onNewTweet(callbackOnNewTweet);
+    }
+};
 
 module.exports = {
 
     start: function(){
+        esConnector.dropIndex().then(function( response, error ){
 
-        twtClient.stream( 'statuses/filter', {track: config.TwitterKeyWord },  function( stream ){
+            twtClient.stream( 'statuses/filter', {track: config.TwitterKeyWord },  function( stream ){
 
-            stream.on('data', function( tweet ) {
+                stream.on('data', function( tweet ) {
 
-                if( typeof tweet.text === "string" ) {
+                    if( typeof tweet.text === "string" && tweet.lang === "en") {
 
-                    /*var table = new Table({
-                        head: ['authors', 'tweet'],
-                        colWidths: [20, 150]
-                    });
-                    table.push([tweet.user.name,  tweet.text]);
-                    console.log(table.toString());
-                    */
+                        var promiseCreate = esClient.create( esData(tweet.user.name, tweet.lang, tweet.text ));
 
-                    esClient.create( esData(tweet.user.name, tweet.lang, tweet.text ), function (error, response) {
+                        promiseCreate.then(function (response, error) {
 
-                        if (error) {
-                            debugger;
-                        }
-                        else{
-                            clientNotifier.onNewTweet();
-                        }
-                    });
-                }
-                else{
+                            if (error) {
+                                console.log(error);
+                            }
+                            else{
+
+                                if( isReady ){
+                                    isReady = false;
+                                    onStack = false;
+                                    clientNotifier.onNewTweet(callbackOnNewTweet);
+                                }
+                                else{
+                                    onStack = true;
+                                }
+                            }
+                        });
+                    }
+                    else{
+                        //debugger;
+                    }
+                });
+
+                stream.on('error', function(error) {
                     debugger;
-                }
-            });
-
-            stream.on('error', function(error) {
-                debugger;
+                });
             });
         });
+
     }
 };

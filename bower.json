@@ -4,6 +4,7 @@
   "dependencies": {
     "jquery": "latest",
     "angular": "latest",
-    "angular-material": "latest"
+    "angular-material": "latest",
+    "angular-socket-io": "latest"
   }
 }
