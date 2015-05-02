@@ -6,7 +6,7 @@ var config = require('../../config/config.js');
 var Table = require('cli-table');
 var socketHandler = require('../socketHandler/socketHandler.js');
 
-function search(){
+function search( callaback ){
 
     var req = esClient.search({
         index: "twitter",
@@ -83,7 +83,7 @@ function search(){
             table.push([aggr[i].key,  aggr[i].doc_count]);
             }
         }
-        socketHandler.notifyAll("newRepresentation" , tab );
+        callaback( tab );
         console.log(table.toString());
 
 
@@ -94,6 +94,22 @@ function search(){
 
 module.exports = {
     onNewTweet : function(){
-        search();
+        if( socketHandler.getNbSockets() > 0 ){
+            search(function( data ){
+                socketHandler.notifyAll("newRepresentation" , data );
+
+            });
+        }
+    },
+    getNewConnection : function(){
+
+        socketHandler.onNewConnection(function( socket ){
+
+            search(function( data ){
+
+                socketHandler.notifyOne("newRepresentation" , data, socket );
+
+            });
+        })
     }
 };

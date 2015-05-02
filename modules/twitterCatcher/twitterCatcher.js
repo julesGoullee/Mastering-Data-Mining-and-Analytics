@@ -16,6 +16,7 @@ function esData ( author, lang, content){
             tags: config.TwitterKeyWord,
             author: author,
             lang: lang,
+            date: Date.now(),
             content: content
         }
     }

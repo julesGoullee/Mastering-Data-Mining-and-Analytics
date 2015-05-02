@@ -5,6 +5,8 @@ var debug = require('debug')('mastering-data-mining-and-analytics:server');
 var http = require('http');
 var io = require('socket.io');
 var socketHandler = require('../modules/socketHandler/socketHandler.js');
+var clientNotifier = require('../modules/clientNotifier/clientNotifier.js');
+
 
 var port = process.env.PORT || '3000';
 app.set('port', port);
@@ -44,4 +46,5 @@ function onListening() {
     var addr = server.address();
     console.log('Listening on port ' + addr.port);
     socketHandler.listen( _io );
+    clientNotifier.getNewConnection();
 }
