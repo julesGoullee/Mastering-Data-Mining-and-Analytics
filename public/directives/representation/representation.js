@@ -70,7 +70,6 @@ angularApp.directive("representation", function($rootScope){
                     .attr("class", "node")
                     .on("mouseover", mouseover)
                     .on("mouseout", mouseout)
-                    .on("click", click)
                     .call(force.drag);
 
                 node.append("circle")
@@ -98,8 +97,7 @@ angularApp.directive("representation", function($rootScope){
                             return d.target.y;
                         });
 
-                    node
-                        .attr("transform", function (d) {
+                    node.attr("transform", function (d) {
                             return "translate(" + d.x + "," + d.y + ")";
                         });
                 }
