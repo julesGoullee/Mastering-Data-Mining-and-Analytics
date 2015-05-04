@@ -27,11 +27,13 @@
         </md-toolbar>
         <md-content ng-controller="RightCtrl" layout-padding>
             <form>
+                Keyword :
                 <md-input-container>
                     <label for="testInput">#TrackMe</label>
                     <input type="text" id="testInput"
                            ng-model="data" md-sidenav-focus>
                 </md-input-container>
+                Gravity : <md-slider flex class="md-warn" md-discrete ng-model="gravity.value" step="0.1" min="0.1" max="1.5" aria-label="gravité"></md-slider>
             </form>
             <md-button ng-click="close()" class="md-primary" aria-label="Close">
                 <ng-md-icon icon="cloud_done"></ng-md-icon>

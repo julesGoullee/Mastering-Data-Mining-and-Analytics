@@ -19,6 +19,7 @@ var dependances = {
         //modules
         "main",
         "controllers/mainController",
+        "services/graphConfig",
         "directives/representation/representation",
         "directives/topBar/topBar",
         "directives/contextMenu/contextMenu",

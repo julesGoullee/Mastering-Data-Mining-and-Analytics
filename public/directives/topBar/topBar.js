@@ -1,5 +1,5 @@
 "use strict";
-angularApp.directive("topBar", function($mdUtil,$mdSidenav,$log){
+angularApp.directive("topBar", function($mdUtil,$mdSidenav,$log,graphConfig){
     return {
         restrict: "E",
         scope:{
@@ -8,6 +8,7 @@ angularApp.directive("topBar", function($mdUtil,$mdSidenav,$log){
         },
         templateUrl:"directives/topBar/topBar.html",
         link: function( scope, element ) {
+            scope.gravity = graphConfig.gravity;
             scope.toggleRight = buildToggler('right');
             function buildToggler(navID) {
                 var debounceFn =  $mdUtil.debounce(function(){

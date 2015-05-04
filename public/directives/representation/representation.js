@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.directive("representation", function($rootScope){
+angularApp.directive("representation", function(graphConfig){
 
     return {
         restrict: "E",
@@ -9,7 +9,7 @@ angularApp.directive("representation", function($rootScope){
         },
         templateUrl:"directives/representation/representation.html",
         link: function( scope, element ){
-
+            scope.gravity = graphConfig.gravity;
             var clientSize = {
                 width : $("body").width(),
                 height: $("body").height() - $("#topBar").height()
@@ -101,6 +101,7 @@ angularApp.directive("representation", function($rootScope){
 
                 this.update =  function(){
                     update();
+                    force.gravity(scope.gravity.value)
                 };
 
                 var findNode = function (id) {
@@ -123,7 +124,7 @@ angularApp.directive("representation", function($rootScope){
                     .attr("height", clientSize.height);
 
                 var force = d3.layout.force()
-                    .gravity(.3)
+                    .gravity(scope.gravity.value)
                     .linkDistance(60)
                     .charge(-300)
                     .size([clientSize.width, clientSize.height]);
@@ -190,6 +191,9 @@ angularApp.directive("representation", function($rootScope){
             }
 
             var graph = new myGraph("#graph");
+            scope.$watch("gravity",function(newgravity){
+                graph.update();
+            },true)
 
         }
     }
