@@ -1,10 +1,5 @@
-/**
- * Created by inattendu on 04/05/15.
- */
 "use strict";
-
-angularApp.directive("topBar", function(){
-
+angularApp.directive("topBar", function($mdUtil,$mdSidenav,$log){
     return {
         restrict: "E",
         scope:{
@@ -12,6 +7,17 @@ angularApp.directive("topBar", function(){
         },
         templateUrl:"directives/topBar/topBar.html",
         link: function( scope, element ) {
+            scope.toggleRight = buildToggler('right');
+            function buildToggler(navID) {
+                var debounceFn =  $mdUtil.debounce(function(){
+                    $mdSidenav(navID)
+                        .toggle()
+                        .then(function () {
+                            $log.debug("toggle " + navID + " is done");
+                        });
+                },300);
+                return debounceFn;
+            }
         }
     };
 });
