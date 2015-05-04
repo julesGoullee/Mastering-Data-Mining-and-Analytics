@@ -4,6 +4,10 @@
         <div class="md-toolbar-tools">
             <span>Mastering Data Mining & Analytics</span>
             <span flex></span>
+            <div class="tweetCounter" flex>
+                <md-icon md-svg-src="images/twitter.svg" alt="twitter"></md-icon>
+                <span>{{tweetCount.value}} tweet Analysis</span>
+            </div>
             <md-button ng-click="toggleRight()" aria-label="Settings">
                 <ng-md-icon icon="settings_applications"></ng-md-icon>
             </md-button>

@@ -6,6 +6,10 @@ angularApp.controller('AppCtrl', function( $scope,$rootScope,socket ){
         draw : function(){}
     };
 
+    $scope.tweetCount = {
+        value: 0
+    };
+
     socket.on('newRepresentation', function( representationData ){
         $scope.words.values = representationData.words;
         $scope.words.draw();
@@ -15,6 +19,10 @@ angularApp.controller('AppCtrl', function( $scope,$rootScope,socket ){
 
         $scope.words.addWord( wordObject );
 
+    });
+
+    socket.on("tweetCount", function(tweetCount){
+        $scope.tweetCount.value = tweetCount;
     });
 });
 

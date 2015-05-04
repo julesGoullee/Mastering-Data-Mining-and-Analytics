@@ -34,3 +34,14 @@ text {
   font: 10px sans-serif;
   pointer-events: none;
 }
+.tweetCounter md-icon {
+  width: 36px;
+  height: 36px;
+}
+.tweetCounter md-icon path {
+  fill: white;
+}
+.tweetCounter md-icon svg {
+  width: 36px;
+  height: 36px;
+}

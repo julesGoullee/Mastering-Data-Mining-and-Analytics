@@ -3,7 +3,8 @@ angularApp.directive("topBar", function($mdUtil,$mdSidenav,$log){
     return {
         restrict: "E",
         scope:{
-            words : "="
+            words : "=",
+            tweetCount: "="
         },
         templateUrl:"directives/topBar/topBar.html",
         link: function( scope, element ) {

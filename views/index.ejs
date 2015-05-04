@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
         <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+        <script src="//cdnjs.cloudflare.com/ajax/libs/SVG-Morpheus/0.1.8/svg-morpheus.js"></script>
         <!--Script Module-->
         <% dependances.scripts.forEach(function(script, index) { %>
         <script src="<%= script %>.js"></script>
@@ -17,16 +18,11 @@
 
     </head>
 <body ng-controller="AppCtrl" layout="row">
-    <!--<div flex class="home-container">-->
-        <!--<div layout="row" class="title">-->
-            <!--<h1 class="text-inverse">Mastering Data Mining &amp; Analytics</h1>-->
-        <!--</div>-->
-        <!--<img src="http://www.nasa.gov/sites/default/files/thumbnails/image/16938569907_90b5c8a831_o.jpg" />-->
-    <!--</div>-->
     <div flex="100">
-    <top-bar flex="100"></top-bar>
-    <div flex="100" ><representation words="words" ></representation></div>
+        <top-bar flex="100" tweet-count="tweetCount" ></top-bar>
+        <div flex="100" >
+            <representation words="words" ></representation>
+        </div>
     </div>
-    <!--<p>Welcome to <%= title %></p>-->
 </body>
 </html>
