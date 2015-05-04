@@ -7,23 +7,25 @@ angularApp.directive('tweetHeartbeat', function(){
         templateUrl:"directives/tweetHeartbeat/tweetHeartbeat.html",
         link: function( scope, element ) {
 
-
             var lastValue;
-            var lastEcart;
-            var n = 120;
+            var lastHeartBeat;
+            var newVariation;
+            var newHeartBeat;
+
+
             scope.tps = 0;
-            var random = d3.random.normal(0, .2);
-                var data = function(){
-                    var t = [];
-                    for ( var i = 0; i < n; i ++){
-                        t.push(0);
-                    }
-                    return t;
-                }();
-            var margin = {top: 10, right: 20, bottom: 10, left: 40},
-                width = 300 - margin.left - margin.right;
-            var  height = $("#topBar").height() - margin.bottom - margin.left;
-            //var height = element.parent().height() - margin.top - margin.bottom;
+            var n = 120;
+            var data = function(){
+                var t = [];
+                for ( var i = 0; i < n; i ++){
+                    t.push(0);
+                }
+                return t;
+            }();
+
+            var width = 300;
+            var height = $("#topBar").height();
+
 
             var x = d3.scale.linear()
                 .domain([0, n - 1])
@@ -38,10 +40,10 @@ angularApp.directive('tweetHeartbeat', function(){
                 .y(function(d, i) { return y(d); });
 
             var svg = d3.select(element.find("#graphTps")[0]).append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                .attr("width", width)
+                .attr("height", height )
+                .style("top", -element.offset().top)
+                .append("g");
 
             svg.append("defs").append("clipPath")
                 .attr("id", "clip")
@@ -69,30 +71,29 @@ angularApp.directive('tweetHeartbeat', function(){
 
             function tick() {
 
-                // push a new data point onto the back
-                console.log(lastValue, scope.tweetCount.value);
-                if( scope.tweetCount.value !==0 ){
-                    if( !lastValue){
+                if( scope.tweetCount.value !== 0){
+
+                    if( lastValue !== undefined && lastHeartBeat !== undefined ){
+                        newHeartBeat = scope.tweetCount.value - lastValue;
+                        newVariation = newHeartBeat - lastHeartBeat;
+                        lastHeartBeat = newHeartBeat;
                         lastValue = scope.tweetCount.value;
+                        scope.tps = newHeartBeat;
                     }
-
-                    var newValue = scope.tweetCount.value - lastValue;
-
-                    if( !lastEcart){
-                        lastEcart = newValue;
+                    else{
+                        lastValue = scope.tweetCount.value;
+                        lastHeartBeat = 0;
+                        newVariation = 0;
                     }
-                    var newEcart = newValue - lastEcart;
-                    lastValue = scope.tweetCount.value;
+                }else{
+                    newHeartBeat = 0;
+                    newVariation = 0;
                 }
-                else{
-                    var newEcart = 0;
-                }
-                scope.tps = newEcart;
-                data.push(newEcart);
+
+                data.push(newVariation);
 
                 // redraw the line, and slide it to the left
-                path
-                    .attr("d", line)
+                path.attr("d", line)
                     .attr("transform", null)
                     .transition()
                     .duration(1000)

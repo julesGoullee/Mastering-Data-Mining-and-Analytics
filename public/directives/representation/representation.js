@@ -60,10 +60,9 @@ angularApp.directive("representation", function(graphConfig){
 
                 }
                 graph.update();
-                console.log('new');
             };
 
-            function myGraph(el) {
+            function Graph(el) {
 
                 // Add and remove elements on the graph object
                 this.addNode = function (id, disableUpdate) {
@@ -190,10 +189,9 @@ angularApp.directive("representation", function(graphConfig){
                 update();
             }
 
-            var graph = new myGraph("#graph");
-            scope.$watch("gravity",function(newgravity){
-                graph.update();
-            },true)
+            var graph = new Graph("#graph");
+
+            scope.$watch( "gravity", graph.update, true );
 
         }
     }

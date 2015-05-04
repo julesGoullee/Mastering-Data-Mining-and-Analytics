@@ -1,5 +1,5 @@
 "use strict";
-angularApp.directive("topBar", function($mdUtil,$mdSidenav,$log,graphConfig){
+angularApp.directive( "topBar", function($mdUtil,$mdSidenav,$log,graphConfig){
     return {
         restrict: "E",
         scope:{
