@@ -154,6 +154,14 @@ module.exports = function(grunt) {
                     {
                         src: "bower_components/d3/d3.js",
                         dest: "public/external/d3.js"
+                    },
+                    {
+                        src: "bower_components/angular-material-icons/angular-material-icons.min.js",
+                        dest: "public/external/angular-material-icons.min.js"
+                    },
+                    {
+                        src: "bower_components/ng-context-menu/dist/ng-context-menu.min.js",
+                        dest: "public/external/ng-context-menu.min.js"
                     }
                 ]
             }

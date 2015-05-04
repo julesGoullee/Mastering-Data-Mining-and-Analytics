@@ -6,6 +6,8 @@
     "angular": "latest",
     "angular-material": "latest",
     "angular-socket-io": "latest",
-    "d3": "latest"
+    "d3": "latest",
+    "angular-material-icons": "latest",
+    "ng-context-menu": "latest"
   }
 }
