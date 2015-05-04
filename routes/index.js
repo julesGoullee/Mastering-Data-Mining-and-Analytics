@@ -21,7 +21,8 @@ var dependances = {
         "controllers/mainController",
         "directives/representation/representation",
         "directives/topBar/topBar",
-        "directives/contextMenu/contextMenu"
+        "directives/contextMenu/contextMenu",
+        "directives/tweetHeartbeat/tweetHeartbeat"
     ],
     css:[
         "external/angular-material",

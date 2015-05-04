@@ -3,10 +3,18 @@
     <md-toolbar id="topBar">
         <div class="md-toolbar-tools">
             <span>Mastering Data Mining & Analytics</span>
-            <span flex></span>
-            <div class="tweetCounter" flex>
-                <md-icon md-svg-src="images/twitter.svg" alt="twitter"></md-icon>
-                <span>{{tweetCount.value}} tweet Analysis</span>
+            <!--<span flex></span>-->
+            <div  flex layout="row" layout-wrap>
+                <div flex="30">
+                    <div class="tweetCounter" >
+                        <md-icon md-svg-src="images/twitter.svg" alt="twitter"></md-icon>
+                        <span>{{tweetCount.value}} tweet Analysis</span>
+
+                    </div>
+                </div>
+                <div flex="70">
+                    <tweet-heartbeat tweet-count="tweetCount" ></tweet-heartbeat>
+                </div>
             </div>
             <md-button ng-click="toggleRight()" aria-label="Settings">
                 <ng-md-icon icon="settings_applications"></ng-md-icon>

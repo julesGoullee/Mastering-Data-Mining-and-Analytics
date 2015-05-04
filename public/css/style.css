@@ -45,3 +45,21 @@ text {
   width: 36px;
   height: 36px;
 }
+#graphTps {
+  position: relative;
+}
+#graphTps svg {
+  font: 10px sans-serif;
+  position: absolute;
+}
+#graphTps .line {
+  fill: none;
+  stroke: white;
+  stroke-width: 1.5px;
+}
+#graphTps .axis path,
+#graphTps .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
