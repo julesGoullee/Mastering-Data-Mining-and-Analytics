@@ -37,7 +37,7 @@ angularApp.directive("representation", function($rootScope){
 
             function draw ( links) {
                 var width = $("body").width(),
-                    height = $("body").height();
+                    height = $("body").height() - $("#topBar").height();
 
                 var nodes = {};
 
@@ -55,7 +55,7 @@ angularApp.directive("representation", function($rootScope){
                     .on("tick", tick)
                     .start();
 
-                var svg = d3.select("body").append("svg")
+                var svg = d3.select(element[0]).append("svg")
                     .attr("width", width)
                     .attr("height", height);
 

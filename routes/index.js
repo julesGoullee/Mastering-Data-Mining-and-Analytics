@@ -17,7 +17,9 @@ var dependances = {
         //modules
         "main",
         "controllers/mainController",
-        "directives/representation/representation"
+        "directives/representation/representation",
+        "directives/topBar/topBar",
+        "directives/contextMenu/contextMenu"
     ],
     css:[
         "external/angular-material",
