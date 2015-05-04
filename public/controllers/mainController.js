@@ -31,6 +31,7 @@ angularApp.controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log)
         $mdSidenav('right').close()
             .then(function () {
                 $log.debug("close RIGHT is done");
+
             });
     };
 });
