@@ -12,6 +12,7 @@ var dependances = {
         "external/angular-material",
         "external/angular-socket-io",
         "external/d3",
+        "external/angular-material-icons.min",
 
 
         //modules
