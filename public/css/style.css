@@ -20,6 +20,9 @@ body {
   text-align: center;
   left: 35%;
 }
+top-bar md-slider {
+  margin: auto 20px;
+}
 representation .link {
   fill: none;
   stroke: #666;
