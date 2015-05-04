@@ -30,7 +30,7 @@ var dependances = {
 };
 
 router.get('/', function(req, res, next) {
-    res.render('index', { dependances: dependances, title: 'Express' });
+    res.render('index', { dependances: dependances, title: 'M.D.M.A - Project' });
 });
 
 module.exports = router;
