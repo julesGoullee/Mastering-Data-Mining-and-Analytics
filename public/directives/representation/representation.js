@@ -9,6 +9,7 @@ angularApp.directive("representation", function(graphConfig){
         },
         templateUrl:"directives/representation/representation.html",
         link: function( scope, element ){
+
             scope.gravity = graphConfig.gravity;
             var clientSize = {
                 width : $("body").width(),
@@ -62,7 +63,7 @@ angularApp.directive("representation", function(graphConfig){
                 graph.update();
             };
 
-            function Graph(el) {
+            function Graph(el)  {
 
                 // Add and remove elements on the graph object
                 this.addNode = function (id, disableUpdate) {

@@ -20,19 +20,22 @@ body {
   text-align: center;
   left: 35%;
 }
-.link {
+representation .link {
   fill: none;
   stroke: #666;
   stroke-width: 1.5px;
 }
-.node circle {
+representation .node circle {
   fill: #ccc;
   stroke: #fff;
   stroke-width: 1.5px;
 }
-text {
+representation text {
   font: 10px sans-serif;
   pointer-events: none;
+}
+.tweetCounter {
+  padding: 0 20%;
 }
 .tweetCounter md-icon {
   width: 36px;

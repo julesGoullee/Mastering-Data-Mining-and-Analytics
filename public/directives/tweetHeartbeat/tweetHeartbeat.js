@@ -12,7 +12,10 @@ angularApp.directive('tweetHeartbeat', function(){
             var newVariation;
             var newHeartBeat;
 
-
+            var margin = {
+                vertical: 10,
+                horizontal: 30
+            };
             scope.tps = 0;
             var n = 120;
             var data = function(){
@@ -23,26 +26,28 @@ angularApp.directive('tweetHeartbeat', function(){
                 return t;
             }();
 
-            var width = 300;
+            //var width = 300;
             var height = $("#topBar").height();
+            var width = element.find("#graphTps").width();
 
 
             var x = d3.scale.linear()
                 .domain([0, n - 1])
-                .range([0, width]);
+                .range([0, width - margin.horizontal ]);
 
             var y = d3.scale.linear()
                 .domain([-3, 3])
-                .range([height, 0]);
+                .range([height - margin.vertical, 0]);
 
             var line = d3.svg.line()
                 .x(function(d, i) { return x(i); })
                 .y(function(d, i) { return y(d); });
 
             var svg = d3.select(element.find("#graphTps")[0]).append("svg")
-                .attr("width", width)
-                .attr("height", height )
-                .style("top", -element.offset().top)
+                .attr("width", width - margin.horizontal )
+                .attr("height", height - margin.vertical )
+                .style("top", - element.offset().top + margin.vertical/2 )
+                .style("left", margin.horizontal/2 )
                 .append("g");
 
             svg.append("defs").append("clipPath")
