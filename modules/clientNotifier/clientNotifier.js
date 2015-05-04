@@ -5,77 +5,77 @@ var esClient = esConnector.client();
 var config = require('../../config/config.js');
 var Table = require('cli-table');
 var socketHandler = require('../socketHandler/socketHandler.js');
-
+var tweetCount = 0;
 var representation = require('../representation/representation.js');
 
 var reqSetting = {
-    "analysis": {
-        "filter": {
-            "english_stop": {
-                "type":       "stop",
-                "stopwords":  "_english_"
-            },
-            "english_keywords": {
-                "type":       "keyword_marker",
-                "keywords":   []
-            },
-            "english_stemmer": {
-                "type":       "stemmer",
-                "language":   "english"
-            },
-            "english_possessive_stemmer": {
-                "type":       "stemmer",
-                "language":   "possessive_english"
-            }
-        },
-        "analyzer": {
-            "english": {
-                "tokenizer":  "standard",
-                "filter": [
-                    "english_possessive_stemmer",
-                    "lowercase",
-                    "english_stop",
-                    "english_keywords",
-                    "english_stemmer"
-                ]
-            }
-        }
-    }
     //"analysis": {
     //    "filter": {
-    //        "french_elision": {
-    //            "type":         "elision",
-    //            "articles": [ "l", "m", "t", "qu", "n", "s",
-    //                "j", "d", "c", "jusqu", "quoiqu",
-    //                "lorsqu", "puisqu"
-    //            ]
-    //        },
-    //        "french_stop": {
+    //        "english_stop": {
     //            "type":       "stop",
-    //            "stopwords":  "_french_"
+    //            "stopwords":  "_english_"
     //        },
-    //        "french_keywords": {
+    //        "english_keywords": {
     //            "type":       "keyword_marker",
     //            "keywords":   []
     //        },
-    //        "french_stemmer": {
+    //        "english_stemmer": {
     //            "type":       "stemmer",
-    //            "language":   "light_french"
+    //            "language":   "english"
+    //        },
+    //        "english_possessive_stemmer": {
+    //            "type":       "stemmer",
+    //            "language":   "possessive_english"
     //        }
     //    },
     //    "analyzer": {
-    //        "french": {
+    //        "english": {
     //            "tokenizer":  "standard",
     //            "filter": [
-    //                "french_elision",
+    //                "english_possessive_stemmer",
     //                "lowercase",
-    //                "french_stop",
-    //                "french_keywords",
-    //                "french_stemmer"
+    //                "english_stop",
+    //                "english_keywords",
+    //                "english_stemmer"
     //            ]
     //        }
     //    }
     //}
+    "analysis": {
+        "filter": {
+            "french_elision": {
+                "type":         "elision",
+                "articles": [ "l", "m", "t", "qu", "n", "s",
+                    "j", "d", "c", "jusqu", "quoiqu",
+                    "lorsqu", "puisqu"
+                ]
+            },
+            "french_stop": {
+                "type":       "stop",
+                "stopwords":  "_french_"
+            },
+            "french_keywords": {
+                "type":       "keyword_marker",
+                "keywords":   []
+            },
+            "french_stemmer": {
+                "type":       "stemmer",
+                "language":   "light_french"
+            }
+        },
+        "analyzer": {
+            "french": {
+                "tokenizer":  "standard",
+                "filter": [
+                    "french_elision",
+                    "lowercase",
+                    "french_stop",
+                    "french_keywords",
+                    "french_stemmer"
+                ]
+            }
+        }
+    }
 };
 
 function getRegexWordsAlreadyFlag(){
@@ -204,6 +204,11 @@ function searchNewKeysWords( callaback ){
 
 module.exports = {
     onNewTweet : function( callback ){
+
+        tweetCount++;
+
+        socketHandler.notifyAll("tweetCount", tweetCount);
+
         searchNewKeysWords(function( newKeysWords ){
 
             if( newKeysWords.length > 0 ){
@@ -216,7 +221,7 @@ module.exports = {
 
                         getKeysWordsReferences( newKeysWords[i].key, function( keyWordsReferences ){
 
-                            tabKeysWords.push( {
+                            tabKeysWords.push({
                                 keyWord : newKeysWords[i].key,
                                 occurence : newKeysWords[i].occurence,
                                 references : keyWordsReferences
@@ -224,8 +229,10 @@ module.exports = {
 
                             if( i === newKeysWords.length -1){
 
-                                representation.addKeysWords( tabKeysWords );
-                                callback();
+                                representation.addKeysWords( tabKeysWords, function( keysWordObjects ){
+                                    socketHandler.notifyAll("newWord", keysWordObjects);
+                                    callback();
+                                });
                             }
                         });
 
@@ -235,7 +242,6 @@ module.exports = {
             }else{
                 callback();
             }
-            //socketHandler.notifyAll("newRepresentation" , data );
 
         });
     },
@@ -244,6 +250,7 @@ module.exports = {
         socketHandler.onNewConnection(function( socket ){
 
             socketHandler.notifyOne("newRepresentation" , representation.getJson() , socket );
+            socketHandler.notifyOne("tweetCount", tweetCount, socket);
         });
     }
 };

@@ -1,6 +1,6 @@
 "use strict";
 
 module.exports = {
-    TwitterKeyWord : "#RoyalBaby",
-    minOccurence: 15
+    TwitterKeyWord : "paris",
+    minOccurence: 5
 };

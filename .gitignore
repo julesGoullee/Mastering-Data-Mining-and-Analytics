@@ -1,6 +1,5 @@
 node_modules/
 .idea/
-text
 utils/elasticsearch-head/
 public/external/
 public/fonts/

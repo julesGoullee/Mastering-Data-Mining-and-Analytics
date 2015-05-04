@@ -7,8 +7,13 @@ angularApp.controller('AppCtrl', function( $scope,$rootScope,socket ){
     };
 
     socket.on('newRepresentation', function( representationData ){
-        var representation = angular.fromJson(representationData);
-        $scope.words.values = representation.words;
+        $scope.words.values = representationData.words;
         $scope.words.draw();
+    });
+
+    socket.on('newWord', function( wordObject ){
+
+        $scope.words.addWord( wordObject );
+
     });
 });

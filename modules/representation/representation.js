@@ -87,26 +87,51 @@ function getFirstLevelReferences( references ){
 }
 
 module.exports = {
-    addKeysWords : function( keysWords ){
+    addKeysWords : function( keysWords, callback ){
+        var tabKeyWordObject = [];
 
         for ( var i = 0; i < keysWords.length ; i++ ){
+
             if( keysWords[i].references.length === 0 ){
+
+                tabKeyWordObject.push({
+                    level: 0,
+                    word: keysWords[i].keyWord,
+                    references: []
+                });
+
                 pushOnLevel(0, keysWords[i].keyWord, keysWords[i].occurence,[]);
             }
             else if( keysWords[i].references.length === 1){
 
                 var level = getLevelsByKeyWord( keysWords[i].references[0] ) + 1;
 
+                tabKeyWordObject.push({
+                    level: level,
+                    word: keysWords[i].keyWord,
+                    references: keysWords[i].references
+                });
+
                 pushOnLevel( level , keysWords[i].keyWord, keysWords[i].occurence, keysWords[i].references);
             }
             else{
                 var levelsAndReferences = getFirstLevelReferences( keysWords[i].references );
                 if( levelsAndReferences.references.length > 0 ) {
+
+                    tabKeyWordObject.push({
+                        level: levelsAndReferences.level + 1,
+                        word: keysWords[i].keyWord,
+                        references: levelsAndReferences.references
+                    });
+
                     pushOnLevel(levelsAndReferences.level + 1, keysWords[i].keyWord, keysWords[i].occurence, levelsAndReferences.references);
                 }
             }
         }
-        jf.writeFile("./data.json", representations.words);
+
+        callback( tabKeyWordObject );
+
+        //jf.writeFile("./data.json", representations.words);
     },
     getWordsAlreadyFlag : function(){
         var words = [];
@@ -120,6 +145,6 @@ module.exports = {
         return words;
     },
     getJson : function(){
-        return JSON.stringify(representations);
+        return representations;
     }
 };
