@@ -4,6 +4,7 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  background-color: #FBFBFB;
 }
 .home-container {
   height: 100%;
@@ -20,7 +21,7 @@ body {
   text-align: center;
   left: 35%;
 }
-top-bar md-slider {
+#topBar md-slider {
   margin: auto 20px;
 }
 representation .link {
@@ -34,8 +35,15 @@ representation .node circle {
   stroke-width: 1.5px;
 }
 representation text {
-  font: 10px sans-serif;
+  font: 13px sans-serif;
   pointer-events: none;
+}
+#menu path {
+  fill: white;
+}
+#menu svg {
+  width: 36px;
+  height: 36px;
 }
 .tweetCounter {
   padding: 0 20%;
@@ -68,4 +76,7 @@ representation text {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
+}
+.tweet-peer-seconde {
+  line-height: 1.5;
 }
