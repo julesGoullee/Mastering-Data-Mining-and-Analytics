@@ -1,29 +1,13 @@
 'use strict';
 
-var twtClient = require('./twitterConnector.js').client();
+var twtConnector = require('./twitterConnector.js');
 var config = require('../../config/config.js');
 var esConnector = require('../elasticSearch/elasticSearchConnector.js');
-var esClient = esConnector.client();
 var clientNotifier = require('../clientNotifier/clientNotifier.js');
-var Table = require('cli-table');
 
 var isReady = true;
 var onStack = false;
 
-function esData ( author, lang, content){
-    return  {
-        index: 'twitter',
-        type: 'tweet',
-        body: {
-            title: "tweet",
-            tags: config.TwitterKeyWord,
-            author: author,
-            lang: lang,
-            date: Date.now(),
-            content: content
-        }
-    }
-}
 var callbackOnNewTweet = function(){
     isReady = true;
 
@@ -36,45 +20,28 @@ var callbackOnNewTweet = function(){
 
 module.exports = {
 
-    start: function(){
-        esConnector.dropIndexByTag().then(function( response, error ){
+    start: function() {
+        esConnector.dropIndexByTag().then(function(){
+            twtConnector.onData(function ( tweet ){
 
-            twtClient.stream( 'statuses/filter', {track: config.TwitterKeyWord },  function( stream ){
+                if (typeof tweet.text === "string" && ( (config.filterLang && config.lang === tweet.lang) || config.filterLang === false)) {
 
-                stream.on('data', function( tweet ) {
+                    esConnector.addNewEntry(tweet.text).then(function () {
 
-                    if( typeof tweet.text === "string" && ( (config.filterLang && config.lang === tweet.lang) || config.filterLang === false) ) {
-
-                        var promiseCreate = esClient.create( esData(tweet.user.name, tweet.lang, tweet.text ));
-
-                        promiseCreate.then(function (response, error) {
-
-                            if (error) {
-                                console.log(error);
-                            }
-                            else{
-
-                                if( isReady ){
-                                    isReady = false;
-                                    onStack = false;
-                                    clientNotifier.onNewTweet(callbackOnNewTweet);
-                                }
-                                else{
-                                    onStack = true;
-                                }
-                            }
-                        });
-                    }
-                    else{
-                        //debugger;
-                    }
-                });
-
-                stream.on('error', function(error) {
-                    debugger;
-                });
+                        if (isReady) {
+                            isReady = false;
+                            onStack = false;
+                            clientNotifier.onNewTweet(callbackOnNewTweet);
+                        }
+                        else {
+                            onStack = true;
+                        }
+                    });
+                }
+                else {
+                    //debugger;
+                }
             });
         });
-
     }
 };

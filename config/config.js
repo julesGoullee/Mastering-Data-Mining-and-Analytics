@@ -1,9 +1,9 @@
 "use strict";
 
 module.exports = {
-    TwitterKeyWord : "paris",
+    TwitterKeyWord : "Ben Laden",
     minOccurence: 5,
-    source: "tweetCatcher",//text,
+    source: "tweetCatcher",//"text",
     filterLang: true,
     lang: "fr",
     useMockData: false,

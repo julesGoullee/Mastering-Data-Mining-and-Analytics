@@ -10,20 +10,24 @@ var client = new elasticsearch.Client({
 client.ping({
     requestTimeout: 6000,
     hello: "elasticsearch!"
-}, function (error) {
-    if (error) {
+}, function ( error ) {
+
+    if( error ) {
+
         console.trace('Elasticsearch cluster is down!');
-    } else {
+    }else {
+
         console.log('Elasticsearch ping [OK]');
     }
 });
+
 
 module.exports = {
     client : function(){
         return client;
     },
     dropIndexByTag: function(){
-        return client.deleteByQuery({
+        var promiseDelete  = client.deleteByQuery({
             index: 'twitter',
             type: 'tweet',
             body: {
@@ -34,6 +38,36 @@ module.exports = {
                 }
             }
         });
+
+        promiseDelete.then(function( response, error ){
+
+            if( error ){
+                console.trace( error );
+            }
+        });
+        return promiseDelete;
+    },
+    addNewEntry : function( content ){
+
+        var promiseCreate = client.create({
+            index: 'twitter',
+            type: 'tweet',
+            body: {
+                tags: config.TwitterKeyWord,
+                date: Date.now(),
+                lang: config.lang,
+                content: content
+            }
+        });
+
+        promiseCreate.then(function( response, error ){
+
+            if( error ) {
+                console.trace( error );
+            }
+        });
+
+        return promiseCreate;
     }
 };
 

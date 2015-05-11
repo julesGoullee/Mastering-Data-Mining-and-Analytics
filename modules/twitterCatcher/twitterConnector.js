@@ -2,6 +2,8 @@
 
 var twitter = require('twitter');
 
+var config = require('../../config/config.js');
+
 var client = new twitter({
     consumer_key: "7ZkuNkslxLXJReFnZXQiQQYmi",
     consumer_secret: "RaOlbMXzUAhParwL95X9VWQ4j2JEjDvctiAVhnW0LjBBsRGJbM",
@@ -13,5 +15,18 @@ var client = new twitter({
 module.exports = {
     client : function(){
         return client;
+    },
+    onData: function( callback ){
+
+        client.stream( 'statuses/filter', {track: config.TwitterKeyWord },  function( stream ) {
+
+            stream.on('data', function (tweet) {
+                callback( tweet );
+            });
+
+            stream.on('error', function(error) {
+                console.trace( error );
+            });
+        });
     }
 };
