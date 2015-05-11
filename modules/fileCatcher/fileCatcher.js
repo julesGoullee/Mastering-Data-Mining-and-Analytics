@@ -25,7 +25,7 @@ function esData( content ){
 
 module.exports = {
     start : function( time ){
-        esConnector.dropIndex().then(function( response, error ) {
+        esConnector.dropIndexByTag().then(function( response, error ) {
             setInterval(function(){
                 if( counter < phrases.length ){
                     var promiseCreate = esClient.create( esData(phrases[counter]) );

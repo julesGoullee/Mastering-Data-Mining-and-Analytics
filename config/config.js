@@ -1,10 +1,11 @@
 "use strict";
 
 module.exports = {
-    TwitterKeyWord : "text",
+    TwitterKeyWord : "paris",
     minOccurence: 5,
     source: "tweetCatcher",//text,
-    filterLang: false,
+    filterLang: true,
     lang: "fr",
-    useMockData: false
+    useMockData: false,
+    elasticSearchAddr: '192.168.56.102:9200'
 };

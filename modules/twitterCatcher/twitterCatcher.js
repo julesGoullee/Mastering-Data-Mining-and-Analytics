@@ -37,7 +37,7 @@ var callbackOnNewTweet = function(){
 module.exports = {
 
     start: function(){
-        esConnector.dropIndex().then(function( response, error ){
+        esConnector.dropIndexByTag().then(function( response, error ){
 
             twtClient.stream( 'statuses/filter', {track: config.TwitterKeyWord },  function( stream ){
 
