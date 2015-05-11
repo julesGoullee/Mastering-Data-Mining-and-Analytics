@@ -10,6 +10,8 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var app = express();
 
+var config = require('./config/config');
+
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -53,8 +55,18 @@ app.use(function(err, req, res, next) {
 });
 
 
-//var twitterCatcher = require('./modules/twitterCatcher/twitterCatcher.js');
-//
-//twitterCatcher.start();
+if( config.source === "tweetCatcher" ){
+
+    var twitterCatcher = require('./modules/twitterCatcher/twitterCatcher.js');
+    twitterCatcher.start();
+}
+else if( config.source === "text" ){
+
+    var fileCatcher = require('./modules/fileCatcher/fileCatcher.js');
+    fileCatcher.start( 1000 );
+
+}
+
+
 
 module.exports = app;

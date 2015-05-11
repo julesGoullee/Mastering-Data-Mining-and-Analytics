@@ -43,7 +43,7 @@ module.exports = {
 
                 stream.on('data', function( tweet ) {
 
-                    if( typeof tweet.text === "string" && tweet.lang === "en") {
+                    if( typeof tweet.text === "string" && ( (config.filterLang && config.lang === tweet.lang) || config.filterLang === false) ) {
 
                         var promiseCreate = esClient.create( esData(tweet.user.name, tweet.lang, tweet.text ));
 

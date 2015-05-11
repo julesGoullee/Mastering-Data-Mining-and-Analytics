@@ -1,18 +1,23 @@
 "use strict";
 
-var jf = require('jsonfile');
 
 var config = require('../../config/config.js');
 
 var representations = {
     tag: config.TwitterKeyWord,
     startDate: new Date().toDateString(),
-    words : jf.readFileSync("./data.json")
+    words : []
 };
 
+if( config.useMockData ){
+    var jf = require('jsonfile');
+    representations.words = jf.readFileSync(__dirname  + "/data.json");
+}
+
 function getLevelsByKeyWord( keyWord ){
+
     for( var i = 0; i < representations.words.length; i ++ ){
-        for ( var j = 0 ; j < representations.words[i].content.length; j++){
+        for ( var j = 0 ; j < representations.words[i].content.length; j++ ){
             if( representations.words[i].content[j].word === keyWord ){
                 return i;
             }
@@ -22,6 +27,7 @@ function getLevelsByKeyWord( keyWord ){
 }
 
 function pushOnLevel( level, word, occurence, references ){
+
     if( !representations.words[ level ] ){
         representations.words[level] = {
             level: level,
@@ -37,10 +43,10 @@ function pushOnLevel( level, word, occurence, references ){
     });
 }
 
-function wordIsinLevel( level, word ){
+function wordIsInLevel( level, word ){
 
-    if( representations.words[ level ]){
-        for ( var i = 0 ; i < representations.words[level].content.length; i++){
+    if( representations.words[ level ] ){
+        for ( var i = 0 ; i < representations.words[level].content.length; i++ ){
             if( representations.words[level].content[i].word === word ){
                 return true;
             }
@@ -54,7 +60,7 @@ function getFirstLevelReferences( references ){
     var tabReferences = {};
     var minLevel;
 
-    for( var i = 0 ; i < references.length; i++){
+    for( var i = 0 ; i < references.length; i++ ){
         var levelCurrentReference = getLevelsByKeyWord( references[i] );
         if ( !tabReferences[levelCurrentReference] ){
             tabReferences[levelCurrentReference] = [];
@@ -62,9 +68,9 @@ function getFirstLevelReferences( references ){
         tabReferences[levelCurrentReference].push(references[i]);
     }
 
-    for( var levelReference in tabReferences){
+    for( var levelReference in tabReferences ){
 
-        if( !minLevel  || minLevel < levelReference){
+        if( !minLevel  || minLevel < levelReference ){
             minLevel = levelReference;
         }
     }
@@ -74,7 +80,7 @@ function getFirstLevelReferences( references ){
 
     for( var j = 0 ; j < tabReferences[ level].length ; j ++ ){
 
-        if( !wordIsinLevel( level + 1, tabReferences[ level ][j]) ){
+        if( !wordIsInLevel( level + 1, tabReferences[ level ][j]) ){
 
             tabReferencesWithoutSameLevelReferences.push( tabReferences[ level ][j] );
         }
