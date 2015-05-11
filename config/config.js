@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = {
-    TwitterKeyWord : "Ben Laden",
+    TwitterKeyWord : "#TuSaisQueTuManquesDeSexeQuand",
     minOccurence: 5,
     source: "tweetCatcher",//"text",
     filterLang: true,

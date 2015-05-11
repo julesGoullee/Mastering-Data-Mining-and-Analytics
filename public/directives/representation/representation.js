@@ -23,7 +23,7 @@ angularApp.directive("representation", function(graphConfig){
                     for( var j = 0 ; j < dataInLevel.content.length; j++){
                         var wordObject =  dataInLevel.content[j];
 
-                        graph.addNode(wordObject.word, true);
+                        graph.addNode(wordObject.word, dataInLevel.level, true);
 
                         if( wordObject.references.length > 0 ){
                             for( var k = 0; k < wordObject.references.length; k++){
@@ -31,7 +31,7 @@ angularApp.directive("representation", function(graphConfig){
 
                                 links.push({
                                     source:  wordObject.word,
-                                    target: wordObject.references[k]
+                                    target: wordObject.references[k],
                                 });
                             }
                         }
@@ -51,7 +51,7 @@ angularApp.directive("representation", function(graphConfig){
                         }
                     }
                     scope.words.values[ wordsObjects[i].level].content.push(wordsObjects[i]);
-                    graph.addNode(wordsObjects[i].word, true);
+                    graph.addNode(wordsObjects[i].word, wordsObjects[i].level, true);
 
                     if( wordsObjects[i].references.length > 0 ){
                         for( var j = 0; j < wordsObjects[i].references.length; j++){
@@ -65,9 +65,14 @@ angularApp.directive("representation", function(graphConfig){
 
             function Graph(el)  {
 
+                var color = d3.scale.category20();
+
                 // Add and remove elements on the graph object
-                this.addNode = function (id, disableUpdate) {
-                    nodes.push({"id":id});
+                this.addNode = function (id, level, disableUpdate) {
+                    nodes.push({
+                        id:id,
+                        level: level
+                    });
                     if( disableUpdate !== true ){
                         update();
                     }
@@ -158,6 +163,7 @@ angularApp.directive("representation", function(graphConfig){
                     nodeEnter.append("circle")
                         .on("mouseover", mouseover)
                         .on("mouseout", mouseout)
+                        .style("fill", function(d) { return color(d.level); })
                         .attr("r", 8);
 
                     node.exit().remove();
