@@ -122,11 +122,29 @@ angularApp.directive("representation", function(graphConfig){
                             return i
                     }
                 };
+                var zoom = d3.behavior.zoom()
+                    .scaleExtent([0.1, 10])
+                    .on("zoom", zoomed);
 
-                // set up the D3 visualisation in the specified element
-                var vis = this.vis = d3.select(element[0]).append("svg:svg")
+                var svg = d3.select(element[0]).append("svg:svg")
                     .attr("width", clientSize.width)
-                    .attr("height", clientSize.height);
+                    .attr("height", clientSize.height)
+                    .append("g")
+                    .call(zoom);
+
+                var rect = svg.append("rect")
+                    .attr("width", clientSize.width)
+                    .attr("height", clientSize.height)
+                    .style("fill", "none")
+                    .style("pointer-events", "all");
+
+                var vis = this.vis = svg.append("g");
+
+
+                function zoomed() {
+                    vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+                }
+
 
                 var force = d3.layout.force()
                     .gravity(scope.gravity.value)
