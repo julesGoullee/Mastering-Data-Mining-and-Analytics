@@ -57,7 +57,7 @@ app.use(function(err, req, res, next) {
 
 if( config.source === "tweetCatcher" ){
 
-    var twitterCatcher = require('./modules/twitterCatcher/twitterCatcher.js');
+    var twitterCatcher = require('./modules/twitter/twitterCatcher.js');
     twitterCatcher.start();
 }
 else if( config.source === "text" ){
