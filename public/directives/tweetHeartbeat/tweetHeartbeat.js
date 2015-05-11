@@ -1,3 +1,5 @@
+"use strict";
+
 angularApp.directive('tweetHeartbeat', function(){
     return{
         restrict: "E",

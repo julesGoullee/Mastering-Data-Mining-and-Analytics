@@ -1,4 +1,5 @@
 "use strict";
+
 angularApp.directive( "topBar", function($mdUtil,$mdSidenav,$log,graphConfig){
     return {
         restrict: "E",

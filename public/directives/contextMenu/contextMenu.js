@@ -1,6 +1,3 @@
-/**
- * Created by inattendu on 04/05/15.
- */
 "use strict";
 
 angularApp.directive("contextMenu", function(){
