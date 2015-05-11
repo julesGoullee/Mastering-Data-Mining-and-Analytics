@@ -78,27 +78,6 @@ module.exports = function(grunt) {
             bowerProd:{
 
                 files : [
-                    //bootstrap
-                    {
-                        src: "bower_components/bootstrap/dist/css/bootstrap.min.css",
-                        dest: "public/external/bootstrap.css"
-                    },
-                    {
-                        src: "bower_components/bootstrap/dist/css/bootstrap-theme.min.css",
-                        dest: "public/external/bootstrap-theme.css"
-                    },
-                    {
-                        src: "bower_components/bootstrap/dist/js/bootstrap.min.js",
-                        dest: "public/external/bootstrap.js"
-                    },
-                    {
-                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.ttf",
-                        dest: "public/fonts/glyphicons-halflings-regular.ttf"
-                    },
-                    {
-                        src: "bower_components/bootstrap/fonts/glyphicons-halflings-regular.woff",
-                        dest: "public/fonts/glyphicons-halflings-regular.woff"
-                    },
                     //jquery
                     {
                         src: "bower_components/jquery/dist/jquery.min.js",
@@ -107,8 +86,65 @@ module.exports = function(grunt) {
                     {
                         src: "bower_components/jquery/dist/jquery.min.map",
                         dest: "public/external/jquery.min.map"
+                    },
+                    //angularjs
+                    {
+                        src: "bower_components/angular/angular.min.js",
+                        dest: "public/external/angular.js"
+                    },
+                    {
+                        src: "bower_components/angular/angular.min.js.map",
+                        dest: "public/external/angular.js.map"
+                    },
+                    {
+                        src: "bower_components/angular-animate/angular-animate.min.js",
+                        dest: "public/external/angular-animate.js"
+                    },
+                    {
+                        src: "bower_components/angular-animate/angular-animate.min.js.map",
+                        dest: "public/external/angular-animate.js.map"
+                    },
+                    {
+                        src: "bower_components/angular-aria/angular-aria.min.js",
+                        dest: "public/external/angular-aria.js"
+                    },
+                    {
+                        src: "bower_components/angular-aria/angular-aria.min.js.map",
+                        dest: "public/external/angular-aria.js.map"
+                    },
+                    //angularjs-material-designe
+                    {
+                        src: "bower_components/angular-material/angular-material.min.js",
+                        dest: "public/external/angular-material.js"
+                    },
+                    {
+                        src: "bower_components/angular-material/angular-material.min.css",
+                        dest: "public/external/angular-material.css"
+                    },
+                    //angularjs-socket
+                    {
+                        src: "bower_components/angular-socket-io/socket.min.js",
+                        dest: "public/external/angular-socket-io.js"
+                    },
+                    {
+                        src: "bower_components/angular-socket-io/socket.min.js.map",
+                        dest: "public/external/angular-socket-io.js.map"
+                    },
+                    //D3.js
+                    {
+                        src: "bower_components/d3/d3.min.js",
+                        dest: "public/external/d3.js"
+                    },
+                    //angularjs-material-icon
+                    {
+                        src: "bower_components/angular-material-icons/angular-material-icons.min.js",
+                        dest: "public/external/angular-material-icons.min.js"
+                    },
+                    //angularjs-context-menu
+                    {
+                        src: "bower_components/ng-context-menu/dist/ng-context-menu.min.js",
+                        dest: "public/external/ng-context-menu.min.js"
                     }
-
                 ]
             },
             bowerDev:{
@@ -128,10 +164,6 @@ module.exports = function(grunt) {
                         dest: "public/external/angular.js"
                     },
                     {
-                        src: "bower_components/angular/angular.js",
-                        dest: "public/external/angular.js"
-                    },
-                    {
                         src: "bower_components/angular-animate/angular-animate.js",
                         dest: "public/external/angular-animate.js"
                     },
@@ -139,6 +171,7 @@ module.exports = function(grunt) {
                         src: "bower_components/angular-aria/angular-aria.js",
                         dest: "public/external/angular-aria.js"
                     },
+                    //angularjs-material-designe
                     {
                         src: "bower_components/angular-material/angular-material.js",
                         dest: "public/external/angular-material.js"
@@ -147,18 +180,22 @@ module.exports = function(grunt) {
                         src: "bower_components/angular-material/angular-material.css",
                         dest: "public/external/angular-material.css"
                     },
+                    //angularjs-socket
                     {
                         src: "bower_components/angular-socket-io/socket.js",
                         dest: "public/external/angular-socket-io.js"
                     },
+                    //D3.js
                     {
                         src: "bower_components/d3/d3.js",
                         dest: "public/external/d3.js"
                     },
+                    //angularjs-material-icon
                     {
                         src: "bower_components/angular-material-icons/angular-material-icons.min.js",
                         dest: "public/external/angular-material-icons.min.js"
                     },
+                    //angularjs-context-menu
                     {
                         src: "bower_components/ng-context-menu/dist/ng-context-menu.min.js",
                         dest: "public/external/ng-context-menu.min.js"
