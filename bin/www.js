@@ -27,10 +27,9 @@ function onError(error) {
         ? 'Pipe ' + port
         : 'Port ' + port;
 
-    // handle specific listen errors with friendly messages
     switch (error.code) {
         case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
+            console.error(bind + ' requires root privileges');
             process.exit(1);
             break;
         case 'EADDRINUSE':
