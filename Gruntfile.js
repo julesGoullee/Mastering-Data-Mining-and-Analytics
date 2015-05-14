@@ -2,25 +2,12 @@
 
 module.exports = function(grunt) {
 
-    //grunt.loadNpmTasks("grunt-karma");
-    //grunt.loadNpmTasks("grunt-simple-mocha");
+    grunt.loadNpmTasks("grunt-simple-mocha");
     grunt.loadNpmTasks("grunt-bower-task");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-copy");
-
     grunt.initConfig({
-        /*simplemocha: {
-            all:{
-                options: {
-                    timeout: 3000,
-                    ignoreLeaks: true,
-                    reporter: "progress",
-                    tdd: "tdd"
-                },
-                src: "app/server/modules//test/*.js"
-            }
-        },
-        karma: {
+       /* karma: {
             autoRun: {
                 basePath: "app/public",
                 frameworks: ["jasmine"],
@@ -210,9 +197,20 @@ module.exports = function(grunt) {
                 }
             }
         },
+        simplemocha: {
+            all:{
+                options: {
+                    timeout: 6000,
+                    ignoreLeaks: true,
+                    reporter: "progress",
+                    tdd: "tdd"
+                },
+                src: "modules/**/test/*.js"
+            }
+        },
         watch: {
             mochaTest: {
-                files: ["app/**/*.js", "Gruntfile.js"],
+                files: ["modules/**/*.js", "Gruntfile.js"],
                 options: {
                     reload: true
                 },

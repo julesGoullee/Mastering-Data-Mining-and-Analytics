@@ -3,97 +3,21 @@
 
 var config = require('../../config/config.js');
 
-var representations = {
-    tag: config.TwitterKeyWord,
-    startDate: new Date().toDateString(),
-    words : []
-};
+function Representation(){
+    var self = this;
 
-if( config.useMockData ){
-    var jf = require('jsonfile');
-    representations.words = jf.readFileSync(__dirname  + "/data.json");
-}
-
-function getLevelsByKeyWord( keyWord ){
-
-    for( var i = 0; i < representations.words.length; i ++ ){
-        for ( var j = 0 ; j < representations.words[i].content.length; j++ ){
-            if( representations.words[i].content[j].word === keyWord ){
-                return i;
-            }
-        }
-    }
-    return false;
-}
-
-function pushOnLevel( level, word, occurence, references ){
-
-    if( !representations.words[ level ] ){
-        representations.words[level] = {
-            level: level,
-            date: new Date().toDateString(),
-            content: []
-        }
-    }
-    representations.words[level].content.push({
-        word: word,
-        occurence: occurence,
-        date: new Date().toDateString(),
-        references: references
-    });
-}
-
-function wordIsInLevel( level, word ){
-
-    if( representations.words[ level ] ){
-        for ( var i = 0 ; i < representations.words[level].content.length; i++ ){
-            if( representations.words[level].content[i].word === word ){
-                return true;
-            }
-        }
-    }
-    return false;
-}
-
-function getFirstLevelReferences( references ){
-
-    var tabReferences = {};
-    var minLevel;
-
-    for( var i = 0 ; i < references.length; i++ ){
-        var levelCurrentReference = getLevelsByKeyWord( references[i] );
-        if ( !tabReferences[levelCurrentReference] ){
-            tabReferences[levelCurrentReference] = [];
-        }
-        tabReferences[levelCurrentReference].push(references[i]);
-    }
-
-    for( var levelReference in tabReferences ){
-
-        if( !minLevel  || minLevel < levelReference ){
-            minLevel = levelReference;
-        }
-    }
-
-    var tabReferencesWithoutSameLevelReferences = [];
-    var level = parseInt( minLevel, 10 ) || 0 ;
-
-    for( var j = 0 ; j < tabReferences[ level].length ; j ++ ){
-
-        if( !wordIsInLevel( level + 1, tabReferences[ level ][j]) ){
-
-            tabReferencesWithoutSameLevelReferences.push( tabReferences[ level ][j] );
-        }
-    }
-
-    return {
-        level :  level,
-        references : tabReferencesWithoutSameLevelReferences
+    var _representationsData = {
+        tag: config.TwitterKeyWord,
+        startDate: Math.floor(new Date() / 1000),
+        words : []
     };
-}
 
-module.exports = {
-    addKeysWords : function( keysWords, callback ){
+    if( config.useMockData ){
+        var jf = require('jsonfile');
+        _representationsData.words = jf.readFileSync(__dirname  + "/data.json");
+    }
+
+    self.addKeysWords = function( keysWords, callback ){
         var tabKeyWordObject = [];
 
         for ( var i = 0; i < keysWords.length ; i++ ){
@@ -138,19 +62,103 @@ module.exports = {
         callback( tabKeyWordObject );
 
         //jf.writeFile("./data.json", representations.words);
-    },
-    getWordsAlreadyFlag : function(){
+    };
+
+    self.getWordsAlreadyFlag = function(){
         var words = [];
 
-        for( var i = 0; i < representations.words.length; i ++ ){
-            for ( var j = 0 ; j < representations.words[i].content.length; j++){
-                words.push(representations.words[i].content[j].word);
+        for( var i = 0; i < _representationsData.words.length; i ++ ){
+            for ( var j = 0 ; j < _representationsData.words[i].content.length; j++){
+                words.push(_representationsData.words[i].content[j].word);
             }
         }
 
         return words;
-    },
-    getJson : function(){
-        return representations;
+    };
+
+    self.getJson = function(){
+        return _representationsData;
+    };
+
+    function getLevelsByKeyWord( keyWord ){
+
+        for( var i = 0; i < _representationsData.words.length; i ++ ){
+            for ( var j = 0 ; j < _representationsData.words[i].content.length; j++ ){
+                if( _representationsData.words[i].content[j].word === keyWord ){
+                    return i;
+                }
+            }
+        }
+        return false;
     }
+
+    function pushOnLevel( level, word, occurence, references ){
+
+        if( !_representationsData.words[ level ] ){
+            _representationsData.words[level] = {
+                level: level,
+                date: Math.floor(new Date() / 1000),
+                content: []
+            }
+        }
+        _representationsData.words[level].content.push({
+            word: word,
+            occurence: occurence,
+            date: Math.floor(new Date() / 1000),
+            references: references
+        });
+    }
+
+    function wordIsInLevel( level, word ){
+
+        if( _representationsData.words[ level ] ){
+            for ( var i = 0 ; i < _representationsData.words[level].content.length; i++ ){
+                if( _representationsData.words[level].content[i].word === word ){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function getFirstLevelReferences( references ){
+
+        var tabReferences = {};
+        var minLevel;
+
+        for( var i = 0 ; i < references.length; i++ ){
+            var levelCurrentReference = getLevelsByKeyWord( references[i] );
+            if ( !tabReferences[levelCurrentReference] ){
+                tabReferences[levelCurrentReference] = [];
+            }
+            tabReferences[levelCurrentReference].push(references[i]);
+        }
+
+        for( var levelReference in tabReferences ){
+
+            if( !minLevel  || minLevel < levelReference ){
+                minLevel = levelReference;
+            }
+        }
+
+        var tabReferencesWithoutSameLevelReferences = [];
+        var level = parseInt( minLevel, 10 ) || 0 ;
+
+        for( var j = 0 ; j < tabReferences[ level].length ; j ++ ){
+
+            if( !wordIsInLevel( level + 1, tabReferences[ level ][j]) ){
+
+                tabReferencesWithoutSameLevelReferences.push( tabReferences[ level ][j] );
+            }
+        }
+
+        return {
+            level :  level,
+            references : tabReferencesWithoutSameLevelReferences
+        };
+    }
+}
+
+module.exports = function(){
+    return new Representation();
 };

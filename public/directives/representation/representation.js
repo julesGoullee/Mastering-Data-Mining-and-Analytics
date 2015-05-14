@@ -31,7 +31,7 @@ angularApp.directive("representation", function(graphConfig){
 
                                 links.push({
                                     source:  wordObject.word,
-                                    target: wordObject.references[k],
+                                    target: wordObject.references[k]
                                 });
                             }
                         }

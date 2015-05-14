@@ -4,7 +4,7 @@ var esConnector = require('../elasticSearch/elasticSearchConnector.js');
 var config = require('../../config/config.js');
 var socketHandler = require('../socketHandler/socketHandler.js');
 var tweetCount = 0;
-var representation = require('../representation/representation.js');
+var representation = require('../representation/representation.js')();
 
 function getRegexWordsAlreadyFlag(){
 
