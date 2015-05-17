@@ -9,7 +9,7 @@ module.exports = {
     addKeyWord: function( name ){
         var keyWord = KeyWord( name );
         _keysWord.push( keyWord );
-        //twitterCatcher.trackKeyWord( keyWord );
+        twitterCatcher.trackKeyWord( keyWord );
         return keyWord;
     },
     getAll: function(){
@@ -26,7 +26,10 @@ module.exports = {
         var jsonKeysWord = [];
 
         for( var i = 0; i < _keysWord.length; i++ ){
-            jsonKeysWord.push(_keysWord[i].name);
+            jsonKeysWord.push({
+                id: _keysWord[i].id,
+                value: _keysWord[i].name
+            });
         }
 
         return jsonKeysWord;

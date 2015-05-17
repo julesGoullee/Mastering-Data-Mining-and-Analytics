@@ -66,7 +66,8 @@ describe("KeysWord", function() {
         });
 
         it("Peut recuperer le json de deux keysWord", function(){
-           expect( keysWord.getJson()).to.eql( [ keyWord.name, keyWord2.name ] );
+            expect( keysWord.getJson()).to.eql( [ { id: keyWord.id, value: keyWord.name}, { id: keyWord2.id, value: keyWord2.name } ] );
+            expect( keysWord.getJson()).to.eql( [ { id: keyWord.id, value: keyWord.name}, { id: keyWord2.id, value: keyWord2.name } ] );
         });
 
         afterEach(function(){

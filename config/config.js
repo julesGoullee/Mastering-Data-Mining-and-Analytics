@@ -2,7 +2,7 @@
 
 module.exports = {
     TwitterKeyWord : "#JeSuisDuGenre",
-    minOccurence: 5,
+    minOccurence: 15,
     source: "tweetCatcher",//"text",
     filterLang: false,
     lang: "fr",

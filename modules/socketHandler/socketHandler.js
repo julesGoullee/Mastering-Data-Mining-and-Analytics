@@ -30,12 +30,9 @@ module.exports = {
         });
     },
     notifyAllWithoutMe: function(event , data, socket ){
-        //console.log("notifyAllWithoutMe", event);
         socket.broadcast.emit( event, data );
     },
     subscribeTo: function( room, socket ){
-        //console.log("subscribeTo", room);
-
         socket.join( room );
     },
     notifyInRoom : function( room, event, data ){

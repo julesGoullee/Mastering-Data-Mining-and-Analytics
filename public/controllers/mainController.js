@@ -1,6 +1,7 @@
 "use strict";
 
 angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog ){
+    $scope.keysWord = [];
     $scope.words = {
         values : {},
         draw : function(){}
@@ -11,9 +12,11 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
     };
 
     socket.on( "keysWord", function( keysWord ){
+        $scope.keysWord = keysWord;
+
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: 'controllers/chooseTrack.html'
+            templateUrl: 'controllers/chooseTrack.html',
         }).then(function() {
             //fermeture popup
         }, function() {
@@ -44,7 +47,8 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
                     $mdDialog.hide();
                 }
                 else if( $scope.selectedKeyWord !== null ) {
-                    debugger;
+                    socket.emit( "setAlreadyTrackKeyWord", $scope.selectedKeyWord );
+
                     $mdDialog.hide();
                 }
                 else {

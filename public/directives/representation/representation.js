@@ -8,14 +8,19 @@ angularApp.directive("representation", function(graphConfig){
             words : "="
         },
         link: function( scope, element ){
-
+            var graph;
             scope.gravity = graphConfig.gravity;
-            var clientSize = {
-                width : $("body").width(),
-                height: $("body").height() - $("#topBar").height()
-            };
 
             scope.words.draw = function(){
+                var clientSize = {
+                    width : $("body").width(),
+                    height: $("body").height() - $("#topBar").height()
+                };
+
+                graph = new Graph("#graph", clientSize);
+
+                scope.$watch( "gravity", graph.update, true );
+
                 var links = [];
                 for( var i= 0 ; i < scope.words.values.length; i ++ ){
                     var dataInLevel = scope.words.values[i];
@@ -62,7 +67,7 @@ angularApp.directive("representation", function(graphConfig){
                 graph.update();
             };
 
-            function Graph(el)  {
+            function Graph(el, clientSize)  {
 
                 var color = d3.scale.category20();
 
@@ -212,10 +217,6 @@ angularApp.directive("representation", function(graphConfig){
                 // Make it all go
                 update();
             }
-
-            var graph = new Graph("#graph");
-
-            scope.$watch( "gravity", graph.update, true );
 
         }
     }

@@ -21,7 +21,6 @@ module.exports = {
         client.stream( 'statuses/filter', {track: twitterKeyWord },  function( stream ) {
 
             stream.on('data', function ( tweet ) {
-                //console.log(tweet.text, twitterKeyWord);
                 callback( tweet );
             });
 
