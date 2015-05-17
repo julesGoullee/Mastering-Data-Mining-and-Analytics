@@ -1,32 +1,46 @@
 "use strict";
 
-var _io;
-var sockets = [];
 var _callbackOnNewConnection = [];
+var users = require("../users/users.js");
+var _io;
 
 module.exports = {
     listen: function( io ){
         _io = io;
         _io.on( "connection", function( socket ) {
-            sockets.push( socket );
 
             for( var i = 0; i < _callbackOnNewConnection.length; i++){
-                _callbackOnNewConnection[i]( socket );
+                _callbackOnNewConnection[i]( users.addUser( socket ) );
             }
         });
     },
     notifyAll : function( event, data ){
-        for( var i = 0; i < sockets.length; i++){
-            sockets[i].emit( event, data);
-        }
+        _io.sockets.emit( event, data );
     },
     notifyOne: function( event, data, socket ){
-        socket.emit(event, data);
-    },
-    getNbSockets : function(){
-        return sockets.length;
+        socket.emit( event, data );
     },
     onNewConnection: function( callback ){
         _callbackOnNewConnection.push( callback );
+    },
+    on: function( event, socket, callback ){
+
+        socket.on( event, function( data ){
+            callback( data );
+        });
+    },
+    notifyAllWithoutMe: function(event , data, socket ){
+        //console.log("notifyAllWithoutMe", event);
+        socket.broadcast.emit( event, data );
+    },
+    subscribeTo: function( room, socket ){
+        //console.log("subscribeTo", room);
+
+        socket.join( room );
+    },
+    notifyInRoom : function( room, event, data ){
+        //console.log("notifyInRoom", room, event);
+
+        _io.sockets.in( room ).emit( event, data );
     }
 };

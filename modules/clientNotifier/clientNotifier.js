@@ -1,75 +1,41 @@
 "use strict";
 
-var esConnector = require('../elasticSearch/elasticSearchConnector.js');
 var config = require('../../config/config.js');
 var socketHandler = require('../socketHandler/socketHandler.js');
-var tweetCount = 0;
-var representation = require('../representation/representation.js')();
+var keysWord = require("../keysWord/keysWord.js");
 
-function getRegexWordsAlreadyFlag(){
+function initUser( user , keyWord){
 
-    var words = representation.getWordsAlreadyFlag();
-
-    var regex = "";
-
-    for( var i = 0 ; i < words.length ; i++ ){
-        if( i !== 0 ){
-            regex += "|";
-        }
-        regex += words[i] ;
-    }
-    return regex;
+    user.idKeyWord = keyWord.id;
+    socketHandler.subscribeTo( keyWord.id, user.socket);
+    socketHandler.notifyOne( "tweetCount", keyWord.tweetCount, user.socket );
+    socketHandler.notifyOne( "representation", keyWord.representation.getJson(), user.socket );
 }
 
 module.exports = {
-    onNewTweet : function( callback ){
+    connect : function(){
+        keysWord.addKeyWord( "new york" );
+        keysWord.addKeyWord( "paris" );
 
-        tweetCount++;
+        socketHandler.onNewConnection(function( user ){
 
-        socketHandler.notifyAll("tweetCount", tweetCount);
+            socketHandler.notifyOne( "keysWord", keysWord.getJson(), user.socket );
 
-        esConnector.searchNewKeysWords(getRegexWordsAlreadyFlag(), function( newKeysWords ){
+            socketHandler.on( "setAlreadyTrackKeyWord", user.socket, function( idKeyWord ){
+                var keyWord = keysWord.getById( idKeyWord );
+                initUser( user, keyWord );
+            });
 
-            if( newKeysWords.length > 0 ){
-
-                var tabKeysWords = [];
-
-                for ( var i = 0 ; i < newKeysWords.length; i++ ){
-
-                    (function(i){
-
-                        esConnector.getKeysWordsReferences( newKeysWords[i].key, getRegexWordsAlreadyFlag(), function( keyWordsReferences ){
-
-                            tabKeysWords.push({
-                                keyWord : newKeysWords[i].key,
-                                occurence : newKeysWords[i].occurence,
-                                references : keyWordsReferences
-                            });
-
-                            if( i === newKeysWords.length -1){
-
-                                representation.addKeysWords( tabKeysWords, function( keysWordObjects ){
-                                    socketHandler.notifyAll("newWord", keysWordObjects);
-                                    callback();
-                                });
-                            }
-                        });
-
-                    }(i));
+            socketHandler.on( "setNewKeyWord", user.socket, function( newKeyWord ){
+                //console.log("setNewKeyWord!");
+                if( keysWord.isNewKeyWord( newKeyWord ) ){
+                    keysWord.addKeyWord( newKeyWord );
+                    socketHandler.notifyAllWithoutMe("newKeyWord", newKeyWord, user.socket );
                 }
+                var keyWord = keysWord.getByName( newKeyWord );
+                initUser( user, keyWord );
 
-            }else{
-                callback();
-            }
-
-        });
-    },
-    getNewConnection : function(){
-
-        socketHandler.onNewConnection(function( socket ){
-
-            socketHandler.notifyOne("newRepresentation" , representation.getJson() , socket );
-            socketHandler.notifyOne("tweetCount", tweetCount, socket);
+            });
         });
     }
 };

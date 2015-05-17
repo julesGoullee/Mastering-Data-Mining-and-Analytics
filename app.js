@@ -54,19 +54,4 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-if( config.source === "tweetCatcher" ){
-
-    var twitterCatcher = require('./modules/twitter/twitterCatcher.js');
-    twitterCatcher.start();
-}
-else if( config.source === "text" ){
-
-    var fileCatcher = require('./modules/fileCatcher/fileCatcher.js');
-    fileCatcher.start( 1000 );
-
-}
-
-
-
 module.exports = app;

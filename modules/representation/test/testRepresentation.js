@@ -6,17 +6,15 @@ global.expect = chai.expect;
 global.sinon = require('sinon');
 chai.use(sinonChai);
 //var mock = require("../../../test/mock.js");
-var config = require("../../../config/config.js");
 
 
 describe("Représentation", function() {
 
     var _representation;
     var testKeyWord = "testKeyWord";
-    config.TwitterKeyWord = "testKeyWord";
 
     beforeEach(function () {
-        _representation = require("../representation.js")();
+        _representation = require("../representation.js")( testKeyWord );
     });
 
     it("Peut recuperer la representation vide", function () {

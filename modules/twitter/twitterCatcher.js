@@ -3,45 +3,49 @@
 var twtConnector = require('./twitterConnector.js');
 var config = require('../../config/config.js');
 var esConnector = require('../elasticSearch/elasticSearchConnector.js');
-var clientNotifier = require('../clientNotifier/clientNotifier.js');
 
-var isReady = true;
-var onStack = false;
 
-var callbackOnNewTweet = function(){
-    isReady = true;
 
-    if( onStack && isReady) {
-        onStack = false;
-        isReady = false;
-        clientNotifier.onNewTweet(callbackOnNewTweet);
+var callbackOnNewTweet = function( keyWord ){
+    keyWord.isReady = true;
+
+    if( keyWord.onStack && keyWord.isReady) {
+        keyWord.onStack = false;
+        keyWord.isReady = false;
+        keyWord.onNewTweet(callbackOnNewTweet);
     }
 };
 
 module.exports = {
 
-    start: function() {
-        esConnector.dropIndexByTag().then(function(){
-            twtConnector.onData(function ( tweet ){
+    trackKeyWord: function( keyWord ) {
+        keyWord.isReady = true;
+        keyWord.onStack = false;
+        console.log( "track word" + keyWord.name);
+        esConnector.dropIndexByTag( keyWord.name );
 
-                if (typeof tweet.text === "string" && ( (config.filterLang && config.lang === tweet.lang) || config.filterLang === false)) {
+        twtConnector.onData( keyWord.name, function ( tweet ){
 
-                    esConnector.addNewEntry(tweet.text).then(function () {
-
-                        if (isReady) {
-                            isReady = false;
-                            onStack = false;
-                            clientNotifier.onNewTweet(callbackOnNewTweet);
-                        }
-                        else {
-                            onStack = true;
-                        }
-                    });
-                }
-                else {
-                    //debugger;
-                }
-            });
+            if(typeof tweet.text === "string" ) {
+                //console.log( tweet.text, keyWord.name ,  keyWord.id);
+                esConnector.addNewEntry( keyWord, tweet.text ).then( function (){
+                    if( keyWord.isReady ){
+                        keyWord.isReady = false;
+                        keyWord.onStack = false;
+                        keyWord.onNewTweet( callbackOnNewTweet );
+                    }
+                    else {
+                        keyWord.onStack = true;
+                    }
+                });
+            }
+            else {
+                //debugger;
+            }
         });
+    },
+    mock: function( mockTwtConnector, mockEsConnector ){
+        twtConnector = mockTwtConnector;
+        esConnector = mockEsConnector;
     }
 };

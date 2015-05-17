@@ -45,5 +45,5 @@ function onListening() {
     var addr = server.address();
     console.log('Listening on port ' + addr.port);
     socketHandler.listen( _io );
-    clientNotifier.getNewConnection();
+    clientNotifier.connect();
 }

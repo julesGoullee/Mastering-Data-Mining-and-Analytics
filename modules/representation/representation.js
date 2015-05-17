@@ -3,11 +3,11 @@
 
 var config = require('../../config/config.js');
 
-function Representation(){
+function Representation( twitterKeyWord){
     var self = this;
 
     var _representationsData = {
-        tag: config.TwitterKeyWord,
+        tag: twitterKeyWord,
         startDate: Math.floor(new Date() / 1000),
         words : []
     };
@@ -95,7 +95,7 @@ function Representation(){
     function pushOnLevel( level, word, occurence, references ){
 
         if( !_representationsData.words[ level ] ){
-            _representationsData.words[level] = {
+            _representationsData.words[ level ] = {
                 level: level,
                 date: Math.floor(new Date() / 1000),
                 content: []
@@ -159,6 +159,6 @@ function Representation(){
     }
 }
 
-module.exports = function(){
-    return new Representation();
+module.exports = function( twitterKeyWord ){
+    return new Representation( twitterKeyWord );
 };

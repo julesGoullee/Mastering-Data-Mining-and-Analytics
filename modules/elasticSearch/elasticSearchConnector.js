@@ -23,38 +23,41 @@ client.ping({
 });
 
 module.exports = {
-    client : function(){
-        return client;
-    },
-    dropIndexByTag: function(){
-        var promiseDelete  = client.deleteByQuery({
-            index: 'twitter',
-            type: 'tweet',
-            body: {
-                query: {
-                    match: {
-                        tags: config.TwitterKeyWord
+    dropIndexByTag: function( keyWord ){
+        try {
+            var promiseDelete = client.deleteByQuery({
+                index: 'twitter',
+                type: 'tweet',
+                body: {
+                    query: {
+                        match: {
+                            tags: keyWord
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        promiseDelete.then(function( response, error ){
+            promiseDelete.then(function (response, error) {
 
-            if( error ){
-                console.trace( error );
-            }
-        });
-        return promiseDelete;
+                if (error) {
+                    //console.trace( error );
+                }
+            });
+            return promiseDelete;
+
+        }
+        catch(e ){
+
+        }
     },
-    addNewEntry : function( content ){
+    addNewEntry : function( keyWord, content ){
 
         var promiseCreate = client.create({
             index: 'twitter',
             type: 'tweet',
             body: {
-                tags: config.TwitterKeyWord,
-                date: Date.now(),
+                tags: keyWord.name,
+                date: Math.floor(new Date() / 1000),
                 lang: config.lang,
                 content: content
             }
@@ -69,13 +72,13 @@ module.exports = {
 
         return promiseCreate;
     },
-    searchNewKeysWords : function( regexWordsAlreadyFlag, callback ){
+    searchNewKeysWords : function( keyWord, regexWordsAlreadyFlag, callback ){
         var req = client.search({
             index: "twitter",
             body:{
                 query: {
                     match: {
-                        tags: config.TwitterKeyWord
+                        tags: keyWord.name
                     }
                 },
                 aggs: {
@@ -120,7 +123,7 @@ module.exports = {
             console.trace( err.message );
         });
     },
-    getKeysWordsReferences: function( newKeysWord, regexWordsAlreadyFlag, callback ){
+    getKeysWordsReferences: function( keyWord, newKeysWord, regexWordsAlreadyFlag, callback ){
         var req = client.search({
             index: "twitter",
             body: {
@@ -129,7 +132,7 @@ module.exports = {
                         "must": [
                             {
                                 match: {
-                                    tags: config.TwitterKeyWord
+                                    tags: keyWord.name
                                 }
                             },
                             {
