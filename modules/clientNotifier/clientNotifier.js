@@ -14,8 +14,8 @@ function initUser( user , keyWord){
 
 module.exports = {
     connect : function(){
-        keysWord.addKeyWord( "new york" );
-        keysWord.addKeyWord( "paris" );
+        //keysWord.addKeyWord( "new york" );
+        //keysWord.addKeyWord( "paris" );
 
         socketHandler.onNewConnection(function( user ){
 
@@ -27,7 +27,6 @@ module.exports = {
             });
 
             socketHandler.on( "setNewKeyWord", user.socket, function( newKeyWord ){
-                //console.log("setNewKeyWord!");
                 if( keysWord.isNewKeyWord( newKeyWord ) ){
                     keysWord.addKeyWord( newKeyWord );
                     socketHandler.notifyAllWithoutMe("newKeyWord", newKeyWord, user.socket );

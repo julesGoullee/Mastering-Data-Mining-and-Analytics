@@ -21,13 +21,11 @@ module.exports = {
     trackKeyWord: function( keyWord ) {
         keyWord.isReady = true;
         keyWord.onStack = false;
-        console.log( "track word" + keyWord.name);
         esConnector.dropIndexByTag( keyWord.name );
 
         twtConnector.onData( keyWord.name, function ( tweet ){
 
             if(typeof tweet.text === "string" ) {
-                //console.log( tweet.text, keyWord.name ,  keyWord.id);
                 esConnector.addNewEntry( keyWord, tweet.text ).then( function (){
                     if( keyWord.isReady ){
                         keyWord.isReady = false;

@@ -9,7 +9,7 @@ module.exports = {
     addKeyWord: function( name ){
         var keyWord = KeyWord( name );
         _keysWord.push( keyWord );
-        twitterCatcher.trackKeyWord( keyWord );
+        //twitterCatcher.trackKeyWord( keyWord );
         return keyWord;
     },
     getAll: function(){

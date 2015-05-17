@@ -7,7 +7,6 @@ angularApp.directive("representation", function(graphConfig){
         scope:{
             words : "="
         },
-        templateUrl:"directives/representation/representation.html",
         link: function( scope, element ){
 
             scope.gravity = graphConfig.gravity;

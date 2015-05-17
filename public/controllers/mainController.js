@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.controller("AppCtrl", function( $scope,$rootScope,socket ){
+angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog ){
     $scope.words = {
         values : {},
         draw : function(){}
@@ -11,7 +11,47 @@ angularApp.controller("AppCtrl", function( $scope,$rootScope,socket ){
     };
 
     socket.on( "keysWord", function( keysWord ){
-        socket.emit( "setNewKeyWord", "paris" );
+        $mdDialog.show({
+            controller: DialogController,
+            templateUrl: 'controllers/chooseTrack.html'
+        }).then(function() {
+            //fermeture popup
+        }, function() {
+            //error
+        });
+
+        function DialogController($scope, $mdDialog) {
+            $scope.addedKeyWord = null;
+            $scope.selectedKeyWord = null;
+            $scope.keysWord = keysWord;
+
+            $scope.isValidInput = function( text ){
+                if( text.length > 3 && text.indexOf(" ") === -1){
+
+                }
+            };
+
+            $scope.hide = function() {
+                $mdDialog.hide();
+            };
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+            $scope.validate = function() {
+
+                if( $scope.addedKeyWord ){
+                    socket.emit( "setNewKeyWord", $scope.addedKeyWord );
+                    $mdDialog.hide();
+                }
+                else if( $scope.selectedKeyWord !== null ) {
+                    debugger;
+                    $mdDialog.hide();
+                }
+                else {
+                    //todo erreur
+                }
+            };
+        }
     });
 
     socket.on("representation", function( representationData ){

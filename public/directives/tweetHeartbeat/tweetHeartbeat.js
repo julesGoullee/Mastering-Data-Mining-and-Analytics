@@ -43,7 +43,7 @@ angularApp.directive('tweetHeartbeat', function(){
 
             var line = d3.svg.line()
                 .x(function(d, i) { return x(i); })
-                .y(function(d, i) { return y(d); });
+                .y(function(d) { return y(d); });
 
             var svg = d3.select(element.find("#graphTps")[0]).append("svg")
                 .attr("width", width - margin.horizontal )

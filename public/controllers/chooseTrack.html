@@ -1,0 +1,19 @@
+<md-dialog aria-label="Mot">
+    <md-dialog-content class="sticky-container">
+        <md-subheader class="md-sticky-no-effect">Choisi le mot que tu veux traquer ou rajoute en un !</md-subheader>
+        <div layout="column" layout-align="center center" flex ng-show="keysWord.length > 0">
+            <md-select ng-model="selectedKeyWord" placeholder="Selectionne un mot!" >
+                <md-option ng-repeat="keyWord in keysWord" ng-value="$index">{{keyWord}}</md-option>
+            </md-select>
+        </div>
+        <div layout layout-sm="column">
+            <md-input-container flex>
+                <label>Ajoute un #mot</label>
+                <input ng-model="addedKeyWord" ng-minlength="4">
+            </md-input-container>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="validate()" class="md-primary">Valider</md-button>
+    </div>
+</md-dialog>
