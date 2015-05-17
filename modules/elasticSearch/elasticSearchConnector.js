@@ -23,7 +23,7 @@ module.exports = {
                 }
             });
 
-            promiseDelete.then(function (response, error) {
+            promiseDelete.then( function( response, error ) {
 
                 if (error) {
                     //console.trace( error );

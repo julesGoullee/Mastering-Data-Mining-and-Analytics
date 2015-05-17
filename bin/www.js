@@ -1,10 +1,10 @@
 'use strict';
 
-var app = require('../app');
-var http = require('http');
-var io = require('socket.io');
-var socketHandler = require('../modules/socketHandler/socketHandler.js');
-var clientNotifier = require('../modules/clientNotifier/clientNotifier.js');
+var app = require("../app");
+var http = require("http");
+var io = require("socket.io");
+var socketHandler = require("../modules/socketHandler/socketHandler.js");
+var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
 //var debug = require('debug')('mastering-data-mining-and-analytics:server');
 
 

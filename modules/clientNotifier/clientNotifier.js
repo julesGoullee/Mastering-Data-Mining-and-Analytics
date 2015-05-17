@@ -1,7 +1,7 @@
 "use strict";
 
-var config = require('../../config/config.js');
-var socketHandler = require('../socketHandler/socketHandler.js');
+var config = require("../../config/config.js");
+var socketHandler = require("../socketHandler/socketHandler.js");
 var keysWord = require("../keysWord/keysWord.js");
 
 function initUser( user , keyWord ){
@@ -14,19 +14,17 @@ function initUser( user , keyWord ){
 
 module.exports = {
     connect : function(){
-        //keysWord.addKeyWord( "new york" );
-        //keysWord.addKeyWord( "paris" );
 
         socketHandler.onNewConnection(function( user ){
 
-            socketHandler.notifyOne( "keysWord", keysWord.getJson(), user.socket );
+            socketHandler.notifyOne("keysWord", keysWord.getJson(), user.socket );
 
-            socketHandler.on( "setAlreadyTrackKeyWord", user.socket, function( idKeyWord ){
+            socketHandler.on("setAlreadyTrackKeyWord", user.socket, function( idKeyWord ){
                 var keyWord = keysWord.getById( idKeyWord );
                 initUser( user, keyWord );
             });
 
-            socketHandler.on( "setNewKeyWord", user.socket, function( newKeyWord ){
+            socketHandler.on("setNewKeyWord", user.socket, function( newKeyWord ){
 
                 if( keysWord.isNewKeyWord( newKeyWord ) ){
 

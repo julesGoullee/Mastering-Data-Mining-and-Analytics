@@ -1,8 +1,8 @@
 "use strict";
 
-var socketHandler = require('../socketHandler/socketHandler.js');
-var esConnector = require('../elasticSearch/elasticSearchConnector.js');
-var Representation = require('../representation/representation.js');
+var socketHandler = require("../socketHandler/socketHandler.js");
+var esConnector = require("../elasticSearch/elasticSearchConnector.js");
+var Representation = require("../representation/representation.js");
 var utils = require("../utils/utils.js");
 
 function KeyWord( name ){

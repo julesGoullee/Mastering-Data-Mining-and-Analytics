@@ -1,8 +1,8 @@
 'use strict';
 
-var twtConnector = require('./twitterConnector.js');
-var config = require('../../config/config.js');
-var esConnector = require('../elasticSearch/elasticSearchConnector.js');
+var twtConnector = require("./twitterConnector.js");
+var config = require("../../config/config.js");
+var esConnector = require("../elasticSearch/elasticSearchConnector.js");
 
 
 
