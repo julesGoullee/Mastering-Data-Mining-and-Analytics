@@ -42,8 +42,18 @@ function onError(error) {
 }
 
 function onListening() {
-    var addr = server.address();
-    console.log('Listening on port ' + addr.port);
-    socketHandler.listen( _io );
-    clientNotifier.connect();
+    var esConnector = require('../modules/elasticSearch/elasticSearchConnector.js');
+
+    esConnector.connect().then(function(){
+
+        console.log('Elasticsearch connection [OK]');
+        var addr = server.address();
+        console.log('Listening on port ' + addr.port);
+        socketHandler.listen( _io );
+        clientNotifier.connect();
+
+    }, function( error ){
+        console.log('Elasticsearch connection [FAIL]');
+    });
+
 }

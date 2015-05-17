@@ -8,20 +8,6 @@ var client = new elasticsearch.Client({
 });
 var reqSetting;
 
-client.ping({
-    requestTimeout: 6000,
-    hello: "elasticsearch!"
-}, function ( error ) {
-
-    if( error ) {
-
-        console.trace('Elasticsearch cluster is down!');
-    }else {
-
-        console.log('Elasticsearch ping [OK]');
-    }
-});
-
 module.exports = {
     dropIndexByTag: function( keyWord ){
         try {
@@ -176,6 +162,12 @@ module.exports = {
 
         }, function ( err ) {
             console.trace( err.message );
+        });
+    },
+    connect: function(){
+        return client.ping({
+            requestTimeout: 6000,
+            hello: "elasticsearch!"
         });
     }
 };

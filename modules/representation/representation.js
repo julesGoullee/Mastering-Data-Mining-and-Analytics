@@ -12,11 +12,6 @@ function Representation( twitterKeyWord){
         words : []
     };
 
-    if( config.useMockData ){
-        var jf = require('jsonfile');
-        _representationsData.words = jf.readFileSync(__dirname  + "/data.json");
-    }
-
     self.addKeysWords = function( keysWords, callback ){
         var tabKeyWordObject = [];
 

@@ -4,10 +4,10 @@ var config = require('../../config/config.js');
 var socketHandler = require('../socketHandler/socketHandler.js');
 var keysWord = require("../keysWord/keysWord.js");
 
-function initUser( user , keyWord){
+function initUser( user , keyWord ){
 
     user.idKeyWord = keyWord.id;
-    socketHandler.subscribeTo( keyWord.id, user.socket);
+    socketHandler.subscribeTo( keyWord.id, user.socket );
     socketHandler.notifyOne( "tweetCount", keyWord.tweetCount, user.socket );
     socketHandler.notifyOne( "representation", keyWord.representation.getJson(), user.socket );
 }
@@ -27,10 +27,13 @@ module.exports = {
             });
 
             socketHandler.on( "setNewKeyWord", user.socket, function( newKeyWord ){
+
                 if( keysWord.isNewKeyWord( newKeyWord ) ){
+
                     keysWord.addKeyWord( newKeyWord );
                     socketHandler.notifyAllWithoutMe("newKeyWord", newKeyWord, user.socket );
                 }
+
                 var keyWord = keysWord.getByName( newKeyWord );
                 initUser( user, keyWord );
 
