@@ -27,7 +27,7 @@ angularApp.factory("graph", function(){
             value: 13,
             def:13
         }
-    };    
+    };
 
     var force = d3.layout.force()
         .linkStrength(1)
@@ -43,9 +43,9 @@ angularApp.factory("graph", function(){
         .on("zoom", zoomed);
 
     var node_drag = d3.behavior.drag()
-        .on("dragstart", dragstart)
-        .on("drag", dragmove)
-        .on("dragend", dragend);
+        .on("dragstart", dragStart)
+        .on("drag", dragMove)
+        .on("dragend", dragEnd);
 
     var nodes = force.nodes();
     var links = force.links();
@@ -59,8 +59,12 @@ angularApp.factory("graph", function(){
         var svg = d3.select( rootElement ).append("svg:svg")
             .attr("width", clientSize.width)
             .attr("height", clientSize.height)
+            .on("contextmenu", function(){//prevent right click
+                d3.event.preventDefault();
+            })
             .call( zoom )
             .on("dblclick.zoom", null);//prevent zoom on double click
+
 
         vis = svg.append("g");
 
@@ -85,6 +89,7 @@ angularApp.factory("graph", function(){
             .on("mouseout", mouseOut)
             .call( node_drag )
             .on("dblclick", dbClick)
+            .on('contextmenu', onRightClick)
             .attr("class", "node");
 
         nodeEnter.append("text")
@@ -122,6 +127,47 @@ angularApp.factory("graph", function(){
         return false;
     }
 
+    function getDirectNodeChildren( nodeId ){
+        var directChildrens = [];
+        for( var i = 0 ; i < links.length; i ++ ){
+            if( links[i].target.id === nodeId ){
+                directChildrens.push( links[i].source.id);
+            }
+        }
+        return directChildrens;
+    }
+
+    function arrayUnique( array ) {
+
+        var a = array.concat();
+
+        for ( var i=0; i < a.length; ++i ) {
+
+            for( var j=i+1; j < a.length; ++j ) {
+
+                if( a[ i ] === a[ j ] ){
+
+                    a.splice( j-- , 1 );
+                }
+            }
+        }
+
+        return a;
+    }
+
+    function getAllNodeChildrenOf( node ){
+        var childrens = [];
+        var newChildren = getDirectNodeChildren( node.id );
+
+        var getNewChildren = function(newChildren){
+            childrens = childrens.concat( newChildren );
+            for( var i = 0 ; i < newChildren.length; i++ ){
+                getNewChildren( getDirectNodeChildren( newChildren[i] ) );
+            }
+        };
+        getNewChildren( newChildren );
+        return arrayUnique( childrens );
+    }
     //svg zoom
     function zoomed() {
         vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -181,12 +227,12 @@ angularApp.factory("graph", function(){
         d.fixed = false;
     }
 
-    function dragstart() {
+    function dragStart() {
         d3.event.sourceEvent.stopPropagation();
         force.stop();
     }
 
-    function dragmove(d) {
+    function dragMove( d ) {
         d.px += d3.event.dx;
         d.py += d3.event.dy;
         d.x += d3.event.dx;
@@ -194,10 +240,40 @@ angularApp.factory("graph", function(){
         onTicks();
     }
 
-    function dragend(d, i) {
+    function dragEnd( d ) {
         d.fixed = true;
         onTicks();
         force.resume();
+    }
+
+    function onRightClick( d ){
+        d3.event.preventDefault();
+        var idNodes = getAllNodeChildrenOf( d );
+
+        vis.selectAll("g.node").style("opacity", '1');
+        vis.selectAll("line.link").style("opacity", '1');
+
+        vis.selectAll("g.node")
+            .filter(function(d){
+                for(var i = 0 ; i < idNodes.length; i++ ){
+                    if( idNodes[i] === d.id ){
+                        return true;
+                    }
+                }
+                return false;
+            })
+            .style("opacity", '0.1');
+
+        vis.selectAll("line.link")
+            .filter(function(d){
+                for(var i = 0 ; i < idNodes.length; i++ ){
+                    if( idNodes[i] === d.source.id ){
+                        return true;
+                    }
+                }
+                return false;
+            })
+            .style("opacity", '0.1');
     }
 
     return {
