@@ -21,6 +21,7 @@ var dependances = {
         "controllers/mainController",
         "services/graphConfig",
         "directives/representation/representation",
+        "directives/representation/graphFactory",
         "directives/topBar/topBar",
         "directives/contextMenu/contextMenu",
         "directives/tweetHeartbeat/tweetHeartbeat"
