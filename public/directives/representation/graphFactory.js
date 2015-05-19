@@ -31,7 +31,8 @@ angularApp.factory("graph", function(){
         var svg = d3.select( rootElement ).append("svg:svg")
             .attr("width", clientSize.width)
             .attr("height", clientSize.height)
-            .call( zoom );
+            .call( zoom )
+            .on("dblclick.zoom", null);//prevent zoom on double click
 
         vis = svg.append("g");
 
@@ -55,6 +56,7 @@ angularApp.factory("graph", function(){
                 .on("mouseover", mouseOver)
                 .on("mouseout", mouseOut)
                 .call( node_drag )
+                .on("dblclick", dbClick)
                 .attr("class", "node");
 
             nodeEnter.append("text")
@@ -133,29 +135,34 @@ angularApp.factory("graph", function(){
             .style("font-size", fontSizeNodeText + "px");
     }
 
+    function dbClick( d ){
+        d.fixed = false;
+    }
+
     var node_drag = d3.behavior.drag()
         .on("dragstart", dragstart)
         .on("drag", dragmove)
         .on("dragend", dragend);
 
-    function dragstart(d, i) {
+    function dragstart() {
         d3.event.sourceEvent.stopPropagation();
-        force.stop(); // stops the force auto positioning before you start dragging
+        force.stop();
     }
 
-    function dragmove(d, i) {
+    function dragmove(d) {
         d.px += d3.event.dx;
         d.py += d3.event.dy;
         d.x += d3.event.dx;
         d.y += d3.event.dy;
-        onTicks(); // this is the key to make it work together with updating both px,py,x,y on d !
+        onTicks();
     }
 
     function dragend(d, i) {
-        d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+        d.fixed = true;
         onTicks();
         force.resume();
     }
+
 
     return {
         addSvg : addSvg,
