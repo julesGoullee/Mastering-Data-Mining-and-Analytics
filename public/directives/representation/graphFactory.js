@@ -37,6 +37,7 @@ angularApp.factory("graph", function(){
 
     }
 
+
     var update = function () {
 
             var link = vis.selectAll("line.link")
@@ -53,6 +54,7 @@ angularApp.factory("graph", function(){
             var nodeEnter = node.enter().append("g")
                 .on("mouseover", mouseOver)
                 .on("mouseout", mouseOut)
+                .call( node_drag )
                 .attr("class", "node");
 
             nodeEnter.append("text")
@@ -99,6 +101,7 @@ angularApp.factory("graph", function(){
             .style("font-size", fontSizeNodeText + "px");
     }
 
+    //node events
     function onTicks(){
         vis.selectAll("line.link").attr("x1", function(d) { return d.source.x; })
             .attr("y1", function(d) { return d.source.y; })
@@ -128,6 +131,30 @@ angularApp.factory("graph", function(){
         d3.select(this).select("text").transition()
             .duration(750)
             .style("font-size", fontSizeNodeText + "px");
+    }
+
+    var node_drag = d3.behavior.drag()
+        .on("dragstart", dragstart)
+        .on("drag", dragmove)
+        .on("dragend", dragend);
+
+    function dragstart(d, i) {
+        d3.event.sourceEvent.stopPropagation();
+        force.stop(); // stops the force auto positioning before you start dragging
+    }
+
+    function dragmove(d, i) {
+        d.px += d3.event.dx;
+        d.py += d3.event.dy;
+        d.x += d3.event.dx;
+        d.y += d3.event.dy;
+        onTicks(); // this is the key to make it work together with updating both px,py,x,y on d !
+    }
+
+    function dragend(d, i) {
+        d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
+        onTicks();
+        force.resume();
     }
 
     return {
