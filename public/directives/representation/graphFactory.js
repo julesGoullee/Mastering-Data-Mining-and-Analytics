@@ -132,14 +132,11 @@ angularApp.factory("graph", function(){
 
     return {
         addSvg : addSvg,
-        addNode : function (id, level, disableUpdate) {
+        addNode : function (id, level) {
             nodes.push({
                 id:id,
                 level: level
             });
-            if( disableUpdate !== true ){
-                update();
-            }
         },
         removeNode : function (id) {
             var i = 0;
@@ -154,20 +151,17 @@ angularApp.factory("graph", function(){
                 update();
             }
         },
-        addLink : function( sourceId, targetId, disableUpdate ){
+        addLink : function( sourceId, targetId ){
             var sourceNode = findNode(sourceId);
             var targetNode = findNode(targetId);
 
             if( (sourceNode !== undefined) && (targetNode !== undefined) ){
                 links.push({"source": sourceNode, "target": targetNode});
-
-                if( disableUpdate !== true ){
-                    update();
-                }
             }
         },
         setGravity: function( newGravity ){
             force.gravity( newGravity.value );
+            force.resume();
         },
         update: function(){
             update();
