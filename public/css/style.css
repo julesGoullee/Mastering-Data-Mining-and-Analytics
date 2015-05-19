@@ -32,12 +32,12 @@ representation .link {
 representation .node:hover {
   cursor: pointer;
 }
-representation .node circle {
+representation .node .circle {
   fill: #ccc;
   stroke: #fff;
   stroke-width: 1.5px;
 }
-representation text {
+representation .node text {
   font: 13px sans-serif;
   pointer-events: none;
 }

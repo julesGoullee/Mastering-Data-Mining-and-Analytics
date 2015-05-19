@@ -11,6 +11,7 @@ body {
 
   height: 100%;
   width: 100%;
+
   img{
     height: 100%;
     width: 100%;
@@ -36,20 +37,24 @@ representation{
     stroke-width: 1.5px;
   }
 
-  .node:hover{
-    cursor: pointer;
-  }
-  .node circle {
-    fill: #ccc;
-    stroke: #fff;
-    stroke-width: 1.5px;
+  .node{
+    &:hover{
+      cursor: pointer;
+    }
+    .circle{
+      fill: #ccc;
+      stroke: #fff;
+      stroke-width: 1.5px;
+    }
+
+    text {
+      font: 13px sans-serif;
+      pointer-events: none;
+    }
   }
 
-  text {
-    font: 13px sans-serif;
-    pointer-events: none;
-  }
 }
+
 #menu{
   path{
     fill: white;

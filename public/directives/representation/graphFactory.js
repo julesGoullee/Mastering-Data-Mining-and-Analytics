@@ -30,14 +30,7 @@ angularApp.factory("graph", function(){
         var svg = d3.select( rootElement ).append("svg:svg")
             .attr("width", clientSize.width)
             .attr("height", clientSize.height)
-            .append("g")
             .call( zoom );
-
-        var rect = svg.append("rect")
-            .attr("width", clientSize.width)
-            .attr("height", clientSize.height)
-            .style("fill", "none")
-            .style("pointer-events", "all");
 
         vis = svg.append("g");
 
@@ -68,6 +61,7 @@ angularApp.factory("graph", function(){
                 .text(function(d) {return d.id});
 
             nodeEnter.append("circle")
+                .attr("class", "circle")
                 .style("fill", function(d) { return color(d.level); })
                 .attr("r", 8);
 
