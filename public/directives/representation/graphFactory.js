@@ -57,6 +57,8 @@ angularApp.factory("graph", function(){
                 .data(nodes, function(d) { return d.id;});
 
             var nodeEnter = node.enter().append("g")
+                .on("mouseover", mouseOver)
+                .on("mouseout", mouseOut)
                 .attr("class", "node");
 
             nodeEnter.append("text")
@@ -66,23 +68,11 @@ angularApp.factory("graph", function(){
                 .text(function(d) {return d.id});
 
             nodeEnter.append("circle")
-                .on("mouseover", mouseOver)
-                .on("mouseout", mouseOut)
                 .style("fill", function(d) { return color(d.level); })
                 .attr("r", 8);
 
             node.exit().remove();
-            //force.start();
-            //var n = nodes.length * nodes.length;
-            //for (var i = n; i > 0; --i) force.tick();
-            //force.stop();
-            //link.attr("x1", function(d) { return d.source.x; })
-            //    .attr("y1", function(d) { return d.source.y; })
-            //    .attr("x2", function(d) { return d.target.x; })
-            //    .attr("y2", function(d) { return d.target.y; });
-            //
-            //node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-            // Restart the force layout.
+
             force.start();
         };
 
@@ -119,15 +109,23 @@ angularApp.factory("graph", function(){
     }
 
     function mouseOver() {
-        //d3.select(this).select("circle").transition()
-        //    .duration(750)
-        //    .attr("r", 16);
+
+        d3.select(this).select("circle").transition()
+            .duration(750)
+            .attr("r", 12);
+
+        d3.select(this).select("text").transition()
+            .duration(750)
+            .style("font-size", "15px");
     }
 
     function mouseOut() {
-        //d3.select(this).select("circle").transition()
-        //    .duration(750)
-        //    .attr("r", 8);
+        d3.select(this).select("circle").transition()
+            .duration(750)
+            .attr("r", 8);
+        d3.select(this).select("text").transition()
+            .duration(750)
+            .style("font-size", "13px");
     }
 
     return {

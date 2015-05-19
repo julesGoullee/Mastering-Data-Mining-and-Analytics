@@ -29,6 +29,9 @@ representation .link {
   stroke: #666;
   stroke-width: 1.5px;
 }
+representation .node:hover {
+  cursor: pointer;
+}
 representation .node circle {
   fill: #ccc;
   stroke: #fff;

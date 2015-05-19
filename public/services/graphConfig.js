@@ -4,6 +4,6 @@
 "use strict";
 angularApp.service("graphConfig",function(){
     return{
-        gravity:{value: 0.2 }
+        gravity:{value: 0.1 }
     }
 });
