@@ -3,6 +3,7 @@
 angularApp.factory("graph", function(){
 
     var color = d3.scale.category20();
+    var fontSizeNodeText = 13;
 
     var force = d3.layout.force()
         .linkStrength(1)
@@ -88,7 +89,14 @@ angularApp.factory("graph", function(){
     }
 
     function zoomed() {
+        console.log( d3.event.scale );
         vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+
+        fontSizeNodeText = d3.event.scale > 1 ? 13 / d3.event.scale  : 13;
+        console.log( fontSizeNodeText );
+        vis.selectAll("g.node text").transition()
+            .duration(750)
+            .style("font-size", fontSizeNodeText + "px");
     }
 
     function onTicks(){
@@ -110,7 +118,7 @@ angularApp.factory("graph", function(){
 
         d3.select(this).select("text").transition()
             .duration(750)
-            .style("font-size", "15px");
+            .style("font-size", fontSizeNodeText * 1.2 + "px");
     }
 
     function mouseOut() {
@@ -119,7 +127,7 @@ angularApp.factory("graph", function(){
             .attr("r", 8);
         d3.select(this).select("text").transition()
             .duration(750)
-            .style("font-size", "13px");
+            .style("font-size", fontSizeNodeText + "px");
     }
 
     return {
