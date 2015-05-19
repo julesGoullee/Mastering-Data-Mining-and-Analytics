@@ -3,14 +3,31 @@
 angularApp.factory("graph", function(){
 
     var color = d3.scale.category10();
-    var fontSizeNodeText = 13;
-    var linksStyle = {
-        strokeWidth:1.5
+
+    var linkStyle = {
+        strokeWidth: {
+            value:2.5,
+            def: 2.5
+        }
     };
-    var nodesStyle = {
-        r: 8,
-        strokeWidth:1.5
+
+    var circleStyle = {
+        r:{
+            value:8 ,
+            def: 8
+        },
+        strokeWidth:  {
+            value:1.5,
+            def: 1.5
+        }
     };
+
+    var textStyle = {
+        fontSize : {
+            value: 13,
+            def:13
+        }
+    };    
 
     var force = d3.layout.force()
         .linkStrength(1)
@@ -55,7 +72,8 @@ angularApp.factory("graph", function(){
             .data(links, function(d) { return d.source.id + "-" + d.target.id; });
 
         link.enter().insert("line")
-            .attr("class", "link");
+            .attr("class", "link")
+            .style("stroke-width", linkStyle.strokeWidth.value );
 
         link.exit().remove();
 
@@ -71,14 +89,16 @@ angularApp.factory("graph", function(){
 
         nodeEnter.append("text")
             .attr("class", "nodetext")
-            .attr("dx", fontSizeNodeText)
+            .attr("dx", textStyle.fontSize.value)
             .attr("dy", ".35em")
+            .style("font-size", textStyle.fontSize.value)
             .text(function(d) {return d.id});
 
         nodeEnter.append("circle")
             .attr("class", "circle")
+            .style("stroke-width", circleStyle.strokeWidth.value )
             .style("fill", function(d) { return color(d.level); })
-            .attr("r", nodesStyle.r );
+            .attr("r", circleStyle.r.value );
 
         node.exit().remove();
 
@@ -106,23 +126,23 @@ angularApp.factory("graph", function(){
     function zoomed() {
         vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 
-        fontSizeNodeText = d3.event.scale > 1 ? 13 / d3.event.scale  : 13;
+        textStyle.fontSize.value = d3.event.scale > 1 ? textStyle.fontSize.def / d3.event.scale  : 13;
         vis.selectAll("g.node text").transition()
             .duration(500)
-            .attr("dx", fontSizeNodeText)
-            .style("font-size", fontSizeNodeText + "px");
+            .attr("dx", textStyle.fontSize.value)
+            .style("font-size", textStyle.fontSize.value + "px");
 
-        nodesStyle.r = d3.event.scale > 1 ? 8 / d3.event.scale : 8;
-        nodesStyle.strokeWidth = d3.event.scale > 1 ? 1.5 / d3.event.scale : 1.5;
+        circleStyle.r.value = d3.event.scale > 1 ? circleStyle.r.def / d3.event.scale : 8;
+        circleStyle.strokeWidth.value = d3.event.scale > 1 ? circleStyle.strokeWidth.def / d3.event.scale : 1.5;
         vis.selectAll("g.node circle").transition()
             .duration(500)
-            .attr("r", nodesStyle.r)
-            .style("stroke-width", nodesStyle.strokeWidth);
+            .attr("r", circleStyle.r.value)
+            .style("stroke-width", circleStyle.strokeWidth.value);
 
-        linksStyle.strokeWidth = d3.event.scale > 1 ? 1.5 / d3.event.scale : 1.5;
+        linkStyle.strokeWidth.value = d3.event.scale > 1 ? linkStyle.strokeWidth.def / d3.event.scale : 1.5;
         vis.selectAll("line.link").transition()
             .duration(500)
-            .style("stroke-width", linksStyle.strokeWidth);
+            .style("stroke-width", linkStyle.strokeWidth.value);
     }
 
     //node events
@@ -141,20 +161,20 @@ angularApp.factory("graph", function(){
 
         d3.select(this).select("circle").transition()
             .duration(750)
-            .attr("r", nodesStyle.r * 1.2);
+            .attr("r", circleStyle.r.value * 1.2);
 
         d3.select(this).select("text").transition()
             .duration(750)
-            .style("font-size", fontSizeNodeText * 1.2 + "px");
+            .style("font-size", textStyle.fontSize.value * 1.2 + "px");
     }
 
     function mouseOut() {
         d3.select(this).select("circle").transition()
             .duration(750)
-            .attr("r", nodesStyle.r);
+            .attr("r", circleStyle.r.value);
         d3.select(this).select("text").transition()
             .duration(750)
-            .style("font-size", fontSizeNodeText + "px");
+            .style("font-size", textStyle.fontSize.value + "px");
     }
 
     function dbClick( d ){

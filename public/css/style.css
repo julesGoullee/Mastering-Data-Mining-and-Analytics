@@ -25,19 +25,16 @@ body {
   margin: auto 20px;
 }
 representation .link {
-  fill: none;
   stroke: #666;
-  stroke-width: 1.5px;
 }
 representation .node:hover {
   cursor: pointer;
 }
 representation .node .circle {
   stroke: #fff;
-  stroke-width: 1.5px;
 }
 representation .node text {
-  font: 13px sans-serif;
+  font-family: sans-serif;
   pointer-events: none;
 }
 #menu path {
