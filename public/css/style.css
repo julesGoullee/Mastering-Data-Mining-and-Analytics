@@ -33,7 +33,6 @@ representation .node:hover {
   cursor: pointer;
 }
 representation .node .circle {
-  fill: #ccc;
   stroke: #fff;
   stroke-width: 1.5px;
 }

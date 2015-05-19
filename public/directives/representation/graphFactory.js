@@ -2,8 +2,15 @@
 
 angularApp.factory("graph", function(){
 
-    var color = d3.scale.category20();
+    var color = d3.scale.category10();
     var fontSizeNodeText = 13;
+    var linksStyle = {
+        strokeWidth:1.5
+    };
+    var nodesStyle = {
+        r: 8,
+        strokeWidth:1.5
+    };
 
     var force = d3.layout.force()
         .linkStrength(1)
@@ -14,10 +21,14 @@ angularApp.factory("graph", function(){
         .theta(0.8)
         .alpha(0.1);
 
-
     var zoom = d3.behavior.zoom()
         .scaleExtent([0.1, 10])
         .on("zoom", zoomed);
+
+    var node_drag = d3.behavior.drag()
+        .on("dragstart", dragstart)
+        .on("drag", dragmove)
+        .on("dragend", dragend);
 
     var nodes = force.nodes();
     var links = force.links();
@@ -38,42 +49,41 @@ angularApp.factory("graph", function(){
 
     }
 
-
     var update = function () {
 
-            var link = vis.selectAll("line.link")
-                .data(links, function(d) { return d.source.id + "-" + d.target.id; });
+        var link = vis.selectAll("line.link")
+            .data(links, function(d) { return d.source.id + "-" + d.target.id; });
 
-            link.enter().insert("line")
-                .attr("class", "link");
+        link.enter().insert("line")
+            .attr("class", "link");
 
-            link.exit().remove();
+        link.exit().remove();
 
-            var node = vis.selectAll("g.node")
-                .data(nodes, function(d) { return d.id;});
+        var node = vis.selectAll("g.node")
+            .data(nodes, function(d) { return d.id;});
 
-            var nodeEnter = node.enter().append("g")
-                .on("mouseover", mouseOver)
-                .on("mouseout", mouseOut)
-                .call( node_drag )
-                .on("dblclick", dbClick)
-                .attr("class", "node");
+        var nodeEnter = node.enter().append("g")
+            .on("mouseover", mouseOver)
+            .on("mouseout", mouseOut)
+            .call( node_drag )
+            .on("dblclick", dbClick)
+            .attr("class", "node");
 
-            nodeEnter.append("text")
-                .attr("class", "nodetext")
-                .attr("dx", 12)
-                .attr("dy", ".35em")
-                .text(function(d) {return d.id});
+        nodeEnter.append("text")
+            .attr("class", "nodetext")
+            .attr("dx", fontSizeNodeText)
+            .attr("dy", ".35em")
+            .text(function(d) {return d.id});
 
-            nodeEnter.append("circle")
-                .attr("class", "circle")
-                .style("fill", function(d) { return color(d.level); })
-                .attr("r", 8);
+        nodeEnter.append("circle")
+            .attr("class", "circle")
+            .style("fill", function(d) { return color(d.level); })
+            .attr("r", nodesStyle.r );
 
-            node.exit().remove();
+        node.exit().remove();
 
-            force.start();
-        };
+        force.start();
+    };
 
     function findNode( id ){
         for( var i=0; i < nodes.length; i++ ){
@@ -92,15 +102,27 @@ angularApp.factory("graph", function(){
         return false;
     }
 
+    //svg zoom
     function zoomed() {
-        console.log( d3.event.scale );
         vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
 
         fontSizeNodeText = d3.event.scale > 1 ? 13 / d3.event.scale  : 13;
-        console.log( fontSizeNodeText );
         vis.selectAll("g.node text").transition()
-            .duration(750)
+            .duration(500)
+            .attr("dx", fontSizeNodeText)
             .style("font-size", fontSizeNodeText + "px");
+
+        nodesStyle.r = d3.event.scale > 1 ? 8 / d3.event.scale : 8;
+        nodesStyle.strokeWidth = d3.event.scale > 1 ? 1.5 / d3.event.scale : 1.5;
+        vis.selectAll("g.node circle").transition()
+            .duration(500)
+            .attr("r", nodesStyle.r)
+            .style("stroke-width", nodesStyle.strokeWidth);
+
+        linksStyle.strokeWidth = d3.event.scale > 1 ? 1.5 / d3.event.scale : 1.5;
+        vis.selectAll("line.link").transition()
+            .duration(500)
+            .style("stroke-width", linksStyle.strokeWidth);
     }
 
     //node events
@@ -119,7 +141,7 @@ angularApp.factory("graph", function(){
 
         d3.select(this).select("circle").transition()
             .duration(750)
-            .attr("r", 12);
+            .attr("r", nodesStyle.r * 1.2);
 
         d3.select(this).select("text").transition()
             .duration(750)
@@ -129,7 +151,7 @@ angularApp.factory("graph", function(){
     function mouseOut() {
         d3.select(this).select("circle").transition()
             .duration(750)
-            .attr("r", 8);
+            .attr("r", nodesStyle.r);
         d3.select(this).select("text").transition()
             .duration(750)
             .style("font-size", fontSizeNodeText + "px");
@@ -138,11 +160,6 @@ angularApp.factory("graph", function(){
     function dbClick( d ){
         d.fixed = false;
     }
-
-    var node_drag = d3.behavior.drag()
-        .on("dragstart", dragstart)
-        .on("drag", dragmove)
-        .on("dragend", dragend);
 
     function dragstart() {
         d3.event.sourceEvent.stopPropagation();
@@ -162,7 +179,6 @@ angularApp.factory("graph", function(){
         onTicks();
         force.resume();
     }
-
 
     return {
         addSvg : addSvg,
