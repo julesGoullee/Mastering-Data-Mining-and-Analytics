@@ -250,8 +250,8 @@ angularApp.factory("graph", function(){
         d3.event.preventDefault();
         var idNodes = getAllNodeChildrenOf( d );
 
-        vis.selectAll("g.node").style("opacity", '1');
-        vis.selectAll("line.link").style("opacity", '1');
+        //vis.selectAll("g.node").style("opacity", '1');
+        //vis.selectAll("line.link").style("opacity", '1');
 
         vis.selectAll("g.node")
             .filter(function(d){
