@@ -77,6 +77,9 @@ angularApp.factory("graph", function(){
 
         link.enter().insert("line")
             .attr("class", "link")
+            .style("opacity", function(d){
+                return d.target.hidden === true ? 0.1 : 1;
+            })
             .style("stroke-width", linkStyle.strokeWidth.value );
 
         link.exit().remove();
@@ -132,6 +135,16 @@ angularApp.factory("graph", function(){
         for( var i = 0 ; i < links.length; i ++ ){
             if( links[i].target.id === nodeId ){
                 directChildrens.push( links[i].source.id);
+            }
+        }
+        return directChildrens;
+    }
+
+    function getDirectNodeParents( nodeId ){
+        var directChildrens = [];
+        for( var i = 0 ; i < links.length; i ++ ){
+            if( links[i].source.id === nodeId ){
+                directChildrens.push( links[i].target.id);
             }
         }
         return directChildrens;
@@ -257,6 +270,7 @@ angularApp.factory("graph", function(){
             .filter(function(d){
                 for(var i = 0 ; i < idNodes.length; i++ ){
                     if( idNodes[i] === d.id ){
+                        d.hidden = true;
                         return true;
                     }
                 }
@@ -268,6 +282,7 @@ angularApp.factory("graph", function(){
             .filter(function(d){
                 for(var i = 0 ; i < idNodes.length; i++ ){
                     if( idNodes[i] === d.source.id ){
+                        d.source.hidden = true;
                         return true;
                     }
                 }
