@@ -91,9 +91,10 @@ angularApp.factory("graph", function(){
             .attr("class", "node")
             .on("mouseover", mouseOver)
             .on("mouseout", mouseOut)
-            .call( node_drag )
             .on("dblclick", dbClick)
+            .on("click", onClick)
             .on('contextmenu', onRightClick)
+            .call( node_drag )
             .style("opacity", function(d){
                 var parentsNodes = getDirectNodeParents( d.id );
                 for (var i = 0; i < parentsNodes.length; i++) {
@@ -193,6 +194,15 @@ angularApp.factory("graph", function(){
         getNewChildren( newChildren );
         return arrayUnique( childrens );
     }
+
+    function directChildrensIsHidden( nodeId ){
+        for( var i = 0 ; i < links.length; i ++ ){
+            if( links[i].target.id === nodeId && links[i].source.hidden === true ){
+                return true;
+            }
+        }
+        return false;
+    }
     //svg zoom
     function zoomed() {
         vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
@@ -271,17 +281,51 @@ angularApp.factory("graph", function(){
         force.resume();
     }
 
+    function onClick( d ){
+        console.log("click");
+        if (d3.event.defaultPrevented === false) {
+
+            if (directChildrensIsHidden(d.id)) {
+                var idChildrensNodes = getAllNodeChildrenOf(d);
+
+                vis.selectAll("g.node")
+                    .filter(function (d) {
+                        for (var i = 0; i < idChildrensNodes.length; i++) {
+                            if (idChildrensNodes[i] === d.id) {
+                                d.hidden = false;
+                                return true;
+                            }
+                        }
+                        return false;
+                    })
+                    .style("opacity", "1");
+
+                vis.selectAll("line.link")
+                    .filter(function (d) {
+                        for (var i = 0; i < idChildrensNodes.length; i++) {
+                            if (idChildrensNodes[i] === d.source.id) {
+                                d.source.hidden = false;
+                                return true;
+                            }
+                        }
+                        return false;
+                    })
+                    .style("opacity", "1");
+            }
+        }
+    }
+
     function onRightClick( d ){
         d3.event.preventDefault();
-        var idNodes = getAllNodeChildrenOf( d );
+        var idChildrensNodes = getAllNodeChildrenOf( d );
 
         //vis.selectAll("g.node").style("opacity", '1');
         //vis.selectAll("line.link").style("opacity", '1');
 
         vis.selectAll("g.node")
             .filter(function(d){
-                for(var i = 0 ; i < idNodes.length; i++ ){
-                    if( idNodes[i] === d.id ){
+                for(var i = 0 ; i < idChildrensNodes.length; i++ ){
+                    if( idChildrensNodes[i] === d.id ){
                         d.hidden = true;
                         return true;
                     }
@@ -292,8 +336,8 @@ angularApp.factory("graph", function(){
 
         vis.selectAll("line.link")
             .filter(function(d){
-                for(var i = 0 ; i < idNodes.length; i++ ){
-                    if( idNodes[i] === d.source.id ){
+                for(var i = 0 ; i < idChildrensNodes.length; i++ ){
+                    if( idChildrensNodes[i] === d.source.id ){
                         d.source.hidden = true;
                         return true;
                     }
