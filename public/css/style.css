@@ -21,11 +21,11 @@ body {
   text-align: center;
   left: 35%;
 }
-#topBar md-slider {
-  margin: auto 20px;
-}
 #right-menu .md-raised {
   width: 100%;
+}
+#right-menu md-slider {
+  margin: auto 20px!important;
 }
 representation .link {
   stroke: #a0a0a0;
