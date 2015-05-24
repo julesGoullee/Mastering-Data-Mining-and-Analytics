@@ -1,7 +1,6 @@
 analysiseur langue
 choix de la langue
 representation
-    reposition postionnement des point
     actualisé l'occurence modifier la tailler des spheres
-limite api twitter trouver une solution
+limite api twitter --> Oauth
 mongo db stocker in real time

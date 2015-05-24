@@ -282,10 +282,9 @@ angularApp.factory("graph", function(){
     }
 
     function onClick( d ){
-        console.log("click");
-        if (d3.event.defaultPrevented === false) {
+        if ( d3.event.defaultPrevented === false && d.hidden === false ) {
 
-            if (directChildrensIsHidden(d.id)) {
+            if( directChildrensIsHidden( d.id ) ) {
                 var idChildrensNodes = getAllNodeChildrenOf(d);
 
                 vis.selectAll("g.node")
