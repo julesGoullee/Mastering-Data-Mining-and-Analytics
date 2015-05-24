@@ -98,7 +98,7 @@ angularApp.factory("graph", function(){
                 var parentsNodes = getDirectNodeParents( d.id );
                 for (var i = 0; i < parentsNodes.length; i++) {
                     var parentNode = parentsNodes[i];
-                    if( parentNode.hidden === true){
+                    if( parentNode.hidden === true ){
                         d.hidden = true;
                         return 0.1;
                     }
@@ -112,7 +112,7 @@ angularApp.factory("graph", function(){
             .attr("dx", textStyle.fontSize.value)
             .attr("dy", ".35em")
             .style("font-size", textStyle.fontSize.value)
-            .text(function(d) {return d.id});
+            .text(function(d) { return d.id });
 
         nodeEnter.append("circle")
             .attr("class", "circle")
@@ -311,15 +311,19 @@ angularApp.factory("graph", function(){
                 level: level
             });
         },
-        removeNode : function (id) {
+        removeNode : function( id ){
             var i = 0;
-            var n = findNode(id);
-            while (i < links.length) {
-                if ((links[i]['source'] === n)||(links[i]['target'] == n)) links.splice(i,1);
-                else i++;
+            var n = findNode( id );
+            while( i < links.length ){
+                if( (links[i]['source'] === n) || (links[i]['target'] == n ) ){
+                    links.splice(i,1);
+                }
+                else {
+                    i++;
+                }
             }
-            var index = findNodeIndex(id);
-            if(index !== undefined) {
+            var index = findNodeIndex( id );
+            if( index !== undefined ){
                 nodes.splice(index, 1);
                 update();
             }
@@ -335,6 +339,15 @@ angularApp.factory("graph", function(){
         setGravity: function( newGravity ){
             force.gravity( newGravity.value );
             force.resume();
+        },
+        showAll: function(){
+            vis.selectAll("g.node").style("opacity", '1').each(function(d){
+                d.hidden = false;
+            });
+
+            vis.selectAll("line.link").style("opacity", '1').each(function(d){
+                d.target.hidden = false;
+            });
         },
         update: function(){
             update();

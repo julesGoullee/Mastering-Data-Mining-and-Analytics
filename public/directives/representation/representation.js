@@ -42,7 +42,9 @@ angularApp.directive("representation", function( graphConfig, graph ){
                     }
                 }
                 graph.update();
-
+                graphConfig.onRestoreHiddenNodes(function(){
+                   graph.showAll();
+                });
             };
 
             scope.words.addWord = function( wordsObjects ){

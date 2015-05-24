@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.directive( "topBar", function($mdUtil,$mdSidenav,$log,graphConfig){
+angularApp.directive( "topBar", function( $mdUtil, $mdSidenav, $log, graphConfig ){
     return {
         restrict: "E",
         scope:{
@@ -11,6 +11,7 @@ angularApp.directive( "topBar", function($mdUtil,$mdSidenav,$log,graphConfig){
         link: function( scope, element ) {
             scope.gravity = graphConfig.gravity;
             scope.toggleRight = buildToggler('right');
+            scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
             function buildToggler(navID) {
                 var debounceFn =  $mdUtil.debounce(function(){
                     $mdSidenav(navID)

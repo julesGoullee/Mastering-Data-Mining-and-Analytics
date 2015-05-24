@@ -33,12 +33,9 @@
                                ng-model="data" md-sidenav-focus>
                     </md-input-container>
                     Gravity : <md-slider flex class="md-warn" min="0.1" step="0.02"  max="1" ng-model="gravity.value" aria-label="gravite" ></md-slider>
+                        <md-button ng-click="restoreHiddenNodes()" class="md-raised">Restore visibility</md-button>
                     </md-slider>
                 </form>
-
-                <md-button ng-click="close()" class="md-primary" aria-label="Close">
-                    <ng-md-icon icon="cloud_done"></ng-md-icon>
-                </md-button>
             </md-content>
         </md-sidenav>
     </div>
