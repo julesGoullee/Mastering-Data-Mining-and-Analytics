@@ -88,12 +88,24 @@ angularApp.factory("graph", function(){
             .data(nodes, function(d) { return d.id;});
 
         var nodeEnter = node.enter().append("g")
+            .attr("class", "node")
             .on("mouseover", mouseOver)
             .on("mouseout", mouseOut)
             .call( node_drag )
             .on("dblclick", dbClick)
             .on('contextmenu', onRightClick)
-            .attr("class", "node");
+            .style("opacity", function(d){
+                var parentsNodes = getDirectNodeParents( d.id );
+                for (var i = 0; i < parentsNodes.length; i++) {
+                    var parentNode = parentsNodes[i];
+                    if( parentNode.hidden === true){
+                        d.hidden = true;
+                        return 0.1;
+                    }
+                }
+                d.hidden = false;
+                return 1;
+            });
 
         nodeEnter.append("text")
             .attr("class", "nodetext")
@@ -130,7 +142,7 @@ angularApp.factory("graph", function(){
         return false;
     }
 
-    function getDirectNodeChildren( nodeId ){
+    function getDirectNodeChildrenId( nodeId ){
         var directChildrens = [];
         for( var i = 0 ; i < links.length; i ++ ){
             if( links[i].target.id === nodeId ){
@@ -144,7 +156,7 @@ angularApp.factory("graph", function(){
         var directChildrens = [];
         for( var i = 0 ; i < links.length; i ++ ){
             if( links[i].source.id === nodeId ){
-                directChildrens.push( links[i].target.id);
+                directChildrens.push( links[i].target);
             }
         }
         return directChildrens;
@@ -170,12 +182,12 @@ angularApp.factory("graph", function(){
 
     function getAllNodeChildrenOf( node ){
         var childrens = [];
-        var newChildren = getDirectNodeChildren( node.id );
+        var newChildren = getDirectNodeChildrenId( node.id );
 
         var getNewChildren = function(newChildren){
             childrens = childrens.concat( newChildren );
             for( var i = 0 ; i < newChildren.length; i++ ){
-                getNewChildren( getDirectNodeChildren( newChildren[i] ) );
+                getNewChildren( getDirectNodeChildrenId( newChildren[i] ) );
             }
         };
         getNewChildren( newChildren );
