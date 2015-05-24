@@ -4,3 +4,4 @@ utils/elasticsearch-head/
 public/external/
 public/fonts/
 bower_components/
+config/account.json
