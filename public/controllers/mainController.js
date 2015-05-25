@@ -43,7 +43,14 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
             $scope.validate = function() {
 
                 if( $scope.addedKeyWord ){
-                    socket.emit( "setNewKeyWord", $scope.addedKeyWord );
+                    var data = {
+                        newKeyWord: $scope.addedKeyWord,
+                        options:{
+                            occurence: 10,
+                            lang: "fr"
+                        }
+                    };
+                    socket.emit( "setNewKeyWord", data );
                     $mdDialog.hide();
                 }
                 else if( $scope.selectedKeyWord !== null ) {

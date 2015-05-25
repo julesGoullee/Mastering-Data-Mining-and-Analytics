@@ -15,7 +15,7 @@ module.exports = {
         });
     },
     notifyAll : function( event, data ){
-        _io.sockets.emit( event, data );
+        _io.server.sockets.emit( event, data );
     },
     notifyOne: function( event, data, socket ){
         socket.emit( event, data );
