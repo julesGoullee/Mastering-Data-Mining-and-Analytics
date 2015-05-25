@@ -23,11 +23,16 @@ describe("twitter catcher", function() {
         mockEsConnector = sinon.spy();
         mockEsConnector.addNewEntry = sinon.stub();
         mockEsConnector.dropIndexByTag = sinon.spy();
+        var tokens = sinon.stub();
+        tokens.returns({
+            token: "token",
+            tokenSecret: "tokenSecret"
+        });
         keyWord = KeyWord( "keyWordTest"  );
         keyWord.onNewTweet = sinon.spy();
         keyWord.mock( mockSocketHandler, mockEsConnector );
         twitterCatcher.mock( mockTwtConnector, mockEsConnector );
-        twitterCatcher.trackKeyWord( keyWord );
+        twitterCatcher.trackKeyWord( keyWord, tokens() );
     });
 
     it("Peut lancer la capture du mot", function () {
@@ -49,7 +54,7 @@ describe("twitter catcher", function() {
             mockAddNewEntryPromise.then = sinon.stub();
             tweet = sinon.spy();
             tweet.text = "un tweet de test";
-            callbackOnData = mockTwtConnector.onData.args[0][1];
+            callbackOnData = mockTwtConnector.onData.args[0][2];
             mockEsConnector.addNewEntry.returns( mockAddNewEntryPromise );
             callbackOnData( tweet );
             callbackPromise = mockAddNewEntryPromise.then.args[0][0];

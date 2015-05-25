@@ -10,12 +10,12 @@ module.exports = {
     client : function(){
         return client;
     },
-    onData: function( twitterKeyWord, callback ){
+    onData: function( twitterKeyWord, tokens, callback ){
         var client = new twitter({
             consumer_key: accounts.TWITTER_CONSUMER_KEY,
             consumer_secret: accounts.TWITTER_CONSUMER_SECRET,
-            access_token_key: "1068441726-aJMFtZQgTLP8vljzW2XkUsPoISReoAmnXGfycYd",
-            access_token_secret: "moTV1xg2RTlQe3fzENn0SeMAnfj0fP8sMNeDfONDAaEbC"
+            access_token_key: tokens.token,
+            access_token_secret: tokens.tokenSecret
         });
         client.stream( 'statuses/filter', {track: twitterKeyWord },  function( stream ){
 
