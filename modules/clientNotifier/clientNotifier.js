@@ -34,8 +34,8 @@ module.exports = {
 
                     if( keysWord.isNewKeyWord( data.newKeyWord ) ){
 
-                        keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, { token: user.session.token , tokenSecret: user.session.tokenSecret });
-                        socketHandler.notifyAllWithoutMe("newKeyWord", data, user.socket );
+                        var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, { token: user.session.token , tokenSecret: user.session.tokenSecret });
+                        socketHandler.notifyAllWithoutMe("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name }, user.socket );
                     }
 
                     var keyWord = keysWord.getByName( data.newKeyWord );

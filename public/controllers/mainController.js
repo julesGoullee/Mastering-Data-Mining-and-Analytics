@@ -16,6 +16,11 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
         $rootScope.showPopup( );
     });
 
+    socket.on("newKeyWord", function( newKeyWord ){
+        $scope.keysWord.push( newKeyWord );
+        $scope.$broadcast( "newKeyWord", newKeyWord.value );
+    });
+
     $rootScope.showPopup = function(){
         $mdDialog.show({
             controller: DialogController,

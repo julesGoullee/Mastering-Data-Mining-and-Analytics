@@ -56,7 +56,7 @@ module.exports = {
 
             if( name.length >= keyWordContraint.minLength && name.length <= keyWordContraint.maxLength ){
 
-                if( keyWordContraint.lang.indexOf( options.lang ) === 1 ) {
+                if( keyWordContraint.lang.indexOf( options.lang ) != -1 ) {
                     options.occurence = parseInt( options.occurence, 10 );
 
                     if( options.occurence >= keyWordContraint.minOccurence && options.occurence <= keyWordContraint.maxOccurence){
