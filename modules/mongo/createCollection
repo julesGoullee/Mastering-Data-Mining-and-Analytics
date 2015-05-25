@@ -1,0 +1,1 @@
+db.userToken.ensureIndex({"id":1})
