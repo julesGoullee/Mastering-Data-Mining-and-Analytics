@@ -5,7 +5,7 @@ angularApp.directive( "login", function( ){
         restrict: "E",
         scope:{
         },
-        templateUrl: "../directives/login/login.html",
+        templateUrl: "/directives/login/login.html",
         link: function( scope, element ) {
         }
     };
