@@ -16,7 +16,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
 
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: '../controllers/chooseTrack.html'
+            templateUrl: '../dialogChooseTrack/chooseTrack.html'
         }).then(function() {
             //fermeture popup
         }, function() {
@@ -42,15 +42,14 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
             };
             $scope.validate = function() {
 
-                if( $scope.addedKeyWord ){
-                    var data = {
-                        newKeyWord: $scope.addedKeyWord,
+                if( $scope.addedKeyWord &&  $scope.addedKeyWord.name && $scope.addedKeyWord.lang &&  $scope.addedKeyWord.occurence ){
+                    socket.emit( "setNewKeyWord", {
+                        newKeyWord: $scope.addedKeyWord.name,
                         options:{
-                            occurence: 10,
-                            lang: "fr"
+                            occurence: $scope.addedKeyWord.occurence,
+                            lang: $scope.addedKeyWord.lang
                         }
-                    };
-                    socket.emit( "setNewKeyWord", data );
+                    });
                     $mdDialog.hide();
                 }
                 else if( $scope.selectedKeyWord !== null ) {

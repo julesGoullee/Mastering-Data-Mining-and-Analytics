@@ -25,8 +25,7 @@ module.exports = {
 
             stream.on('error', function( error ){
                 client.get("application/rate_limit_status", function( error, content, response ){
-                    debugger;
-                    var a = response.headers["x-rate-limit-reset"];
+                    var limit = response.headers["x-rate-limit-reset"];
                 });
             });
         });

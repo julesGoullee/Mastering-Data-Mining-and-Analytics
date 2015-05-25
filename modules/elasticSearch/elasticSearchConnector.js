@@ -24,8 +24,8 @@ module.exports = {
 
             promiseDelete.then( function( response, error ) {
 
-                if (error) {
-                    //console.trace( error );
+                if( error ){
+                    console.trace( error );
                 }
             });
             return promiseDelete;
@@ -51,7 +51,7 @@ module.exports = {
         promiseCreate.then(function( response, error ){
 
             if( error ) {
-                //console.trace( error );
+                console.trace( error );
             }
         });
 
@@ -105,7 +105,7 @@ module.exports = {
             callback( keysWords );
 
         }, function ( err ) {
-            //console.trace( err.message );
+            console.trace( err.message );
         });
     },
     getKeysWordsReferences: function( keyWord, newKeysWord, regexWordsAlreadyFlag, callback ){
@@ -160,7 +160,7 @@ module.exports = {
             callback( tab );
 
         }, function( err ) {
-            //console.trace( err.message );
+            console.trace( err.message );
         });
     },
     connect: function(){
