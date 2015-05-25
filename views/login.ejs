@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="Mastering-Data-Mining-and-Analytics">
+<head>
+    <title><%= title %></title>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <!--Script Module-->
+    <% dependances.scripts.forEach(function(script, index) { %>
+    <script src="<%= script %>.js"></script>
+    <% }); %>
+
+    <!--CSS Module-->
+    <% dependances.css.forEach(function(css, index) { %>
+    <link rel="stylesheet" type="text/css" href="<%= css %>.css">
+    <% }); %>
+
+</head>
+<body ng-controller="LoginCtrl" layout="row">
+    <div flex="100">
+        <md-toolbar id="topBar">
+            <div class="md-toolbar-tools">
+                <span>Mastering Data Mining & Analytics</span>
+                <div  flex></div>
+            </div>
+        </md-toolbar>
+        <top-bar flex="100" tweet-count="tweetCount" ></top-bar>
+        <div flex="100" >
+            <login></login>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -15,8 +15,8 @@ module.exports = {
         var client = new twitter({
             consumer_key: "7ZkuNkslxLXJReFnZXQiQQYmi",
             consumer_secret: "RaOlbMXzUAhParwL95X9VWQ4j2JEjDvctiAVhnW0LjBBsRGJbM",
-            access_token_key: "1068441726-LzsbGEBUWNPoKHyJRMjVCMBLN6T3T9g8nkJrvcK",
-            access_token_secret: "rNz13tQIIpat5j4vVUDzzgxXcjQzVrUNyuWbLI6mtjmAX"
+            access_token_key: "1068441726-aJMFtZQgTLP8vljzW2XkUsPoISReoAmnXGfycYd",
+            access_token_secret: "moTV1xg2RTlQe3fzENn0SeMAnfj0fP8sMNeDfONDAaEbC"
         });
         client.stream( 'statuses/filter', {track: twitterKeyWord },  function( stream ) {
 

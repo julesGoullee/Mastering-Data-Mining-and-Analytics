@@ -25,7 +25,7 @@ module.exports = {
 
         twtConnector.onData( keyWord.name, function ( tweet ){
 
-            if(typeof tweet.text === "string" ) {
+            if( typeof tweet.text === "string" ) {
                 esConnector.addNewEntry( keyWord, tweet.text ).then( function (){
                     if( keyWord.isReady ){
                         keyWord.isReady = false;

@@ -1,6 +1,6 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-
+var auth = require("./auth.js");
 var dependances = {
 
     scripts:[
@@ -32,8 +32,8 @@ var dependances = {
     ]
 };
 
-router.get('/', function(req, res, next) {
-    res.render('index', { dependances: dependances, title: 'M.D.M.A - Project' });
+router.get("/", auth.ensureAuthenticated, function( req, res, next ){
+    res.render("index", { dependances: dependances, title: "M.D.M.A - Project" });
 });
 
 module.exports = router;
