@@ -23,13 +23,15 @@ describe("KeyWord", function() {
         mockEsConnector.getKeysWordsReferences = sinon.spy();
         callbackOnNewTweet = sinon.spy();
 
-        keyWord = KeyWord( "keyWordTest" );
+        keyWord = KeyWord( "keyWordTest", "fr", 5 );
         keyWord.mock( mockSocketHandler, mockEsConnector );
 
     });
 
     it("Peut ajouter un keyword", function () {
         expect( keyWord.name ).to.eql("keyWordTest");
+        expect( keyWord.lang).to.eql("fr");
+        expect( keyWord.occurence ).to.eql(5);
         expect( keyWord.tweetCount ).to.eql( 0 );
     });
 

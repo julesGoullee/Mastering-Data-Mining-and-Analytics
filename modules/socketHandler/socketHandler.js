@@ -36,8 +36,7 @@ module.exports = {
         socket.join( room );
     },
     notifyInRoom : function( room, event, data ){
-        //console.log("notifyInRoom", room, event);
 
-        _io.sockets.in( room ).emit( event, data );
+        _io.server.sockets.in( room ).emit( event, data );
     }
 };

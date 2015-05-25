@@ -24,17 +24,19 @@ module.exports = {
                 initUser( user, keyWord );
             });
 
-            socketHandler.on("setNewKeyWord", user.socket, function( newKeyWord ){
+            socketHandler.on("setNewKeyWord", user.socket, function( data ){
 
-                if( keysWord.isNewKeyWord( newKeyWord ) ){
+                if( keysWord.isValidKeyWord( data.newKeyWord, data.options ) ){
 
-                    keysWord.addKeyWord( newKeyWord );
-                    socketHandler.notifyAllWithoutMe("newKeyWord", newKeyWord, user.socket );
+                    if( keysWord.isNewKeyWord( data.newKeyWord ) ){
+
+                        keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence );
+                        socketHandler.notifyAllWithoutMe("newKeyWord", data, user.socket );
+                    }
+
+                    var keyWord = keysWord.getByName( data.newKeyWord );
+                    initUser( user, keyWord );
                 }
-
-                var keyWord = keysWord.getByName( newKeyWord );
-                initUser( user, keyWord );
-
             });
         });
     }

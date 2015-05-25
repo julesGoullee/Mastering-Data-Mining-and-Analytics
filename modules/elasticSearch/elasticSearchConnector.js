@@ -6,7 +6,6 @@ var config = require('../../config/config.js');
 var client = new elasticsearch.Client({
     host: config.elasticSearchAddr
 });
-var reqSetting;
 
 module.exports = {
     dropIndexByTag: function( keyWord ){
@@ -44,7 +43,7 @@ module.exports = {
             body: {
                 tags: keyWord.name,
                 date: Math.floor(new Date() / 1000),
-                lang: config.lang,
+                lang: keyWord.lang,
                 content: content
             }
         });
@@ -52,7 +51,7 @@ module.exports = {
         promiseCreate.then(function( response, error ){
 
             if( error ) {
-                console.trace( error );
+                //console.trace( error );
             }
         });
 
@@ -75,14 +74,14 @@ module.exports = {
                                 "pattern" : regexWordsAlreadyFlag
                                 //"flags" : "CASE_INSENSITIVE"
                             },
-                            min_doc_count: config.minOccurence,
-                            "size" : 1000
+                            min_doc_count: keyWord.occurence,
+                            "size" : 5000
                         }
                     }
                 }
             },
-            size: 1000,
-            "settings": reqSetting
+            size: 5000,
+            "settings": getAnalysisByLang( keyWord.lang )
         });
 
         req.then( function ( resp ) {
@@ -106,7 +105,7 @@ module.exports = {
             callback( keysWords );
 
         }, function ( err ) {
-            console.trace( err.message );
+            //console.trace( err.message );
         });
     },
     getKeysWordsReferences: function( keyWord, newKeysWord, regexWordsAlreadyFlag, callback ){
@@ -143,7 +142,7 @@ module.exports = {
                 }
             },
             size: 1000,
-            "settings": reqSetting
+            "settings": getAnalysisByLang( keyWord.lang )
         });
 
         req.then( function ( resp ) {
@@ -160,8 +159,8 @@ module.exports = {
 
             callback( tab );
 
-        }, function ( err ) {
-            console.trace( err.message );
+        }, function( err ) {
+            //console.trace( err.message );
         });
     },
     connect: function(){
@@ -172,78 +171,81 @@ module.exports = {
     }
 };
 
-
-if( config.lang === "en" ) {
-    reqSetting = {
-        "analysis": {
-            "filter": {
-                "english_stop": {
-                    "type": "stop",
-                    "stopwords": "_english_"
+function getAnalysisByLang( lang ){
+    if( lang === "en" ) {
+        return {
+            "analysis": {
+                "filter": {
+                    "english_stop": {
+                        "type": "stop",
+                        "stopwords": "_english_"
+                    },
+                    "english_keywords": {
+                        "type": "keyword_marker",
+                        "keywords": []
+                    },
+                    "english_stemmer": {
+                        "type": "stemmer",
+                        "language": "english"
+                    },
+                    "english_possessive_stemmer": {
+                        "type": "stemmer",
+                        "language": "possessive_english"
+                    }
                 },
-                "english_keywords": {
-                    "type": "keyword_marker",
-                    "keywords": []
-                },
-                "english_stemmer": {
-                    "type": "stemmer",
-                    "language": "english"
-                },
-                "english_possessive_stemmer": {
-                    "type": "stemmer",
-                    "language": "possessive_english"
-                }
-            },
-            "analyzer": {
-                "english": {
-                    "tokenizer": "standard",
-                    "filter": [
-                        "english_possessive_stemmer",
-                        "lowercase",
-                        "english_stop",
-                        "english_keywords",
-                        "english_stemmer"
-                    ]
+                "analyzer": {
+                    "english": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "english_possessive_stemmer",
+                            "lowercase",
+                            "english_stop",
+                            "english_keywords",
+                            "english_stemmer"
+                        ]
+                    }
                 }
             }
         }
+    } else if( lang === "fr") {
+        return {
+            "analysis": {
+                "filter": {
+                    "french_elision": {
+                        "type": "elision",
+                        "articles": ["l", "m", "t", "qu", "n", "s",
+                            "j", "d", "c", "jusqu", "quoiqu",
+                            "lorsqu", "puisqu"
+                        ]
+                    },
+                    "french_stop": {
+                        "type": "stop",
+                        "stopwords": "_french_"
+                    },
+                    "french_keywords": {
+                        "type": "keyword_marker",
+                        "keywords": []
+                    },
+                    "french_stemmer": {
+                        "type": "stemmer",
+                        "language": "light_french"
+                    }
+                },
+                "analyzer": {
+                    "french": {
+                        "tokenizer": "standard",
+                        "filter": [
+                            "french_elision",
+                            "lowercase",
+                            "french_stop",
+                            "french_keywords",
+                            "french_stemmer"
+                        ]
+                    }
+                }
+            }
+        };
     }
-} else if( config.lang === "fr") {
-    reqSetting = {
-        "analysis": {
-            "filter": {
-                "french_elision": {
-                    "type": "elision",
-                    "articles": ["l", "m", "t", "qu", "n", "s",
-                        "j", "d", "c", "jusqu", "quoiqu",
-                        "lorsqu", "puisqu"
-                    ]
-                },
-                "french_stop": {
-                    "type": "stop",
-                    "stopwords": "_french_"
-                },
-                "french_keywords": {
-                    "type": "keyword_marker",
-                    "keywords": []
-                },
-                "french_stemmer": {
-                    "type": "stemmer",
-                    "language": "light_french"
-                }
-            },
-            "analyzer": {
-                "french": {
-                    "tokenizer": "standard",
-                    "filter": [
-                        "french_elision",
-                        "lowercase",
-                        "french_stop",
-                        "french_keywords",
-                        "french_stemmer"
-                    ]
-                }
-            }
-        }
-    };
+    return {};
 }
+

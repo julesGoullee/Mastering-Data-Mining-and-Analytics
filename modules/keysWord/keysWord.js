@@ -5,9 +5,17 @@ var twitterCatcher = require('../twitter/twitterCatcher.js');
 var KeyWord = require("./keyWord.js");
 var _keysWord = [];
 
+var keyWordContraint = {
+    minLength: 4,
+    maxLength: 15,
+    lang: ["en", "fr"],
+    minOccurence: 5,
+    maxOccurence: 100
+};
+
 module.exports = {
-    addKeyWord: function( name ){
-        var keyWord = KeyWord( name );
+    addKeyWord: function( name, lang, occurence ){
+        var keyWord = KeyWord( name, lang, occurence );
         _keysWord.push( keyWord );
         twitterCatcher.trackKeyWord( keyWord );
         return keyWord;
@@ -41,6 +49,24 @@ module.exports = {
             }
         }
         return true;
+    },
+    isValidKeyWord : function( name, options ){
+
+        if( name && options && options.lang && options.occurence ){
+
+            if( name.length >= keyWordContraint.minLength && name.length <= keyWordContraint.maxLength ){
+
+                if( keyWordContraint.lang.indexOf( options.lang ) === 1 ) {
+                    options.occurence = parseInt( options.occurence, 10 );
+
+                    if( options.occurence >= keyWordContraint.minOccurence && options.occurence <= keyWordContraint.maxOccurence){
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     },
     getByName: function( name ){
         for( var i = 0; i < _keysWord.length; i++ ){

@@ -20,7 +20,7 @@ describe("KeysWord", function() {
         mockTwitterCatcher.trackKeyWord = sinon.spy();
         mockEsConnector = sinon.spy();
         keysWord.mock( mockSocketHandler, mockTwitterCatcher );
-        keyWord = keysWord.addKeyWord( "keyWordTest" );
+        keyWord = keysWord.addKeyWord( "keyWordTest", "fr", 5 );
         keyWord.mock( mockSocketHandler, mockEsConnector );
     });
 
@@ -47,6 +47,38 @@ describe("KeysWord", function() {
         expect( keysWord.isNewKeyWord( keyWord.name ) ).to.eql( false );
     });
 
+    it("Peut dire si le keyWord est valide ou non", function(){
+        var keyWordTest = "keyWord";
+        var options = {
+            lang: "fr",
+            occurence: 5
+        };
+
+        expect( keysWord.isValidKeyWord( keyWordTest, options ) ).to.eql( true );
+
+        keyWordTest = "maxLengthIsExceded";
+        expect( keysWord.isValidKeyWord( keyWordTest, options ) ).to.eql( false );
+
+        keyWordTest = "kk";
+        expect( keysWord.isValidKeyWord( keyWordTest, options ) ).to.eql( false );
+
+        keyWordTest = "keyWord";
+        options.lang = "jp";
+        expect( keysWord.isValidKeyWord( keyWordTest, options ) ).to.eql( false );
+
+        options.lang = "fr";
+        options.occurence = 1;
+        expect( keysWord.isValidKeyWord( keyWordTest, options ) ).to.eql( false );
+
+        options.occurence = 101;
+        expect( keysWord.isValidKeyWord( keyWordTest, options ) ).to.eql( false );
+
+        options.occurence = 10;
+        expect( keysWord.isValidKeyWord( keyWordTest, options ) ).to.eql( true );
+
+
+    });
+
     it("Peut dire que le keyWord n'existe pas deja", function(){
         expect( keysWord.isNewKeyWord( "keyQuiNexistePas" ) ).to.eql( true );
     });
@@ -55,8 +87,7 @@ describe("KeysWord", function() {
         var keyWord2;
 
         beforeEach(function(){
-            keyWord2 = keysWord.addKeyWord( "keyWordTest2" );
-
+            keyWord2 = keysWord.addKeyWord( "keyWordTest2", "fr", 10 );
         });
 
         it("Peut recuperer deux keyword", function(){

@@ -5,10 +5,12 @@ var esConnector = require("../elasticSearch/elasticSearchConnector.js");
 var Representation = require("../representation/representation.js");
 var utils = require("../utils/utils.js");
 
-function KeyWord( name ){
+function KeyWord( name, lang, occurence ){
 
     var self = this;
     self.name = name;
+    self.lang = lang;
+    self.occurence = occurence;
     self.id = utils.guid();
     self.tweetCount = 0;
     self.representation = Representation( self.name );
@@ -74,6 +76,6 @@ function KeyWord( name ){
     }
 }
 
-module.exports= function( name ){
-    return new KeyWord( name );
+module.exports= function( name, lang, occurence ){
+    return new KeyWord( name, lang, occurence );
 };
