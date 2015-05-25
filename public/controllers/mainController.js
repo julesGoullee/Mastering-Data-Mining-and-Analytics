@@ -16,7 +16,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
 
         $mdDialog.show({
             controller: DialogController,
-            templateUrl: 'controllers/chooseTrack.html',
+            templateUrl: '../controllers/chooseTrack.html'
         }).then(function() {
             //fermeture popup
         }, function() {
