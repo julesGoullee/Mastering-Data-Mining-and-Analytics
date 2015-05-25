@@ -1,6 +1,7 @@
 'use strict';
 
-var app = require("../app");
+var app = require("../app").app;
+var sessionMiddleware = require("../app").sessionMiddleware;
 var http = require("http");
 var io = require("socket.io");
 var socketHandler = require("../modules/socketHandler/socketHandler.js");
@@ -12,9 +13,10 @@ var port = process.env.PORT || '3000';
 app.set('port', port);
 var server = http.createServer(app);
 
-var _io = io(server);
-
 server.listen(port);
+var _io = io(server).use(function(socket, next){
+        sessionMiddleware(socket.request, {}, next);
+    });
 server.on('error', onError);
 server.on('listening', onListening);
 

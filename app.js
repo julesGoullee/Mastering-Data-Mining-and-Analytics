@@ -11,8 +11,7 @@ var session = require("express-session");
 var TwitterStrategy = require("passport-twitter").Strategy;
 var methodOverride = require("method-override");
 var passport = require("passport");
-var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/mdma');
+var mongoConnector=  require("./modules/mongo/mongoConnector.js");
 var MongoStore = require("connect-mongo")(session);
 
 var routes = require("./routes/index");
@@ -49,6 +48,18 @@ passport.use( new TwitterStrategy({
         });
     }
 ));
+var sessionMiddleware = session({
+    secret: "keyboard cat",
+    name: "token",
+    proxy: true,
+    resave: true,
+    store: new MongoStore({
+        mongooseConnection: mongoConnector.getConnection(),
+        stringify : false
+    }),
+    saveUninitialized: true,
+    cookie: { secure: false }
+});
 
 var app = express();
 
@@ -61,18 +72,7 @@ app.use(methodOverride());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(session({
-    secret: "keyboard cat",
-    name: "token",
-    proxy: true,
-    resave: true,
-    store: new MongoStore({
-        mongooseConnection: mongoose.connection,
-        stringify : false
-    }),
-    saveUninitialized: true,
-    cookie: { secure: false }
-}));
+app.use( sessionMiddleware );
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -111,4 +111,7 @@ app.use(function( err, req, res ){
     });
 });
 
-module.exports = app;
+module.exports = {
+    app: app,
+    sessionMiddleware : sessionMiddleware
+};
