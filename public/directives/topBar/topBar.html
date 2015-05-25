@@ -25,17 +25,14 @@
                 <h1 class="md-toolbar-tools">Settings</h1>
             </md-toolbar>
             <md-content ng-controller="RightCtrl" layout-padding>
-                <form>
-                    Keyword :
-                    <md-input-container>
-                        <label for="testInput">#TrackMe</label>
-                        <input type="text" id="testInput"
-                               ng-model="data" md-sidenav-focus>
-                    </md-input-container>
+                <section layout-padding>
+                    <md-button ng-click="showPopup();toggleRight()" class="md-raised md-primary" layout-padding>Add or change #keyWord</md-button>
+                </section>
+                <section layout-padding>
+                    <md-subheader class="md-primary">Graph Config</md-subheader>
                     Gravity : <md-slider flex class="md-warn" min="0.1" step="0.02"  max="1" ng-model="gravity.value" aria-label="gravite" ></md-slider>
-                    <md-button ng-click="restoreHiddenNodes()" class="md-raised">Restore visibility</md-button>
-                    </md-slider>
-                </form>
+                    <md-button ng-click="restoreHiddenNodes()" class="md-raised" layout-padding>Restore visibility</md-button>
+                </section>
             </md-content>
         </md-sidenav>
     </div>

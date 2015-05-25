@@ -13,7 +13,10 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
 
     socket.on( "keysWord", function( keysWord ){
         $scope.keysWord = keysWord;
+        $rootScope.showPopup( );
+    });
 
+    $rootScope.showPopup = function(){
         $mdDialog.show({
             controller: DialogController,
             templateUrl: '../dialogChooseTrack/chooseTrack.html'
@@ -23,38 +26,37 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
             //error
         });
 
-        function DialogController($scope, $mdDialog) {
-            $scope.addedKeyWord = null;
-            $scope.selectedKeyWord = null;
-            $scope.keysWord = keysWord;
+        function DialogController(scope, $mdDialog) {
+            scope.addedKeyWord = null;
+            scope.selectedKeyWord = null;
+            scope.keysWord = $scope.keysWord;
 
-            $scope.isValidInput = function( text ){
+            scope.isValidInput = function( text ){
                 if( text.length > 3 && text.indexOf(" ") === -1){
 
                 }
             };
 
-            $scope.hide = function() {
+            scope.hide = function() {
                 $mdDialog.hide();
             };
-            $scope.cancel = function() {
+            scope.cancel = function() {
                 $mdDialog.cancel();
             };
-            $scope.validate = function() {
+            scope.validate = function() {
 
-                if( $scope.addedKeyWord &&  $scope.addedKeyWord.name && $scope.addedKeyWord.lang &&  $scope.addedKeyWord.occurence ){
+                if( scope.addedKeyWord &&  scope.addedKeyWord.name && scope.addedKeyWord.lang &&  scope.addedKeyWord.occurence ){
                     socket.emit( "setNewKeyWord", {
-                        newKeyWord: $scope.addedKeyWord.name,
+                        newKeyWord: scope.addedKeyWord.name,
                         options:{
-                            occurence: $scope.addedKeyWord.occurence,
-                            lang: $scope.addedKeyWord.lang
+                            occurence: scope.addedKeyWord.occurence,
+                            lang: scope.addedKeyWord.lang
                         }
                     });
                     $mdDialog.hide();
                 }
-                else if( $scope.selectedKeyWord !== null ) {
-                    socket.emit( "setAlreadyTrackKeyWord", $scope.selectedKeyWord );
-
+                else if( scope.selectedKeyWord !== null ) {
+                    socket.emit( "setAlreadyTrackKeyWord", scope.selectedKeyWord );
                     $mdDialog.hide();
                 }
                 else {
@@ -62,7 +64,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
                 }
             };
         }
-    });
+    };
 
     socket.on("representation", function( representationData ){
         $scope.words.values = representationData.words;

@@ -1,6 +1,7 @@
 "use strict";
 
 angularApp.directive("representation", function( graphConfig, graph ){
+    var isFirst = true;
 
     return {
         restrict: "E",
@@ -10,14 +11,21 @@ angularApp.directive("representation", function( graphConfig, graph ){
         link: function( scope, element ){
             scope.gravity = graphConfig.gravity;
 
-            scope.words.draw = function(){
-                var clientSize = {
-                    width : $("body").width(),
-                    height: $("body").height() - $("#topBar").height()
-                };
+            scope.words.draw = function( ){
 
-                graph.addSvg( element[0], clientSize );
-                scope.$watch( "gravity", graph.setGravity, true );
+                if( isFirst ){
+                    isFirst = false;
+                    var clientSize = {
+                        width : $("body").width(),
+                        height: $("body").height() - $("#topBar").height()
+                    };
+
+                    graph.addSvg( element[0], clientSize );
+                    scope.$watch( "gravity", graph.setGravity, true );
+                    graphConfig.onRestoreHiddenNodes(function(){
+                        graph.showAll();
+                    });
+                }
 
                 var links = [];
 
@@ -42,9 +50,7 @@ angularApp.directive("representation", function( graphConfig, graph ){
                     }
                 }
                 graph.update();
-                graphConfig.onRestoreHiddenNodes(function(){
-                   graph.showAll();
-                });
+
             };
 
             scope.words.addWord = function( wordsObjects ){
