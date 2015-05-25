@@ -19,8 +19,13 @@ describe("KeysWord", function() {
         mockTwitterCatcher = sinon.spy();
         mockTwitterCatcher.trackKeyWord = sinon.spy();
         mockEsConnector = sinon.spy();
+        var tokens = sinon.stub();
+        tokens.returns({
+            token: "token",
+            tokenSecret: "tokenSecret"
+        });
         keysWord.mock( mockSocketHandler, mockTwitterCatcher );
-        keyWord = keysWord.addKeyWord( "keyWordTest", "fr", 5 );
+        keyWord = keysWord.addKeyWord( "keyWordTest", "fr", 5, tokens() );
         keyWord.mock( mockSocketHandler, mockEsConnector );
     });
 
@@ -87,7 +92,12 @@ describe("KeysWord", function() {
         var keyWord2;
 
         beforeEach(function(){
-            keyWord2 = keysWord.addKeyWord( "keyWordTest2", "fr", 10 );
+            var tokens = sinon.stub();
+            tokens.returns({
+                token: "token",
+                tokenSecret: "tokenSecret"
+            });
+            keyWord2 = keysWord.addKeyWord( "keyWordTest2", "fr", 10, tokens() );
         });
 
         it("Peut recuperer deux keyword", function(){

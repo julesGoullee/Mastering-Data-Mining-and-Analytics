@@ -8,6 +8,7 @@ var _users = [];
 function User( socket ) {
     var self = this;
     self.socket = socket;
+    self.session = socket.request.session.passport.user;
     self.tweetCount = 0;
     self.id = utils.guid();
 

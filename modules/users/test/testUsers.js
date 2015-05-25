@@ -14,7 +14,15 @@ describe("User", function() {
 
     beforeEach(function () {
         var socket = sinon.stub();
-        socket.returns({});
+        socket.returns({
+            request: {
+                session:{
+                    passport:{
+                        user: {}
+                    }
+                }
+            }
+        });
         user = users.addUser( socket() );
     });
 
@@ -33,8 +41,16 @@ describe("User", function() {
 
     it("Peut recuperer deux users", function(){
         var socket = sinon.stub();
-        socket.returns({});
-        var user2 = users.addUser( socket );
+        socket.returns({
+            request: {
+                session: {
+                    passport: {
+                        user: {}
+                    }
+                }
+            }
+        });
+        var user2 = users.addUser( socket() );
         expect( users.getUsers().length ).to.eql( 2 );
         users.delUserById( user2.id );
 

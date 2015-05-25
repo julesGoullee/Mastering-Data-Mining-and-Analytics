@@ -30,7 +30,7 @@ module.exports = {
 
                     if( keysWord.isNewKeyWord( data.newKeyWord ) ){
 
-                        keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence );
+                        keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, { token: user.session.token , tokenSecret: user.session.tokenSecret });
                         socketHandler.notifyAllWithoutMe("newKeyWord", data, user.socket );
                     }
 
