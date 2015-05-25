@@ -371,6 +371,11 @@ angularApp.factory("graph", function(){
                 update();
             }
         },
+        removeAllNode: function(){
+            links.splice(0,links.length);
+            nodes.splice(0,nodes.length);
+            update();
+        },
         addLink : function( sourceId, targetId ){
             var sourceNode = findNode(sourceId);
             var targetNode = findNode(targetId);

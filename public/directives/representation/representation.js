@@ -25,6 +25,8 @@ angularApp.directive("representation", function( graphConfig, graph ){
                     graphConfig.onRestoreHiddenNodes(function(){
                         graph.showAll();
                     });
+                }else{
+                    graph.removeAllNode();
                 }
 
                 var links = [];

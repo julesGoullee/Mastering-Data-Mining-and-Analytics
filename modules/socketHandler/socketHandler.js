@@ -35,6 +35,9 @@ module.exports = {
     subscribeTo: function( room, socket ){
         socket.join( room );
     },
+    unSubscribeTo: function( room, socket ){
+        socket.leave( room );
+    },
     notifyInRoom : function( room, event, data ){
 
         _io.server.sockets.in( room ).emit( event, data );

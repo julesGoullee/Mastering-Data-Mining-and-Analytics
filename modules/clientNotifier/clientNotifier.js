@@ -6,6 +6,10 @@ var keysWord = require("../keysWord/keysWord.js");
 
 function initUser( user , keyWord ){
 
+    if( user.idKeyWord ){
+        socketHandler.unSubscribeTo( user.idKeyWord, user.socket );
+    }
+
     user.idKeyWord = keyWord.id;
     socketHandler.subscribeTo( keyWord.id, user.socket );
     socketHandler.notifyOne( "tweetCount", keyWord.tweetCount, user.socket );
