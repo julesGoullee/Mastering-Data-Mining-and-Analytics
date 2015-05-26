@@ -14,10 +14,9 @@ function KeyWord( name, lang, occurence ){
     self.id = utils.guid();
     self.tweetCount = 0;
     self.representation = Representation( self.name );
-    //todo lang
 
     self.onNewTweet =  function( callback ) {
-        self.tweetCount++;//TODO faux si queue & donc plusieur tweet
+        self.tweetCount++;//TODO
 
         socketHandler.notifyInRoom( self.id, "tweetCount", self.tweetCount );
 

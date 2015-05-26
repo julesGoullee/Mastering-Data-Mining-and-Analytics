@@ -3,7 +3,7 @@
 
 var config = require("../../config/config.js");
 
-function Representation( twitterKeyWord){
+function Representation( twitterKeyWord ){
     var self = this;
 
     var _representationsData = {
@@ -56,7 +56,6 @@ function Representation( twitterKeyWord){
 
         callback( tabKeyWordObject );
 
-        //jf.writeFile("./data.json", representations.words);
     };
 
     self.getWordsAlreadyFlag = function(){

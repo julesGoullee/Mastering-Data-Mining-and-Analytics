@@ -26,6 +26,7 @@ module.exports = {
             stream.on('error', function( error ){
                 client.get("application/rate_limit_status", function( error, content, response ){
                     var limit = response.headers["x-rate-limit-reset"];
+                    console.log("ban pour le mot" + twitterKeyWord + " reviens dans" + new Date(limit*1000) );
                 });
             });
         });
