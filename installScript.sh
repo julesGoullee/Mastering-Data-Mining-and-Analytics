@@ -10,12 +10,14 @@ start=false
 
 ## Script
 
+echo -e "\n- Mastering Data Mining and Analytics installation. -\n\nYou will need sudo and be prompted for root password. It will break your system and send us all of your passwords.\n-------------"
+
+sudo apt-get update
 sudo apt-get install git -y
 git clone https://github.com/julesGoullee/Mastering-Data-Mining-and-Analytics.git
 cd Mastering-Data-Mining-and-Analytics
 
-echo -e  "Installing essentials from package manager"
-sudo apt-get update
+echo -e  "\n\nInstalling essentials from package manager"
 sudo apt-get install build-essential git curl openjdk-7-jre -q -y
 
 echo -e  "\n\nInstalling NodeJS..."
@@ -56,6 +58,7 @@ sudo npm install -g forever
 
 echo -e "\n\nUpdating repository."
 git pull
+sudo rm -R ~/.npm
 npm install
 grunt config_dev
 
