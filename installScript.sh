@@ -28,7 +28,7 @@ sudo ./configure
 sudo make
 sudo make install
 cd ..
-rm -rf node-v$nodeVersion node-v$nodeVersion.tar.gz
+sudo rm -rf node-v$nodeVersion node-v$nodeVersion.tar.gz
 
 echo -e  "\n\nInstalling MongoDB..."
 curl -O http://downloads.mongodb.org/linux/mongodb-linux-x86_64-$mongoVersion.tgz
@@ -39,6 +39,7 @@ mv mongodb-linux-x86_64-$mongoVersion/* mongodb
 rm -r mongodb-linux-x86_64-$mongoVersion
 cd mongodb
 echo -e  'export PATH='`pwd`'/bin:$PATH' >> ~/.bashrc 
+export PATH=`pwd`/bin:$PATH
 mkdir -p data/db
 cd ..
 
@@ -56,8 +57,7 @@ sudo npm install -g grunt-cli
 sudo npm install -g bower
 sudo npm install -g forever
 
-echo -e "\n\nUpdating repository."
-git pull
+echo -e "\n\nInstalling dependencies..."
 sudo rm -R ~/.npm
 npm install
 grunt config_dev
@@ -83,7 +83,7 @@ module.exports = {
 
 
 
-echo -e "\n\nDone ! Everything went fine."
+echo -e "\n\nDone !"
 
 # TODO :
 # launch mongodb at start
