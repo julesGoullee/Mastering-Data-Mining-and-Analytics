@@ -22,8 +22,8 @@ echo -e  "\n\nInstalling NodeJS..."
 curl -L -O http://nodejs.org/dist/v0.12.4/node-v$nodeVersion.tar.gz
 tar xfz node-v$nodeVersion.tar.gz
 cd node-v$nodeVersion
-./configure
-make
+sudo ./configure
+sudo make
 sudo make install
 cd ..
 rm -rf node-v$nodeVersion node-v$nodeVersion.tar.gz
@@ -46,6 +46,7 @@ echo -e  "\n\nInstalling ElasticSearch..."
 curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ESVersion.deb
 sudo dpkg -i elasticsearch-$ESVersion.deb
 rm elasticsearch-$ESVersion.deb -f
+sudo update-rc.d elasticsearch defaults 95 10
 fi
 
 echo -e "\n\nInstalling npm globals..."
@@ -58,22 +59,6 @@ git pull
 npm install
 grunt config_dev
 
-
-#Setting elasticSearch to boot automatically
-if [ $startOnBoot = true ] 
-then
-echo -e "\n\nSetting up auto start..."
-sudo update-rc.d elasticsearch defaults 95 10
-fi
-
-
-# Starting servers
-if [ $start = true ] 
-then
-echo -e "\n\nStarting servers..."
-sudo /etc/init.d/elasticsearch start
-mongod --dbpath mongodb/data/db&
-fi
 
 # MDMA Configuration
 echo -e "\n\nConfiguring project..."
