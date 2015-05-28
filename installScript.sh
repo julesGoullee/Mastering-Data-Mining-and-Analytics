@@ -10,13 +10,13 @@ start=false
 
 ## Script
 
-#apt-get install git -y
-#git clone https://github.com/julesGoullee/Mastering-Data-Mining-and-Analytics.git
+sudo apt-get install git -y
+git clone https://github.com/julesGoullee/Mastering-Data-Mining-and-Analytics.git
 cd Mastering-Data-Mining-and-Analytics
 
 echo -e  "Installing essentials from package manager"
-apt-get update
-apt-get install build-essential git curl openjdk-7-jre -q -y
+sudo apt-get update
+sudo apt-get install build-essential git curl openjdk-7-jre -q -y
 
 echo -e  "\n\nInstalling NodeJS..."
 curl -L -O http://nodejs.org/dist/v0.12.4/node-v$nodeVersion.tar.gz
@@ -24,7 +24,7 @@ tar xfz node-v$nodeVersion.tar.gz
 cd node-v$nodeVersion
 ./configure
 make
-make install
+sudo make install
 cd ..
 rm -rf node-v$nodeVersion node-v$nodeVersion.tar.gz
 
@@ -44,16 +44,19 @@ if [ $ES_Server = 0 ]
 then
 echo -e  "\n\nInstalling ElasticSearch..."
 curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ESVersion.deb
-dpkg -i elasticsearch-$ESVersion.deb
+sudo dpkg -i elasticsearch-$ESVersion.deb
 rm elasticsearch-$ESVersion.deb -f
 fi
 
 echo -e "\n\nInstalling npm globals..."
-npm install -g grunt
+sudo npm install -g grunt-cli
+sudo npm install -g bower
+sudo npm install -g forever
 
 echo -e "\n\nUpdating repository."
 git pull
 npm install
+grunt config_dev
 
 
 #Setting elasticSearch to boot automatically
@@ -81,13 +84,12 @@ then
 es_ip=$ES_Server
 fi
 
-echo $es_ip
 echo "'use strict';
 module.exports = {
     minOccurence: 5,
-    lang: "fr",
+    lang: 'fr',
     elasticSearchAddr: '"$es_ip":9200',
-    domain:'10.33.1.36',
+    domain:'twitmdma.ddns.net',
     port:3000
 };" > config/config.js
 

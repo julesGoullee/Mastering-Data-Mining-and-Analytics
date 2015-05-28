@@ -9,5 +9,8 @@
     "d3": "latest",
     "angular-material-icons": "latest",
     "ng-context-menu": "latest"
+  },
+  "resolutions": {
+    "angular": "~1.4.x"
   }
 }

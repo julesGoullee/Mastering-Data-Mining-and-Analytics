@@ -7,4 +7,4 @@ sudo /etc/init.d/elasticsearch start
 
 mongod --dbpath mongodb/data/db&
 
-npm start
+forever start bin/www.js
