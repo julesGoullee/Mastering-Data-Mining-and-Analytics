@@ -6,6 +6,7 @@ var http = require("http");
 var io = require("socket.io");
 var socketHandler = require("../modules/socketHandler/socketHandler.js");
 var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
+var noIpConnector = require("../modules/serverConfig/noipConfig.js");
 //var debug = require('debug')('mastering-data-mining-and-analytics:server');
 
 
@@ -19,6 +20,8 @@ var _io = io(server).use(function(socket, next){
     });
 server.on('error', onError);
 server.on('listening', onListening);
+
+noIpConnector.updateIp();
 
 function onError(error) {
     if (error.syscall !== 'listen') {
@@ -44,6 +47,7 @@ function onError(error) {
 }
 
 function onListening() {
+	
     var esConnector = require('../modules/elasticSearch/elasticSearchConnector.js');
 
     esConnector.connect().then(function(){
