@@ -21,22 +21,12 @@ echo -e  "\n\nInstalling essentials from package manager"
 sudo apt-get install build-essential git curl openjdk-7-jre -q -y
 
 echo -e  "\n\nInstalling NodeJS..."
-curl -L -O http://nodejs.org/dist/v0.12.4/node-v$nodeVersion.tar.gz
-tar xfz node-v$nodeVersion.tar.gz
-cd node-v$nodeVersion
-sudo ./configure
-sudo make
-sudo make install
-cd ..
-sudo rm -rf node-v$nodeVersion node-v$nodeVersion.tar.gz
-
-: '
 #Install nvm au lieu de la compilation node des sources
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
-. ~/.nvm/nvm.sh
+. ~/.bashrc
 nvm install $nodeVersion
 nvm use "v"$nodeVersion
-'
+echo "nvm use "$nodeVersion >> ~/.bashrc
 
 echo -e  "\n\nInstalling MongoDB..."
 curl -O http://downloads.mongodb.org/linux/mongodb-linux-x86_64-$mongoVersion.tgz
@@ -61,12 +51,11 @@ sudo update-rc.d elasticsearch defaults 95 10
 fi
 
 echo -e "\n\nInstalling npm globals..."
-sudo npm install -g grunt-cli
-sudo npm install -g bower
-sudo npm install -g forever
+npm install -g grunt-cli
+npm install -g bower
+npm install -g forever
 
 echo -e "\n\nInstalling dependencies..."
-sudo rm -R ~/.npm
 npm install
 grunt config_dev
 
