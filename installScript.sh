@@ -18,12 +18,12 @@ git clone https://github.com/julesGoullee/Mastering-Data-Mining-and-Analytics.gi
 cd Mastering-Data-Mining-and-Analytics
 
 echo -e  "\n\nInstalling essentials from package manager"
-sudo apt-get install build-essential git curl openjdk-7-jre -q -y
+sudo apt-get install git curl openjdk-7-jre -q -y
 
 echo -e  "\n\nInstalling NodeJS..."
 #Install nvm au lieu de la compilation node des sources
 wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
-. ~/.bashrc
+. $HOME/.nvm/nvm.sh
 nvm install $nodeVersion
 nvm use "v"$nodeVersion
 echo "nvm use "$nodeVersion >> ~/.bashrc
@@ -36,13 +36,19 @@ mkdir -p mongodb
 mv mongodb-linux-x86_64-$mongoVersion/* mongodb
 rm -r mongodb-linux-x86_64-$mongoVersion
 cd mongodb
-echo -e  'export PATH='`pwd`'/bin:$PATH' >> ~/.bashrc 
+
+    if ! grep -qc 'mongodb/bin' "$HOME/.bashrc"; then
+        echo "=> Appending source string to .bashrc"
+        echo -e  'export PATH='`pwd`'/bin:$PATH' >> $HOME/.bashrc
+    else
+        echo "=> Source string already in b.bashrc"
+    fi
+
 export PATH=`pwd`/bin:$PATH
 mkdir -p data/db
 cd ..
 
-if [ $ES_Server = 0 ]
-then
+if [ $ES_Server = 0 ]; then
 echo -e  "\n\nInstalling ElasticSearch..."
 curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ESVersion.deb
 sudo dpkg -i elasticsearch-$ESVersion.deb
