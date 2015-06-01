@@ -30,6 +30,14 @@ sudo make install
 cd ..
 sudo rm -rf node-v$nodeVersion node-v$nodeVersion.tar.gz
 
+: '
+#Install nvm au lieu de la compilation node des sources
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | bash
+. ~/.nvm/nvm.sh
+nvm install $nodeVersion
+nvm use "v"$nodeVersion
+'
+
 echo -e  "\n\nInstalling MongoDB..."
 curl -O http://downloads.mongodb.org/linux/mongodb-linux-x86_64-$mongoVersion.tgz
 tar xfz mongodb-linux-x86_64-$mongoVersion.tgz
