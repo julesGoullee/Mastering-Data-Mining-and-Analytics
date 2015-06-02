@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Starting servers
+. $HOME/.bashrc
+
 echo -e "\n\nStarting servers..."
 
 sudo /etc/init.d/elasticsearch start
