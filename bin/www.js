@@ -14,7 +14,7 @@ var port = process.env.PORT || '3000';
 app.set('port', port);
 var server = http.createServer(app);
 
-server.listen(port);
+server.listen(port, "0.0.0.0");
 var _io = io(server).use(function(socket, next){
         sessionMiddleware(socket.request, {}, next);
     });
