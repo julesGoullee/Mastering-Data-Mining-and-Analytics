@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www.js"
+    "start": "node ./bin/www.js",
+    "test": "grunt test_server"
   },
   "devDependencies": {
     "chai": "^2.3.0",
