@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Starting servers
-source $HOME/.bashrc
+. $HOME/.bashrc
 
 echo -e "\n\nStarting servers..."
 
