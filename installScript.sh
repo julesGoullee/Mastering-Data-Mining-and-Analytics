@@ -18,7 +18,7 @@ git clone https://github.com/julesGoullee/Mastering-Data-Mining-and-Analytics.gi
 cd Mastering-Data-Mining-and-Analytics
 
 echo -e  "\n\nInstalling essentials from package manager"
-sudo apt-get install git curl openjdk-7-jre -q -y
+sudo apt-get install build-essential curl openjdk-7-jre -q -y
 
 echo -e  "\n\nInstalling NodeJS..."
 #Install nvm au lieu de la compilation node des sources
