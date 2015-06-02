@@ -131,6 +131,10 @@ module.exports = function(grunt) {
                     {
                         src: "bower_components/ng-context-menu/dist/ng-context-menu.min.js",
                         dest: "public/external/ng-context-menu.min.js"
+                    },
+                    {
+                        src: "config/config_prod.js",
+                        dest: "config/config.js"
                     }
                 ]
             },
