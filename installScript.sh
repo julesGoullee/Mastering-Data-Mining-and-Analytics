@@ -12,13 +12,17 @@ start=false
 
 echo -e "\n- Mastering Data Mining and Analytics installation. -\n\nYou will need sudo and be prompted for root password. It will break your system and send us all of your passwords.\n-------------"
 
+echo -e  "\n\n Add elasticsearch in source apt.list"
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb http://packages.elastic.co/elasticsearch/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
+
 sudo apt-get update
 sudo apt-get install git -y
 git clone https://github.com/julesGoullee/Mastering-Data-Mining-and-Analytics.git
 cd Mastering-Data-Mining-and-Analytics
 
-echo -e  "\n\nInstalling essentials from package manager"
-sudo apt-get install build-essential curl openjdk-7-jre -q -y
+echo -e  "\n\nInstalling elasticsearch essentials from package manager"
+sudo apt-get install elasticsearch build-essential curl openjdk-7-jre -q -y
 
 echo -e  "\n\nInstalling NodeJS..."
 #Install nvm au lieu de la compilation node des sources
@@ -48,13 +52,13 @@ export PATH=`pwd`/bin:$PATH
 mkdir -p data/db
 cd ..
 
-if [ $ES_Server = 0 ]; then
-echo -e  "\n\nInstalling ElasticSearch..."
-curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ESVersion.deb
-sudo dpkg -i elasticsearch-$ESVersion.deb
-rm elasticsearch-$ESVersion.deb -f
-sudo update-rc.d elasticsearch defaults 95 10
-fi
+#if [ $ES_Server = 0 ]; then
+#echo -e  "\n\nInstalling ElasticSearch..."
+#curl -L -O https://download.elastic.co/elasticsearch/elasticsearch/elasticsearch-$ESVersion.deb
+#sudo dpkg -i elasticsearch-$ESVersion.deb
+#rm elasticsearch-$ESVersion.deb -f
+#sudo update-rc.d elasticsearch defaults 95 10
+#fi
 
 echo -e "\n\nInstalling npm globals..."
 npm install -g grunt-cli
