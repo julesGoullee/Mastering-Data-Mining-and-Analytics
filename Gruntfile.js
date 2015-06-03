@@ -227,6 +227,7 @@ module.exports = function(grunt) {
 
     //TEST//
     grunt.registerTask("test_server", ["simplemocha:all", "watch:mochaTest"]);
+    grunt.registerTask("test_server_ci", ["simplemocha:all"]);
     grunt.registerTask("test_client", ["karma:autoRun"]);
 
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);
@@ -236,5 +237,3 @@ module.exports = function(grunt) {
     grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd"]);
 
 };
-
-
