@@ -16,7 +16,7 @@ echo -e  "\n\n Add elasticsearch && mongodb in source apt.list"
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv 7F0CEB10
 wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 echo "deb http://packages.elastic.co/elasticsearch/1.5/debian stable main" | sudo tee -a /etc/apt/sources.list
-echo "deb http://repo.mongodb.org/apt/debian "$(lsb_release -sc)"/mongodb-org/3.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/3.0 main" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
 
 sudo apt-get update
 sudo apt-get install git -y
