@@ -5,8 +5,7 @@
 
 echo -e "\n\nStarting servers..."
 
-sudo /etc/init.d/elasticsearch start
-
-mongod --dbpath mongodb/data/db&
+sudo service mongod start
+sudo service elasticsearch start
 
 forever start bin/www.js
