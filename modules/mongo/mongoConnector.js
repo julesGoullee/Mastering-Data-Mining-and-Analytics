@@ -1,6 +1,8 @@
 "use strict";
 var mongoose = require("mongoose");
-mongoose.connect('mongodb://localhost/mdma');
+var config = require("../../config/config.js");
+
+mongoose.connect('mongodb://'+config.mongo.ip+'/'+config.mongo.base);
 
 module.exports = {
     getConnection : function(){
