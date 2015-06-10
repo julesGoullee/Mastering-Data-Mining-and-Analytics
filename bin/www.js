@@ -3,6 +3,7 @@
 var app = require("../app").app;
 var sessionMiddleware = require("../app").sessionMiddleware;
 var http = require("http");
+var config = require("../config/config.js");
 if( !config.onlyClient ) {
     var io = require("socket.io");
     var socketHandler = require("../modules/socketHandler/socketHandler.js");

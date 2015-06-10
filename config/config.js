@@ -7,6 +7,5 @@ module.exports = {
         ip: "127.0.0.1",
         base: "mdma"
     },
-    onlyClient: true,
-    distantServerAdresse: "192.168.1.18"
+    onlyClient: false
 };

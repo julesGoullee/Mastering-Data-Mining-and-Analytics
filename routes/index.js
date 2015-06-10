@@ -18,6 +18,7 @@ var dependances = {
 
         //modules
         "main",
+        "const/const",
         "controllers/mainController",
         "services/graphConfig",
         "directives/representation/representation",
