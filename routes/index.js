@@ -1,10 +1,15 @@
 var express = require("express");
 var router = express.Router();
-var auth = require("./auth.js");
+var config = require("../config/config.js");
+
+if( !config.onlyClient ){
+    var auth = require("./auth.js");
+}
+
 var dependances = {
 
     scripts:[
-        "socket.io/socket.io",
+        "http://" + (config.distantServeur || config.domain) + ":" + config.port + "/socket.io/socket.io",
         "external/jquery",
         "external/angular",
         "external/angular-aria",
@@ -33,8 +38,14 @@ var dependances = {
     ]
 };
 
-router.get("/", auth.ensureAuthenticated, function( req, res, next ){
-    res.render("index", { dependances: dependances, title: "M.D.M.A - Project" });
-});
-
+if( config.onlyClient  ){
+    router.get("/", function( req, res, next ){
+        res.render("index", { dependances: dependances, title: "M.D.M.A - Project" });
+    });
+}
+else {
+    router.get("/", auth.ensureAuthenticated, function (req, res, next) {
+        res.render("index", {dependances: dependances, title: "M.D.M.A - Project"});
+    });
+}
 module.exports = router;

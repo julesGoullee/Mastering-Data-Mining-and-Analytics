@@ -1,10 +1,11 @@
 'use strict';
 
 var app = require("../app").app;
-var sessionMiddleware = require("../app").sessionMiddleware;
 var http = require("http");
 var config = require("../config/config.js");
+
 if( !config.onlyClient ) {
+    var sessionMiddleware = require("../app").sessionMiddleware;
     var io = require("socket.io");
     var socketHandler = require("../modules/socketHandler/socketHandler.js");
     var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
@@ -52,14 +53,15 @@ function onError(error) {
 }
 
 function onListening() {
+    var addr = server.address();
+    console.log('Listening on port ' + addr.port);
     if( !config.onlyClient ) {
         var esConnector = require('../modules/elasticSearch/elasticSearchConnector.js');
 
         esConnector.connect().then(function () {
 
             console.log('Elasticsearch connection [OK]');
-            var addr = server.address();
-            console.log('Listening on port ' + addr.port);
+
             socketHandler.listen(_io);
             clientNotifier.connect();
 

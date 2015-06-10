@@ -9,6 +9,10 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 
+var routes = require("./routes/index");
+//app.use(logger("dev"));
+var jf = require('jsonfile');
+var accounts = jf.readFileSync( __dirname + "/config/account.json");
 
 if( !config.onlyClient ) {
     var session = require("express-session");
@@ -17,14 +21,8 @@ if( !config.onlyClient ) {
     var passport = require("passport");
     var mongoConnector = require("./modules/mongo/mongoConnector.js");
     var MongoStore = require("connect-mongo")(session);
-}
+    var auth = require("./routes/auth");
 
-var routes = require("./routes/index");
-var auth = require("./routes/auth");
-//app.use(logger("dev"));
-var jf = require('jsonfile');
-var accounts = jf.readFileSync( __dirname + "/config/account.json");
-if( !config.onlyClient ) {
     passport.serializeUser(function (user, done) {
         done(null, user);
     });
@@ -64,6 +62,9 @@ if( !config.onlyClient ) {
         saveUninitialized: true,
         cookie: {secure: false}
     });
+}
+else{
+    var sessionMiddleware = {};
 }
 var app = express();
 

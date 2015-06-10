@@ -1,6 +1,6 @@
 "use strict";
 
 angularApp.constant("config", {
-    "url": "192.168.1.18",
-    "port": 3000
+    "url": "109.190.95.175",
+    "port": 80
 });

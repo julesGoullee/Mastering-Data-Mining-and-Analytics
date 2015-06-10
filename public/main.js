@@ -3,7 +3,13 @@
 var angularApp = angular.module('Mastering-Data-Mining-and-Analytics', ['ngMaterial',"btford.socket-io","ngMdIcons","ng-context-menu"]);
 
 angularApp.factory('socket', function (config, socketFactory) {
-    return socketFactory("http://" + config.url + ":" + config.port);
+    var myIoSocket = io.connect("http://" + config.url + ":" + config.port);
+
+    return socketFactory({
+        ioSocket: myIoSocket
+    });
+
+    //return socketFactory("http://" + config.url + ":" + config.port);
 });
 
 angularApp.config(function($mdThemingProvider) {
