@@ -1,12 +1,12 @@
-analysiseur langue
-choix de la langue
-representation
+ES
+    optimiser l'insertion (indexation) & la recherche & les analiseurs
+    analysiseur langue
+
+Representation
     actualisé l'occurence modifier la tailler des spheres
-limite api twitter --> Oauth
-mongo db stocker in real time
 
-
-twitterCatcher
-
-KeyWord
-representation --> addKeysWords
+Capture
+    Empecher de lancer plus de 2 analyses en sumultané
+    Arreter une capture
+    La mettre sur pause
+    mongo db stocker in real time
