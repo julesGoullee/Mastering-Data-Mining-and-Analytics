@@ -1,5 +1,7 @@
 "use strict";
 
+var config = require("./config/config");
+
 var express = require("express");
 var path = require("path");
 var favicon = require("serve-favicon");
@@ -7,17 +9,19 @@ var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 
-var session = require("express-session");
-var TwitterStrategy = require("passport-twitter").Strategy;
-var methodOverride = require("method-override");
-var passport = require("passport");
-var mongoConnector=  require("./modules/mongo/mongoConnector.js");
-var MongoStore = require("connect-mongo")(session);
+
+if( !config.onlyClient ) {
+    var session = require("express-session");
+    var TwitterStrategy = require("passport-twitter").Strategy;
+    var methodOverride = require("method-override");
+    var passport = require("passport");
+    var mongoConnector = require("./modules/mongo/mongoConnector.js");
+    var MongoStore = require("connect-mongo")(session);
+}
 
 var routes = require("./routes/index");
 var auth = require("./routes/auth");
 //app.use(logger("dev"));
-var config = require("./config/config");
 var jf = require('jsonfile');
 var accounts = jf.readFileSync( __dirname + "/config/account.json");
 if( !config.onlyClient ) {
@@ -64,14 +68,13 @@ if( !config.onlyClient ) {
 var app = express();
 
 app.set("views", path.join(__dirname, "views"));
-
 app.set("view engine", "ejs");
 app.use(favicon(__dirname + "/public/images/favicon.ico"));
-app.use(bodyParser.json());
-app.use(methodOverride());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 if( !config.onlyClient ) {
+    app.use(bodyParser.json());
+    app.use(methodOverride());
+    app.use(bodyParser.urlencoded({extended: false}));
     app.use(cookieParser());
 
     app.use(sessionMiddleware);

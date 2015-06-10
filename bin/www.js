@@ -18,9 +18,11 @@ app.set('port', port);
 var server = http.createServer(app);
 
 server.listen(port, "0.0.0.0");
-var _io = io(server).use(function(socket, next){
+if( !config.onlyClient ) {
+    var _io = io(server).use(function (socket, next) {
         sessionMiddleware(socket.request, {}, next);
     });
+}
 server.on('error', onError);
 server.on('listening', onListening);
 
