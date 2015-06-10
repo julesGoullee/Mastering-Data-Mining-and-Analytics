@@ -20,47 +20,47 @@ var auth = require("./routes/auth");
 var config = require("./config/config");
 var jf = require('jsonfile');
 var accounts = jf.readFileSync( __dirname + "/config/account.json");
+if( !config.onlyClient ) {
+    passport.serializeUser(function (user, done) {
+        done(null, user);
+    });
 
-passport.serializeUser(function( user, done ){
-    done(null, user);
-});
+    passport.deserializeUser(function (obj, done) {
+        done(null, obj);
+    });
 
-passport.deserializeUser(function( obj, done ){
-    done(null, obj);
-});
+    passport.use(new TwitterStrategy({
+            consumerKey: accounts.TWITTER_CONSUMER_KEY,
+            consumerSecret: accounts.TWITTER_CONSUMER_SECRET,
+            callbackURL: "http://" + config.domain + ":3000/auth/twitter/callback"
+        },
+        function (token, tokenSecret, profile, done) {
 
-passport.use( new TwitterStrategy({
-        consumerKey: accounts.TWITTER_CONSUMER_KEY,
-        consumerSecret: accounts.TWITTER_CONSUMER_SECRET,
-        callbackURL: "http://" + config.domain + "/auth/twitter/callback"
-    },
-    function( token, tokenSecret, profile, done ){
-
-        process.nextTick(function (){
-            var profileSave = {
-                id: profile.id,
-                username: profile.username,
-                token: token,
-                tokenSecret:  tokenSecret,
-                photoUrl: profile.photos[0].value
-            };
-            return done(null, profileSave);
-        });
-    }
-));
-var sessionMiddleware = session({
-    secret: "keyboard cat",
-    name: "token",
-    proxy: true,
-    resave: true,
-    store: new MongoStore({
-        mongooseConnection: mongoConnector.getConnection(),
-        stringify : false
-    }),
-    saveUninitialized: true,
-    cookie: { secure: false }
-});
-
+            process.nextTick(function () {
+                var profileSave = {
+                    id: profile.id,
+                    username: profile.username,
+                    token: token,
+                    tokenSecret: tokenSecret,
+                    photoUrl: profile.photos[0].value
+                };
+                return done(null, profileSave);
+            });
+        }
+    ));
+    var sessionMiddleware = session({
+        secret: "keyboard cat",
+        name: "token",
+        proxy: true,
+        resave: true,
+        store: new MongoStore({
+            mongooseConnection: mongoConnector.getConnection(),
+            stringify: false
+        }),
+        saveUninitialized: true,
+        cookie: {secure: false}
+    });
+}
 var app = express();
 
 app.set("views", path.join(__dirname, "views"));
@@ -70,16 +70,21 @@ app.use(favicon(__dirname + "/public/images/favicon.ico"));
 app.use(bodyParser.json());
 app.use(methodOverride());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
 
-app.use( sessionMiddleware );
+if( !config.onlyClient ) {
+    app.use(cookieParser());
 
-app.use(passport.initialize());
-app.use(passport.session());
+    app.use(sessionMiddleware);
 
+    app.use(passport.initialize());
+    app.use(passport.session());
+}
 //routes
 app.use("/", routes);
-app.use("/auth", auth.router);
+
+if( !config.onlyClient ){
+    app.use("/auth", auth.router);
+}
 
 app.use(express.static(path.join(__dirname, "public")));
 

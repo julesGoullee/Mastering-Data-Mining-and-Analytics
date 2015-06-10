@@ -3,9 +3,11 @@
 var app = require("../app").app;
 var sessionMiddleware = require("../app").sessionMiddleware;
 var http = require("http");
-var io = require("socket.io");
-var socketHandler = require("../modules/socketHandler/socketHandler.js");
-var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
+if( !config.onlyClient ) {
+    var io = require("socket.io");
+    var socketHandler = require("../modules/socketHandler/socketHandler.js");
+    var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
+}
 //var noIpConnector = require("../modules/serverConfig/noipConfig.js");
 //var debug = require('debug')('mastering-data-mining-and-analytics:server');
 
@@ -47,19 +49,19 @@ function onError(error) {
 }
 
 function onListening() {
-	
-    var esConnector = require('../modules/elasticSearch/elasticSearchConnector.js');
+    if( !config.onlyClient ) {
+        var esConnector = require('../modules/elasticSearch/elasticSearchConnector.js');
 
-    esConnector.connect().then(function(){
+        esConnector.connect().then(function () {
 
-        console.log('Elasticsearch connection [OK]');
-        var addr = server.address();
-        console.log('Listening on port ' + addr.port);
-        socketHandler.listen( _io );
-        clientNotifier.connect();
+            console.log('Elasticsearch connection [OK]');
+            var addr = server.address();
+            console.log('Listening on port ' + addr.port);
+            socketHandler.listen(_io);
+            clientNotifier.connect();
 
-    }, function( error ){
-        console.log('Elasticsearch connection [FAIL]');
-    });
-
+        }, function (error) {
+            console.log('Elasticsearch connection [FAIL]');
+        });
+    }
 }

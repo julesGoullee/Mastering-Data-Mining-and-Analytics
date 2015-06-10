@@ -2,8 +2,8 @@
 
 var angularApp = angular.module('Mastering-Data-Mining-and-Analytics', ['ngMaterial',"btford.socket-io","ngMdIcons","ng-context-menu"]);
 
-angularApp.factory('socket', function (socketFactory) {
-    return socketFactory();
+angularApp.factory('socket', function (config, socketFactory) {
+    return socketFactory("http://" + config.url + ":" + config.port);
 });
 
 angularApp.config(function($mdThemingProvider) {
