@@ -3,13 +3,17 @@
 module.exports = function(grunt) {
 
     grunt.loadNpmTasks("grunt-simple-mocha");
+    grunt.loadNpmTasks("grunt-karma");
     grunt.loadNpmTasks("grunt-bower-task");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.initConfig({
-       /* karma: {
+        karma: {
+            unit: {
+                configFile: 'e2eFront/karma.conf.js'
+            },
             autoRun: {
-                basePath: "app/public",
+                basePath: "public",
                 frameworks: ["jasmine"],
                 options:{
                     files: [
@@ -60,7 +64,7 @@ module.exports = function(grunt) {
                 singleRun: true,
                 browsers: ["PhantomJS"]
             }
-        },*/
+        },
         copy:{
             bowerProd:{
 
@@ -228,7 +232,7 @@ module.exports = function(grunt) {
     //TEST//
     grunt.registerTask("test_server", ["simplemocha:all", "watch:mochaTest"]);
     grunt.registerTask("test_server_ci", ["simplemocha:all"]);
-    grunt.registerTask("test_client", ["karma:autoRun"]);
+    grunt.registerTask("test_client", ["karma:unit"]);
 
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);
 
