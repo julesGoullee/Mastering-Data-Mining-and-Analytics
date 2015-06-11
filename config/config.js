@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     api : {
-        active : true,
+        active : false,
         esAdress: '192.168.1.19:9200',
         mongo: {
             ip: "127.0.0.1",
@@ -12,7 +12,7 @@ module.exports = {
     },
     webServer: {
         active: true,
-        apiAdress: "localhost",
-        apiPort:3000
+        apiAdress: "109.190.95.175",
+        apiPort:80
     }
 };

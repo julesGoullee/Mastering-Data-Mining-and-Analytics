@@ -8,12 +8,11 @@ var config = require("../config/config.js");
 //var debug = require('debug')('mastering-data-mining-and-analytics:server');
 //noIpConnector.updateIp();
 
-var port = process.env.PORT || '3000';
-app.set('port', port);
+app.set('port', config.api.port);
 var server = http.createServer(app);
-server.listen(port, "0.0.0.0");
+server.listen(config.api.port, "0.0.0.0");
 
-if( config.catcher.active ) {
+if( config.api.active ) {
     var sessionMiddleware = require("../app").sessionMiddleware;
     var io = require("socket.io");
     var socketHandler = require("../modules/socketHandler/socketHandler.js");
@@ -30,9 +29,9 @@ function onError(error) {
         throw error;
     }
 
-    var bind = typeof port === 'string'
-        ? 'Pipe ' + port
-        : 'Port ' + port;
+    var bind = typeof config.api.port === 'string'
+        ? 'Pipe ' + config.api.port
+        : 'Port ' + config.api.port;
 
     switch (error.code) {
         case 'EACCES':
@@ -53,7 +52,7 @@ function onListening() {
     var addr = server.address();
     console.log('Listening on port ' + addr.port);
 
-    if( config.catcher.active ) {
+    if( config.api.active ) {
         var esConnector = require('../modules/elasticSearch/elasticSearchConnector.js');
 
         esConnector.connect().then(function () {
