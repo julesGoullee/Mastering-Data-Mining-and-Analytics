@@ -10,6 +10,7 @@ function KeyWord( name, lang, occurence, userOwner ){
     var self = this;
     self.name = name;
     self.lang = lang;
+    self.stream = {};
     self.occurence = occurence;
     self.id = utils.guid();
     self.tweetCount = 0;

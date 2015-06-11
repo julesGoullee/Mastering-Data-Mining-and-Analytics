@@ -9,14 +9,16 @@ module.exports = {
     client : function(){
         return client;
     },
-    onData: function( twitterKeyWord, tokens, callback ){
+    onData: function( keyWord, user, callback ){
         var client = new twitter({
             consumer_key: accounts.TWITTER_CONSUMER_KEY,
             consumer_secret: accounts.TWITTER_CONSUMER_SECRET,
-            access_token_key: tokens.token,
-            access_token_secret: tokens.tokenSecret
+            access_token_key: user.session.token,
+            access_token_secret: user.session.tokenSecret
         });
-        client.stream( 'statuses/filter', {track: twitterKeyWord },  function( stream ){
+        client.stream( 'statuses/filter', {track: keyWord.name },  function( stream ){
+
+            keyWord.stream = keyWord.stream || stream;
 
             stream.on('data', function( tweet ){
                 callback( tweet );

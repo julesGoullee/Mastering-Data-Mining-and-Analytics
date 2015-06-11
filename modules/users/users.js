@@ -24,9 +24,14 @@ function User( socket ) {
 
     self.delKeyWord = function( keyWord ){
 
-        for (var i = 0; i < _keysWord.length; i++) {
+        for( var i = 0; i < _keysWord.length; i++ ){
+
             var word = _keysWord[i];
+
             if( word.id === keyWord.id ){
+
+                word.stream.stop();
+
                 _keysWord.splice(i, 1);
                 return true;
             }
