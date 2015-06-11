@@ -60,7 +60,7 @@ module.exports = {
                         var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user);
                         user.addKeyWord( newKeyWord );
 
-                        socketHandler.notifyAll("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name }, user.socket );
+                        socketHandler.notifyAll("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name } );
                     }
 
                     var keyWord = keysWord.getByName( data.newKeyWord );
