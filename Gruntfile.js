@@ -1,12 +1,11 @@
 "use strict";
 
+var config = require("./config/config.js");
+
 module.exports = function(grunt) {
 
-    grunt.loadNpmTasks("grunt-simple-mocha");
-    grunt.loadNpmTasks("grunt-karma");
-    grunt.loadNpmTasks("grunt-bower-task");
-    grunt.loadNpmTasks("grunt-contrib-watch");
-    grunt.loadNpmTasks("grunt-contrib-copy");
+    require('load-grunt-tasks')(grunt);
+
     grunt.initConfig({
         karma: {
             unit: {
@@ -195,6 +194,25 @@ module.exports = function(grunt) {
                         src: "bower_components/ng-context-menu/dist/ng-context-menu.min.js",
                         dest: "public/external/ng-context-menu.min.js"
                     }
+                ]
+            }
+        },
+        replace: {
+            dist: {
+                options: {
+                    patterns: [
+                        {
+                            match: 'apiAddress',
+                            replacement:  config.webServer.apiAddress
+                        },
+                        {
+                            match: 'apiPort',
+                            replacement: config.webServer.apiPort
+                        }
+                    ]
+                },
+                files: [
+                    {expand: true, flatten: true, src: ['public/const/const.js'], dest: 'public/const/'}
                 ]
             }
         },
