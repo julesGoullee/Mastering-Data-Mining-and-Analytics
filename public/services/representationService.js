@@ -27,7 +27,7 @@ angularApp
 
         var setData = function(data) {
             representation = data;
-            findChildren();
+            //findChildren();
         };
 
         var tellFathers = function(wordO) {
@@ -42,14 +42,18 @@ angularApp
             }
         };
 
+        var getCurrentWord = function() {
+            return representation && representation.tag || "";
+        };
         return {
-            setData: setData,
+            setRepresentation: setData,
             findChildren: findChildren,
             findById: findById,
             tellFathers: tellFathers,
             getRepresentation: function() {
                 return representation;
-            }
+            },
+            getCurrentWord: getCurrentWord
 
     };
 });

@@ -1,6 +1,11 @@
 "use strict";
 
-var angularApp = angular.module('Mastering-Data-Mining-and-Analytics', ['ngMaterial',"btford.socket-io","ngMdIcons","ng-context-menu"]);
+var angularApp = angular.module('Mastering-Data-Mining-and-Analytics',
+    ['ngMaterial',
+        "btford.socket-io",
+        "ngMdIcons",
+        "ng-context-menu"]
+);
 
 angularApp.factory('socket', function (config, socketFactory) {
     var myIoSocket = io.connect("http://" + config.url + ":" + config.port);

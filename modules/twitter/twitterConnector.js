@@ -17,8 +17,9 @@ module.exports = {
             access_token_secret: user.session.tokenSecret
         });
         client.stream( 'statuses/filter', {track: keyWord.name },  function( stream ){
-
-            keyWord.stream = keyWord.stream || stream;
+            if( keyWord.stream === false ){
+                stream.destroy();
+            }
 
             stream.on('data', function( tweet ){
                 callback( tweet );

@@ -1,98 +1,87 @@
 "use strict";
 
-angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog ){
+angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog, representationService ){
     $scope.keysWord = [];
     $scope.words = {
         values : {},
         draw : function(){}
     };
-
     $scope.tweetCount = {
         value: 0
     };
 
-    socket.on( "keysWord", function( keysWord ){
-        $scope.keysWord = keysWord;
-        $rootScope.showPopup( );
-    });
-
-    socket.on("newKeyWord", function( newKeyWord ){
-        $scope.keysWord.push( newKeyWord );
-        $scope.$broadcast( "newKeyWord", newKeyWord.value );
-    });
-
     $rootScope.showPopup = function(){
         $mdDialog.show({
-            controller: DialogController,
-            templateUrl: '../dialogChooseTrack/chooseTrack.html'
+            controller: "ChooseTrackController",
+            templateUrl: '../dialogs/chooseTrack.html',
+            locals:
+            {
+                keywords: $scope.keysWord
+            }
         }).then(function() {
             //fermeture popup
         }, function() {
             //error
         });
+    };
 
-        function DialogController(scope, $mdDialog) {
-            scope.addedKeyWord = null;
-            scope.selectedKeyWord = null;
-            scope.keysWord = $scope.keysWord;
+    var receiveKeywords = function( keysWord ){
+        $scope.keysWord = keysWord;
 
-            scope.isValidInput = function( text ){
-                if( text.length > 3 && text.indexOf(" ") === -1){
-
+        $scope.keysWord.getById = function( id ){
+            for( var i = 0; i < _keysWord.length; i++ ){
+                if( _keysWord[i].id === id ){
+                    return _keysWord[i];
                 }
-            };
+            }
+            return false;
+        };
+        $scope.keysWord.delById = function( id ){
+            for( var i = 0; i < _keysWord.length; i++ ){
+                if( _keysWord[i].id === id ){
+                    _keysWord.splice(i, 1);
+                    return true;
+                }
+            }
+            return false;
+        };
 
-            scope.hide = function() {
-                $mdDialog.hide();
-            };
-            scope.cancel = function() {
-                $mdDialog.cancel();
-            };
-            scope.validate = function() {
+        if(keysWord.length) {
+            socket.emit( "setAlreadyTrackKeyWord", keysWord[0].id );
 
-                if( scope.addedKeyWord &&  scope.addedKeyWord.name && scope.addedKeyWord.lang &&  scope.addedKeyWord.occurence ){
-                    socket.emit( "setNewKeyWord", {
-                        newKeyWord: scope.addedKeyWord.name,
-                        options:{
-                            occurence: scope.addedKeyWord.occurence,
-                            lang: scope.addedKeyWord.lang
-                        }
-                    });
-                    $mdDialog.hide();
-                }
-                else if( scope.selectedKeyWord !== null ) {
-                    socket.emit( "setAlreadyTrackKeyWord", scope.selectedKeyWord );
-                    $mdDialog.hide();
-                }
-                else {
-                    //todo erreur
-                }
-            };
+        }
+        else {
+            $rootScope.showPopup( );
         }
     };
 
-    socket.on("representation", function( representationData ){
+    var addKeyword = function( newKeyWord ){
+        $scope.keysWord.push( newKeyWord );
+        $scope.$broadcast( "newKeyWord", newKeyWord.value );
+    };
+
+    var receiveRepresentation = function( representationData ){
+        representationService.setRepresentation(representationData);
         $scope.words.values = representationData.words;
         $scope.words.draw();
-    });
+    };
+
+    socket.on( "keysWord", receiveKeywords);
+    socket.on( "newKeyWord", addKeyword);
+    socket.on("representation", receiveRepresentation);
 
     socket.on("newWord", function( wordObject ){
-
         $scope.words.addWord( wordObject );
+    });
 
+
+    socket.on("stopKeyWord", function( wordId ){
+        console.log("stop kw: " + wordId, $scope.keysWord.getById(wordId));
+        $scope.$broadcast( "stopKeyWord", $scope.keysWord.getById(wordId) );
+        $scope.keysWord.delById( wordId );
     });
 
     socket.on("tweetCount", function(tweetCount){
         $scope.tweetCount.value = tweetCount;
     });
-});
-
-angularApp.controller("RightCtrl", function ($scope, $timeout, $mdSidenav, $log) {
-    $scope.close = function () {
-        $mdSidenav("right").close()
-            .then(function () {
-                $log.debug("close RIGHT is done");
-
-            });
-    };
 });

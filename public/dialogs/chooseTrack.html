@@ -1,0 +1,43 @@
+<md-dialog aria-label="Mot" flex="50">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Add word</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="hide()">
+                <ng-md-icon icon="close" aria-label="Close dialog"
+                            class="md-secondary"
+                            style="fill: white;"
+                            size="30"></ng-md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <md-dialog-content class="sticky-container">
+        <md-subheader class="md-sticky-no-effect">
+            Please enter a keyword to stream.
+        </md-subheader>
+        <div>
+        <div layout="row">
+            <md-input-container>
+                <label>#keyword</label>
+                <input ng-model="addedKeyWord.name" ng-minlength="4">
+            </md-input-container>
+        </div>
+
+        <div layout="row">
+            <md-select placeholder="Language" ng-model="addedKeyWord.lang" name="lang" required>
+                <md-option value="fr">Français</md-option>
+                <md-option value="en">English</md-option>
+            </md-select>
+            <md-input-container>
+                <label>Occurence</label>
+                <input required type="number" step="1" ng-init="addedKeyWord.occurence=5" name="occurence" ng-model="addedKeyWord.occurence" min="5" max="100">
+            </md-input-container>
+        </div>
+        </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+        <md-button ng-click="validate()" class="md-primary">Valider</md-button>
+    </div>
+</md-dialog>

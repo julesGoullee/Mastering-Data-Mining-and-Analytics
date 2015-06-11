@@ -26,6 +26,8 @@ var dependances = {
         "const/const",
         "controllers/mainController",
         "services/graphConfig",
+        "services/representationService",
+        "dialogs/chooseTrack",
         "directives/representation/representation",
         "directives/representation/graphFactory",
         "directives/topBar/topBar",
