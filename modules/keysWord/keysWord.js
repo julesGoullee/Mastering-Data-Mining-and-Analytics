@@ -17,7 +17,7 @@ module.exports = {
     addKeyWord: function( name, lang, occurence, userOwner ){
         var keyWord = KeyWord( name, lang, occurence );
         _keysWord.push( keyWord );
-        twitterCatcher.trackKeyWord( keyWord, userOwner.session );
+        twitterCatcher.trackKeyWord( keyWord, userOwner );
         return keyWord;
     },
     getAll: function(){
