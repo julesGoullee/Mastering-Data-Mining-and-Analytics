@@ -5,7 +5,7 @@ var esConnector = require("../elasticSearch/elasticSearchConnector.js");
 var Representation = require("../representation/representation.js");
 var utils = require("../utils/utils.js");
 
-function KeyWord( name, lang, occurence ){
+function KeyWord( name, lang, occurence, userOwner ){
 
     var self = this;
     self.name = name;
@@ -14,6 +14,7 @@ function KeyWord( name, lang, occurence ){
     self.id = utils.guid();
     self.tweetCount = 0;
     self.representation = Representation( self.name );
+    self.userOwner = userOwner;
 
     self.onNewTweet =  function( callback ) {
         self.tweetCount++;//TODO

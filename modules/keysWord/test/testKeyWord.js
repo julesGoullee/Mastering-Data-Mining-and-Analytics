@@ -13,6 +13,8 @@ describe("KeyWord", function() {
     var keyWord;
     var mockSocketHandler;
     var mockEsConnector;
+    var mockUserOwner;
+
     var callbackOnNewTweet;
 
     beforeEach(function () {
@@ -22,8 +24,8 @@ describe("KeyWord", function() {
         mockEsConnector.searchNewKeysWords = sinon.spy();
         mockEsConnector.getKeysWordsReferences = sinon.spy();
         callbackOnNewTweet = sinon.spy();
-
-        keyWord = KeyWord( "keyWordTest", "fr", 5 );
+        mockUserOwner = sinon.spy();
+        keyWord = KeyWord( "keyWordTest", "fr", 5, mockUserOwner );
         keyWord.mock( mockSocketHandler, mockEsConnector );
 
     });
