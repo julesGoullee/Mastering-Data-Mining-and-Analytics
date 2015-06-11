@@ -60,11 +60,17 @@ module.exports = {
                         var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user);
                         user.addKeyWord( newKeyWord );
 
-                        socketHandler.notifyAllWithoutMe("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name }, user.socket );
+                        socketHandler.notifyAll("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name }, user.socket );
                     }
 
                     var keyWord = keysWord.getByName( data.newKeyWord );
                     initUser( user, keyWord );
+                }
+            });
+
+            socketHandler.on("stopKeyWord", user.socket, function( idKeyWord ){
+                if( user.delKeyWord( idKeyWord ) ){
+
                 }
             });
         });
