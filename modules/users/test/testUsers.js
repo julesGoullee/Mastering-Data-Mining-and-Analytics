@@ -55,6 +55,29 @@ describe("User", function() {
         users.delUserById( user2.id );
 
     });
+    describe("KeyWord", function(){
+        var keyWord = sinon.stub();
+        keyWord.returns({ id: 1 });
+
+        beforeEach(function(){
+            user.addKeyWord( keyWord );
+
+        });
+
+        it("Peut ajouter un mot a tracker", function(){
+
+            expect( user.getKeysWord().length ).to.eql(1);
+        });
+
+        it("Peut suprimmer un mot a tracker", function(){
+            expect( user.delKeyWord( keyWord )).to.eql( true );
+
+            expect( user.getKeysWord().length ).to.eql(0);
+
+        });
+    });
+
+
 
     afterEach(function(){
         users.delUserById( user.id );

@@ -7,10 +7,32 @@ var _users = [];
 
 function User( socket ) {
     var self = this;
+    var _keysWord = [];
+
     self.socket = socket;
     self.session = socket.request.session.passport.user;
     self.tweetCount = 0;
     self.id = utils.guid();
+
+    self.addKeyWord = function( keyWord ){
+        _keysWord.push( keyWord );
+    };
+
+    self.getKeysWord = function(){
+        return _keysWord;
+    };
+
+    self.delKeyWord = function( keyWord ){
+
+        for (var i = 0; i < _keysWord.length; i++) {
+            var word = _keysWord[i];
+            if( word.id === keyWord.id ){
+                _keysWord.splice(i, 1);
+                return true;
+            }
+        }
+        return false;
+    };
 
     _users.push( self );
 }
