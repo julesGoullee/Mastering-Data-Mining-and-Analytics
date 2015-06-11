@@ -17,12 +17,12 @@ var callbackOnNewTweet = function( keyWord ){
 
 module.exports = {
 
-    trackKeyWord: function( keyWord, tokens ) {
+    trackKeyWord: function( keyWord, user ) {
         keyWord.isReady = true;
         keyWord.onStack = false;
         esConnector.dropIndexByTag( keyWord.name );
 
-        twtConnector.onData( keyWord, tokens, function ( tweet ){
+        twtConnector.onData( keyWord, user, function ( tweet ){
 
             if( typeof tweet.text === "string" ) {
                 esConnector.addNewEntry( keyWord, tweet.text ).then( function (){
