@@ -4,7 +4,7 @@ var elasticsearch = require('elasticsearch');
 var config = require('../../config/config.js');
 
 var client = new elasticsearch.Client({
-    host: config.elasticSearchAddr
+    host: config.api.esAdress
 });
 
 module.exports = {

@@ -2,14 +2,14 @@ var express = require("express");
 var router = express.Router();
 var config = require("../config/config.js");
 
-if( !config.onlyClient ){
+if( config.api.active ){
     var auth = require("./auth.js");
 }
 
 var dependances = {
 
     scripts:[
-        "http://" + (config.distantServeur || config.domain) + ":" + config.port + "/socket.io/socket.io",
+        "//" + config.webServer.apiAdress + ":" + config.webServer.apiPort + "/socket.io/socket.io",
         "external/jquery",
         "external/angular",
         "external/angular-aria",
@@ -38,13 +38,13 @@ var dependances = {
     ]
 };
 
-if( config.onlyClient  ){
-    router.get("/", function( req, res, next ){
-        res.render("index", { dependances: dependances, title: "M.D.M.A - Project" });
+if( config.api.active ){
+    router.get("/", auth.ensureAuthenticated, function (req, res, next) {
+        res.render("index", {dependances: dependances, title: "M.D.M.A - Project"});
     });
 }
 else {
-    router.get("/", auth.ensureAuthenticated, function (req, res, next) {
+    router.get("/", function (req, res, next) {
         res.render("index", {dependances: dependances, title: "M.D.M.A - Project"});
     });
 }

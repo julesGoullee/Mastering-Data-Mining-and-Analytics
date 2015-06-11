@@ -2,7 +2,6 @@
 
 var fs = require("fs");
 var esConnector = require('../elasticSearch/elasticSearchConnector.js');
-var config = require('../../config/config.js');
 var clientNotifier = require('../clientNotifier/clientNotifier.js');
 var text = fs.readFileSync(__dirname + "/marine").toString();
 var phrases = text.split( "," );

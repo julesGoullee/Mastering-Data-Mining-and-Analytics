@@ -1,6 +1,5 @@
 "use strict";
 
-var config = require("../../config/config.js");
 var socketHandler = require("../socketHandler/socketHandler.js");
 var keysWord = require("../keysWord/keysWord.js");
 

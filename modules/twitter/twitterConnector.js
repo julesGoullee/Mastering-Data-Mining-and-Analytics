@@ -2,7 +2,6 @@
 
 var twitter = require('twitter');
 
-var config = require('../../config/config.js');
 var jf = require('jsonfile');
 var accounts = jf.readFileSync( __dirname + "/../../config/account.json");
 

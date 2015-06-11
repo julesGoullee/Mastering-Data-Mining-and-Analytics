@@ -1,12 +1,18 @@
 'use strict';
 module.exports = {
-    elasticSearchAddr: '192.168.1.19:9200',
-    domain:'localhost',
-    port:3000,
-    mongo: {
-        ip: "127.0.0.1",
-        base: "mdma"
+    api : {
+        active : true,
+        esAdress: '192.168.1.19:9200',
+        mongo: {
+            ip: "127.0.0.1",
+            base: "mdma"
+        },
+        port: 3000,
+        domain:'localhost'
     },
-    onlyClient: true,
-    distantServeur: "192.168.1.15"
+    webServer: {
+        active: true,
+        apiAdress: "localhost",
+        apiPort:3000
+    }
 };

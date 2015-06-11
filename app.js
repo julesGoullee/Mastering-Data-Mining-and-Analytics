@@ -5,16 +5,19 @@ var config = require("./config/config");
 var express = require("express");
 var path = require("path");
 var favicon = require("serve-favicon");
-var logger = require("morgan");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
+//var logger = require("morgan");
+//app.use(logger("dev"));
 
 var routes = require("./routes/index");
-//app.use(logger("dev"));
-var jf = require('jsonfile');
-var accounts = jf.readFileSync( __dirname + "/config/account.json");
+var sessionMiddleware = {};
 
-if( !config.onlyClient ) {
+
+if( config.api.active ) {
+    var jf = require('jsonfile');
+    var accounts = jf.readFileSync( __dirname + "/config/account.json");
+
     var session = require("express-session");
     var TwitterStrategy = require("passport-twitter").Strategy;
     var methodOverride = require("method-override");
@@ -34,7 +37,7 @@ if( !config.onlyClient ) {
     passport.use(new TwitterStrategy({
             consumerKey: accounts.TWITTER_CONSUMER_KEY,
             consumerSecret: accounts.TWITTER_CONSUMER_SECRET,
-            callbackURL: "http://" + config.domain + ":3000/auth/twitter/callback"
+            callbackURL: "http://" + config.api.domain + ":" + config.api.port+ "/auth/twitter/callback"
         },
         function (token, tokenSecret, profile, done) {
 
@@ -50,7 +53,7 @@ if( !config.onlyClient ) {
             });
         }
     ));
-    var sessionMiddleware = session({
+    sessionMiddleware = session({
         secret: "keyboard cat",
         name: "token",
         proxy: true,
@@ -63,16 +66,14 @@ if( !config.onlyClient ) {
         cookie: {secure: false}
     });
 }
-else{
-    var sessionMiddleware = {};
-}
+
 var app = express();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(favicon(__dirname + "/public/images/favicon.ico"));
 
-if( !config.onlyClient ) {
+if( config.api.active ) {
     app.use(bodyParser.json());
     app.use(methodOverride());
     app.use(bodyParser.urlencoded({extended: false}));
@@ -82,13 +83,10 @@ if( !config.onlyClient ) {
 
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use("/auth", auth.router);
 }
 //routes
 app.use("/", routes);
-
-if( !config.onlyClient ){
-    app.use("/auth", auth.router);
-}
 
 app.use(express.static(path.join(__dirname, "public")));
 

@@ -4,30 +4,26 @@ var app = require("../app").app;
 var http = require("http");
 var config = require("../config/config.js");
 
-if( !config.onlyClient ) {
-    var sessionMiddleware = require("../app").sessionMiddleware;
-    var io = require("socket.io");
-    var socketHandler = require("../modules/socketHandler/socketHandler.js");
-    var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
-}
 //var noIpConnector = require("../modules/serverConfig/noipConfig.js");
 //var debug = require('debug')('mastering-data-mining-and-analytics:server');
-
+//noIpConnector.updateIp();
 
 var port = process.env.PORT || '3000';
 app.set('port', port);
 var server = http.createServer(app);
-
 server.listen(port, "0.0.0.0");
-if( !config.onlyClient ) {
+
+if( config.catcher.active ) {
+    var sessionMiddleware = require("../app").sessionMiddleware;
+    var io = require("socket.io");
+    var socketHandler = require("../modules/socketHandler/socketHandler.js");
+    var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
     var _io = io(server).use(function (socket, next) {
         sessionMiddleware(socket.request, {}, next);
     });
 }
 server.on('error', onError);
 server.on('listening', onListening);
-
-//noIpConnector.updateIp();
 
 function onError(error) {
     if (error.syscall !== 'listen') {
@@ -53,9 +49,11 @@ function onError(error) {
 }
 
 function onListening() {
+
     var addr = server.address();
     console.log('Listening on port ' + addr.port);
-    if( !config.onlyClient ) {
+
+    if( config.catcher.active ) {
         var esConnector = require('../modules/elasticSearch/elasticSearchConnector.js');
 
         esConnector.connect().then(function () {
