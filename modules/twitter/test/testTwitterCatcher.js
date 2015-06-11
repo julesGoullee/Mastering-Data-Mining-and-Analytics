@@ -38,7 +38,7 @@ describe("twitter catcher", function() {
     it("Peut lancer la capture du mot", function () {
         expect( keyWord.isReady).to.eql( true );
         expect( keyWord.onStack).to.eql( false );
-        expect( mockTwtConnector.onData).calledWith( keyWord.name );
+        expect( mockTwtConnector.onData).calledWith( keyWord );
     });
 
     describe("Declanchement d'un tweet", function(){

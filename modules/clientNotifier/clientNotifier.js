@@ -69,7 +69,10 @@ module.exports = {
             });
 
             socketHandler.on("stopKeyWord", user.socket, function( idKeyWord ){
+
                 if( user.delKeyWord( idKeyWord ) ){
+
+                    socketHandler.notifyAll("stopKeyWord", { id: idKeyWord } );
 
                 }
             });

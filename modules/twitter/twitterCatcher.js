@@ -22,7 +22,7 @@ module.exports = {
         keyWord.onStack = false;
         esConnector.dropIndexByTag( keyWord.name );
 
-        twtConnector.onData( keyWord.name, tokens, function ( tweet ){
+        twtConnector.onData( keyWord, tokens, function ( tweet ){
 
             if( typeof tweet.text === "string" ) {
                 esConnector.addNewEntry( keyWord, tweet.text ).then( function (){

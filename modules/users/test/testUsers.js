@@ -56,8 +56,15 @@ describe("User", function() {
 
     });
     describe("KeyWord", function(){
-        var keyWord = sinon.stub();
-        keyWord.returns({ id: 1 });
+        var stopStream = sinon.stub();
+
+        var keyWord = {
+            id:1,
+            stream:{
+                stop: stopStream
+            }
+
+        };
 
         beforeEach(function(){
             user.addKeyWord( keyWord );
