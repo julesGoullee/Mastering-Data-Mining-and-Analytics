@@ -56,6 +56,14 @@ module.exports = {
         }
         return false;
     },
+    getBySessionId: function( sessionId ){
+        for( var i = 0; i < _users.length; i++ ){
+            if( _users[i].session.id === sessionId ){
+                return _users[i];
+            }
+        }
+        return false;
+    },
     getUsers: function(){
         return _users;
     }
