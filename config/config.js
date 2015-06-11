@@ -2,7 +2,7 @@
 module.exports = {
     api : {
         active : false,
-        esAdress: '192.168.1.19:9200',
+        esAddress: '192.168.1.19:9200',
         mongo: {
             ip: "127.0.0.1",
             base: "mdma"
@@ -12,7 +12,7 @@ module.exports = {
     },
     webServer: {
         active: true,
-        apiAdress: "109.190.95.175",
+        apiAddress: "109.190.95.175",
         apiPort:80
     }
 };

@@ -9,7 +9,7 @@ if( config.api.active ){
 var dependances = {
 
     scripts:[
-        "//" + config.webServer.apiAdress + ":" + config.webServer.apiPort + "/socket.io/socket.io",
+        "//" + config.webServer.apiAddress + ":" + config.webServer.apiPort + "/socket.io/socket.io",
         "external/jquery",
         "external/angular",
         "external/angular-aria",
