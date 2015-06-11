@@ -4,13 +4,28 @@ var _callbackOnNewConnection = [];
 var users = require("../users/users.js");
 var _io;
 
+function getOrAddUser( socket ){
+    var user = users.getBySessionId( socket.request.session.passport.user.id );
+
+    if( !user ){
+        user = users.addUser( socket );
+    }
+    else{
+        user.socket = socket;
+        user.session = socket.request.session.passport.user;
+    }
+
+    return user;
+}
+
 module.exports = {
     listen: function( io ){
         _io = io;
         _io.on( "connection", function( socket ) {
 
             for( var i = 0; i < _callbackOnNewConnection.length; i++){
-                _callbackOnNewConnection[i]( users.addUser( socket ) );
+
+                _callbackOnNewConnection[i]( getOrAddUser( socket ) );
             }
         });
     },

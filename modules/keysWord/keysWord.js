@@ -14,10 +14,10 @@ var keyWordContraint = {
 };
 
 module.exports = {
-    addKeyWord: function( name, lang, occurence, tokens ){
+    addKeyWord: function( name, lang, occurence, userOwner ){
         var keyWord = KeyWord( name, lang, occurence );
         _keysWord.push( keyWord );
-        twitterCatcher.trackKeyWord( keyWord, tokens );
+        twitterCatcher.trackKeyWord( keyWord, userOwner.session );
         return keyWord;
     },
     getAll: function(){

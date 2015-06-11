@@ -14,18 +14,17 @@ describe("KeysWord", function() {
     var mockSocketHandler;
     var mockTwitterCatcher;
     var mockEsConnector;
+    var mockUserOwner;
+
     beforeEach(function () {
         mockSocketHandler = sinon.spy();
         mockTwitterCatcher = sinon.spy();
         mockTwitterCatcher.trackKeyWord = sinon.spy();
         mockEsConnector = sinon.spy();
-        var tokens = sinon.stub();
-        tokens.returns({
-            token: "token",
-            tokenSecret: "tokenSecret"
-        });
+        mockUserOwner = sinon.spy();
+
         keysWord.mock( mockSocketHandler, mockTwitterCatcher );
-        keyWord = keysWord.addKeyWord( "keyWordTest", "fr", 5, tokens() );
+        keyWord = keysWord.addKeyWord( "keyWordTest", "fr", 5, mockUserOwner );
         keyWord.mock( mockSocketHandler, mockEsConnector );
     });
 
@@ -92,12 +91,10 @@ describe("KeysWord", function() {
         var keyWord2;
 
         beforeEach(function(){
-            var tokens = sinon.stub();
-            tokens.returns({
-                token: "token",
-                tokenSecret: "tokenSecret"
-            });
-            keyWord2 = keysWord.addKeyWord( "keyWordTest2", "fr", 10, tokens() );
+            var mockUserOwner2;
+            mockUserOwner2 = sinon.spy();
+
+            keyWord2 = keysWord.addKeyWord( "keyWordTest2", "fr", 10, mockUserOwner2 );
         });
 
         it("Peut recuperer deux keyword", function(){

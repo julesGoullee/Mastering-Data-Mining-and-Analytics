@@ -198,7 +198,7 @@ module.exports = function(grunt) {
             }
         },
         replace: {
-            dist: {
+            constantClient: {
                 options: {
                     patterns: [
                         {
