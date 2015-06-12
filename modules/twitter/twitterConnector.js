@@ -17,18 +17,19 @@ module.exports = {
             access_token_secret: user.session.tokenSecret
         });
         client.stream( 'statuses/filter', {track: keyWord.name },  function( stream ){
-            if( keyWord.stream === false ){
-                stream.destroy();
-            }
 
             stream.on('data', function( tweet ){
+                if( keyWord.stream === false ){
+                    stream.destroy();
+                    return false;
+                }
                 callback( tweet );
             });
 
             stream.on('error', function( error ){
                 client.get("application/rate_limit_status", function( error, content, response ){
                     var limit = response.headers["x-rate-limit-reset"];
-                    console.log("ban pour le mot" + twitterKeyWord + " reviens dans" + new Date(limit*1000) );
+                    console.log("ban pour le mot" + keyWord.name + " reviens dans" + new Date(limit*1000) );
                 });
             });
         });
