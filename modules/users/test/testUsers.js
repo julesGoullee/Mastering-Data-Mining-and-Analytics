@@ -77,7 +77,7 @@ describe("User", function() {
         });
 
         it("Peut suprimmer un mot a tracker", function(){
-            expect( user.delKeyWord( keyWord )).to.eql( true );
+            expect( user.delKeyWord( keyWord.id )).to.eql( true );
 
             expect( user.getKeysWord().length ).to.eql(0);
 

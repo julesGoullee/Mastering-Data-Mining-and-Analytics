@@ -29,17 +29,17 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
         $scope.keysWord = keysWord;
 
         $scope.keysWord.getById = function( id ){
-            for( var i = 0; i < _keysWord.length; i++ ){
-                if( _keysWord[i].id === id ){
-                    return _keysWord[i];
+            for( var i = 0; i < $scope.keysWord.length; i++ ){
+                if( $scope.keysWord[i].id === id ){
+                    return $scope.keysWord[i];
                 }
             }
             return false;
         };
         $scope.keysWord.delById = function( id ){
-            for( var i = 0; i < _keysWord.length; i++ ){
-                if( _keysWord[i].id === id ){
-                    _keysWord.splice(i, 1);
+            for( var i = 0; i < $scope.keysWord.length; i++ ){
+                if( $scope.keysWord[i].id === id ){
+                    $scope.keysWord.splice(i, 1);
                     return true;
                 }
             }

@@ -47,8 +47,12 @@ module.exports = {
             socketHandler.notifyOne("keysWord", getKeysWordsByUser( user ), user.socket );
 
             socketHandler.on("setAlreadyTrackKeyWord", user.socket, function( idKeyWord ){
+
                 var keyWord = keysWord.getById( idKeyWord );
-                initUser( user, keyWord );
+
+                if( keyWord ){
+                    initUser( user, keyWord );
+                }
             });
 
             socketHandler.on("setNewKeyWord", user.socket, function( data ){
@@ -72,7 +76,7 @@ module.exports = {
 
                 if( user.delKeyWord( idKeyWord ) ){
 
-                    socketHandler.notifyAll("stopKeyWord", { id: idKeyWord } );
+                    socketHandler.notifyAll("stopKeyWord", idKeyWord);
                 }
             });
         });
