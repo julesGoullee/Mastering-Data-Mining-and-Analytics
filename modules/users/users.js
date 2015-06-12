@@ -30,7 +30,7 @@ function User( socket ) {
 
             if( word.id === keyWord.id ){
 
-                word.stream.stop();
+                word.stream.destroy();
 
                 _keysWord.splice(i, 1);
                 return true;
