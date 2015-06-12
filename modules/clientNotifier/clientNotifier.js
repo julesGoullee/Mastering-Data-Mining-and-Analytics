@@ -73,7 +73,6 @@ module.exports = {
                 if( user.delKeyWord( idKeyWord ) ){
 
                     socketHandler.notifyAll("stopKeyWord", { id: idKeyWord } );
-
                 }
             });
         });

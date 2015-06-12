@@ -28,7 +28,7 @@ function User( socket ) {
 
             var word = _keysWord[i];
 
-            if( word.id === keyWord.id ){
+            if( word.id === keyWordId ){
 
                 word.stream.destroy();
 

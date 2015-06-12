@@ -20,20 +20,49 @@
                 </md-button>
             </div>
         </md-toolbar>
-        <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right" id="right-menu">
-            <md-toolbar class="md-theme-light">
-                <h1 class="md-toolbar-tools">Settings</h1>
-            </md-toolbar>
-            <md-content ng-controller="RightCtrl" layout-padding>
-                <section layout-padding>
-                    <md-button ng-click="showPopup();toggleRight()" class="md-raised md-primary" layout-padding>Add or change #keyWord</md-button>
-                </section>
-                <section layout-padding>
-                    <md-subheader class="md-primary">Graph Config</md-subheader>
-                    Gravity : <md-slider flex class="md-warn" min="0.1" step="0.02"  max="1" ng-model="gravity.value" aria-label="gravite" ></md-slider>
-                    <md-button ng-click="restoreHiddenNodes()" class="md-raised" layout-padding>Restore visibility</md-button>
-                </section>
-            </md-content>
+        <md-sidenav  class="md-sidenav-right md-whiteframe-z2" md-component-id="right" id="right-menu">
+            <div>
+                <md-toolbar class="md-theme-light">
+                    <h2 class="md-toolbar-tools"><span>Settings</span></h2>
+                </md-toolbar>
+                <md-content >
+                    <md-list>
+                        <md-list-item ng-repeat="word in words" ng-click="changeWord(word)" class="word-line">
+                            <!--ng-style="{'fill': runningWord() === word.value ? 'green' : '#BBBBBB'}"-->
+
+                            <ng-md-icon icon="sync"
+                                        ng-style="{'fill': runningWord() === word.value ? 'green' : '#BBBBBB'}"
+                                        size="20"></ng-md-icon>
+                            <p>{{word.value}}</p>
+                            <div class="md-secondary">
+
+                                <ng-md-icon icon="close"
+                                            style="fill: red"
+                                            size="25"
+                                            ng-click="deleteWord(word)"></ng-md-icon>
+                                <ng-md-icon icon="send"
+                                            style="fill: #BBBBBB"
+                                            size="25"></ng-md-icon>
+                            </div>
+                        </md-list-item>
+                    </md-list>
+
+                    <md-divider></md-divider>
+
+                    <md-button ng-click="showPopup();toggleRight()" class="md-primary">Add or change #keyWord</md-button>
+                </md-content >
+                <md-toolbar class="md-theme-light">
+                    <h2 class="md-toolbar-tools">
+                        <span>Graph Config</span>
+                    </h2>
+                </md-toolbar>
+                <md-content >
+                    <md-subheader>Gravity : </md-subheader>
+                    <md-slider flex class="md-warn" min="0.1" step="0.02"  max="1" ng-model="gravity.value" aria-label="gravite" ></md-slider>
+                    <md-button ng-click="restoreHiddenNodes()" class="md-primary">Restore visibility</md-button>
+
+                </md-content>
+            </div>
         </md-sidenav>
     </div>
 </div>
