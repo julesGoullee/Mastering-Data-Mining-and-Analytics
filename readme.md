@@ -6,7 +6,7 @@ Nodejs-Express-socketio web app
 Storage mongdb & elasticSearch
 Angularjs,D3 client app
 
-[Demo dev](109.190.95.175)
+[Demo dev](http://109.190.95.175)
 
 ## Configuration
 Default configuration installs everythings needed to run the web application server.
