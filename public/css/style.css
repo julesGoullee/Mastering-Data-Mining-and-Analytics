@@ -27,6 +27,10 @@ body {
 #right-menu md-slider {
   margin: auto 20px!important;
 }
+#right-menu .word-line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 representation .link {
   stroke: #a0a0a0;
 }
