@@ -15,36 +15,13 @@ function initUser( user , keyWord ){
     socketHandler.notifyOne( "representation", keyWord.representation.getJson(), user.socket );
 }
 
-function getKeysWordsByUser( user ){
-    var keysWords = keysWord.getJson();
-    var userKeysWord = user.getKeysWord();
-
-    for( var i = 0; i < userKeysWord.length; i++ ){
-
-        var userKeyWord = userKeysWord[i];
-
-        for( var j = 0; j < keysWords.length; j++){
-
-            var keyWord = keysWords[j];
-
-            if( keyWord.id === userKeyWord.id ){
-                keysWords[j].isMine = true;
-                break;
-            }
-
-        }
-
-    }
-
-    return keysWords;
-}
 
 module.exports = {
     connect : function(){
 
         socketHandler.onNewConnection(function( user ){
 
-            socketHandler.notifyOne("keysWord", getKeysWordsByUser( user ), user.socket );
+            socketHandler.notifyOne("keysWord", keysWord.getJsonByUser( user ), user.socket );
 
             socketHandler.on("setAlreadyTrackKeyWord", user.socket, function( idKeyWord ){
 

@@ -13,35 +13,69 @@ var keyWordContraint = {
     maxOccurence: 100
 };
 
-module.exports = {
-    addKeyWord: function( name, lang, occurence, userOwner ){
-        var keyWord = KeyWord( name, lang, occurence );
-        _keysWord.push( keyWord );
-        twitterCatcher.trackKeyWord( keyWord, userOwner );
-        return keyWord;
-    },
-    getAll: function(){
-        return _keysWord;
-    },
-    delById: function( id ){
-        for( var i = 0; i < _keysWord.length; i++ ){
-            if( _keysWord[i].id === id ){
-                _keysWord.splice(i, 1);
+function addKeyWord( name, lang, occurence, userOwner ){
+    var keyWord = KeyWord( name, lang, occurence );
+    _keysWord.push( keyWord );
+    twitterCatcher.trackKeyWord( keyWord, userOwner );
+    return keyWord;
+}
+
+function getAll(){
+    return _keysWord;
+}
+
+function getJson(){
+    var jsonKeysWord = [];
+
+    for( var i = 0; i < _keysWord.length; i++ ){
+        jsonKeysWord.push({
+            id: _keysWord[i].id,
+            value: _keysWord[i].name
+        });
+    }
+
+    return jsonKeysWord;
+}
+
+function getJsonByUser( user ){
+    var keysWords = getJson();
+    var userKeysWord = user.getKeysWord();
+
+    for( var i = 0; i < userKeysWord.length; i++ ){
+
+        var userKeyWord = userKeysWord[i];
+
+        for( var j = 0; j < keysWords.length; j++){
+
+            var keyWord = keysWords[j];
+
+
+            if( keyWord.id === userKeyWord.id ){
+                keysWords[j].isMine = true;
+                break;
             }
-        }
-    },
-    getJson: function(){
-        var jsonKeysWord = [];
 
-        for( var i = 0; i < _keysWord.length; i++ ){
-            jsonKeysWord.push({
-                id: _keysWord[i].id,
-                value: _keysWord[i].name
-            });
         }
 
-        return jsonKeysWord;
-    },
+    }
+
+    return keysWords;
+}
+
+function delById( id ){
+    for( var i = 0; i < _keysWord.length; i++ ){
+        if( _keysWord[i].id === id ){
+            _keysWord.splice(i, 1);
+        }
+    }
+}
+
+module.exports = {
+    addKeyWord: addKeyWord,
+    getAll: getAll,
+    getJson: getJson,
+    getJsonByUser: getJsonByUser,
+    delById: delById,
     isNewKeyWord: function( name ){
         for( var i = 0; i < _keysWord.length; i++ ){
             if( _keysWord[i].name === name ){
