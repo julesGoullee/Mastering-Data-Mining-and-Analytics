@@ -11,6 +11,7 @@ function KeyWord( name, lang, occurence, userOwner ){
     self.name = name;
     self.lang = lang;
     self.stream = true;
+    self.isWait = false;
     self.occurence = occurence;
     self.id = utils.guid();
     self.tweetCount = 0;

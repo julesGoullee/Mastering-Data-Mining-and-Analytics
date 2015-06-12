@@ -30,10 +30,27 @@ function User( socket ) {
 
             if( word.id === keyWordId ){
 
-                word.stream =false;
+                word.stream = false;
 
                 _keysWord.splice(i, 1);
                 return true;
+            }
+        }
+        return false;
+    };
+
+    self.waitKeyWord = function( keyWordId ){
+
+        for( var i = 0; i < _keysWord.length; i++ ){
+
+            var word = _keysWord[i];
+
+            if( word.id === keyWordId ){
+
+                word.stream = false;
+                word.isWait = true;
+
+                return word;
             }
         }
         return false;

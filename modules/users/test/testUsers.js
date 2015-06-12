@@ -56,13 +56,11 @@ describe("User", function() {
 
     });
     describe("KeyWord", function(){
-        var stopStream = sinon.stub();
 
         var keyWord = {
             id:1,
-            stream:{
-                stop: stopStream
-            }
+            isWait: false,
+            stream:true
 
         };
 
@@ -74,12 +72,30 @@ describe("User", function() {
         it("Peut ajouter un mot a tracker", function(){
 
             expect( user.getKeysWord().length ).to.eql(1);
+            expect( user.getKeysWord()[0] ).to.eql( keyWord );
         });
 
         it("Peut suprimmer un mot a tracker", function(){
             expect( user.delKeyWord( keyWord.id )).to.eql( true );
 
             expect( user.getKeysWord().length ).to.eql(0);
+
+        });
+
+        it("Peut stop le stream un mot", function(){
+            expect( user.delKeyWord( keyWord.id )).to.eql( true );
+            expect( keyWord.stream ).to.eql(false);
+
+        });
+
+        it("Peut mettre sur pause le stream d'un mot", function(){
+            expect( keyWord.isWait ).to.eql(false);
+
+            expect( user.waitKeyWord( keyWord.id )).to.eql( keyWord );
+            expect( keyWord.stream ).to.eql(false);
+            expect( keyWord.isWait ).to.eql(true);
+            expect( user.getKeysWord()[0] ).to.eql( keyWord );
+
 
         });
     });
