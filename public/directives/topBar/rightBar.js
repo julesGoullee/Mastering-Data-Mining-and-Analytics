@@ -18,7 +18,7 @@ angularApp.directive( "topBar", function( $mdUtil, $mdSidenav,$rootScope, graphC
 
             scope.changeWord = function(word) {
 
-                socket.emit( "setAlreadyTrackKeyWord", word );
+                socket.emit( "setAlreadyTrackKeyWord", word.id );
             };
 
             scope.deleteWord = function(word) {
