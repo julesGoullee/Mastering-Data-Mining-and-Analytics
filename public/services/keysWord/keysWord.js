@@ -20,8 +20,8 @@ angularApp.service("keysWord", function( $rootScope, socket ){
 
     function getById( id ) {
 
-        for (var i = 0; i < _keysWord.length; i++) {
-            if (_keysWord[i].id === id) {
+        for( var i = 0; i < _keysWord.length; i++ ){
+            if( _keysWord[i].id === id ){
                 return _keysWord[i];
             }
         }
@@ -45,7 +45,7 @@ angularApp.service("keysWord", function( $rootScope, socket ){
         return false;
     }
 
-    socket.on( "keysWord", function( keysWord ){
+    socket.on("keysWord", function( keysWord ){
 
         _keysWord = keysWord;
 
@@ -61,7 +61,7 @@ angularApp.service("keysWord", function( $rootScope, socket ){
         }
     });
 
-    socket.on( "newKeyWord", function( newKeyWord ){
+    socket.on("newKeyWord", function( newKeyWord ){
         add( newKeyWord );
         $rootScope.$broadcast( "newKeyWord", newKeyWord );
     });
