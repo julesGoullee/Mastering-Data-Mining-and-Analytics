@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "dependencies": {
     "jquery": "latest",
-    "angular": "latest",
+    "angular": "~1.4.0",
     "angular-material": "latest",
     "angular-socket-io": "latest",
     "d3": "latest",
     "angular-material-icons": "latest",
-    "ng-context-menu": "latest"
+    "ng-context-menu": "latest",
+    "angular-mocks": "~1.4.0"
   },
   "resolutions": {
     "angular": "~1.4.x"

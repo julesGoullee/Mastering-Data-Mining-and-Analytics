@@ -148,14 +148,14 @@ module.exports = function(grunt) {
                         src: "bower_components/jquery/dist/jquery.js",
                         dest: "public/external/jquery.js"
                     },
-                    {
-                        src: "bower_components/jquery/dist/jquery.min.map",
-                        dest: "public/external/jquery.min.map"
-                    },
                     //angularjs
                     {
                         src: "bower_components/angular/angular.js",
                         dest: "public/external/angular.js"
+                    },
+                    {
+                        src: "bower_components/angular-mocks/angular-mocks.js",
+                        dest: "public/test/libs/angular-mocks.js"
                     },
                     {
                         src: "bower_components/angular-animate/angular-animate.js",
