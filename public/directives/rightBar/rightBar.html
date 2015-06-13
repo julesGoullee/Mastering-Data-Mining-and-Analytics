@@ -17,10 +17,8 @@
                         <ng-md-icon icon="close"
                                     style="fill: red"
                                     size="25"
+                                    ng-show="word.isMine === true"
                                     ng-click="deleteWord(word)"></ng-md-icon>
-                        <ng-md-icon icon="send"
-                                    style="fill: #BBBBBB"
-                                    size="25"></ng-md-icon>
                     </div>
                 </md-list-item>
             </md-list>

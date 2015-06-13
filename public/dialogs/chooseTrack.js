@@ -34,9 +34,9 @@ angularApp.controller("ChooseTrackController", function( $scope,$rootScope, $mdD
                 }
             });
 
-            $rootScope.$on("newKeyWord", function( event,  word ){
+            $scope.$on( "newKeyWord", function( event,  word ){
                 if( word.value === $scope.addedKeyWord.name){
-                    keysWord.currentKeyWord( words[0].id );
+                    keysWord.currentKeyWord( word.id );
                 }
             });
 

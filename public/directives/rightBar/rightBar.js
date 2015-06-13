@@ -17,6 +17,7 @@ angularApp.directive( "rightBar",
             scope.changeWord = function( word ){
                 if( scope.runningWord() !== word ){
                     socket.emit( "setAlreadyTrackKeyWord", word.id );
+                    scope.runningWord( word.id );
 
                 }
             };

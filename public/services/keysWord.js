@@ -61,6 +61,17 @@ angularApp.service("keysWord", function( $rootScope, socket ){
         }
     });
 
+    socket.on( "newKeyWord", function( newKeyWord ){
+        add( newKeyWord );
+        $rootScope.$broadcast( "newKeyWord", newKeyWord );
+    });
+
+    socket.on("stopKeyWord", function( wordId ){
+        console.log("stop kw: " + wordId, getById( wordId ) );
+        $rootScope.$broadcast( "stopKeyWord", getById( wordId ) );
+        delById( wordId );
+    });
+
     return {
         get: get,
         currentKeyWord: currentKeyWord,
