@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.controller("ChooseTrackController", function( $scope,$rootScope, $mdDialog, socket, keysWord ){
+angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $mdDialog, socket, keysWord ){
     $scope.addedKeyWord = null;
     $scope.selectedKeyWord = null;
 
@@ -10,15 +10,15 @@ angularApp.controller("ChooseTrackController", function( $scope,$rootScope, $mdD
         }
     };
 
-    $scope.hide = function() {
+    $scope.hide = function(){
         $mdDialog.hide();
     };
 
-    $scope.cancel = function() {
+    $scope.cancel = function(){
         $mdDialog.cancel();
     };
 
-    $scope.validate = function() {
+    $scope.validate = function(){
 
         if( $scope.addedKeyWord &&  $scope.addedKeyWord.name &&  $scope.addedKeyWord.occurence ){
 
@@ -35,7 +35,7 @@ angularApp.controller("ChooseTrackController", function( $scope,$rootScope, $mdD
             });
 
             $scope.$on( "newKeyWord", function( event,  word ){
-                if( word.value === $scope.addedKeyWord.name){
+                if( word.value === $scope.addedKeyWord.name ){
                     word.isMine = true;
                     keysWord.currentKeyWord( word.id );
                 }
