@@ -1,21 +1,19 @@
 "use strict";
 
-angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig ){
+angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, representation ){
     return {
         restrict: "E",
-        scope:{
-            tweetCount: "="
-        },
         templateUrl:"directives/topBar/topBar.html",
         link: function( scope ){
+
+            scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
+            scope.showPopup = $rootScope.showPopup;
+            scope.tweetCount = representation.tweetCount;
 
             scope.toggleRight = function(){
                 $rootScope.$broadcast("toggleRight");
             };
 
-            scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
-
-            scope.showPopup = $rootScope.showPopup;
 
             scope.$on("newKeyWord", function( event, newKeyWord ){
                 $mdToast.show(

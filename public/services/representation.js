@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.service('representationService', function(){
+angularApp.service('representation', function( ){
         var representation;
 
         var findById = function( id ){
@@ -66,6 +66,9 @@ angularApp.service('representationService', function(){
             tellFathers: tellFathers,
             getRepresentation: function(){
                 return representation;
+            },
+            tweetCount : {
+                value: 0
             },
             getCurrentWord: getCurrentWord
 

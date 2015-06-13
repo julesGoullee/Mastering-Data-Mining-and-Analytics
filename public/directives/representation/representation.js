@@ -1,17 +1,17 @@
 "use strict";
 
-angularApp.directive("representation", function( graphConfig, graph ){
+angularApp.directive("representation", function( graphConfig, graph, representation ){
     var isFirst = true;
 
     return {
         restrict: "E",
         scope:{
-            words : "="
         },
         link: function( scope, element ){
+
             scope.gravity = graphConfig.gravity;
 
-            scope.words.draw = function( ){
+            scope.$on("draw",function( ){
 
                 if( isFirst ){
                     isFirst = false;
@@ -31,8 +31,8 @@ angularApp.directive("representation", function( graphConfig, graph ){
 
                 var links = [];
 
-                for( var i= 0 ; i < scope.words.values.length; i ++ ){
-                    var dataInLevel = scope.words.values[i];
+                for( var i= 0 ; i < representation.getRepresentation().words.length; i ++ ){
+                    var dataInLevel = representation.getRepresentation().words[i];
 
                     for( var j = 0 ; j < dataInLevel.content.length; j++){
                         var wordObject =  dataInLevel.content[j];
@@ -53,22 +53,22 @@ angularApp.directive("representation", function( graphConfig, graph ){
                 }
                 graph.update();
 
-            };
+            });
 
-            scope.words.addWord = function( wordsObjects ){
+            scope.$on("addWord", function( wordsObjects ){
 
                 for ( var i = 0 ; i < wordsObjects.length; i++ ){
 
-                    if( !scope.words.values[ wordsObjects[i].level ]){
+                    if( !representation.getRepresentation().words[ wordsObjects[i].level ]){
 
-                        scope.words.values[ wordsObjects[i].level ] = {
+                        representation.getRepresentation().words[ wordsObjects[i].level ] = {
                             content : [],
                             date: new Date().toDateString(),
                             level : wordsObjects[i].level
                         }
                     }
 
-                    scope.words.values[ wordsObjects[i].level ].content.push( wordsObjects[i] );
+                    representation.getRepresentation().words[ wordsObjects[i].level ].content.push( wordsObjects[i] );
                     graph.addNode( wordsObjects[i].word, wordsObjects[i].level );
 
                     if( wordsObjects[i].references.length > 0 ){
@@ -80,7 +80,7 @@ angularApp.directive("representation", function( graphConfig, graph ){
 
                 }
                 graph.update();
-            };
+            });
 
         }
     }

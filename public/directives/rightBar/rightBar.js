@@ -1,7 +1,8 @@
 "use strict";
 
 angularApp.directive( "rightBar",
-    function( $mdUtil, $mdSidenav, $rootScope, graphConfig, socket, representationService ){
+    function( $mdUtil, $mdSidenav, $rootScope, graphConfig, socket, representation
+    ){
     return {
         restrict: "E",
         scope:{
@@ -13,7 +14,7 @@ angularApp.directive( "rightBar",
             scope.gravity = graphConfig.gravity;
             scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
             scope.showPopup = $rootScope.showPopup;
-            scope.runningWord = representationService.getCurrentWord;
+            scope.runningWord = representation.getCurrentWord;
             scope.toggleRight = buildToggler("right");
 
             scope.changeWord = function( word ){
