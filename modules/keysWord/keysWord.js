@@ -14,10 +14,57 @@ var keyWordContraint = {
 };
 
 function addKeyWord( name, lang, occurence, userOwner ){
-    var keyWord = KeyWord( name, lang, occurence );
+
+
+    var keyWord = KeyWord( name, lang, occurence, userOwner );
     _keysWord.push( keyWord );
     twitterCatcher.trackKeyWord( keyWord, userOwner );
+    userOwner.addKeyWord( keyWord );
+
     return keyWord;
+}
+
+function resumeKeyWord( keyWordId ){
+
+    var keyWord = getById( keyWordId );
+
+    if( keyWord ) {
+        keyWord.resume();
+        twitterCatcher.trackKeyWord( keyWord, keyWord.userOwner );
+        return keyWord;
+    }
+    return false;
+
+}
+
+function waitKeyWord ( keyWordId ){
+
+    var keyWord = getById( keyWordId );
+
+    if( keyWord ) {
+        keyWord.pause();
+        return keyWord;
+    }
+    return false;
+}
+
+function getByName ( name ){
+    for( var i = 0; i < _keysWord.length; i++ ){
+        if( _keysWord[i].name === name ){
+            return _keysWord[i];
+        }
+    }
+    return false;
+}
+
+function getById( id ){
+
+    for( var i = 0; i < _keysWord.length; i++ ){
+        if( _keysWord[i].id === id ){
+            return _keysWord[i];
+        }
+    }
+    return false;
 }
 
 function getAll(){
@@ -25,6 +72,7 @@ function getAll(){
 }
 
 function getJson(){
+
     var jsonKeysWord = [];
 
     for( var i = 0; i < _keysWord.length; i++ ){
@@ -38,86 +86,77 @@ function getJson(){
 }
 
 function getJsonByUser( user ){
+
     var keysWords = getJson();
-    var userKeysWord = user.getKeysWord();
 
-    for( var i = 0; i < userKeysWord.length; i++ ){
+    for( var i = 0; i < keysWords.length; i++ ){
 
-        var userKeyWord = userKeysWord[i];
+        var keyWord = keysWords[i];
 
-        for( var j = 0; j < keysWords.length; j++){
-
-            var keyWord = keysWords[j];
-
-
-            if( keyWord.id === userKeyWord.id ){
-                keysWords[j].isMine = true;
-                break;
-            }
-
+        if( user.isMyKeyWord( keyWord.id ) ){
+            keyWord.isMine = true;
         }
-
     }
 
     return keysWords;
 }
 
 function delById( id ){
+
     for( var i = 0; i < _keysWord.length; i++ ){
-        if( _keysWord[i].id === id ){
+        var keyWord = _keysWord[i];
+
+        if( keyWord.id === id ){
+
+            keyWord.userOwner && _keysWord[i].userOwner.delKeyWord(keyWord.id);
+            keyWord.pause();
             _keysWord.splice(i, 1);
+            return true;
         }
     }
+    return false;
+}
+
+function isNewKeyWord( name ){
+    for( var i = 0; i < _keysWord.length; i++ ){
+        if( _keysWord[i].name === name ){
+            return false;
+        }
+    }
+    return true;
+}
+
+function isValidKeyWord( name, options ){
+
+    if( name && options && options.lang && options.occurence ){
+
+        if( name.length >= keyWordContraint.minLength && name.length <= keyWordContraint.maxLength ){
+
+            if( keyWordContraint.lang.indexOf( options.lang ) != -1 ) {
+                options.occurence = parseInt( options.occurence, 10 );
+
+                if( options.occurence >= keyWordContraint.minOccurence && options.occurence <= keyWordContraint.maxOccurence){
+                    return true;
+                }
+            }
+        }
+    }
+
+    return false;
 }
 
 module.exports = {
     addKeyWord: addKeyWord,
+    resumeKeyWord: resumeKeyWord,
+    waitKeyWord: waitKeyWord,
+    getByName: getByName,
+    getById: getById,
     getAll: getAll,
     getJson: getJson,
     getJsonByUser: getJsonByUser,
     delById: delById,
-    isNewKeyWord: function( name ){
-        for( var i = 0; i < _keysWord.length; i++ ){
-            if( _keysWord[i].name === name ){
-                return false;
-            }
-        }
-        return true;
-    },
-    isValidKeyWord : function( name, options ){
-
-        if( name && options && options.lang && options.occurence ){
-
-            if( name.length >= keyWordContraint.minLength && name.length <= keyWordContraint.maxLength ){
-
-                if( keyWordContraint.lang.indexOf( options.lang ) != -1 ) {
-                    options.occurence = parseInt( options.occurence, 10 );
-
-                    if( options.occurence >= keyWordContraint.minOccurence && options.occurence <= keyWordContraint.maxOccurence){
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
-    },
-    getByName: function( name ){
-        for( var i = 0; i < _keysWord.length; i++ ){
-            if( _keysWord[i].name === name ){
-                return _keysWord[i];
-            }
-        }
-        return false;
-    },
-    getById: function( id ){
-        for( var i = 0; i < _keysWord.length; i++ ){
-            if( _keysWord[i].id === id ){
-                return _keysWord[i];
-            }
-        }
-        return false;
-    },
+    isNewKeyWord: isNewKeyWord,
+    isValidKeyWord: isValidKeyWord,
     mock: function( mockSocketHandler, mockTwitterCatcher ){
         socketHandler = mockSocketHandler;
         twitterCatcher = mockTwitterCatcher;

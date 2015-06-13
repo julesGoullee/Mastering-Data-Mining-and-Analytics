@@ -38,22 +38,44 @@ module.exports = {
 
                     if( keysWord.isNewKeyWord( data.newKeyWord ) ){
 
-                        var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user);
-                        user.addKeyWord( newKeyWord );
+                        if( user.isReadyForStream() ){
+                            var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user);
+                            socketHandler.notifyAll("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name } );
 
-                        socketHandler.notifyAll("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name } );
+                        }
+                        else{
+                            return;
+                        }
+
                     }
 
                     var keyWord = keysWord.getByName( data.newKeyWord );
-                    initUser( user, keyWord );
+
+                    if( keyWord ){
+                        initUser( user, keyWord );
+
+                    }
                 }
             });
 
             socketHandler.on("stopKeyWord", user.socket, function( idKeyWord ){
 
-                if( user.delKeyWord( idKeyWord ) ){
-
+                if( user.isMyKeyWord( idKeyWord ) && keysWord.delById( idKeyWord ) ){
                     socketHandler.notifyAll("stopKeyWord", idKeyWord);
+                }
+            });
+
+            socketHandler.on("pauseKeyWord", user.socket, function( idKeyWord ){
+
+                if( user.isMyKeyWord( idKeyWord ) && keysWord.waitKeyWord( idKeyWord ) ){
+                    socketHandler.notifyAll("pauseKeyWord", idKeyWord);
+                }
+            });
+
+            socketHandler.on("resumeKeyWord", user.socket, function( idKeyWord ){
+
+                if( user.isMyKeyWord( idKeyWord ) && keysWord.resumeKeyWord( idKeyWord ) ){
+                    socketHandler.notifyAll("pauseKeyWord", idKeyWord);
                 }
             });
         });

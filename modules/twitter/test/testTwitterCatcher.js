@@ -15,22 +15,32 @@ describe("twitter catcher", function() {
     var mockSocketHandler;
     var mockTwtConnector;
     var mockEsConnector;
+    var mockUserOwner;
+    var tokens;
 
     beforeEach(function () {
+
         mockSocketHandler = sinon.spy();
+
         mockTwtConnector = sinon.spy();
         mockTwtConnector.onData = sinon.spy();
+
         mockEsConnector = sinon.spy();
         mockEsConnector.addNewEntry = sinon.stub();
         mockEsConnector.dropIndexByTag = sinon.spy();
-        var tokens = sinon.stub();
+
+        tokens = sinon.stub();
         tokens.returns({
             token: "token",
             tokenSecret: "tokenSecret"
         });
-        keyWord = KeyWord( "keyWordTest"  );
+
+        mockUserOwner = sinon.spy();
+
+        keyWord = KeyWord( "keyWordTest", "fr", 5, mockUserOwner );
         keyWord.onNewTweet = sinon.spy();
         keyWord.mock( mockSocketHandler, mockEsConnector );
+
         twitterCatcher.mock( mockTwtConnector, mockEsConnector );
         twitterCatcher.trackKeyWord( keyWord, tokens() );
     });
@@ -39,6 +49,20 @@ describe("twitter catcher", function() {
         expect( keyWord.isReady).to.eql( true );
         expect( keyWord.onStack).to.eql( false );
         expect( mockTwtConnector.onData).calledWith( keyWord );
+    });
+
+    it("Peut supprimer les index si premier lancement ", function(){
+
+        expect(mockEsConnector.dropIndexByTag.calledWith( keyWord.name )).to.eql(true);
+
+    });
+
+    it("Peut ne pas supprimer les index si deja des tweet present", function(){
+
+        keyWord.tweetCount ++;
+        twitterCatcher.trackKeyWord( keyWord, tokens() );
+
+        expect(mockEsConnector.dropIndexByTag.callCount).to.eql(1);
     });
 
     describe("Declanchement d'un tweet", function(){
