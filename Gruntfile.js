@@ -193,9 +193,27 @@ module.exports = function(grunt) {
                 },
                 tasks: "simplemocha:all"
             }
+        },
+        mochacov: {
+            coverage: {
+                options: {
+                    coveralls: true,
+                    instrument: false
+                }
+            },
+            test: {
+                options: {
+                    reporter: 'spec'
+                }
+            },
+            options: {
+                files: 'modules/**/*.js'
+            }
         }
     });
 
+    grunt.registerTask('travis', ['mochacov:coverage']);
+    grunt.registerTask('test', ['mochacov:test']);
     grunt.registerTask("default", ["test_all"]);
 
     //TEST//
