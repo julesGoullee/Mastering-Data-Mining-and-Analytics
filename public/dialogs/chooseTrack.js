@@ -1,10 +1,11 @@
+"use strict";
 
-angularApp.controller("ChooseTrackController", function($scope, $mdDialog, socket) {
+angularApp.controller("ChooseTrackController", function( $scope, $mdDialog, socket ){
     $scope.addedKeyWord = null;
     $scope.selectedKeyWord = null;
 
     $scope.isValidInput = function( text ){
-        if( text.length > 3 && text.indexOf(" ") === -1){
+        if( text.length > 3 && text.indexOf(" ") === -1 ){
 
         }
     };
@@ -12,13 +13,15 @@ angularApp.controller("ChooseTrackController", function($scope, $mdDialog, socke
     $scope.hide = function() {
         $mdDialog.hide();
     };
+
     $scope.cancel = function() {
         $mdDialog.cancel();
     };
+
     $scope.validate = function() {
 
         if( $scope.addedKeyWord &&  $scope.addedKeyWord.name &&  $scope.addedKeyWord.occurence ){
-            if(!$scope.addedKeyWord.lang) {
+            if( !$scope.addedKeyWord.lang ){
                 $scope.addedKeyWord.lang = 'fr';
             }
             socket.emit( "setNewKeyWord", {
