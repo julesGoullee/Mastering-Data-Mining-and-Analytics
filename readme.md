@@ -10,6 +10,7 @@ Angularjs,D3 client app
 
 ### Test && Build
 [![Build Status](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics.png)](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics.svg?branch=master)
+[![Coverage Status](https://coveralls.io/repos/julesGoullee/Mastering-Data-Mining-and-Analytics/badge.svg)](https://coveralls.io/r/julesGoullee/Mastering-Data-Mining-and-Analytics)
 
 ## Configuration
 Default configuration installs everythings needed to run the web application server.
