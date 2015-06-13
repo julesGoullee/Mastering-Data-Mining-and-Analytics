@@ -1,68 +1,20 @@
-<div layout="row">
-    <div layout="column" layout-fill>
-        <md-toolbar id="topBar">
-            <div class="md-toolbar-tools">
-                <span>Mastering Data Mining & Analytics</span>
-                <div  flex layout="row" layout-wrap>
-                    <div flex="30">
-                        <div class="tweetCounter" >
-                            <md-icon md-svg-src="images/twitter.svg" alt="twitter"></md-icon>
-                            <span>{{tweetCount.value}}</span>
+<md-toolbar id="topBar">
+<div class="md-toolbar-tools">
+    <span>Mastering Data Mining & Analytics</span>
+    <div  flex layout="row" layout-wrap>
+        <div flex="30">
+            <div class="tweetCounter" >
+                <md-icon md-svg-src="images/twitter.svg" alt="twitter"></md-icon>
+                <span>{{tweetCount.value}}</span>
 
-                        </div>
-                    </div>
-                    <div flex="70">
-                        <tweet-heartbeat tweet-count="tweetCount" ></tweet-heartbeat>
-                    </div>
-                </div>
-                <md-button ng-click="toggleRight()" aria-label="menu">
-                    <ng-md-icon icon="menu" id="menu" ></ng-md-icon>
-                </md-button>
             </div>
-        </md-toolbar>
-        <md-sidenav  class="md-sidenav-right md-whiteframe-z2" md-component-id="right" id="right-menu">
-            <div>
-                <md-toolbar class="md-theme-light">
-                    <h2 class="md-toolbar-tools"><span>Settings</span></h2>
-                </md-toolbar>
-                <md-content >
-                    <md-list>
-                        <md-list-item ng-repeat="word in words" ng-click="changeWord(word)" class="word-line">
-                            <!--ng-style="{'fill': runningWord() === word.value ? 'green' : '#BBBBBB'}"-->
-
-                            <ng-md-icon icon="sync"
-                                        ng-style="{'fill': runningWord().id === word.id ? 'green' : '#BBBBBB'}"
-                                        size="20"></ng-md-icon>
-                            <p>{{word.value}}</p>
-                            <div class="md-secondary">
-
-                                <ng-md-icon icon="close"
-                                            style="fill: red"
-                                            size="25"
-                                            ng-click="deleteWord(word)"></ng-md-icon>
-                                <ng-md-icon icon="send"
-                                            style="fill: #BBBBBB"
-                                            size="25"></ng-md-icon>
-                            </div>
-                        </md-list-item>
-                    </md-list>
-
-                    <md-divider></md-divider>
-
-                    <md-button ng-click="showPopup();toggleRight()" class="md-primary">Add or change #keyWord</md-button>
-                </md-content >
-                <md-toolbar class="md-theme-light">
-                    <h2 class="md-toolbar-tools">
-                        <span>Graph Config</span>
-                    </h2>
-                </md-toolbar>
-                <md-content >
-                    <md-subheader>Gravity : </md-subheader>
-                    <md-slider flex class="md-warn" min="0.1" step="0.02"  max="1" ng-model="gravity.value" aria-label="gravite" ></md-slider>
-                    <md-button ng-click="restoreHiddenNodes()" class="md-primary">Restore visibility</md-button>
-
-                </md-content>
-            </div>
-        </md-sidenav>
+        </div>
+        <div flex="70">
+            <tweet-heartbeat tweet-count="tweetCount" ></tweet-heartbeat>
+        </div>
     </div>
+    <md-button ng-click="toggleRight()" aria-label="menu">
+        <ng-md-icon icon="menu" id="menu" ></ng-md-icon>
+    </md-button>
 </div>
+</md-toolbar>

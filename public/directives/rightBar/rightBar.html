@@ -9,7 +9,7 @@
                     <!--ng-style="{'fill': runningWord() === word.value ? 'green' : '#BBBBBB'}"-->
 
                     <ng-md-icon icon="sync"
-                                ng-style="{'fill': runningWord() === word.value ? 'green' : '#BBBBBB'}"
+                                ng-style="{'fill': runningWord().id === word.id ? 'green' : '#BBBBBB'}"
                                 size="20"></ng-md-icon>
                     <p>{{word.value}}</p>
                     <div class="md-secondary">

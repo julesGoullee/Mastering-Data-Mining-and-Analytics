@@ -31,6 +31,7 @@ var dependances = {
         "directives/representation/representation",
         "directives/representation/graphFactory",
         "directives/topBar/topBar",
+        "directives/rightBar/rightBar",
         "directives/contextMenu/contextMenu",
         "directives/tweetHeartbeat/tweetHeartbeat"
     ],

@@ -18,7 +18,12 @@
     </head>
 <body ng-controller="AppCtrl" layout="row">
     <div flex="100">
-        <top-bar flex="100" tweet-count="tweetCount" words="keysWord"></top-bar>
+        <div layout="row">
+            <div layout="column" layout-fill>
+                <top-bar flex="100" tweet-count="tweetCount" ></top-bar>
+                <right-bar words="keysWord"></right-bar>
+            </div>
+        </div>
         <div flex="100" >
             <representation words="words" ></representation>
         </div>
