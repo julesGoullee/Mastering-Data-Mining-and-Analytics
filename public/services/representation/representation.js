@@ -20,18 +20,14 @@ angularApp.service("representation", function( ){
             }
         };
 
-    function findByName( name ){
-
-    }
     var findChildren = function(){
 
-        for( var levelId in representation.words ){
+        for( var i = 0; i < representation.words.length; i++ ){
 
-            var level = representation.words[levelId];
+            var level = representation.words[i];
+            for( var j =0; j < level.content.length; j++ ){
 
-            for( var wordId in level.content ){
-
-                var word = level.content[wordId];
+                var word = level.content[j];
                 tellFathers(word.word);
 
             }
@@ -52,7 +48,7 @@ angularApp.service("representation", function( ){
         for( var i = 0; i < fathers.length; i++ ){
 
             var fatherName = fathers[i];
-            var father = findById(fatherName);
+            var father = findById( fatherName );
             father.sons = father.sons || [];
             father.sons.push(word.word);
         }
@@ -63,18 +59,17 @@ angularApp.service("representation", function( ){
     };
 
     return {
-            setRepresentation: setData,
-            findChildren: findChildren,
-            findById: findById,
-            findByName: findByName,
-            tellFathers: tellFathers,
-            getRepresentation: function(){
-                return representation;
-            },
-            tweetCount : {
-                value: 0
-            },
-            getCurrentWord: getCurrentWord
+        get: function(){
+            return representation;
+        },
+        setRepresentation: setData,
+        findChildren: findChildren,
+        findById: findById,
+        tellFathers: tellFathers,
+        tweetCount : {
+            value: 0
+        },
+        getCurrentWord: getCurrentWord
 
     };
 });
