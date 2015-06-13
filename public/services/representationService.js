@@ -1,23 +1,33 @@
-angularApp
-    .service('representationService', function () {
+"use strict";
+
+angularApp.service('representationService', function(){
         var representation;
 
-        var findById = function(id) {
-            for (var levelId in representation.words) {
+        var findById = function( id ){
+
+            for( var levelId in representation.words ){
+
                 var level = representation.words[levelId];
-                for (var wordId in level.content) {
+
+                for( var wordId in level.content ){
+
                     var word = level.content[wordId];
 
-                    if(word.word === id) {
+                    if( word.word === id ){
                         return word;
                     }
                 }
             }
         };
-        var findChildren = function() {
-            for (var levelId in representation.words) {
+
+        var findChildren = function(){
+
+            for( var levelId in representation.words ){
+
                 var level = representation.words[levelId];
-                for (var wordId in level.content) {
+
+                for( var wordId in level.content ){
+
                     var word = level.content[wordId];
                     tellFathers(word.word);
 
@@ -25,16 +35,19 @@ angularApp
             }
         };
 
-        var setData = function(data) {
+        var setData = function( data ){
             representation = data;
             //findChildren();
         };
 
-        var tellFathers = function(wordO) {
-            var word = wordO.word ? wordO : findById(wordO);
+        var tellFathers = function( wordO ){
+
+            var word = wordO.word ? wordO : findById( wordO );
 
             var fathers = word.references;
-            for (var i = 0; i < fathers.length; i++) {
+
+            for( var i = 0; i < fathers.length; i++ ){
+
                 var fatherName = fathers[i];
                 var father = findById(fatherName);
                 father.sons = father.sons || [];
@@ -42,15 +55,16 @@ angularApp
             }
         };
 
-        var getCurrentWord = function() {
-            return representation && representation.tag || "";
+        var getCurrentWord = function(){
+            return representation || "";
         };
+
         return {
             setRepresentation: setData,
             findChildren: findChildren,
             findById: findById,
             tellFathers: tellFathers,
-            getRepresentation: function() {
+            getRepresentation: function(){
                 return representation;
             },
             getCurrentWord: getCurrentWord

@@ -75,7 +75,7 @@ module.exports = {
             socketHandler.on("resumeKeyWord", user.socket, function( idKeyWord ){
 
                 if( user.isMyKeyWord( idKeyWord ) && keysWord.resumeKeyWord( idKeyWord ) ){
-                    socketHandler.notifyAll("pauseKeyWord", idKeyWord);
+                    socketHandler.notifyAll("resumeKeyWord", idKeyWord);
                 }
             });
         });

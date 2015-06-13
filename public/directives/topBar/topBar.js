@@ -8,10 +8,11 @@ angularApp.directive( "topBar", function( $mdUtil, $mdSidenav,$rootScope, graphC
             tweetCount: "="
         },
         templateUrl:"directives/topBar/topBar.html",
-        link: function( scope, element ) {
+        link: function( scope ){
+
             console.log(scope.words);
             scope.gravity = graphConfig.gravity;
-            scope.toggleRight = buildToggler('right');
+            scope.toggleRight = buildToggler("right");
             scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
             scope.showPopup = $rootScope.showPopup;
 
@@ -34,24 +35,26 @@ angularApp.directive( "topBar", function( $mdUtil, $mdSidenav,$rootScope, graphC
                 );
             });
 
-            function buildToggler(navID) {
-                var debounceFn =  $mdUtil.debounce(function(){
+            function buildToggler( navID ){
+
+                return $mdUtil.debounce(function(){
                     $mdSidenav(navID)
                         .toggle()
                         .then(function () {
                         });
                 },300);
-                return debounceFn;
             }
 
             scope.toggleRight();
 
-            scope.changeWord = function(word) {
+            scope.changeWord = function( word ){
+                if( scope.runningWord() !== word ){
+                    socket.emit( "setAlreadyTrackKeyWord", word.id );
 
-                socket.emit( "setAlreadyTrackKeyWord", word.id );
+                }
             };
 
-            scope.deleteWord = function(word) {
+            scope.deleteWord = function( word ){
 
                 socket.emit( "stopKeyWord", word.id );
             };

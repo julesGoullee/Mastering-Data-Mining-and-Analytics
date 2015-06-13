@@ -6,6 +6,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
         values : {},
         draw : function(){}
     };
+
     $scope.tweetCount = {
         value: 0
     };
@@ -29,6 +30,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
         $scope.keysWord = keysWord;
 
         $scope.keysWord.getById = function( id ){
+
             for( var i = 0; i < $scope.keysWord.length; i++ ){
                 if( $scope.keysWord[i].id === id ){
                     return $scope.keysWord[i];
@@ -36,9 +38,13 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
             }
             return false;
         };
+
         $scope.keysWord.delById = function( id ){
+
             for( var i = 0; i < $scope.keysWord.length; i++ ){
+
                 if( $scope.keysWord[i].id === id ){
+
                     $scope.keysWord.splice(i, 1);
                     return true;
                 }
@@ -46,7 +52,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
             return false;
         };
 
-        if(keysWord.length) {
+        if( keysWord.length ){
             socket.emit( "setAlreadyTrackKeyWord", keysWord[0].id );
 
         }
@@ -66,9 +72,9 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
         $scope.words.draw();
     };
 
-    socket.on( "keysWord", receiveKeywords);
-    socket.on( "newKeyWord", addKeyword);
-    socket.on("representation", receiveRepresentation);
+    socket.on( "keysWord", receiveKeywords );
+    socket.on( "newKeyWord", addKeyword );
+    socket.on("representation", receiveRepresentation );
 
     socket.on("newWord", function( wordObject ){
         $scope.words.addWord( wordObject );
@@ -76,12 +82,12 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
 
 
     socket.on("stopKeyWord", function( wordId ){
-        console.log("stop kw: " + wordId, $scope.keysWord.getById(wordId));
-        $scope.$broadcast( "stopKeyWord", $scope.keysWord.getById(wordId) );
+        console.log("stop kw: " + wordId, $scope.keysWord.getById( wordId ) );
+        $scope.$broadcast( "stopKeyWord", $scope.keysWord.getById( wordId ) );
         $scope.keysWord.delById( wordId );
     });
 
-    socket.on("tweetCount", function(tweetCount){
+    socket.on("tweetCount", function( tweetCount ){
         $scope.tweetCount.value = tweetCount;
     });
 });
