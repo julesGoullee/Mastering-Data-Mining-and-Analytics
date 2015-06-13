@@ -187,7 +187,7 @@ module.exports = function(grunt) {
         },
         watch: {
             mochaTest: {
-                files: ["modules/**/*.js", "Gruntfile.js"],
+                files: ["modules/**/*.js", "gruntfile.js"],
                 options: {
                     reload: true
                 },
