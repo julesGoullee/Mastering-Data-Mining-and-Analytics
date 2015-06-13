@@ -15,10 +15,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-        '../external/angular.js',
-        'libs/angular-mocks.js',
-        'mockApp.js',
-        'mockData/**/*.js',
+      '../external/angular.js',
+      'libs/angular-mocks.js',
+      'mockApp.js',
+      'mockData/**/*.js',
       '../services/**/*.js',
       '../**/*.js'
     ],
@@ -26,6 +26,9 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
+      "../main.js",
+      "../controllers/loginController.js",
+      "../config/theme.js"
     ],
 
 
