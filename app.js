@@ -26,11 +26,11 @@ if( config.api.active ) {
     var MongoStore = require("connect-mongo")(session);
     var auth = require("./routes/auth");
 
-    passport.serializeUser(function (user, done) {
+    passport.serializeUser(function( user, done ){
         done(null, user);
     });
 
-    passport.deserializeUser(function (obj, done) {
+    passport.deserializeUser(function( obj, done ){
         done(null, obj);
     });
 
@@ -39,7 +39,7 @@ if( config.api.active ) {
             consumerSecret: accounts.TWITTER_CONSUMER_SECRET,
             callbackURL: "http://" + config.api.domain + ":" + config.api.port+ "/auth/twitter/callback"
         },
-        function (token, tokenSecret, profile, done) {
+        function( token, tokenSecret, profile, done ){
 
             process.nextTick(function () {
                 var profileSave = {
