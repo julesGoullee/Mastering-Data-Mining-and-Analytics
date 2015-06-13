@@ -9,7 +9,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         karma: {
             unit: {
-                configFile: 'e2eFront/karma.conf.js'
+                configFile: 'public/test/karma.conf.js'
             },
             autoRun: {
                 basePath: "public",

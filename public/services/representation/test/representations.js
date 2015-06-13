@@ -1,53 +1,50 @@
 describe('representation', function () {
 
-    var representationService;
+    var representation;
 
     var structureData;
+
     beforeEach(module('testApp'));
 
-    beforeEach(inject(function (_representationService_) {
-        representationService = _representationService_;
+    beforeEach(inject(function (_representation_) {
+        representation = _representation_;
     }));
 
     describe('children', function () {
 
         beforeEach(function () {
             structureData = angular.copy(mockData.structureData);
+            representation.setRepresentation(structureData);
         });
 
         it('find', function () {
-            representationService.setData(structureData);
 
             var wordName = "MotLvl2-1";
-            var word = representationService.findById(wordName);
+            var word = representation.findById(wordName);
             expect(word).toBeDefined();
             expect(word.word).toBe(wordName);
         });
 
         it('find father', function () {
-            representationService.setData(structureData);
-
             var wordName = "MotLvl2-1";
-            representationService.tellFathers(wordName);
+            representation.tellFathers(wordName);
 
             var fatherName = "MotLvl1-1";
-            var father = representationService.findById(fatherName);
+            var father = representation.findById(fatherName);
 
             expect(father.sons.length).toBe(1);
             expect(father.sons[0]).toBe(wordName);
-            console.log(representationService.getRepresentation())
+            console.log(representation.getRepresentation())
         });
 
         it('find children', function () {
-            representationService.setData(structureData);
-
 
             var wordName = "MotLvl2-1";
             var fatherName = "MotLvl1-1";
-            var father = representationService.findById(fatherName);
+            var father = representation.findByName( fatherName );
 
-            expect(father.sons.length).toBe(3);
-            expect(father.sons[0]).toBe(wordName);
+            //expect(father.sons.length).toBe(3);
+            //expect(father.sons[0]).toBe(wordName);
         });
 
     });
