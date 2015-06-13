@@ -32,7 +32,7 @@ describe('representation', function () {
             var fatherName = "MotLvl1-1";
             var father = representation.findById(fatherName);
 
-            expect(father.sons.length).toBe();
+            expect(father.sons.length).toBe(1);
             expect(father.sons[0]).toBe(wordName);
             console.log(representation.getRepresentation())
         });
