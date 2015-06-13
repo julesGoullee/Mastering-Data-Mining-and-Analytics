@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.controller("ChooseTrackController", function( $scope, $mdDialog, socket ){
+angularApp.controller("ChooseTrackController", function( $scope,$rootScope, $mdDialog, socket, keysWord ){
     $scope.addedKeyWord = null;
     $scope.selectedKeyWord = null;
 
@@ -21,9 +21,11 @@ angularApp.controller("ChooseTrackController", function( $scope, $mdDialog, sock
     $scope.validate = function() {
 
         if( $scope.addedKeyWord &&  $scope.addedKeyWord.name &&  $scope.addedKeyWord.occurence ){
+
             if( !$scope.addedKeyWord.lang ){
                 $scope.addedKeyWord.lang = 'fr';
             }
+
             socket.emit( "setNewKeyWord", {
                 newKeyWord: $scope.addedKeyWord.name,
                 options:{
@@ -31,6 +33,13 @@ angularApp.controller("ChooseTrackController", function( $scope, $mdDialog, sock
                     lang: $scope.addedKeyWord.lang
                 }
             });
+
+            $rootScope.$on("newKeyWord", function( event,  word ){
+                if( word.value === $scope.addedKeyWord.name){
+                    keysWord.currentKeyWord( words[0].id );
+                }
+            });
+
             $mdDialog.hide();
         }
         else {

@@ -11,7 +11,7 @@ angularApp.directive("representation", function( graphConfig, graph, representat
 
             scope.gravity = graphConfig.gravity;
 
-            scope.$on("draw",function( ){
+            scope.$on("draw",function(){
 
                 if( isFirst ){
                     isFirst = false;
@@ -55,7 +55,7 @@ angularApp.directive("representation", function( graphConfig, graph, representat
 
             });
 
-            scope.$on("addWord", function( wordsObjects ){
+            scope.$on("addWord", function( event, wordsObjects ){
 
                 for ( var i = 0 ; i < wordsObjects.length; i++ ){
 

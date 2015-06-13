@@ -18,7 +18,7 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
             scope.$on("newKeyWord", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("New Word: " + newKeyWord )
+                        .content("New Word: " + newKeyWord.value )
                         .position("top left")
                         .hideDelay(3000)
                 );

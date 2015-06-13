@@ -8,7 +8,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
             templateUrl: '../dialogs/chooseTrack.html',
             locals:
             {
-                keywords: $scope.keysWord
+                keywords: keysWord.get()
             }
         }).then(function() {
             //fermeture popup
@@ -20,7 +20,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
 
     socket.on( "newKeyWord", function( newKeyWord ){
         keysWord.add( newKeyWord );
-        $scope.$broadcast( "newKeyWord", newKeyWord.value );
+        $rootScope.$broadcast( "newKeyWord", newKeyWord );
     });
 
     socket.on("representation", function( representationData ){

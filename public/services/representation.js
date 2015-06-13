@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.service('representation', function( ){
+angularApp.service("representation", function( ){
         var representation;
 
         var findById = function( id ){

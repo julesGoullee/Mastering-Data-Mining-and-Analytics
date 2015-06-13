@@ -1,24 +1,20 @@
 "use strict";
 
 angularApp.directive( "rightBar",
-    function( $mdUtil, $mdSidenav, $rootScope, graphConfig, socket, representation
-    ){
+    function( $mdUtil, $mdSidenav, $rootScope, graphConfig, socket, keysWord ){
     return {
         restrict: "E",
-        scope:{
-            words : "="
-        },
         templateUrl:"directives/rightBar/rightBar.html",
         link: function( scope, element ) {
 
             scope.gravity = graphConfig.gravity;
             scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
             scope.showPopup = $rootScope.showPopup;
-            scope.runningWord = representation.getCurrentWord;
+            scope.runningWord = keysWord.currentKeyWord;
+            scope.words = keysWord.get;
             scope.toggleRight = buildToggler("right");
 
             scope.changeWord = function( word ){
-
                 if( scope.runningWord() !== word ){
                     socket.emit( "setAlreadyTrackKeyWord", word.id );
 
