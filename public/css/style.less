@@ -5,6 +5,7 @@ body {
   width: 100%;
   overflow: hidden;
   background-color: #FBFBFB;
+  //background-color: #282930;
 }
 
 .home-container{
@@ -28,6 +29,7 @@ body {
 #topBar {
 
 }
+
 #right-menu{
   .md-raised{
     width: 100%;
@@ -38,11 +40,50 @@ body {
   .word-line {
     margin-top: 10px;
     margin-bottom: 10px;
+    ng-md-icon{
+      font-size: 46px;
+    }
+
+
+    .word-name{
+      font-size: 27px;
+      text-transform: capitalize;
+      padding-left: 10%;
+      margin: 0;
+
+    }
+
+    &:hover{
+      background-color: rgba(183, 189, 191, 0.16);
+      cursor: pointer;
+
+      .selected-icon{
+        fill: #BBBBBB;
+      }
+
+    }
+
+    .selected-icon{
+      fill: #BBBBBB;
+    }
+
+    .close-icon{
+      fill:red;
+    }
+
+    &.selected{
+      .selected-icon{
+        fill: green;
+      }
+      background-color: rgba(130, 136, 138, 0.16);
+
+    }
   }
 }
 representation{
   .link {
     stroke: #a0a0a0;
+    //stroke: #ebebeb;
   }
 
   .node{
@@ -51,6 +92,7 @@ representation{
     }
     .circle{
       stroke: #fff;
+      //stroke: #ebebeb;
     }
 
     text {
@@ -58,6 +100,8 @@ representation{
       pointer-events: none;
       color: #000000;
       text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+      //fill: #ebebeb;
+      //text-shadow: -1px 0 white, 0 1px #999999, 1px 0 #999999, 0 -1px #999999;
     }
   }
 
