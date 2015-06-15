@@ -62,6 +62,7 @@ angularApp.service("keysWord", function( $rootScope, socket ){
     });
 
     socket.on("newKeyWord", function( newKeyWord ){
+        newKeyWord.running = true;
         add( newKeyWord );
         $rootScope.$broadcast( "newKeyWord", newKeyWord );
     });
@@ -74,10 +75,12 @@ angularApp.service("keysWord", function( $rootScope, socket ){
 
     socket.on("pauseKeyWord", function( wordId ){
         console.log("pause kw: " + wordId, getById( wordId ) );
+        _keysWord[wordId].running = false;
     });
 
     socket.on("resumeKeyWord", function( wordId ){
         console.log("resume kw: " + wordId, getById( wordId ) );
+        _keysWord[wordId].running = true;
     });
 
     return {

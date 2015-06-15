@@ -9,7 +9,7 @@ Angularjs,D3 client app
 [Demo dev](http://109.190.95.175)
 
 ### Test && Build
-[![Build Status](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics.png)](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics.svg?branch=master)
+[![Build Status](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics.png)](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics)
 
 ## Configuration
 Default configuration installs everythings needed to run the web application server.

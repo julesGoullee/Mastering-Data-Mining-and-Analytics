@@ -12,7 +12,6 @@ angularApp.directive( "rightBar",
             scope.showPopup = $rootScope.showPopup;
             scope.runningWord = keysWord.currentKeyWord;
             scope.words = keysWord.get;
-            scope.toggleRight = buildToggler("right");
 
             scope.changeWord = function( word ){
                 if( scope.runningWord() !== word ){
@@ -27,9 +26,15 @@ angularApp.directive( "rightBar",
                 socket.emit( "stopKeyWord", word.id );
             };
 
-            scope.$on("toggleRight", function(){
-                scope.toggleRight();
-            });
+            scope.pauseWord = function( word ){
+
+                socket.emit( "pauseKeyWord", word.id );
+            };
+
+            scope.resumeWord = function( word ){
+
+                socket.emit( "resumeKeyWord", word.id );
+            };
 
 
             function buildToggler( navID ){
@@ -41,6 +46,13 @@ angularApp.directive( "rightBar",
                         });
                 },300);
             }
+
+            scope.toggleRight = buildToggler("right");
+
+            scope.$on("toggleRight", function(){
+                scope.toggleRight();
+            });
+
         }
     };
 });

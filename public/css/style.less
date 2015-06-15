@@ -49,8 +49,8 @@ body {
     }
 
     .word-name{
-      font-size: 27px;
-      text-transform: capitalize;
+      font-size: 20px;
+      text-transform: uppercase;
       padding-left: 10%;
       margin: 0;
 
@@ -63,11 +63,18 @@ body {
       .selected-icon{
         fill: #BBBBBB;
       }
-
     }
+
 
     .selected-icon{
       fill: #BBBBBB;
+    }
+
+    .play-icon{
+      fill:blue;
+    }
+    .pause-icon{
+      fill:grey;
     }
 
     .close-icon{
@@ -75,11 +82,11 @@ body {
     }
 
     &.selected{
-      .selected-icon{
-        fill: green;
-      }
       background-color: rgba(130, 136, 138, 0.16);
+    }
 
+    .running{
+      fill: green;
     }
   }
 }

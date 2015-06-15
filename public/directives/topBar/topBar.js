@@ -33,18 +33,6 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
                 );
             });
 
-            function buildToggler(navID) {
-                var debounceFn =  $mdUtil.debounce(function(){
-                    $mdSidenav(navID)
-                        .toggle()
-                        .then(function () {
-                        });
-                },300);
-                return debounceFn;
-            }
-
-            scope.toggleRight();
-
             scope.changeWord = function(word) {
 
                 socket.emit( "setAlreadyTrackKeyWord", word );

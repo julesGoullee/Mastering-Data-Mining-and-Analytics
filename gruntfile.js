@@ -194,25 +194,20 @@ module.exports = function(grunt) {
                 tasks: "simplemocha:all"
             }
         },
-        mochacov: {
-            coverage: {
+        less: {
+            dist: {
                 options: {
-                    coveralls: true,
-                    instrument: false
+                    compress: true
+                },
+                files: {
+                    "public/css/style.css": 'public/css/style.less'
                 }
-            },
-            test: {
-                options: {
-                    reporter: 'spec'
-                }
-            },
-            options: {
-                files: 'modules/**/*.js'
             }
         }
     });
 
     grunt.registerTask("default", ["test_all"]);
+    grunt.registerTask("less", ["less"]);
 
     //TEST//
     grunt.registerTask("test_server", ["simplemocha:all", "watch:mochaTest"]);

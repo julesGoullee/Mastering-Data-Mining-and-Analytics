@@ -7,20 +7,30 @@
             <md-divider></md-divider>
 
             <md-list>
-                <md-list-item ng-repeat="word in words()" ng-click="changeWord(word)" class="word-line" ng-class="{'selected': runningWord().id === word.id }"layout="row" >
+                <md-list-item ng-repeat="word in words()" ng-click="changeWord(word)" class="word-line" ng-class="{'selected': runningWord().id === word.id }" layout="row" >
                     <!--ng-style="{'fill': runningWord() === word.value ? 'green' : '#BBBBBB'}"-->
 
                         <ng-md-icon icon="sync"
                                     flex="10"
-                                    class="selected-icon"
+                                    ng-class="{'running':word.running }"
                                    ></ng-md-icon>
                         <p class="word-name" flex="80">{{word.value}}</p>
 
-                        <ng-md-icon icon="close"
-                                    class="close-icon"
-                                    flex="10"
-                                    ng-show="word.isMine === true"
-                                    ng-click="deleteWord(word)"></ng-md-icon>
+                    <ng-md-icon icon="play"
+                                class="play-icon"
+                                flex="10"
+                                ng-show="word.isMine === true && word.running === false"
+                                ng-click="resumeWord(word)"></ng-md-icon>
+                    <ng-md-icon icon="pause"
+                                class="pause-icon"
+                                flex="10"
+                                ng-show="word.isMine === true && word.running === true"
+                                ng-click="pauseWord(word)"></ng-md-icon>
+                    <ng-md-icon icon="close"
+                                class="close-icon"
+                                flex="10"
+                                ng-show="word.isMine === true"
+                                ng-click="deleteWord(word)"></ng-md-icon>
                 </md-list-item>
             </md-list>
 
