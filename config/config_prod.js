@@ -1,11 +1,18 @@
-"use strict";
+'use strict';
 module.exports = {
-    elasticSearchAddr: '127.0.0.1:9200',
-    domain:'twitmdma.ddns.net',
-    port:80,
-    mongo: {
-        ip: "127.0.0.1",
-        base: "mdma"
+    api : {
+        active : true,
+        esAddress: '127.0.0.1:9200',
+        mongo: {
+            ip: "127.0.0.1",
+            base: "mdma"
+        },
+        port: 3000,
+        domain:"109.190.95.175"
     },
-    onlyClient: false
+    webServer: {
+        active: true,
+        apiAddress: "109.190.95.175",
+        apiPort: 3000
+    }
 };
