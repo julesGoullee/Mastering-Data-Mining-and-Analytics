@@ -212,8 +212,6 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('travis', ['mochacov:coverage']);
-    grunt.registerTask('test', ['mochacov:test']);
     grunt.registerTask("default", ["test_all"]);
 
     //TEST//
