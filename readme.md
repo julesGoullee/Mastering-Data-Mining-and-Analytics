@@ -21,7 +21,7 @@ Files in config/ must be tweaked to use your own configurations, like twitter AP
 ## Installation :
 
 ```
-wget -q https://raw.githubusercontent.com/julesGoullee/Mastering-Data-Mining-and-Analytics/master/installScript.sh
+wget -q https://raw.githubusercontent.com/julesGoullee/Mastering-Data-Mining-and-Analytics/master/scripts/installScript.sh
 chmod u+x installScript.sh
 ./installScript.sh
 ```
