@@ -163,7 +163,7 @@ module.exports = function(grunt) {
                     ]
                 },
                 files: [
-                    {expand: true, flatten: true, src: ['public/const/const.js'], dest: 'public/const/'}
+                    {expand: true, flatten: true, src: ['public/config/const.js'], dest: 'public/config/'}
                 ]
             }
         },
