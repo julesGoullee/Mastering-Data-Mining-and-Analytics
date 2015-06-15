@@ -13,11 +13,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
     $rootScope.showPopup = function(){
         $mdDialog.show({
             controller: "ChooseTrackController",
-            templateUrl: '../dialogs/chooseTrack.html',
-            locals:
-            {
-                keywords: $scope.keysWord
-            }
+            templateUrl: '../dialogs/chooseTrack.html'
         }).then(function() {
             //fermeture popup
         }, function() {
@@ -46,7 +42,7 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
             return false;
         };
 
-        if(keysWord.length) {
+        if(keysWord.length > 0) {
             socket.emit( "setAlreadyTrackKeyWord", keysWord[0].id );
 
         }

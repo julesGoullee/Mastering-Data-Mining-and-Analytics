@@ -44,7 +44,7 @@ angularApp.directive( "topBar", function( $mdUtil, $mdSidenav,$rootScope, graphC
                 return debounceFn;
             }
 
-            scope.toggleRight();
+            //scope.toggleRight();
 
             scope.changeWord = function(word) {
 
