@@ -224,7 +224,7 @@ module.exports = function(grunt) {
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);
 
     //INSTALLATION
-    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev"]);
-    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd"]);
+    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev", "replace:constantClient"]);
+    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd", "replace:constantClient"]);
 
 };
