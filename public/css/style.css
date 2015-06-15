@@ -35,8 +35,8 @@ body {
   font-size: 46px;
 }
 #right-menu .word-line .word-name {
-  font-size: 27px;
-  text-transform: capitalize;
+  font-size: 20px;
+  text-transform: uppercase;
   padding-left: 10%;
   margin: 0;
 }
@@ -50,13 +50,19 @@ body {
 #right-menu .word-line .selected-icon {
   fill: #BBBBBB;
 }
+#right-menu .word-line .play-icon {
+  fill: blue;
+}
+#right-menu .word-line .pause-icon {
+  fill: grey;
+}
 #right-menu .word-line .close-icon {
   fill: red;
 }
 #right-menu .word-line.selected {
   background-color: rgba(130, 136, 138, 0.16);
 }
-#right-menu .word-line.selected .selected-icon {
+#right-menu .word-line .running {
   fill: green;
 }
 representation .link {
