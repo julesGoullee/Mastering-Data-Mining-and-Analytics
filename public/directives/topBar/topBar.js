@@ -1,30 +1,29 @@
 "use strict";
 
-angularApp.directive( "topBar", function( $mdUtil, $mdSidenav,$rootScope, graphConfig, $mdToast, socket, representationService ){
+angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, representation ){
     return {
         restrict: "E",
-        scope:{
-            words : "=",
-            tweetCount: "="
-        },
         templateUrl:"directives/topBar/topBar.html",
-        link: function( scope, element ) {
-            console.log(scope.words);
-            scope.gravity = graphConfig.gravity;
-            scope.toggleRight = buildToggler('right');
+        link: function( scope ){
+
             scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
             scope.showPopup = $rootScope.showPopup;
+            scope.tweetCount = representation.tweetCount;
 
-            scope.runningWord = representationService.getCurrentWord;
+            scope.toggleRight = function(){
+                $rootScope.$broadcast("toggleRight");
+            };
+
 
             scope.$on("newKeyWord", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("New Word: " + newKeyWord )
+                        .content("New Word: " + newKeyWord.value )
                         .position("top left")
                         .hideDelay(3000)
                 );
             });
+
             scope.$on("stopKeyword", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
@@ -44,7 +43,7 @@ angularApp.directive( "topBar", function( $mdUtil, $mdSidenav,$rootScope, graphC
                 return debounceFn;
             }
 
-            //scope.toggleRight();
+            scope.toggleRight();
 
             scope.changeWord = function(word) {
 

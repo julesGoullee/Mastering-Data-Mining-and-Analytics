@@ -11,6 +11,7 @@ function KeyWord( name, lang, occurence, userOwner ){
     self.name = name;
     self.lang = lang;
     self.stream = true;
+    self.isWait = false;
     self.occurence = occurence;
     self.id = utils.guid();
     self.tweetCount = 0;
@@ -56,6 +57,16 @@ function KeyWord( name, lang, occurence, userOwner ){
         });
     };
 
+    self.pause = function(){
+        self.stream = false;
+        self.isWait = true;
+    };
+
+    self.resume = function(){
+        self.stream = true;
+        self.isWait = false;
+    };
+
     self.mock = function( mockSocketHandler, mockEsConnector ){
         socketHandler = mockSocketHandler;
         esConnector = mockEsConnector;
@@ -77,6 +88,6 @@ function KeyWord( name, lang, occurence, userOwner ){
     }
 }
 
-module.exports= function( name, lang, occurence ){
-    return new KeyWord( name, lang, occurence );
+module.exports= function( name, lang, occurence, userOwner ){
+    return new KeyWord( name, lang, occurence, userOwner );
 };

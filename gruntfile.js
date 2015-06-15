@@ -9,59 +9,10 @@ module.exports = function(grunt) {
     grunt.initConfig({
         karma: {
             unit: {
-                configFile: 'e2eFront/karma.conf.js'
+                configFile: 'public/test/karma.conf.js'
             },
-            autoRun: {
-                basePath: "public",
-                frameworks: ["jasmine"],
-                options:{
-                    files: [
-                        //external
-                        "external/jquery.js",
-                        "external/bootstrap.js",
-                        //utils
-                        "modules/utils/*.js",
-                        //MOCK
-                        "modules/test/mock.js",
-                        //config
-                        "modules/config/config.js",
-                        //modules
-                        "modules//test/.js",
-                        "modules//*.js"
-                    ]
-                },
-                // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-                reporters: ["dots", "ubuntu"],
-                //reporters: ["dots", "growl"],
-                autoWatch: true,
-                browsers: ["PhantomJS"]
-            },
-            singleRun: {
-                basePath: "app/public",
-                frameworks: ["jasmine"],
-                options:{
-                    files: [
-                        //external
-                        "external/jquery.js",
-                        "external/bootstrap.js",
-                        "external/babylonjs/babylon.js",
-                        //utils
-                        "modules/utils/*.js",
-                        //MOCK
-                        "modules/test/mock.js",
-                        //config
-                        "modules/config/config.js",
-                        //modules
-                        "modules//test/*.js",
-                        "modules//*.js"
-                    ]
-                },
-                // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-                reporters: ["dots", "ubuntu"],
-                //reporters: ["dots", "growl"],
-                autoWatch: false,
-                singleRun: true,
-                browsers: ["PhantomJS"]
+            singleRun:{
+                configFile: 'public/test/karmaSingleRun.conf.js'
             }
         },
         copy:{
@@ -148,14 +99,14 @@ module.exports = function(grunt) {
                         src: "bower_components/jquery/dist/jquery.js",
                         dest: "public/external/jquery.js"
                     },
-                    {
-                        src: "bower_components/jquery/dist/jquery.min.map",
-                        dest: "public/external/jquery.min.map"
-                    },
                     //angularjs
                     {
                         src: "bower_components/angular/angular.js",
                         dest: "public/external/angular.js"
+                    },
+                    {
+                        src: "bower_components/angular-mocks/angular-mocks.js",
+                        dest: "public/test/libs/angular-mocks.js"
                     },
                     {
                         src: "bower_components/angular-animate/angular-animate.js",
@@ -236,20 +187,38 @@ module.exports = function(grunt) {
         },
         watch: {
             mochaTest: {
-                files: ["modules/**/*.js", "Gruntfile.js"],
+                files: ["modules/**/*.js", "gruntfile.js"],
                 options: {
                     reload: true
                 },
                 tasks: "simplemocha:all"
             }
+        },
+        mochacov: {
+            coverage: {
+                options: {
+                    coveralls: true,
+                    instrument: false
+                }
+            },
+            test: {
+                options: {
+                    reporter: 'spec'
+                }
+            },
+            options: {
+                files: 'modules/**/*.js'
+            }
         }
     });
 
+    grunt.registerTask('travis', ['mochacov:coverage']);
+    grunt.registerTask('test', ['mochacov:test']);
     grunt.registerTask("default", ["test_all"]);
 
     //TEST//
     grunt.registerTask("test_server", ["simplemocha:all", "watch:mochaTest"]);
-    grunt.registerTask("test_server_ci", ["simplemocha:all"]);
+    grunt.registerTask("test_all", ["simplemocha:all", "karma:singleRun"]);
     grunt.registerTask("test_client", ["karma:unit"]);
 
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);

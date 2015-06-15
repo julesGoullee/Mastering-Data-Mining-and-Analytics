@@ -1,83 +1,32 @@
 "use strict";
 
-angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog, representationService ){
-    $scope.keysWord = [];
-    $scope.words = {
-        values : {},
-        draw : function(){}
-    };
-    $scope.tweetCount = {
-        value: 0
-    };
+angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog, representation, keysWord ){
 
     $rootScope.showPopup = function(){
+
         $mdDialog.show({
             controller: "ChooseTrackController",
-            templateUrl: '../dialogs/chooseTrack.html'
-        }).then(function() {
+            templateUrl: "../dialogs/chooseTrack.html"
+        }).then(function(){
             //fermeture popup
-        }, function() {
+        },function(){
             //error
         });
     };
 
-    var receiveKeywords = function( keysWord ){
-        $scope.keysWord = keysWord;
+    socket.on("representation", function( representationData ){
 
-        $scope.keysWord.getById = function( id ){
-            for( var i = 0; i < _keysWord.length; i++ ){
-                if( _keysWord[i].id === id ){
-                    return _keysWord[i];
-                }
-            }
-            return false;
-        };
-        $scope.keysWord.delById = function( id ){
-            for( var i = 0; i < _keysWord.length; i++ ){
-                if( _keysWord[i].id === id ){
-                    _keysWord.splice(i, 1);
-                    return true;
-                }
-            }
-            return false;
-        };
-
-        if(keysWord.length > 0) {
-            socket.emit( "setAlreadyTrackKeyWord", keysWord[0].id );
-
-        }
-        else {
-            $rootScope.showPopup( );
-        }
-    };
-
-    var addKeyword = function( newKeyWord ){
-        $scope.keysWord.push( newKeyWord );
-        $scope.$broadcast( "newKeyWord", newKeyWord.value );
-    };
-
-    var receiveRepresentation = function( representationData ){
-        representationService.setRepresentation(representationData);
-        $scope.words.values = representationData.words;
-        $scope.words.draw();
-    };
-
-    socket.on( "keysWord", receiveKeywords);
-    socket.on( "newKeyWord", addKeyword);
-    socket.on("representation", receiveRepresentation);
+        representation.setRepresentation( representationData );
+        $rootScope.$broadcast("draw");
+    });
 
     socket.on("newWord", function( wordObject ){
-        $scope.words.addWord( wordObject );
+
+        $rootScope.$broadcast("addWord", wordObject );
     });
 
+    socket.on("tweetCount", function( tweetCount ){
 
-    socket.on("stopKeyWord", function( wordId ){
-        console.log("stop kw: " + wordId, $scope.keysWord.getById(wordId));
-        $scope.$broadcast( "stopKeyWord", $scope.keysWord.getById(wordId) );
-        $scope.keysWord.delById( wordId );
-    });
-
-    socket.on("tweetCount", function(tweetCount){
-        $scope.tweetCount.value = tweetCount;
+        representation.tweetCount.value = tweetCount;
     });
 });

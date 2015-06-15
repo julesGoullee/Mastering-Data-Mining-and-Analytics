@@ -5,17 +5,18 @@ var users = require("../users/users.js");
 var _io;
 
 function getOrAddUser( socket ){
-    var user = users.getBySessionId( socket.request.session.passport.user.id );
-
-    if( !user ){
-        user = users.addUser( socket );
+    if( socket.request && socket.request.session && socket.request.session.passport && socket.request.session.passport.user && socket.request.session.passport.user.id ){
+        var user = users.getBySessionId( socket.request.session.passport.user.id );
+        if( !user ){
+            user = users.addUser( socket );
+        }
+        else{
+            user.socket = socket;
+            user.session = socket.request.session.passport.user;
+        }
+        return user;
     }
-    else{
-        user.socket = socket;
-        user.session = socket.request.session.passport.user;
-    }
-
-    return user;
+    return false;
 }
 
 module.exports = {
@@ -23,10 +24,14 @@ module.exports = {
         _io = io;
         _io.on( "connection", function( socket ) {
 
-            for( var i = 0; i < _callbackOnNewConnection.length; i++){
+            var user = getOrAddUser( socket );
+            if( user ){
+                for( var i = 0; i < _callbackOnNewConnection.length; i++){
 
-                _callbackOnNewConnection[i]( getOrAddUser( socket ) );
+                    _callbackOnNewConnection[i]( user );
+                }
             }
+
         });
     },
     notifyAll : function( event, data ){

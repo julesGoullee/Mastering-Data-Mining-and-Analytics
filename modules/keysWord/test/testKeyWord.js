@@ -6,6 +6,7 @@ global.expect = chai.expect;
 global.sinon = require('sinon');
 chai.use(sinonChai);
 var KeyWord = require("../keyWord.js");
+var users = require("../../users/users.js");
 
 
 describe("KeyWord", function() {
@@ -13,7 +14,7 @@ describe("KeyWord", function() {
     var keyWord;
     var mockSocketHandler;
     var mockEsConnector;
-    var mockUserOwner;
+    var user;
 
     var callbackOnNewTweet;
 
@@ -24,8 +25,18 @@ describe("KeyWord", function() {
         mockEsConnector.searchNewKeysWords = sinon.spy();
         mockEsConnector.getKeysWordsReferences = sinon.spy();
         callbackOnNewTweet = sinon.spy();
-        mockUserOwner = sinon.spy();
-        keyWord = KeyWord( "keyWordTest", "fr", 5, mockUserOwner );
+        var socket = sinon.stub();
+        socket.returns({
+            request: {
+                session:{
+                    passport:{
+                        user: {}
+                    }
+                }
+            }
+        });
+        user = users.addUser( socket() );
+        keyWord = KeyWord( "keyWordTest", "fr", 5, users );
         keyWord.mock( mockSocketHandler, mockEsConnector );
 
     });
@@ -108,4 +119,7 @@ describe("KeyWord", function() {
 
     });
 
+    afterEach(function(){
+        users.delUserById( user.id );
+    });
 });

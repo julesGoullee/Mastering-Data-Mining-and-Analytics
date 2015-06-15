@@ -23,14 +23,18 @@ var dependances = {
 
         //modules
         "main",
-        "const/const",
+        "config/const",
+        "config/theme",
         "controllers/mainController",
-        "services/graphConfig",
-        "services/representationService",
+        "services/graphConfig/graphConfig",
+        "services/socket/socket",
+        "services/representation/representation",
+        "services/keysWord/keysWord",
         "dialogs/chooseTrack",
         "directives/representation/representation",
         "directives/representation/graphFactory",
         "directives/topBar/topBar",
+        "directives/rightBar/rightBar",
         "directives/contextMenu/contextMenu",
         "directives/tweetHeartbeat/tweetHeartbeat"
     ],

@@ -5,3 +5,5 @@ public/external/
 public/fonts/
 bower_components/
 mongodb/
+
+public/test/libs/angular-mocks.js

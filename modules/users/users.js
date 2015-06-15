@@ -2,7 +2,7 @@
 
 var utils = require("../utils/utils.js");
 var representation = require('../representation/representation.js')();
-
+var _limitUserMaxKeyWords = 2;
 var _users = [];
 
 function User( socket ) {
@@ -12,6 +12,7 @@ function User( socket ) {
     self.socket = socket;
     self.session = socket.request.session.passport.user;
     self.tweetCount = 0;
+    self.client = false;
     self.id = utils.guid();
 
     self.addKeyWord = function( keyWord ){
@@ -22,6 +23,19 @@ function User( socket ) {
         return _keysWord;
     };
 
+    self.isMyKeyWord = function( keyWordId ){
+        for( var i = 0; i < _keysWord.length; i++ ){
+
+            var word = _keysWord[i];
+
+            if( word.id === keyWordId ){
+
+                return true;
+            }
+        }
+        return false;
+    };
+
     self.delKeyWord = function( keyWordId ){
 
         for( var i = 0; i < _keysWord.length; i++ ){
@@ -30,13 +44,22 @@ function User( socket ) {
 
             if( word.id === keyWordId ){
 
-                word.stream = false;
-
                 _keysWord.splice(i, 1);
                 return true;
             }
         }
         return false;
+    };
+
+    self.isReadyForStream = function(){
+        var nbKeyWordsStreaming = 0;
+        for (var i = 0; i < _keysWord.length; i++) {
+            var keyWord = _keysWord[i];
+            if( keyWord.stream && !keyWord.isWait ){
+                nbKeyWordsStreaming ++;
+            }
+        }
+        return nbKeyWordsStreaming < _limitUserMaxKeyWords;
     };
 
     _users.push( self );

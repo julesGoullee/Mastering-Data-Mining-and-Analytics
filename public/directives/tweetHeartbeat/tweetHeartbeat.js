@@ -1,11 +1,8 @@
 "use strict";
 
-angularApp.directive('tweetHeartbeat', function(){
+angularApp.directive('tweetHeartbeat', function( representation ){
     return{
         restrict: "E",
-        scope:{
-            tweetCount: "="
-        },
         templateUrl:"directives/tweetHeartbeat/tweetHeartbeat.html",
         link: function( scope, element ) {
 
@@ -18,17 +15,19 @@ angularApp.directive('tweetHeartbeat', function(){
                 vertical: 10,
                 horizontal: 30
             };
-            scope.tps = 0;
             var n = 120;
+
             var data = function(){
                 var t = [];
-                for ( var i = 0; i < n; i ++){
+                for( var i = 0; i < n; i ++ ){
                     t.push(0);
                 }
                 return t;
             }();
 
-            //var width = 300;
+            scope.tps = 0;
+            scope.tweetCount = representation.tweetCount;
+
             var height = $("#topBar").height();
             var width = element.find("#graphTps").width();
 

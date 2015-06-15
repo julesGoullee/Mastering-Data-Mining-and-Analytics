@@ -27,6 +27,38 @@ body {
 #right-menu md-slider {
   margin: auto 20px!important;
 }
+#right-menu .word-line {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+#right-menu .word-line ng-md-icon {
+  font-size: 46px;
+}
+#right-menu .word-line .word-name {
+  font-size: 27px;
+  text-transform: capitalize;
+  padding-left: 10%;
+  margin: 0;
+}
+#right-menu .word-line:hover {
+  background-color: rgba(183, 189, 191, 0.16);
+  cursor: pointer;
+}
+#right-menu .word-line:hover .selected-icon {
+  fill: #BBBBBB;
+}
+#right-menu .word-line .selected-icon {
+  fill: #BBBBBB;
+}
+#right-menu .word-line .close-icon {
+  fill: red;
+}
+#right-menu .word-line.selected {
+  background-color: rgba(130, 136, 138, 0.16);
+}
+#right-menu .word-line.selected .selected-icon {
+  fill: green;
+}
 representation .link {
   stroke: #a0a0a0;
 }

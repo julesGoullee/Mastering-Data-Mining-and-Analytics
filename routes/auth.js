@@ -15,7 +15,8 @@ var dependances = {
         "../external/angular-material-icons.min",
         //modules
         "../controllers/loginController",
-        "../const/const",
+        "../config/const",
+        "../config/theme",
         "../directives/login/login"
     ],
     css:[
