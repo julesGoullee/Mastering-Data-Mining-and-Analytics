@@ -143,8 +143,7 @@ describe("KeysWord", function() {
         });
 
         it("Peut recuperer le json de deux keysWord", function(){
-            expect( keysWord.getJson()).to.eql( [ { id: keyWord.id, value: keyWord.name}, { id: keyWord2.id, value: keyWord2.name } ] );
-            expect( keysWord.getJson()).to.eql( [ { id: keyWord.id, value: keyWord.name}, { id: keyWord2.id, value: keyWord2.name } ] );
+            expect( keysWord.getJson()).to.eql( [ { id: keyWord.id, value: keyWord.name, isWait: keyWord.isWait}, { id: keyWord2.id, value: keyWord2.name, isWait: keyWord2.isWait } ] );
         });
 
         afterEach(function(){

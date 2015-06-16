@@ -78,7 +78,8 @@ function getJson(){
     for( var i = 0; i < _keysWord.length; i++ ){
         jsonKeysWord.push({
             id: _keysWord[i].id,
-            value: _keysWord[i].name
+            value: _keysWord[i].name,
+            isWait: _keysWord[i].isWait
         });
     }
 
