@@ -18,6 +18,17 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
 
         representation.setRepresentation( representationData );
         $rootScope.$broadcast("draw");
+
+        //var word = representationData.words[1].content[3].word;
+        //
+        //socket.on("getTweetByWord",function( tweets ){
+        //    for (var i = 0; i < tweets.length; i++) {
+        //        var tweet = tweets[i];
+        //        console.log( tweet._source.content + "  date: " + tweet._source.date);
+        //    }
+        //});
+        //
+        //socket.emit("getTweetByWord", {nameKeyWordTracked: representationData.tag, word: "paris"});
     });
 
     socket.on("newWord", function( wordObject ){

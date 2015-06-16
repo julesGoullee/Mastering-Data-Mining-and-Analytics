@@ -72,6 +72,10 @@ function KeyWord( name, lang, occurence, userOwner ){
         esConnector = mockEsConnector;
     };
 
+    self.getTweetByWord = function( keyWord, word, callback ){
+        esConnector.getTweetByWord( keyWord, word, callback);
+    };
+
     function getRegexWordsAlreadyFlag(){
 
         var words = self.representation.getWordsAlreadyFlag();

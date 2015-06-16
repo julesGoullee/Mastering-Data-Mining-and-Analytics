@@ -81,6 +81,20 @@ module.exports = {
                     socketHandler.notifyAll("resumeKeyWord", idKeyWord);
                 }
             });
+
+            socketHandler.on("getTweetByWord", user.socket, function( data ){
+
+                var keyWord = keysWord.getByName( data.nameKeyWordTracked );
+                if( keyWord ){
+                    keyWord.getTweetByWord( keyWord, data.word, function( tweets ){
+
+                        if( tweets ){
+                            socketHandler.notifyOne("getTweetByWord", tweets, user.socket);
+                        }
+                    });
+
+                }
+            });
         });
     }
 };
