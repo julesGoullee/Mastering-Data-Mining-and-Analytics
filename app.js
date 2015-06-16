@@ -37,7 +37,7 @@ if( config.api.active ) {
     passport.use(new TwitterStrategy({
             consumerKey: accounts.TWITTER_CONSUMER_KEY,
             consumerSecret: accounts.TWITTER_CONSUMER_SECRET,
-            callbackURL: "http://" + config.api.domain + ":" + config.api.port+ "/auth/twitter/callback"
+            callbackURL: "http://" + config.api.domain + ":" + config.port+ "/auth/twitter/callback"
         },
         function( token, tokenSecret, profile, done ){
 

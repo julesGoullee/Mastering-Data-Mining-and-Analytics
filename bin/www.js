@@ -8,9 +8,9 @@ var config = require("../config/config.js");
 //var debug = require('debug')('mastering-data-mining-and-analytics:server');
 //noIpConnector.updateIp();
 
-app.set('port', config.api.port);
+app.set('port', config.port);
 var server = http.createServer(app);
-server.listen(config.api.port, "0.0.0.0");
+server.listen(config.port, "0.0.0.0");
 
 if( config.api.active ) {
     var sessionMiddleware = require("../app").sessionMiddleware;
@@ -29,9 +29,9 @@ function onError(error) {
         throw error;
     }
 
-    var bind = typeof config.api.port === 'string'
-        ? 'Pipe ' + config.api.port
-        : 'Port ' + config.api.port;
+    var bind = typeof config.port === 'string'
+        ? 'Pipe ' + config.port
+        : 'Port ' + config.port;
 
     switch (error.code) {
         case 'EACCES':
