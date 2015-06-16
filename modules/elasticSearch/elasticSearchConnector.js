@@ -163,6 +163,41 @@ module.exports = {
             console.trace( err.message );
         });
     },
+    getTweetByWord: function( keyWord, word, callback){
+        var req = client.search({
+            index: "twitter",
+            body: {
+                "query": {
+                    "bool": {
+                        "must": [
+                            {
+                                match: {
+                                    tags: keyWord.name
+                                }
+                            },
+                            {
+                                match: {
+                                    content: word
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            size: 1000,
+            "settings": getAnalysisByLang( keyWord.lang )
+        });
+
+        req.then( function ( resp ) {
+
+            var hits = resp.hits.hits;
+            
+            callback( hits );
+
+        }, function( err ) {
+            console.trace( err.message );
+        });
+    },
     connect: function(){
         return client.ping({
             requestTimeout: 6000,
