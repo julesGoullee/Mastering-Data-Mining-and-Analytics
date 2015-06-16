@@ -10,11 +10,11 @@
                 <md-list-item ng-repeat="word in words()" ng-click="changeWord(word)" class="word-line" ng-class="{'selected': runningWord().id === word.id }" layout="row" >
                     <!--ng-style="{'fill': runningWord() === word.value ? 'green' : '#BBBBBB'}"-->
 
-                        <ng-md-icon icon="sync"
-                                    flex="10"
-                                    ng-class="{'running':word.running }"
-                                   ></ng-md-icon>
-                        <p class="word-name" flex="80">{{word.value}}</p>
+                    <ng-md-icon icon="sync"
+                                flex="10"
+                                ng-class="{'running': !word.isWait }"
+                            ></ng-md-icon>
+                    <p class="word-name" flex="80">{{word.value}}</p>
 
                     <ng-md-icon icon="play_arrow"
                                 class="play-icon"
@@ -36,7 +36,9 @@
 
             <md-divider></md-divider>
 
-            <md-button ng-click="showPopup();toggleRight()" class="md-primary">Add or change #keyWord</md-button>
+            <div layout="row"  layout-align="center center">
+                <md-button ng-click="showPopup();toggleRight()" class="md-primary">Add or change #keyWord</md-button>
+            </div>
         </md-content >
         <md-toolbar class="md-theme-light">
             <h2 class="md-toolbar-tools">
@@ -44,9 +46,27 @@
             </h2>
         </md-toolbar>
         <md-content >
-            <md-subheader>Gravity : </md-subheader>
-            <md-slider flex class="md-warn" min="0.1" step="0.02"  max="1" ng-model="gravity.value" aria-label="gravite" ></md-slider>
-            <md-button ng-click="restoreHiddenNodes()" class="md-primary">Restore visibility</md-button>
+            <md-subheader>
+                <div layout>
+                    <div flex="50" layout layout-align="center center">
+                        <h2>Gravity</h2>
+
+                    </div>
+                    <md-switch flex="50"  ng-model="gravity.enabled" aria-label="Gravity Switch">
+                        Enabled
+                    </md-switch>
+                </div>
+            </md-subheader>
+
+
+
+            <div layout>
+                <md-slider flex="70" class="md-warn" min="0.1" step="0.02"  max="1" ng-model="gravity.value" aria-label="gravite" ></md-slider>
+                <div flex="10" layout layout-align="center center">
+                    <span clas="md-body-1">{{gravity.value}}</span>
+                </div>
+            </div>
+
 
         </md-content>
     </div>

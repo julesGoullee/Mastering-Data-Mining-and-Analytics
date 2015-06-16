@@ -362,7 +362,7 @@ angularApp.factory("graph", function($rootScope){
         },
         setGravity: function( newGravity ){
             force.gravity( newGravity.value );
-            force.resume();
+            newGravity.enabled ? force.start() : force.stop();
         },
         showAll: function(){
             vis.selectAll("g.node").style("opacity", '1').each(function(d){

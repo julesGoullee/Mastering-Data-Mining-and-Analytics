@@ -1,11 +1,14 @@
 "use strict";
-angularApp.service("graphConfig",function(){
+angularApp.service("graphConfig",function($rootScope){
     var _callbackHiddenNodes = [];
 
-    return {
-        gravity: {
+    var gravity = {
+        enabled: true,
             value: 0.1
-        },
+    };
+
+    return {
+        gravity: gravity,
         restoreHiddenNodes: function(){
             for( var i = 0; i < _callbackHiddenNodes.length; i++ ){
                 _callbackHiddenNodes[i]();
