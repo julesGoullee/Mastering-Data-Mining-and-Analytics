@@ -12,7 +12,7 @@ module.exports = {
     },
     webServer: {
         active: true,
-        apiAddress: "127.0.0.1",
-        apiPort: 3000
+        apiAddress: "109.190.95.175",
+        apiPort: 80
     }
 };

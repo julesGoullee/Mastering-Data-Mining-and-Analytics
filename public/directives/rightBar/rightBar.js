@@ -4,6 +4,7 @@ angularApp.directive( "rightBar",
     function( $mdUtil, $mdSidenav, $rootScope, graphConfig, socket, keysWord ){
     return {
         restrict: "E",
+        scope: {},
         templateUrl:"directives/rightBar/rightBar.html",
         link: function( scope, element ) {
 
