@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.factory("graph", function(){
+angularApp.factory("graph", function($rootScope){
 
     var color = d3.scale.category10();
 
@@ -281,69 +281,45 @@ angularApp.factory("graph", function(){
         force.resume();
     }
 
-    function onClick( d ){
-        if ( d3.event.defaultPrevented === false && d.hidden === false ) {
+    function onClick(d) {
+        d3.event.preventDefault();
 
-            if( directChildrensIsHidden( d.id ) ) {
-                var idChildrensNodes = getAllNodeChildrenOf(d);
+        $rootScope.$broadcast('openTweetBox', d);
+    }
 
-                vis.selectAll("g.node")
-                    .filter(function (d) {
-                        for (var i = 0; i < idChildrensNodes.length; i++) {
-                            if (idChildrensNodes[i] === d.id) {
-                                d.hidden = false;
+    function setVisibilityFor (nodes, visibility) {
+
+        vis.selectAll("g.node")
+            .filter(function (d) {
+                        for (var i = 0; i < nodes.length; i++) {
+                            if (nodes[i] === d.id) {
+                                d.hidden = visibility;
                                 return true;
                             }
                         }
                         return false;
                     })
-                    .style("opacity", "1");
+            .style("opacity", visibility ? "1" : "0.1");
 
-                vis.selectAll("line.link")
-                    .filter(function (d) {
-                        for (var i = 0; i < idChildrensNodes.length; i++) {
-                            if (idChildrensNodes[i] === d.source.id) {
-                                d.source.hidden = false;
+        vis.selectAll("line.link")
+            .filter(function (d) {
+                        for (var i = 0; i < nodes.length; i++) {
+                            if (nodes[i] === d.source.id) {
+                                d.source.hidden = visibility;
                                 return true;
                             }
                         }
                         return false;
                     })
-                    .style("opacity", "1");
-            }
-        }
+            .style("opacity", visibility ? "1" : "0.1");
     }
 
     function onRightClick( d ){
         d3.event.preventDefault();
         var idChildrensNodes = getAllNodeChildrenOf( d );
 
-        //vis.selectAll("g.node").style("opacity", '1');
-        //vis.selectAll("line.link").style("opacity", '1');
-
-        vis.selectAll("g.node")
-            .filter(function(d){
-                for(var i = 0 ; i < idChildrensNodes.length; i++ ){
-                    if( idChildrensNodes[i] === d.id ){
-                        d.hidden = true;
-                        return true;
-                    }
-                }
-                return false;
-            })
-            .style("opacity", '0.1');
-
-        vis.selectAll("line.link")
-            .filter(function(d){
-                for(var i = 0 ; i < idChildrensNodes.length; i++ ){
-                    if( idChildrensNodes[i] === d.source.id ){
-                        d.source.hidden = true;
-                        return true;
-                    }
-                }
-                return false;
-            })
-            .style("opacity", '0.1');
+        setVisibilityFor(idChildrensNodes, !d.hidden);
+        d.hidden = !d.hidden;
     }
 
     return {
