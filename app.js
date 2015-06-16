@@ -41,7 +41,7 @@ if( config.api.active ) {
         },
         function( token, tokenSecret, profile, done ){
 
-            process.nextTick(function () {
+            process.nextTick(function(){
                 var profileSave = {
                     id: profile.id,
                     username: profile.username,
@@ -62,7 +62,7 @@ if( config.api.active ) {
             mongooseConnection: mongoConnector.getConnection(),
             stringify: false
         }),
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {secure: false}
     });
 }
