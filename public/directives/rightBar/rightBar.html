@@ -16,15 +16,15 @@
                                    ></ng-md-icon>
                         <p class="word-name" flex="80">{{word.value}}</p>
 
-                    <ng-md-icon icon="play"
+                    <ng-md-icon icon="play_arrow"
                                 class="play-icon"
                                 flex="10"
-                                ng-show="word.isMine === true && word.running === false"
+                                ng-show="word.isMine === true && word.isWait === true"
                                 ng-click="resumeWord(word)"></ng-md-icon>
                     <ng-md-icon icon="pause"
                                 class="pause-icon"
                                 flex="10"
-                                ng-show="word.isMine === true && word.running === true"
+                                ng-show="word.isMine === true && word.isWait === false"
                                 ng-click="pauseWord(word)"></ng-md-icon>
                     <ng-md-icon icon="close"
                                 class="close-icon"

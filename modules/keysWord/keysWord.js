@@ -71,16 +71,21 @@ function getAll(){
     return _keysWord;
 }
 
+function getOneJson(keyword){
+
+    return {
+        id: keyword.id,
+        value: keyword.name,
+        isWait: keyword.isWait
+    };
+}
+
 function getJson(){
 
     var jsonKeysWord = [];
 
     for( var i = 0; i < _keysWord.length; i++ ){
-        jsonKeysWord.push({
-            id: _keysWord[i].id,
-            value: _keysWord[i].name,
-            isWait: _keysWord[i].isWait
-        });
+        jsonKeysWord.push(getOneJson(_keysWord[i]));
     }
 
     return jsonKeysWord;
@@ -154,6 +159,7 @@ module.exports = {
     getById: getById,
     getAll: getAll,
     getJson: getJson,
+    getOneJson: getOneJson,
     getJsonByUser: getJsonByUser,
     delById: delById,
     isNewKeyWord: isNewKeyWord,

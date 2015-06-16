@@ -40,7 +40,10 @@ module.exports = {
 
                         if( user.isReadyForStream() ){
                             var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user);
-                            socketHandler.notifyAll("newKeyWord", { id: newKeyWord.id , value: newKeyWord.name } );
+                            newKeyWord.isMine = true;
+                            socketHandler.notifyOne("newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket);
+                            newKeyWord.isMine = false;
+                            socketHandler.notifyAllWithoutMe("newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket );
 
                         }
                         else{
