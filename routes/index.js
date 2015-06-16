@@ -14,6 +14,7 @@ var dependances = {
         "external/angular",
         "external/angular-aria",
         "external/angular-animate",
+        "external/angular-route",
         "external/angular-material",
         "external/angular-socket-io",
         "external/d3",
@@ -24,6 +25,7 @@ var dependances = {
         //modules
         "main",
         "config/const",
+        "config/routes",
         "config/theme",
         "controllers/mainController",
         "services/graphConfig/graphConfig",

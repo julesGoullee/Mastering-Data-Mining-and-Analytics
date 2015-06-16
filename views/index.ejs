@@ -17,16 +17,8 @@
 
     </head>
 <body ng-controller="AppCtrl" layout="row">
-    <div flex="100">
-        <div layout="row">
-            <div layout="column" layout-fill>
-                <top-bar flex="100" ></top-bar>
-                <right-bar></right-bar>
-            </div>
-        </div>
-        <div flex="100" >
-            <representation ></representation>
-        </div>
+    <div class="main-view" ng-view>
+
     </div>
 </body>
 </html>

@@ -71,6 +71,15 @@ module.exports = function(grunt) {
                         src: "bower_components/angular-socket-io/socket.min.js.map",
                         dest: "public/external/angular-socket-io.js.map"
                     },
+                    //angularjs-route
+                    {
+                        src: "bower_components/angular-route/angular-route.min.js",
+                        dest: "public/external/angular-route.min.js"
+                    },
+                    {
+                        src: "bower_components/angular-route/angular-route.js.map",
+                        dest: "public/external/angular-route.js.map"
+                    },
                     //D3.js
                     {
                         src: "bower_components/d3/d3.min.js",
@@ -129,6 +138,11 @@ module.exports = function(grunt) {
                     {
                         src: "bower_components/angular-socket-io/socket.js",
                         dest: "public/external/angular-socket-io.js"
+                    },
+                    //angularjs-route
+                    {
+                        src: "bower_components/angular-route/angular-route.js",
+                        dest: "public/external/angular-route.js"
                     },
                     //D3.js
                     {
