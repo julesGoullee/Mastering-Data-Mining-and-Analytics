@@ -9,10 +9,14 @@ module.exports = function(grunt) {
     grunt.initConfig({
         karma: {
             unit: {
-                configFile: 'public/test/karma.conf.js'
+                configFile: 'public/test/karma.conf.js',
+                singleRun: true,
+                autoWatch: false
             },
             singleRun:{
-                configFile: 'public/test/karmaSingleRun.conf.js'
+                configFile: 'public/test/karma.conf.js',
+                singleRun: false,
+                autoWatch: true
             }
         },
         copy:{

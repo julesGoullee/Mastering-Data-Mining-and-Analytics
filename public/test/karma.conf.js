@@ -20,7 +20,7 @@ module.exports = function(config) {
       'mockApp.js',
       'mockData/**/*.js',
       '../services/**/*.js',
-      '../**/*.js'
+      '../directives/*.js'
     ],
 
 
