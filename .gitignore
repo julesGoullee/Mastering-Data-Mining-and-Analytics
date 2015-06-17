@@ -9,3 +9,4 @@ mongodb/
 public/test/libs/angular-mocks.js
 config/config.js
 public/config/const.js
+config/account.json
