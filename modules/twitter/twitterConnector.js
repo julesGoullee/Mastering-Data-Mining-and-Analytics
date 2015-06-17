@@ -20,7 +20,6 @@ module.exports = {
         user.client.stream( 'statuses/filter', {track: keyWord.name },  function( stream ){
             stream.on('data', function( tweet ){
                 if( keyWord.stream === false ){
-                    console.log("pause");
                     stream.destroy();
                     return false;
                 }
