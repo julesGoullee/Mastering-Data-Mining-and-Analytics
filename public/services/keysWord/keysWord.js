@@ -68,18 +68,18 @@ angularApp.service("keysWord", function( $rootScope, socket ){
     });
 
     socket.on("stopKeyWord", function( wordId ){
-        //console.log("stop kw: " + wordId, getById( wordId ) );
-        $rootScope.$broadcast( "stopKeyWord", getById( wordId ) );
+        $rootScope.$broadcast( "stopKeyWord", getById( wordId ).value );
         delById( wordId );
     });
 
     socket.on("pauseKeyWord", function( wordId ){
-        //console.log("pause kw: " + wordId, getById( wordId ) );
+        $rootScope.$broadcast( "pauseKeyWord", getById( wordId ).value );
+
         getById(wordId).isWait = true;
     });
 
     socket.on("resumeKeyWord", function( wordId ){
-        //console.log("resume kw: " + wordId, getById( wordId ) );
+        $rootScope.$broadcast( "resumeKeyWord", getById( wordId ).value );
         getById(wordId).isWait = false;
     });
 
