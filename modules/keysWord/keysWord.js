@@ -115,7 +115,7 @@ function delById( id ){
         if( keyWord.id === id ){
 
             keyWord.userOwner && _keysWord[i].userOwner.delKeyWord( keyWord.id );
-            keyWord.pause();
+            keyWord.stop();
             _keysWord.splice(i, 1);
             return true;
         }

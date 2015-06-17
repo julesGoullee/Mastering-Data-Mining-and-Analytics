@@ -74,6 +74,8 @@ describe("KeysWord", function(){
     it("Peut suprimmer un keyword", function(){
         expect( keysWord.delById( keyWord.id )).to.eql( true );
         expect( keysWord.getAll().length ).to.eql( 0 );
+        expect( keyWord.stream ).to.eql( false );
+        expect( keyWord.isWait ).to.eql( true );
     });
 
     it("Peut dire que le keyWord existe deja", function(){
