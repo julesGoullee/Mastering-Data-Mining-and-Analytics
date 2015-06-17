@@ -61,5 +61,8 @@ module.exports = {
     notifyInRoom : function( room, event, data ){
 
         _io.server.sockets.in( room ).emit( event, data );
+    },
+    notifyAllInRoomWithoutMe: function( room, event , data, socket ){
+        socket.in( room).broadcast.emit( event, data );
     }
 };

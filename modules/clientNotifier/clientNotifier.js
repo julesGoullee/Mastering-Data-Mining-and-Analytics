@@ -70,15 +70,21 @@ module.exports = {
 
             socketHandler.on("pauseKeyWord", user.socket, function( idKeyWord ){
 
-                if( user.isMyKeyWord( idKeyWord ) && keysWord.waitKeyWord( idKeyWord ) ){
-                    socketHandler.notifyAll( "pauseKeyWord", idKeyWord );
+                var keyWord = keysWord.getById( idKeyWord );
+
+                if( user.isMyKeyWord( keyWord.id ) && keysWord.waitKeyWord( keyWord.id ) ){
+                    socketHandler.notifyAll( "pauseKeyWord", keyWord.id );
                 }
             });
 
             socketHandler.on("resumeKeyWord", user.socket, function( idKeyWord ){
+                var keyWord = keysWord.getById( idKeyWord );
 
-                if( user.isMyKeyWord( idKeyWord ) && keysWord.resumeKeyWord( idKeyWord ) ){
-                    socketHandler.notifyAll( "resumeKeyWord", idKeyWord );
+                if( user.isMyKeyWord( keyWord.id ) && keysWord.resumeKeyWord( keyWord.id ) ){
+
+                    setTimeout(function () {
+                        socketHandler.notifyAll("resumeKeyWord", keyWord.id);
+                    }, 1000);
                 }
             });
 

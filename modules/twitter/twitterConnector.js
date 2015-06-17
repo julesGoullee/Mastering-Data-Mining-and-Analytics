@@ -4,6 +4,9 @@ var twitter = require('twitter');
 
 var jf = require('jsonfile');
 var accounts = jf.readFileSync( __dirname + "/../../config/account.json");
+var socketHandler = require("../socketHandler/socketHandler.js");
+var utils = require("../utils/utils.js");
+
 
 module.exports = {
     client : function(){
@@ -29,9 +32,18 @@ module.exports = {
             stream.on('error', function( error ){
                 user.client.get("application/rate_limit_status", function( error, content, response ){
                     var limit = response.headers["x-rate-limit-reset"];
-                    console.log("ban pour le mot" + keyWord.name + " reviens dans" + new Date(limit*1000) );
+                    var timeRemaining = new Date(limit*1000);
+
+                    console.log( "ban pour le mot '" + keyWord.name + "' jusqu'a " + utils.dateToString( timeRemaining ) );
                     stream.destroy();
                     keyWord.pause();
+
+                    //socketHandler.notifyAllInRoomWithoutMe( keyWord.id, "pauseKeyWord", keyWord.id, user.socket );
+                    console.log(utils.dateToString(timeRemaining));
+                    socketHandler.notifyOne( "limitExceeded", {
+                        id: keyWord.id,
+                        timeRemaining : timeRemaining.getTime()
+                    }, user.socket );
                 });
             });
         });

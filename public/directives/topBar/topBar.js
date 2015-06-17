@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, representation ){
+angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, representation, keysWord ){
     return {
         restrict: "E",
         templateUrl:"directives/topBar/topBar.html",
@@ -18,7 +18,7 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
             scope.$on("newKeyWord", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("New Word: " + newKeyWord.value )
+                        .content( "New Word: " + newKeyWord.value )
                         .position("top left")
                         .hideDelay(3000)
                 );
@@ -27,7 +27,7 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
             scope.$on("stopKeyword", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Word deleted: " + newKeyWord )
+                        .content( "Word deleted: " + newKeyWord )
                         .position("top left")
                         .hideDelay(3000)
                 );
@@ -36,7 +36,7 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
             scope.$on("pauseKeyWord", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Word pause : " + newKeyWord )
+                        .content( "Word pause : " + newKeyWord )
                         .position("top left")
                         .hideDelay(3000)
                 );
@@ -45,17 +45,31 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
             scope.$on("resumeKeyWord", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
-                        .content("Word resume: " + newKeyWord )
+                        .content( "Word resume: " + newKeyWord )
                         .position("top left")
                         .hideDelay(3000)
                 );
             });
-            scope.changeWord = function(word) {
+
+            scope.$on( "limitExceeded", function( event, data ){
+                var dateLimit = new Date( data.timeRemaining );
+
+                var curMinute = dateLimit.getMinutes() < 10 ? "0" + dateLimit.getMinutes() : dateLimit.getMinutes();
+                var curSeconds = dateLimit.getSeconds() < 10 ? "0" + dateLimit.getSeconds() : dateLimit.getSeconds();
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content( "Word limit exceeded: " + data.keyWord.name + " time remaining " + curMinute + "m:" + curSeconds + "s" )
+                        .position("top left")
+                        .hideDelay(3000)
+                );
+            });
+
+            scope.changeWord = function( word ){
 
                 socket.emit( "setAlreadyTrackKeyWord", word );
             };
 
-            scope.deleteWord = function(word) {
+            scope.deleteWord = function( word ){
 
                 socket.emit( "stopKeyWord", word.id );
             };

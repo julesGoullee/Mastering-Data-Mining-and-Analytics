@@ -42,6 +42,7 @@ function waitKeyWord( keyWordId ){
     var keyWord = getById( keyWordId );
 
     if( keyWord ){
+        //todo verifier que le keyWord est bien arreté
         keyWord.pause();
         return keyWord;
     }

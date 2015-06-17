@@ -36,6 +36,15 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
         $rootScope.$broadcast("addWord", wordObject );
     });
 
+    socket.on("limitExceeded", function( keyWordLimit ){
+
+        $rootScope.$broadcast("limitExceeded", {
+            keyWord: keysWord.getById( keyWordLimit.id ),
+            timeRemaining: keyWordLimit.timeRemaining
+        });
+    });
+
+
     socket.on("tweetCount", function( tweetCount ){
 
         representation.tweetCount.value = tweetCount;

@@ -5,13 +5,12 @@ module.exports = {
 
         return Math.floor( ( 1 + Math.random() ) * 0x10000 ).toString( 16 );
     },
-    dateNow: function(){
-        var objToday = new Date();
-        var dayOfMonth = (objToday.getDate() < 10) ? "0" + objToday.getDate() : objToday.getDate() ;
-        var curHour = objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours();
-        var curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes();
-        var curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds();
+    dateToString: function( date ){
+        var dayOfMonth = (date.getDate() < 10) ? "0" + date.getDate() : date.getDate() ;
+        var curHour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+        var curMinute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+        var curSeconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
 
-        return curHour + "h:" + curMinute + "m:" + curSeconds  + "s " + dayOfMonth + "/" + objToday.getMonth();
+        return curHour + "h:" + curMinute + "m:" + curSeconds  + "s " + dayOfMonth + "/" + date.getMonth();
     }
 };
