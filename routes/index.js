@@ -38,6 +38,7 @@ var dependances = {
         "directives/representation/graphFactory",
         "directives/topBar/topBar",
         "directives/rightBar/rightBar",
+        "directives/tweetBox/tweetBox",
         "directives/contextMenu/contextMenu",
         "directives/tweetHeartbeat/tweetHeartbeat"
     ],

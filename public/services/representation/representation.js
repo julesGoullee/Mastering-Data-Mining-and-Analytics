@@ -58,6 +58,10 @@ angularApp.service("representation", function( ){
         return representation || "";
     };
 
+    var getCurrentTag = function(){
+        return representation && representation.tag || "";
+    };
+
     return {
         get: function(){
             return representation;
@@ -69,7 +73,8 @@ angularApp.service("representation", function( ){
         tweetCount : {
             value: 0
         },
-        getCurrentWord: getCurrentWord
+        getCurrentWord: getCurrentWord,
+        getCurrentTag: getCurrentTag
 
     };
 });

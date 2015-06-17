@@ -296,7 +296,9 @@ angularApp.factory( "graph", function( $rootScope ){
     function onClick(d){
         d3.event.preventDefault();
 
-        $rootScope.$broadcast( "openTweetBox", d );
+        $rootScope.$apply(function() {
+            $rootScope.$broadcast( "openTweetBox", d );
+        })
     }
 
     function setVisibilityFor( nodes, visibility ){
