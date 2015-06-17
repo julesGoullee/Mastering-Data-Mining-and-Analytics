@@ -4,6 +4,7 @@ var socketHandler = require("../socketHandler/socketHandler.js");
 var esConnector = require("../elasticSearch/elasticSearchConnector.js");
 var Representation = require("../representation/representation.js");
 var utils = require("../utils/utils.js");
+var config = require( "../../config/config.js" );
 
 function KeyWord( name, lang, occurence, userOwner ){
 
@@ -60,11 +61,19 @@ function KeyWord( name, lang, occurence, userOwner ){
     self.pause = function(){
         self.stream = false;
         self.isWait = true;
+        config.log && console.info( "Pause de '" + self.name + "' # " + utils.dateNow() );
+    };
+
+    self.stop = function(){
+        self.stream = false;
+        self.isWait = true;
+        config.log && console.info( "Stop de '" + self.name + "' # " + utils.dateNow() );
     };
 
     self.resume = function(){
         self.stream = true;
         self.isWait = false;
+        config.log && console.info( "Resume de '" + self.name + "' # " + utils.dateNow() );
     };
 
     self.mock = function( mockSocketHandler, mockEsConnector ){
@@ -90,6 +99,8 @@ function KeyWord( name, lang, occurence, userOwner ){
         }
         return regex;
     }
+
+    config.log && console.info( "New word '" + self.name  + "' # " + utils.dateNow() );
 }
 
 module.exports= function( name, lang, occurence, userOwner ){
