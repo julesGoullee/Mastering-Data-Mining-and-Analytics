@@ -26,9 +26,10 @@ module.exports = function(config) {
 
     // list of files to exclude
     exclude: [
-        "../main.js",
-        "../controllers/loginController.js",
-        "../config/theme.js"
+      "../main.js",
+      "../controllers/loginController.js",
+      "../config/theme.js",
+      "../config/routes.js"
     ],
 
 
