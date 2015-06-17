@@ -8,13 +8,13 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 configFile: 'public/test/karma.conf.js',
-                singleRun: true,
-                autoWatch: false
+                singleRun: false,
+                autoWatch: true
             },
             singleRun:{
                 configFile: 'public/test/karma.conf.js',
-                singleRun: false,
-                autoWatch: true
+                singleRun: true,
+                autoWatch: false
             }
         },
         copy:{
