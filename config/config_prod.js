@@ -8,11 +8,11 @@ module.exports = {
             ip: "127.0.0.1",
             base: "mdma"
         },
-        domain:"109.190.95.175"
+        domain:"masteringdata.ddns.net"
     },
     webServer: {
         active: true,
-        apiAddress: "109.190.95.175",
+        apiAddress: "masteringdata.ddns.net",
         apiPort: 80
     }
 };
