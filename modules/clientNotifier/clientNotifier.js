@@ -83,8 +83,10 @@ module.exports = {
                 if( user.isMyKeyWord( keyWord.id ) && keysWord.resumeKeyWord( keyWord.id ) ){
 
                     setTimeout(function () {
-                        socketHandler.notifyAll("resumeKeyWord", keyWord.id);
-                    }, 1000);
+                        if( keyWord.stream && !keyWord.isWait ){
+                            socketHandler.notifyAll("resumeKeyWord", keyWord.id);
+                        }
+                    }, 3000);
                 }
             });
 

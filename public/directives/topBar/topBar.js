@@ -1,8 +1,11 @@
 "use strict";
 
-angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, representation, keysWord ){
+angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, representation ){
     return {
         restrict: "E",
+        scope:{
+
+        },
         templateUrl:"directives/topBar/topBar.html",
         link: function( scope ){
 
@@ -56,6 +59,7 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
 
                 var curMinute = dateLimit.getMinutes() < 10 ? "0" + dateLimit.getMinutes() : dateLimit.getMinutes();
                 var curSeconds = dateLimit.getSeconds() < 10 ? "0" + dateLimit.getSeconds() : dateLimit.getSeconds();
+                console.log("show");
                 $mdToast.show(
                     $mdToast.simple()
                         .content( "Word limit exceeded: " + data.keyWord.name + " time remaining " + curMinute + "m:" + curSeconds + "s" )
