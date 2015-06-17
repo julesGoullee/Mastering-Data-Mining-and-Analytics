@@ -23,7 +23,7 @@ function KeyWord( name, lang, occurence, userOwner ){
 
         socketHandler.notifyInRoom( self.id, "tweetCount", self.tweetCount );
 
-        esConnector.searchNewKeysWords( self, getRegexWordsAlreadyFlag(), function( newKeysWords ) {
+        esConnector.searchNewKeysWords( self, getRegexWordsAlreadyFlag(), function( newKeysWords ){
             if( newKeysWords.length > 0 ){
 
                 var tabKeysWords = [];
@@ -31,7 +31,7 @@ function KeyWord( name, lang, occurence, userOwner ){
 
                     (function (i) {
 
-                        esConnector.getKeysWordsReferences( self, newKeysWords[i].key, getRegexWordsAlreadyFlag(), function( keyWordsReferences ) {
+                        esConnector.getKeysWordsReferences( self, newKeysWords[i].key, getRegexWordsAlreadyFlag(), function( keyWordsReferences ){
 
                             tabKeysWords.push({
                                 keyWord: newKeysWords[i].key,
@@ -39,9 +39,9 @@ function KeyWord( name, lang, occurence, userOwner ){
                                 references: keyWordsReferences
                             });
 
-                            if (i === newKeysWords.length - 1) {
+                            if( i === newKeysWords.length - 1 ){
 
-                                self.representation.addKeysWords( tabKeysWords, function ( keysWordObjects ) {
+                                self.representation.addKeysWords( tabKeysWords, function ( keysWordObjects ){
                                     socketHandler.notifyInRoom( self.id, "newWord", keysWordObjects );
                                     callback( self );
                                 });

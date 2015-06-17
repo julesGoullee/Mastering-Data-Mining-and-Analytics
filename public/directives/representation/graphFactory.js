@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.factory("graph", function($rootScope){
+angularApp.factory( "graph", function( $rootScope ){
 
     var color = d3.scale.category10();
 
@@ -39,8 +39,8 @@ angularApp.factory("graph", function($rootScope){
         .alpha(0.1);
 
     var zoom = d3.behavior.zoom()
-        .scaleExtent([0.1, 10])
-        .on("zoom", zoomed);
+        .scaleExtent( [0.1, 10] )
+        .on("zoom", zoomed );
 
     var node_drag = d3.behavior.drag()
         .on("dragstart", dragStart)
@@ -51,9 +51,9 @@ angularApp.factory("graph", function($rootScope){
     var links = force.links();
     var vis;
 
-    function addSvg ( rootElement, clientSize ){
+    function addSvg( rootElement, clientSize ){
 
-        force.size([clientSize.width, clientSize.height])
+        force.size( [clientSize.width, clientSize.height] )
             .on("tick", onTicks );
 
         var svg = d3.select( rootElement ).append("svg:svg")
@@ -63,14 +63,14 @@ angularApp.factory("graph", function($rootScope){
                 d3.event.preventDefault();
             })
             .call( zoom )
-            .on("dblclick.zoom", null);//prevent zoom on double click
+            .on( "dblclick.zoom", null );//prevent zoom on double click
 
 
         vis = svg.append("g");
 
     }
 
-    var update = function () {
+    var update = function(){
 
         var link = vis.selectAll("line.link")
             .data(links, function(d) { return d.source.id + "-" + d.target.id; });
@@ -95,10 +95,13 @@ angularApp.factory("graph", function($rootScope){
             .on("click", onClick)
             .on('contextmenu', onRightClick)
             .call( node_drag )
-            .style("opacity", function(d){
+            .style( "opacity", function( d ){
+
                 var parentsNodes = getDirectNodeParents( d.id );
+
                 for (var i = 0; i < parentsNodes.length; i++) {
                     var parentNode = parentsNodes[i];
+
                     if( parentNode.hidden === true ){
                         d.hidden = true;
                         return 0.1;
@@ -116,9 +119,11 @@ angularApp.factory("graph", function($rootScope){
             .text(function(d) { return d.id });
 
         nodeEnter.append("circle")
-            .attr("class", "circle")
+            .attr( "class", "circle")
             .style("stroke-width", circleStyle.strokeWidth.value )
-            .style("fill", function(d) { return color(d.level); })
+            .style("fill", function(d) {
+                return color(d.level);
+            })
             .attr("r", circleStyle.r.value );
 
         node.exit().remove();
@@ -134,7 +139,7 @@ angularApp.factory("graph", function($rootScope){
         }
     }
 
-    function findNodeIndex( id ) {
+    function findNodeIndex( id ){
         for( var i = 0; i < nodes.length; i++ ){
             if( nodes[i].id === id ){
                 return i;
@@ -145,6 +150,7 @@ angularApp.factory("graph", function($rootScope){
 
     function getDirectNodeChildrenId( nodeId ){
         var directChildrens = [];
+
         for( var i = 0 ; i < links.length; i ++ ){
             if( links[i].target.id === nodeId ){
                 directChildrens.push( links[i].source.id);
@@ -155,7 +161,8 @@ angularApp.factory("graph", function($rootScope){
 
     function getDirectNodeParents( nodeId ){
         var directChildrens = [];
-        for( var i = 0 ; i < links.length; i ++ ){
+
+        for( var i = 0 ; i < links.length; i++ ){
             if( links[i].source.id === nodeId ){
                 directChildrens.push( links[i].target);
             }
@@ -167,13 +174,13 @@ angularApp.factory("graph", function($rootScope){
 
         var a = array.concat();
 
-        for ( var i=0; i < a.length; ++i ) {
+        for( var i=0; i < a.length; ++i ){
 
-            for( var j=i+1; j < a.length; ++j ) {
+            for( var j=i+1; j < a.length; ++j ){
 
                 if( a[ i ] === a[ j ] ){
 
-                    a.splice( j-- , 1 );
+                    a.splice( j--, 1 );
                 }
             }
         }
@@ -185,8 +192,10 @@ angularApp.factory("graph", function($rootScope){
         var childrens = [];
         var newChildren = getDirectNodeChildrenId( node.id );
 
-        var getNewChildren = function(newChildren){
+        var getNewChildren = function( newChildren ){
+
             childrens = childrens.concat( newChildren );
+
             for( var i = 0 ; i < newChildren.length; i++ ){
                 getNewChildren( getDirectNodeChildrenId( newChildren[i] ) );
             }
@@ -196,16 +205,19 @@ angularApp.factory("graph", function($rootScope){
     }
 
     function directChildrensIsHidden( nodeId ){
+
         for( var i = 0 ; i < links.length; i ++ ){
+
             if( links[i].target.id === nodeId && links[i].source.hidden === true ){
                 return true;
             }
         }
         return false;
     }
+
     //svg zoom
-    function zoomed() {
-        vis.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    function zoomed(){
+        vis.attr( "transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")" );
 
         textStyle.fontSize.value = d3.event.scale > 1 ? textStyle.fontSize.def / d3.event.scale  : 13;
         vis.selectAll("g.node text").transition()
@@ -238,7 +250,7 @@ angularApp.factory("graph", function($rootScope){
         });
     }
 
-    function mouseOver() {
+    function mouseOver(){
 
         d3.select(this).select("circle").transition()
             .duration(750)
@@ -262,12 +274,12 @@ angularApp.factory("graph", function($rootScope){
         d.fixed = false;
     }
 
-    function dragStart() {
+    function dragStart(){
         d3.event.sourceEvent.stopPropagation();
         force.stop();
     }
 
-    function dragMove( d ) {
+    function dragMove( d ){
         d.px += d3.event.dx;
         d.py += d3.event.dy;
         d.x += d3.event.dx;
@@ -275,24 +287,24 @@ angularApp.factory("graph", function($rootScope){
         onTicks();
     }
 
-    function dragEnd( d ) {
+    function dragEnd( d ){
         d.fixed = true;
         onTicks();
         force.resume();
     }
 
-    function onClick(d) {
+    function onClick(d){
         d3.event.preventDefault();
 
-        $rootScope.$broadcast('openTweetBox', d);
+        $rootScope.$broadcast( "openTweetBox", d );
     }
 
-    function setVisibilityFor (nodes, visibility) {
+    function setVisibilityFor( nodes, visibility ){
 
         vis.selectAll("g.node")
-            .filter(function (d) {
-                        for (var i = 0; i < nodes.length; i++) {
-                            if (nodes[i] === d.id) {
+            .filter(function (d){
+                        for( var i = 0; i < nodes.length; i++ ){
+                            if( nodes[i] === d.id ){
                                 d.hidden = visibility;
                                 return true;
                             }
@@ -302,9 +314,9 @@ angularApp.factory("graph", function($rootScope){
             .style("opacity", visibility ? "1" : "0.1");
 
         vis.selectAll("line.link")
-            .filter(function (d) {
-                        for (var i = 0; i < nodes.length; i++) {
-                            if (nodes[i] === d.source.id) {
+            .filter(function( d ){
+                        for( var i = 0; i < nodes.length; i++ ){
+                            if( nodes[i] === d.source.id ){
                                 d.source.hidden = visibility;
                                 return true;
                             }
@@ -318,13 +330,13 @@ angularApp.factory("graph", function($rootScope){
         d3.event.preventDefault();
         var idChildrensNodes = getAllNodeChildrenOf( d );
 
-        setVisibilityFor(idChildrensNodes, !d.hidden);
+        setVisibilityFor( idChildrensNodes, !d.hidden );
         d.hidden = !d.hidden;
     }
 
     return {
         addSvg : addSvg,
-        addNode : function (id, level) {
+        addNode : function( id, level ){
             nodes.push({
                 id:id,
                 level: level
@@ -343,18 +355,18 @@ angularApp.factory("graph", function($rootScope){
             }
             var index = findNodeIndex( id );
             if( index !== undefined ){
-                nodes.splice(index, 1);
+                nodes.splice( index, 1 );
                 update();
             }
         },
         removeAllNode: function(){
-            links.splice(0,links.length);
-            nodes.splice(0,nodes.length);
+            links.splice( 0,links.length );
+            nodes.splice( 0,nodes.length );
             update();
         },
         addLink : function( sourceId, targetId ){
-            var sourceNode = findNode(sourceId);
-            var targetNode = findNode(targetId);
+            var sourceNode = findNode( sourceId );
+            var targetNode = findNode( targetId );
 
             if( (sourceNode !== undefined) && (targetNode !== undefined) ){
                 links.push({"source": sourceNode, "target": targetNode});
@@ -365,11 +377,11 @@ angularApp.factory("graph", function($rootScope){
             newGravity.enabled ? force.start() : force.stop();
         },
         showAll: function(){
-            vis.selectAll("g.node").style("opacity", '1').each(function(d){
+            vis.selectAll("g.node").style("opacity", '1').each(function( d ){
                 d.hidden = false;
             });
 
-            vis.selectAll("line.link").style("opacity", '1').each(function(d){
+            vis.selectAll("line.link").style("opacity", '1').each(function( d ){
                 d.target.hidden = false;
             });
         },

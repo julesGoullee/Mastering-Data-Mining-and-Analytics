@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.directive( "login", function( ){
+angularApp.directive( "login", function(){
     return {
         restrict: "E",
         scope:{

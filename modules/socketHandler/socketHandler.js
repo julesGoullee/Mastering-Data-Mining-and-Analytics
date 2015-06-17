@@ -22,11 +22,11 @@ function getOrAddUser( socket ){
 module.exports = {
     listen: function( io ){
         _io = io;
-        _io.on( "connection", function( socket ) {
+        _io.on( "connection", function( socket ){
 
             var user = getOrAddUser( socket );
             if( user ){
-                for( var i = 0; i < _callbackOnNewConnection.length; i++){
+                for( var i = 0; i < _callbackOnNewConnection.length; i++ ){
 
                     _callbackOnNewConnection[i]( user );
                 }

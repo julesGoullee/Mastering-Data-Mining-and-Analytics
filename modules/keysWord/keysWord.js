@@ -28,7 +28,7 @@ function resumeKeyWord( keyWordId ){
 
     var keyWord = getById( keyWordId );
 
-    if( keyWord ) {
+    if( keyWord ){
         keyWord.resume();
         twitterCatcher.trackKeyWord( keyWord, keyWord.userOwner );
         return keyWord;
@@ -37,11 +37,11 @@ function resumeKeyWord( keyWordId ){
 
 }
 
-function waitKeyWord ( keyWordId ){
+function waitKeyWord( keyWordId ){
 
     var keyWord = getById( keyWordId );
 
-    if( keyWord ) {
+    if( keyWord ){
         keyWord.pause();
         return keyWord;
     }
@@ -71,7 +71,7 @@ function getAll(){
     return _keysWord;
 }
 
-function getOneJson(keyword){
+function getOneJson( keyword ){
 
     return {
         id: keyword.id,
@@ -85,7 +85,7 @@ function getJson(){
     var jsonKeysWord = [];
 
     for( var i = 0; i < _keysWord.length; i++ ){
-        jsonKeysWord.push(getOneJson(_keysWord[i]));
+        jsonKeysWord.push( getOneJson( _keysWord[i] ) );
     }
 
     return jsonKeysWord;
@@ -114,7 +114,7 @@ function delById( id ){
 
         if( keyWord.id === id ){
 
-            keyWord.userOwner && _keysWord[i].userOwner.delKeyWord(keyWord.id);
+            keyWord.userOwner && _keysWord[i].userOwner.delKeyWord( keyWord.id );
             keyWord.pause();
             _keysWord.splice(i, 1);
             return true;
@@ -141,7 +141,7 @@ function isValidKeyWord( name, options ){
             if( keyWordContraint.lang.indexOf( options.lang ) != -1 ) {
                 options.occurence = parseInt( options.occurence, 10 );
 
-                if( options.occurence >= keyWordContraint.minOccurence && options.occurence <= keyWordContraint.maxOccurence){
+                if( options.occurence >= keyWordContraint.minOccurence && options.occurence <= keyWordContraint.maxOccurence ){
                     return true;
                 }
             }

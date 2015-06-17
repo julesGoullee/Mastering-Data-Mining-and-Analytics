@@ -39,11 +39,11 @@ module.exports = {
                     if( keysWord.isNewKeyWord( data.newKeyWord ) ){
 
                         if( user.isReadyForStream() ){
-                            var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user);
+                            var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user );
                             newKeyWord.isMine = true;
-                            socketHandler.notifyOne("newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket);
+                            socketHandler.notifyOne( "newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket );
                             newKeyWord.isMine = false;
-                            socketHandler.notifyAllWithoutMe("newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket );
+                            socketHandler.notifyAllWithoutMe( "newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket );
 
                         }
                         else{
@@ -64,21 +64,21 @@ module.exports = {
             socketHandler.on("stopKeyWord", user.socket, function( idKeyWord ){
 
                 if( user.isMyKeyWord( idKeyWord ) && keysWord.delById( idKeyWord ) ){
-                    socketHandler.notifyAll("stopKeyWord", idKeyWord);
+                    socketHandler.notifyAll( "stopKeyWord", idKeyWord );
                 }
             });
 
             socketHandler.on("pauseKeyWord", user.socket, function( idKeyWord ){
 
                 if( user.isMyKeyWord( idKeyWord ) && keysWord.waitKeyWord( idKeyWord ) ){
-                    socketHandler.notifyAll("pauseKeyWord", idKeyWord);
+                    socketHandler.notifyAll( "pauseKeyWord", idKeyWord );
                 }
             });
 
             socketHandler.on("resumeKeyWord", user.socket, function( idKeyWord ){
 
                 if( user.isMyKeyWord( idKeyWord ) && keysWord.resumeKeyWord( idKeyWord ) ){
-                    socketHandler.notifyAll("resumeKeyWord", idKeyWord);
+                    socketHandler.notifyAll( "resumeKeyWord", idKeyWord );
                 }
             });
 
@@ -89,7 +89,7 @@ module.exports = {
                     keyWord.getTweetByWord( keyWord, data.word, function( tweets ){
 
                         if( tweets ){
-                            socketHandler.notifyOne("getTweetByWord", tweets, user.socket);
+                            socketHandler.notifyOne( "getTweetByWord", tweets, user.socket );
                         }
                     });
 

@@ -44,7 +44,7 @@ function User( socket ) {
 
             if( word.id === keyWordId ){
 
-                _keysWord.splice(i, 1);
+                _keysWord.splice( i, 1 );
                 return true;
             }
         }
@@ -53,7 +53,7 @@ function User( socket ) {
 
     self.isReadyForStream = function(){
         var nbKeyWordsStreaming = 0;
-        for (var i = 0; i < _keysWord.length; i++) {
+        for( var i = 0; i < _keysWord.length; i++ ){
             var keyWord = _keysWord[i];
             if( keyWord.stream && !keyWord.isWait ){
                 nbKeyWordsStreaming ++;

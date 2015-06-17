@@ -34,13 +34,13 @@ angularApp.directive("representation", function( graphConfig, graph, representat
                 for( var i= 0 ; i < representation.get().words.length; i ++ ){
                     var dataInLevel = representation.get().words[i];
 
-                    for( var j = 0 ; j < dataInLevel.content.length; j++){
+                    for( var j = 0 ; j < dataInLevel.content.length; j++ ){
                         var wordObject =  dataInLevel.content[j];
 
                         graph.addNode( wordObject.word, dataInLevel.level );
 
                         if( wordObject.references.length > 0 ){
-                            for( var k = 0; k < wordObject.references.length; k++){
+                            for( var k = 0; k < wordObject.references.length; k++ ){
                                 graph.addLink( wordObject.word, wordObject.references[k]);
 
                                 links.push({
@@ -59,7 +59,7 @@ angularApp.directive("representation", function( graphConfig, graph, representat
 
                 for ( var i = 0 ; i < wordsObjects.length; i++ ){
 
-                    if( !representation.get().words[ wordsObjects[i].level ]){
+                    if( !representation.get().words[ wordsObjects[i].level ] ){
 
                         representation.get().words[ wordsObjects[i].level ] = {
                             content : [],

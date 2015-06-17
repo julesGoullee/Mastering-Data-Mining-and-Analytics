@@ -23,9 +23,9 @@ function Representation( twitterKeyWord ){
                     references: []
                 });
 
-                pushOnLevel(0, keysWords[i].keyWord, keysWords[i].occurence,[]);
+                pushOnLevel( 0, keysWords[i].keyWord, keysWords[i].occurence,[] );
             }
-            else if( keysWords[i].references.length === 1){
+            else if( keysWords[i].references.length === 1 ){
 
                 var level = getLevelsByKeyWord( keysWords[i].references[0] ) + 1;
 
@@ -35,11 +35,11 @@ function Representation( twitterKeyWord ){
                     references: keysWords[i].references
                 });
 
-                pushOnLevel( level , keysWords[i].keyWord, keysWords[i].occurence, keysWords[i].references);
+                pushOnLevel( level , keysWords[i].keyWord, keysWords[i].occurence, keysWords[i].references );
             }
             else{
                 var levelsAndReferences = getFirstLevelReferences( keysWords[i].references );
-                if( levelsAndReferences.references.length > 0 ) {
+                if( levelsAndReferences.references.length > 0 ){
 
                     tabKeyWordObject.push({
                         level: levelsAndReferences.level + 1,
@@ -47,7 +47,7 @@ function Representation( twitterKeyWord ){
                         references: levelsAndReferences.references
                     });
 
-                    pushOnLevel(levelsAndReferences.level + 1, keysWords[i].keyWord, keysWords[i].occurence, levelsAndReferences.references);
+                    pushOnLevel( levelsAndReferences.level + 1, keysWords[i].keyWord, keysWords[i].occurence, levelsAndReferences.references );
                 }
             }
         }
@@ -60,8 +60,8 @@ function Representation( twitterKeyWord ){
         var words = [];
 
         for( var i = 0; i < _representationsData.words.length; i ++ ){
-            for ( var j = 0 ; j < _representationsData.words[i].content.length; j++){
-                words.push(_representationsData.words[i].content[j].word);
+            for ( var j = 0 ; j < _representationsData.words[i].content.length; j++ ){
+                words.push( _representationsData.words[i].content[j].word );
             }
         }
 
@@ -89,14 +89,14 @@ function Representation( twitterKeyWord ){
         if( !_representationsData.words[ level ] ){
             _representationsData.words[ level ] = {
                 level: level,
-                date: Math.floor(new Date() / 1000),
+                date: Math.floor( new Date() / 1000 ),
                 content: []
             }
         }
         _representationsData.words[level].content.push({
             word: word,
             occurence: occurence,
-            date: Math.floor(new Date() / 1000),
+            date: Math.floor( new Date() / 1000 ),
             references: references
         });
     }
@@ -123,7 +123,7 @@ function Representation( twitterKeyWord ){
             if ( !tabReferences[levelCurrentReference] ){
                 tabReferences[levelCurrentReference] = [];
             }
-            tabReferences[levelCurrentReference].push(references[i]);
+            tabReferences[levelCurrentReference].push( references[i] );
         }
 
         for( var levelReference in tabReferences ){
@@ -138,7 +138,7 @@ function Representation( twitterKeyWord ){
 
         for( var j = 0 ; j < tabReferences[ level].length ; j ++ ){
 
-            if( !wordIsInLevel( level + 1, tabReferences[ level ][j]) ){
+            if( !wordIsInLevel( level + 1, tabReferences[ level ][j] ) ){
 
                 tabReferencesWithoutSameLevelReferences.push( tabReferences[ level ][j] );
             }

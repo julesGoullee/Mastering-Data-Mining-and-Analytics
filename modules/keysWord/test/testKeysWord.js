@@ -9,7 +9,7 @@ var keysWord = require("../keysWord.js");
 var users = require("../../users/users.js");
 
 
-describe("KeysWord", function() {
+describe("KeysWord", function(){
 
     var keyWord;
     var mockSocketHandler;
@@ -17,7 +17,7 @@ describe("KeysWord", function() {
     var mockEsConnector;
     var user;
 
-    beforeEach(function () {
+    beforeEach(function (){
         mockSocketHandler = sinon.spy();
         mockTwitterCatcher = sinon.spy();
         mockTwitterCatcher.trackKeyWord = sinon.spy();
@@ -46,10 +46,10 @@ describe("KeysWord", function() {
     });
 
     it("Peut mettre sur pause le stream d'un mot", function(){
-        expect( keyWord.isWait ).to.eql(false);
+        expect( keyWord.isWait ).to.eql( false );
         expect( keysWord.waitKeyWord(keyWord.id) ).to.eql( keyWord );
-        expect( keyWord.stream ).to.eql(false);
-        expect( keyWord.isWait ).to.eql(true);
+        expect( keyWord.stream ).to.eql( false );
+        expect( keyWord.isWait ).to.eql( true );
     });
 
     it("Peut resumer un keyWord", function(){
@@ -59,7 +59,7 @@ describe("KeysWord", function() {
         expect( keyWord.stream ).to.eql( false );
         expect( keysWord.resumeKeyWord(keyWord.id) ).to.eql( keyWord );
         expect( keyWord.isWait ).to.eql( false );
-        expect( keyWord.stream ).to.eql(true);
+        expect( keyWord.stream ).to.eql( true );
 
     });
 

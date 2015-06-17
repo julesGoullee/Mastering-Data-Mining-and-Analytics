@@ -45,7 +45,7 @@ describe("twitter catcher", function() {
         twitterCatcher.trackKeyWord( keyWord, tokens() );
     });
 
-    it("Peut lancer la capture du mot", function () {
+    it("Peut lancer la capture du mot", function (){
         expect( keyWord.isReady).to.eql( true );
         expect( keyWord.onStack).to.eql( false );
         expect( mockTwtConnector.onData).calledWith( keyWord );
@@ -53,7 +53,7 @@ describe("twitter catcher", function() {
 
     it("Peut supprimer les index si premier lancement ", function(){
 
-        expect(mockEsConnector.dropIndexByTag.calledWith( keyWord.name )).to.eql(true);
+        expect(mockEsConnector.dropIndexByTag.calledWith( keyWord.name )).to.eql( true) ;
 
     });
 

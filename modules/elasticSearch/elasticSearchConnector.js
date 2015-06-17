@@ -1,7 +1,7 @@
 "use strict";
 
-var elasticsearch = require('elasticsearch');
-var config = require('../../config/config.js');
+var elasticsearch = require("elasticsearch");
+var config = require("../../config/config.js");
 
 var client = new elasticsearch.Client({
     host: config.api.esAddress
@@ -11,8 +11,8 @@ module.exports = {
     dropIndexByTag: function( keyWord ){
         try {
             var promiseDelete = client.deleteByQuery({
-                index: 'twitter',
-                type: 'tweet',
+                index: "twitter",
+                type: "tweet",
                 body: {
                     query: {
                         match: {
@@ -22,7 +22,7 @@ module.exports = {
                 }
             });
 
-            promiseDelete.then( function( response, error ) {
+            promiseDelete.then(function( response, error ){
 
                 if( error ){
                     console.trace( error );
@@ -38,8 +38,8 @@ module.exports = {
     addNewEntry : function( keyWord, content ){
 
         var promiseCreate = client.create({
-            index: 'twitter',
-            type: 'tweet',
+            index: "twitter",
+            type: "tweet",
             body: {
                 tags: keyWord.name,
                 date: Math.floor(new Date() / 1000),
@@ -50,7 +50,7 @@ module.exports = {
 
         promiseCreate.then(function( response, error ){
 
-            if( error ) {
+            if( error ){
                 console.trace( error );
             }
         });
@@ -84,15 +84,16 @@ module.exports = {
             "settings": getAnalysisByLang( keyWord.lang )
         });
 
-        req.then( function ( resp ) {
+        req.then(function( resp ){
 
             var hits = resp.hits.hits;
             var aggr = resp.aggregations.keyWords.buckets;
 
             var keysWords = [];
+
             for( var i = 0; i < aggr.length; i++ ){
 
-                if( aggr[i].key.length > 4){
+                if( aggr[i].key.length > 4 ){
 
                     keysWords.push({
                         key : aggr[i].key,
@@ -104,7 +105,7 @@ module.exports = {
 
             callback( keysWords );
 
-        }, function ( err ) {
+        }, function( err ){
             console.trace( err.message );
         });
     },
@@ -145,7 +146,7 @@ module.exports = {
             "settings": getAnalysisByLang( keyWord.lang )
         });
 
-        req.then( function ( resp ) {
+        req.then(function( resp ){
 
             //var hits = resp.hits.hits;
             var aggr = resp.aggregations.keyWords.buckets;
@@ -159,11 +160,11 @@ module.exports = {
 
             callback( tab );
 
-        }, function( err ) {
+        }, function( err ){
             console.trace( err.message );
         });
     },
-    getTweetByWord: function( keyWord, word, callback){
+    getTweetByWord: function( keyWord, word, callback ){
         var req = client.search({
             index: "twitter",
             body: {
@@ -188,13 +189,13 @@ module.exports = {
             "settings": getAnalysisByLang( keyWord.lang )
         });
 
-        req.then( function ( resp ) {
+        req.then(function ( resp ){
 
             var hits = resp.hits.hits;
             
             callback( hits );
 
-        }, function( err ) {
+        }, function( err ){
             console.trace( err.message );
         });
     },
@@ -207,7 +208,7 @@ module.exports = {
 };
 
 function getAnalysisByLang( lang ){
-    if( lang === "en" ) {
+    if( lang === "en" ){
         return {
             "analysis": {
                 "filter": {
@@ -242,7 +243,7 @@ function getAnalysisByLang( lang ){
                 }
             }
         }
-    } else if( lang === "fr") {
+    } else if( lang === "fr" ){
         return {
             "analysis": {
                 "filter": {
