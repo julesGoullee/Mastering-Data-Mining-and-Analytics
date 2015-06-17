@@ -21,11 +21,11 @@
                     <div layout="row">
                         <md-input-container flex="100">
                             <label>#keyword</label>
-                            <input name="keyword" ng-model="addedKeyWord.name" minlength="4" required md-maxlength="15">
+                            <input name="keyword" ng-model="addedKeyWord.name" ng-minlength="4" required md-maxlength="15">
                             <div ng-messages="trackForm.keyword.$error">
-                                <div ng-message="required" ng-if="tried">Veuillez choisir un mot.</div>
-                                <div ng-message="md-maxlength">Le mot ne peut excéder 15 caractères.</div>
-                                <div ng-message="minlength">Le mot doit contenir au moins 4 caractères.</div>
+                                <div ng-message="required" ng-if="tried">Please enter a keyword.</div>
+                                <div ng-message="md-maxlength">Max size is 15 characters.</div>
+                                <div ng-message="minlength">Min size is 4 characters.</div>
                             </div>
                         </md-input-container>
                     </div>
