@@ -12,32 +12,39 @@
             </md-button>
         </div>
     </md-toolbar>
+    <form name="trackForm" ng-submit="validate()">
+        <md-dialog-content class="sticky-container">
+                <md-subheader class="md-sticky-no-effect">
+                    Please enter a keyword to stream.
+                </md-subheader>
+                <div>
+                    <div layout="row">
+                        <md-input-container flex="100">
+                            <label>#keyword</label>
+                            <input name="keyword" ng-model="addedKeyWord.name" minlength="4" required md-maxlength="15">
+                            <div ng-messages="trackForm.keyword.$error">
+                                <div ng-message="required" ng-if="tried">Veuillez choisir un mot.</div>
+                                <div ng-message="md-maxlength">Le mot ne peut excéder 15 caractères.</div>
+                                <div ng-message="minlength">Le mot doit contenir au moins 4 caractères.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
 
-    <md-dialog-content class="sticky-container">
-        <md-subheader class="md-sticky-no-effect">
-            Please enter a keyword to stream.
-        </md-subheader>
-        <div>
-        <div layout="row">
-            <md-input-container>
-                <label>#keyword</label>
-                <input ng-model="addedKeyWord.name" ng-minlength="4" ng-maxlength="15">
-            </md-input-container>
+                    <div layout="row">
+                        <md-select placeholder="Language" ng-model="addedKeyWord.lang" name="lang" required flex="30">
+                            <md-option value="fr">Français</md-option>
+                            <md-option value="en">English</md-option>
+                        </md-select>
+                        <md-input-container flex="20">
+                            <label>Occurence</label>
+                            <input required type="number" step="1" ng-init="addedKeyWord.occurence=5" name="occurence" ng-model="addedKeyWord.occurence" min="5" max="100">
+                        </md-input-container>
+                    </div>
+                </div>
+        </md-dialog-content>
+        <div class="md-actions" layout="row">
+            <md-button ng-click="validate()" type="submit" class="md-primary">Valider</md-button>
         </div>
+    </form>
 
-        <div layout="row">
-            <md-select placeholder="Language" ng-model="addedKeyWord.lang" name="lang" required>
-                <md-option value="fr">Français</md-option>
-                <md-option value="en">English</md-option>
-            </md-select>
-            <md-input-container>
-                <label>Occurence</label>
-                <input required type="number" step="1" ng-init="addedKeyWord.occurence=5" name="occurence" ng-model="addedKeyWord.occurence" min="5" max="100">
-            </md-input-container>
-        </div>
-        </div>
-    </md-dialog-content>
-    <div class="md-actions" layout="row">
-        <md-button ng-click="validate()" class="md-primary">Valider</md-button>
-    </div>
 </md-dialog>

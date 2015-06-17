@@ -20,6 +20,7 @@ angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $md
 
     $scope.validate = function(){
 
+        $scope.tried = true;
         if( $scope.addedKeyWord &&  $scope.addedKeyWord.name &&  $scope.addedKeyWord.occurence ){
 
             if( !$scope.addedKeyWord.lang ){
