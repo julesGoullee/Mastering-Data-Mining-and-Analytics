@@ -33,6 +33,23 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
                 );
             });
 
+            scope.$on("pauseKeyWord", function( event, newKeyWord ){
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Word pause : " + newKeyWord )
+                        .position("top left")
+                        .hideDelay(3000)
+                );
+            });
+
+            scope.$on("resumeKeyWord", function( event, newKeyWord ){
+                $mdToast.show(
+                    $mdToast.simple()
+                        .content("Word resume: " + newKeyWord )
+                        .position("top left")
+                        .hideDelay(3000)
+                );
+            });
             scope.changeWord = function(word) {
 
                 socket.emit( "setAlreadyTrackKeyWord", word );
