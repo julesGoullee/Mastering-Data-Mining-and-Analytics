@@ -8,13 +8,13 @@ module.exports = function(grunt) {
         karma: {
             unit: {
                 configFile: 'public/test/karma.conf.js',
-                singleRun: true,
-                autoWatch: false
+                singleRun: false,
+                autoWatch: true
             },
             singleRun:{
                 configFile: 'public/test/karma.conf.js',
-                singleRun: false,
-                autoWatch: true
+                singleRun: true,
+                autoWatch: false
             }
         },
         copy:{
@@ -238,7 +238,7 @@ module.exports = function(grunt) {
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);
 
     //INSTALLATION
-    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev", "less:style"]);
-    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd", "less:style"]);
+    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev"]);
+    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd"]);
 
 };
