@@ -7,3 +7,5 @@ bower_components/
 mongodb/
 
 public/test/libs/angular-mocks.js
+config/config.js
+public/config/const.js
