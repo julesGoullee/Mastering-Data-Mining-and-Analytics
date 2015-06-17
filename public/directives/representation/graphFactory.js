@@ -373,7 +373,7 @@ angularApp.factory( "graph", function( $rootScope ){
             }
         },
         setGravity: function( newGravity ){
-            force.gravity( newGravity.value );
+            force.gravity( newGravity.value/10 );
             newGravity.enabled ? force.start() : force.stop();
         },
         showAll: function(){
