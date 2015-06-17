@@ -1,7 +1,5 @@
 "use strict";
 
-var config = require("./config/config.js");
-
 module.exports = function(grunt) {
 
     require('load-grunt-tasks')(grunt);
@@ -99,9 +97,14 @@ module.exports = function(grunt) {
                         src: "bower_components/ng-context-menu/dist/ng-context-menu.min.js",
                         dest: "public/external/ng-context-menu.min.js"
                     },
+                    //Config
                     {
                         src: "config/config_prod.js",
                         dest: "config/config.js"
+                    },
+                    {
+                        src: "public/config/const_prod.js",
+                        dest: "public/config/const.js"
                     }
                 ]
             },
@@ -162,26 +165,16 @@ module.exports = function(grunt) {
                     {
                         src: "bower_components/ng-context-menu/dist/ng-context-menu.min.js",
                         dest: "public/external/ng-context-menu.min.js"
+                    },
+                    //Config
+                    {
+                        src: "config/config_dev.js",
+                        dest: "config/config.js"
+                    },
+                    {
+                        src: "public/config/const_dev.js",
+                        dest: "public/config/const.js"
                     }
-                ]
-            }
-        },
-        replace: {
-            constantClient: {
-                options: {
-                    patterns: [
-                        {
-                            match: 'apiAddress',
-                            replacement:  config.webServer.apiAddress
-                        },
-                        {
-                            match: 'apiPort',
-                            replacement: config.webServer.apiPort
-                        }
-                    ]
-                },
-                files: [
-                    {expand: true, flatten: true, src: ['public/config/const.js'], dest: 'public/config/'}
                 ]
             }
         },
@@ -213,7 +206,7 @@ module.exports = function(grunt) {
             }
         },
         less: {
-            dist: {
+            style: {
                 options: {
                     compress: true
                 },
@@ -235,7 +228,7 @@ module.exports = function(grunt) {
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);
 
     //INSTALLATION
-    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev", "replace:constantClient"]);
-    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd", "replace:constantClient"]);
+    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev","less:style"]);
+    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd","less:style"]);
 
 };
