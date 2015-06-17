@@ -74,7 +74,7 @@ module.exports = function(grunt) {
                     //angularjs-route
                     {
                         src: "bower_components/angular-route/angular-route.min.js",
-                        dest: "public/external/angular-route.min.js"
+                        dest: "public/external/angular-route.js"
                     },
                     {
                         src: "bower_components/angular-route/angular-route.js.map",
