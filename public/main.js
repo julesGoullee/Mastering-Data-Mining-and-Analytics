@@ -5,5 +5,6 @@ var angularApp = angular.module("Mastering-Data-Mining-and-Analytics",
         "btford.socket-io",
         "ngMdIcons",
         "ng-context-menu",
-    "ngRoute"]
+        "ngRoute",
+        'ngMessages']
 );

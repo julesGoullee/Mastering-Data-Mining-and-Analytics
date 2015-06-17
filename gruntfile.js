@@ -55,6 +55,11 @@ module.exports = function(grunt) {
                         src: "bower_components/angular-aria/angular-aria.min.js.map",
                         dest: "public/external/angular-aria.js.map"
                     },
+                    //angularjs-message
+                    {
+                        src: "bower_components/angular-messages/angular-messages.min.js",
+                        dest: "public/external/angular-messages.js"
+                    },
                     //angularjs-material-designe
                     {
                         src: "bower_components/angular-material/angular-material.min.js",
@@ -131,6 +136,11 @@ module.exports = function(grunt) {
                     {
                         src: "bower_components/angular-aria/angular-aria.js",
                         dest: "public/external/angular-aria.js"
+                    },
+                    //angularjs-message
+                    {
+                        src: "bower_components/angular-messages/angular-messages.js",
+                        dest: "public/external/angular-messages.js"
                     },
                     //angularjs-material-designe
                     {
@@ -228,7 +238,7 @@ module.exports = function(grunt) {
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);
 
     //INSTALLATION
-    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev","less:style"]);
-    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd","less:style"]);
+    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev", "less:style"]);
+    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd", "less:style"]);
 
 };

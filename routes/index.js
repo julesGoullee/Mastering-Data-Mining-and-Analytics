@@ -16,6 +16,7 @@ var dependances = {
         "external/angular-animate",
         "external/angular-route",
         "external/angular-material",
+        "external/angular-messages",
         "external/angular-socket-io",
         "external/d3",
         "external/angular-material-icons.min",
