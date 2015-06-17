@@ -4,7 +4,7 @@ module.exports = {
     log: true,
     api : {
         active : true,
-        esAddress: '192.168.0.4:9200',
+        esAddress: '192.168.0.34:9200',
         mongo: {
             ip: "127.0.0.1",
             base: "mdma"

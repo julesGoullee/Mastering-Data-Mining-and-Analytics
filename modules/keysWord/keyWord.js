@@ -19,7 +19,7 @@ function KeyWord( name, lang, occurence, userOwner ){
     self.representation = Representation( self.name );
     self.userOwner = userOwner;
 
-    self.onNewTweet =  function( callback ) {
+    self.onNewTweet =  function( callback, text ) {
         self.tweetCount++;//TODO
 
         socketHandler.notifyInRoom( self.id, "tweetCount", self.tweetCount );
@@ -61,19 +61,19 @@ function KeyWord( name, lang, occurence, userOwner ){
     self.pause = function(){
         self.stream = false;
         self.isWait = true;
-        config.log && console.info( "Pause de '" + self.name + "' # " + utils.dateNow() );
+        config.log && console.info( "Pause de '" + self.name + "' # " + utils.dateToString( new Date() ) );
     };
 
     self.stop = function(){
         self.stream = false;
         self.isWait = true;
-        config.log && console.info( "Stop de '" + self.name + "' # " + utils.dateNow() );
+        config.log && console.info( "Stop de '" + self.name + "' # " + utils.dateToString( new Date() ) );
     };
 
     self.resume = function(){
         self.stream = true;
         self.isWait = false;
-        config.log && console.info( "Resume de '" + self.name + "' # " + utils.dateNow() );
+        config.log && console.info( "Resume de '" + self.name + "' # " + utils.dateToString( new Date() ) );
     };
 
     self.mock = function( mockSocketHandler, mockEsConnector ){
@@ -100,7 +100,7 @@ function KeyWord( name, lang, occurence, userOwner ){
         return regex;
     }
 
-    config.log && console.info( "New word '" + self.name  + "' # " + utils.dateNow() );
+    config.log && console.info( "New word '" + self.name  + "' # " + utils.dateToString( new Date() ) );
 }
 
 module.exports= function( name, lang, occurence, userOwner ){
