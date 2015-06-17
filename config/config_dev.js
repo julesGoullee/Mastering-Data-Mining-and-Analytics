@@ -2,8 +2,8 @@
 module.exports = {
     port: 3000,
     api : {
-        active : false,
-        esAddress: "127.0.0.1:9200",
+        active : true,
+        esAddress: '192.168.1.14:9200',
         mongo: {
             ip: "127.0.0.1",
             base: "mdma"
@@ -12,7 +12,7 @@ module.exports = {
     },
     webServer: {
         active: true,
-        apiAddress: "masteringdata.ddns.net",
-        apiPort: 80
+        apiAddress: "127.0.0.1",
+        apiPort: 3000
     }
 };
