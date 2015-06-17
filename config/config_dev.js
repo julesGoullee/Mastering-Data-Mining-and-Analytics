@@ -12,7 +12,7 @@ module.exports = {
     },
     webServer: {
         active: true,
-        apiAddress: "109.190.95.175",
+        apiAddress: "masteringdata.ddns.net",
         apiPort: 80
     }
 };
