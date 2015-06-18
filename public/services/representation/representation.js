@@ -1,7 +1,10 @@
 "use strict";
 
-angularApp.service("representation", function( ){
+angularApp.service("representation", function( $rootScope, socket ){
     var representation;
+    var _tweetCount = {
+        value: 0
+    };
 
     var findById = function( id ){
 
@@ -62,6 +65,18 @@ angularApp.service("representation", function( ){
         return representation && representation.tag || "";
     };
 
+
+    socket.on("representation", function( representationData ){
+
+        setData( representationData );
+        $rootScope.$broadcast("draw");
+
+    });
+
+    socket.on("tweetCount", function( tweetCount ){
+        _tweetCount.value = tweetCount;
+    });
+
     return {
         get: function(){
             return representation;
@@ -70,9 +85,7 @@ angularApp.service("representation", function( ){
         findChildren: findChildren,
         findById: findById,
         tellFathers: tellFathers,
-        tweetCount : {
-            value: 0
-        },
+        tweetCount : _tweetCount,
         getCurrentWord: getCurrentWord,
         getCurrentTag: getCurrentTag
 

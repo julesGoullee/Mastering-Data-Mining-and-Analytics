@@ -62,7 +62,6 @@ angularApp.service("keysWord", function( $rootScope, socket ){
     });
 
     socket.on("newKeyWord", function( newKeyWord ){
-        newKeyWord.running = true;
         add( newKeyWord );
         $rootScope.$broadcast( "newKeyWord", newKeyWord );
     });
