@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                     },
                     {
                         src: "bower_components/jquery/dist/jquery.min.map",
-                        dest: "public/external/jquery.min.map"
+                        dest: "public/external/jquery.min.js.map"
                     },
                     //angularjs
                     {
@@ -37,7 +37,7 @@ module.exports = function(grunt) {
                     },
                     {
                         src: "bower_components/angular/angular.min.js.map",
-                        dest: "public/external/angular.js.map"
+                        dest: "public/external/angular.min.js.map"
                     },
                     {
                         src: "bower_components/angular-animate/angular-animate.min.js",
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                     },
                     {
                         src: "bower_components/angular-animate/angular-animate.min.js.map",
-                        dest: "public/external/angular-animate.js.map"
+                        dest: "public/external/angular-animate.min.js.map"
                     },
                     {
                         src: "bower_components/angular-aria/angular-aria.min.js",
@@ -53,9 +53,13 @@ module.exports = function(grunt) {
                     },
                     {
                         src: "bower_components/angular-aria/angular-aria.min.js.map",
-                        dest: "public/external/angular-aria.js.map"
+                        dest: "public/external/angular-aria.min.js.map"
                     },
                     //angularjs-message
+                    {
+                        src: "bower_components/angular-messages/angular-messages.min.js.map",
+                        dest: "public/external/angular-messages.min.js.map"
+                    },
                     {
                         src: "bower_components/angular-messages/angular-messages.min.js",
                         dest: "public/external/angular-messages.js"
@@ -85,7 +89,7 @@ module.exports = function(grunt) {
                     },
                     {
                         src: "bower_components/angular-route/angular-route.js.map",
-                        dest: "public/external/angular-route.js.map"
+                        dest: "public/external/angular-route.min.js.map"
                     },
                     //D3.js
                     {
