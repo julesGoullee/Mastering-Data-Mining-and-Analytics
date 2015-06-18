@@ -6,7 +6,7 @@ Nodejs-Express-socketio web app
 Storage mongdb & elasticSearch
 Angularjs,D3 client app
 
-[Demo dev](http://109.190.95.175)
+[Demo dev](http://masteringdata.ddns.net)
 
 ### Test && Build
 [![Build Status](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics.png)](https://travis-ci.org/julesGoullee/Mastering-Data-Mining-and-Analytics)
