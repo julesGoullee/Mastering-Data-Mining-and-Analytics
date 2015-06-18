@@ -8,8 +8,7 @@ module.exports = {
         mongo: {
             ip: "127.0.0.1",
             base: "mdma"
-        },
-        domain:"masteringdata.ddns.net"
+        }
     },
     webServer: {
         active: true,
