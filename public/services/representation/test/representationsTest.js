@@ -4,7 +4,13 @@ describe('representation', function () {
 
     var structureData;
 
-    beforeEach( module('testApp') );
+    beforeEach( module('testApp', function( $provide ){
+        $provide.value("socket", {
+            on: function(){
+
+            }
+        });
+    }));
 
     beforeEach(inject(function (_representation_) {
         representation = _representation_;
