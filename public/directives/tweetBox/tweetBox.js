@@ -21,16 +21,16 @@ angularApp.directive( "tweetBox",
             scope.tweets = [];
 
             var fillBoxWithTweets = function( wordId ){
-                var word = representation.findById(wordId);
+                if( wordId !== representation.getCurrentTag() ){
+                    var message = { nameKeyWordTracked: representation.getCurrentTag(), word: wordId };
+                    socket.emit("getTweetByWord", message);
+                }
 
-                socket.on("getTweetByWord",function( tweets ){
-                    scope.tweets = tweets;
-                });
-
-                var message = { nameKeyWordTracked: representation.getCurrentTag(), word: wordId };
-
-                socket.emit("getTweetByWord", message);
             };
+
+            socket.on("getTweetByWord",function( tweets ){
+                scope.tweets = tweets;
+            });
 
             scope.$on('openTweetBox', function(event, word) {
 
