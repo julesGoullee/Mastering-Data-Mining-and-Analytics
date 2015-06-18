@@ -78,6 +78,10 @@ describe("twitter catcher", function() {
             mockAddNewEntryPromise.then = sinon.stub();
             tweet = sinon.spy();
             tweet.text = "un tweet de test";
+            tweet.id = 1;
+            tweet.user = {
+                screen_name: "1"
+            };
             callbackOnData = mockTwtConnector.onData.args[0][2];
             mockEsConnector.addNewEntry.returns( mockAddNewEntryPromise );
             callbackOnData( tweet );
@@ -87,12 +91,17 @@ describe("twitter catcher", function() {
         });
 
         it("Peut ajouter le tweet dans es", function(){
-            expect( mockEsConnector.addNewEntry ).calledWith( keyWord, tweet.text );
+            expect( mockEsConnector.addNewEntry ).calledWith( keyWord, tweet.id, tweet.text );
         });
 
         it("Peut mettre en attente le deuxieme temps que le premier n'est pas finis de traiter", function(){
             var tweet2 = sinon.spy();
             tweet2.text = "un deuxieme tweet de test";
+            tweet2.id = 3;
+            tweet2.user = {
+                screen_name: "2"
+            };
+
             callbackOnData( tweet2 );
             callbackPromise = mockAddNewEntryPromise.then.args[0][0];
             callbackPromise();
@@ -103,6 +112,10 @@ describe("twitter catcher", function() {
             var tweet2 = sinon.spy();
             var callbackOnNewTweet = keyWord.onNewTweet.args[0][0];
             tweet2.text = "un deuxieme tweet de test";
+            tweet2.id = 2;
+            tweet2.user = {
+                screen_name: "2"
+            };
             callbackOnData( tweet2 );
             callbackPromise = mockAddNewEntryPromise.then.args[0][0];
             callbackPromise();
@@ -126,6 +139,10 @@ describe("twitter catcher", function() {
 
             var tweet2 = sinon.spy();
             tweet2.text = "un deuxieme tweet de test";
+            tweet2.id = 2;
+            tweet2.user = {
+                screen_name: "2"
+            };
             callbackOnData( tweet2 );
             callbackPromise = mockAddNewEntryPromise.then.args[0][0];
             callbackPromise();

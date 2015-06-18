@@ -35,7 +35,7 @@ module.exports = {
 
         }
     },
-    addNewEntry : function( keyWord, content ){
+    addNewEntry : function( keyWord, id, content, author){
 
         var promiseCreate = client.create({
             index: "twitter",
@@ -44,7 +44,9 @@ module.exports = {
                 tags: keyWord.name,
                 date: Math.floor(new Date() / 1000),
                 lang: keyWord.lang,
-                content: content
+                content: content,
+                id: id,
+                author: author
             }
         });
 
@@ -192,8 +194,15 @@ module.exports = {
         req.then(function ( resp ){
 
             var hits = resp.hits.hits;
-            
-            callback( hits );
+            var tweets = [];
+            for (var i = 0; i < hits.length; i++) {
+                var tweet = hits[i]._source;
+                tweets.push({
+                    id: tweet.id,
+                    author: tweet.author
+                });
+            }
+            callback( tweets );
 
         }, function( err ){
             console.trace( err.message );

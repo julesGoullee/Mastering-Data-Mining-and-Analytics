@@ -18,20 +18,19 @@ angularApp.directive( "tweetBox",
                 scope.visible = false;
             };
 
-            var fillBoxWithTweets = function(wordId) {
+            scope.tweets = [];
+
+            var fillBoxWithTweets = function( wordId ){
                 var word = representation.findById(wordId);
 
                 socket.on("getTweetByWord",function( tweets ){
-                    for (var i = 0; i < tweets.length; i++) {
-                        var tweet = tweets[i];
-                        //console.log( tweet._source.content + "  date: " + tweet._source.date);
-                    }
+                    scope.tweets = tweets;
                 });
 
-                var message = {nameKeyWordTracked: representation.getCurrentTag(), word: wordId};
+                var message = { nameKeyWordTracked: representation.getCurrentTag(), word: wordId };
 
                 socket.emit("getTweetByWord", message);
-            }
+            };
 
             scope.$on('openTweetBox', function(event, word) {
 

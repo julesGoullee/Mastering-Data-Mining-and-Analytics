@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
     port: 3000,
-    log: true,
+    log: false,
     api : {
         active : true,
         esAddress: '192.168.0.34:9200',

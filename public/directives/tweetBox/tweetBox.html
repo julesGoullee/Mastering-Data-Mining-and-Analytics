@@ -13,15 +13,26 @@
     </md-toolbar>
 
     <div layout="row">
-        <md-content style="height: 400px;">
-            <div>
-                <blockquote class="twitter-tweet" data-cards="hidden" lang="fr"><p lang="fr" dir="ltr">Prêtez à des entreprises à partir de 20 €. Recevez des intérêts chaque mois. Compte totalement gratuit. <a href="https://t.co/OXHE1QMYGu">https://t.co/OXHE1QMYGu</a></p>&mdash; Unilend (@unilend) <a href="https://twitter.com/unilend/status/583186049314127872">1 Avril 2015</a></blockquote>
+        <md-content style="height: 400px; width: 500px;">
+            <div ng-repeat="tweet in tweets">
+                <blockquote class="twitter-tweet" data-cards="hidden" lang="fr">
+                    <a ng-href="{{'https://twitter.com/' + tweet.author + '/status/' + tweet.id }}" ></a>
+                </blockquote>
                 <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
-            <div>
-                <blockquote class="twitter-tweet" lang="fr"><p lang="en" dir="ltr">We’re helping <a href="https://twitter.com/udacity">@udacity</a> develop Nanodegree programs to democratize <a href="https://twitter.com/hashtag/STEM?src=hash">#STEM</a> education! See how: <a href="https://t.co/Pe3fuBb4sL">https://t.co/Pe3fuBb4sL</a> <a href="https://twitter.com/hashtag/ATTimpact?src=hash">#ATTimpact</a></p>&mdash; attjobs (@attJOBS) <a href="https://twitter.com/attJOBS/status/611178988652859392">17 Juin 2015</a></blockquote>
-                <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-            </div>
+
         </md-content>
     </div>
 </div>
+
+<!--<div>-->
+<!--<blockquote class="twitter-tweet" data-cards="hidden" lang="fr">-->
+<!--<a href="https://twitter.com/unilend/status/583186049314127872"></a>-->
+<!--</blockquote>-->
+<!--<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+<!--</div>-->
+<!--<div>-->
+<!--<blockquote class="twitter-tweet" lang="fr">-->
+<!--<a href="https://twitter.com/hashtag/STEM?src=hash">#STEM</a> education! See how: <a href="https://t.co/Pe3fuBb4sL">https://t.co/Pe3fuBb4sL</a> <a href="https://twitter.com/hashtag/ATTimpact?src=hash">#ATTimpact</a></p>&mdash; attjobs (@attJOBS) <a href="https://twitter.com/attJOBS/status/611178988652859392">17 Juin 2015</a></blockquote>-->
+<!--<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>-->
+<!--</div>-->

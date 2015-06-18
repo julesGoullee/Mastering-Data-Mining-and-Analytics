@@ -28,7 +28,8 @@ module.exports = {
         twtConnector.onData( keyWord, user, function( tweet ){
 
             if( typeof tweet.text === "string" ){
-                esConnector.addNewEntry( keyWord, tweet.text ).then( function (){
+
+                esConnector.addNewEntry( keyWord, tweet.id_str, tweet.text, tweet.user.screen_name ).then( function (){
                     if( keyWord.isReady ){
                         keyWord.isReady = false;
                         keyWord.onStack = false;
