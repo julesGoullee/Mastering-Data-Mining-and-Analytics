@@ -32,7 +32,39 @@ body {
 }
 
 #topBar {
+  .running-word {
+    text-transform: uppercase;
+    padding: 15px;
+  }
 
+  .tweetCounter{
+    md-icon{
+      width: 36px;
+      height: 36px;
+      path{
+        fill: white;
+      }
+      svg{
+        width: 36px;
+        height: 36px;
+      }
+    }
+  }
+
+  .menu-btn {
+    cursor: pointer;
+    path{
+      fill: white;
+    }
+    svg{
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .tweet-peer-seconde{
+    line-height: 1.5;
+  }
 }
 
 #right-menu{
@@ -133,31 +165,6 @@ body {
   }
 }
 
-#menu{
-  path{
-    fill: white;
-  }
-  svg{
-    width: 36px;
-    height: 36px;
-  }
-}
-
-.tweetCounter{
-  padding: 0 20%;
-  md-icon{
-    width: 36px;
-    height: 36px;
-    path{
-      fill: white;
-    }
-    svg{
-      width: 36px;
-      height: 36px;
-    }
-  }
-}
-
 #graphTps{
   position: relative;
   svg{
@@ -175,8 +182,4 @@ body {
     stroke: #000;
     shape-rendering: crispEdges;
   }
-}
-
-.tweet-peer-seconde{
-  line-height: 1.5;
 }

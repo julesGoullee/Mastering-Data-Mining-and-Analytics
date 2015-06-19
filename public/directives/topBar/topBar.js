@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, representation ){
+angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, keysWord, representation ){
     return {
         restrict: "E",
         scope:{
@@ -12,12 +12,13 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
             scope.restoreHiddenNodes = graphConfig.restoreHiddenNodes;
             scope.showPopup = $rootScope.showPopup;
             scope.tweetCount = representation.tweetCount;
+            scope.runningWord = keysWord.currentKeyWord;
 
             scope.toggleRight = function(){
                 $rootScope.$broadcast("toggleRight");
             };
 
-
+            // Toasts
             scope.$on("newKeyWord", function( event, newKeyWord ){
                 $mdToast.show(
                     $mdToast.simple()
@@ -67,16 +68,6 @@ angularApp.directive( "topBar", function( $rootScope, $mdToast, graphConfig, rep
                         .hideDelay(3000)
                 );
             });
-
-            scope.changeWord = function( word ){
-
-                socket.emit( "setAlreadyTrackKeyWord", word );
-            };
-
-            scope.deleteWord = function( word ){
-
-                socket.emit( "stopKeyWord", word.id );
-            };
 
         }
     };

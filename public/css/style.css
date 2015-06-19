@@ -25,6 +25,34 @@ body {
   text-align: center;
   left: 35%;
 }
+#topBar .running-word {
+  text-transform: uppercase;
+  padding: 15px;
+}
+#topBar .tweetCounter md-icon {
+  width: 36px;
+  height: 36px;
+}
+#topBar .tweetCounter md-icon path {
+  fill: white;
+}
+#topBar .tweetCounter md-icon svg {
+  width: 36px;
+  height: 36px;
+}
+#topBar .menu-btn {
+  cursor: pointer;
+}
+#topBar .menu-btn path {
+  fill: white;
+}
+#topBar .menu-btn svg {
+  width: 36px;
+  height: 36px;
+}
+#topBar .tweet-peer-seconde {
+  line-height: 1.5;
+}
 #right-menu .md-raised {
   width: 100%;
 }
@@ -91,27 +119,6 @@ body {
   color: #000000;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
-#menu path {
-  fill: white;
-}
-#menu svg {
-  width: 36px;
-  height: 36px;
-}
-.tweetCounter {
-  padding: 0 20%;
-}
-.tweetCounter md-icon {
-  width: 36px;
-  height: 36px;
-}
-.tweetCounter md-icon path {
-  fill: white;
-}
-.tweetCounter md-icon svg {
-  width: 36px;
-  height: 36px;
-}
 #graphTps {
   position: relative;
 }
@@ -129,7 +136,4 @@ body {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
-}
-.tweet-peer-seconde {
-  line-height: 1.5;
 }

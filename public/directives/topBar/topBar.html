@@ -1,20 +1,22 @@
 <md-toolbar id="topBar">
-<div class="md-toolbar-tools">
-    <span>Mastering Data Mining & Analytics</span>
-    <div  flex layout="row" layout-wrap>
-        <div flex="30">
-            <div class="tweetCounter" >
-                <md-icon md-svg-src="images/twitter.svg" alt="twitter"></md-icon>
-                <span>{{tweetCount.value}}</span>
-
-            </div>
+    <div class="md-toolbar-tools" layout="row">
+        <div flex="25">
+            <span>Mastering Data Mining & Analytics</span>
         </div>
         <div flex="70">
-            <tweet-heartbeat></tweet-heartbeat>
+            <div layout="row" layout-align="end center">
+                <div class="tweetCounter">
+                    <span class="running-word">{{runningWord().value}}</span>
+                    <md-icon md-svg-src="images/twitter.svg" alt="twitter"></md-icon>
+                    <span>{{tweetCount.value}}</span>
+                </div>
+                <div flex="50">
+                    <tweet-heartbeat></tweet-heartbeat>
+                </div>
+            </div>
+        </div>
+        <div flex="5">
+            <ng-md-icon icon="menu" class="menu-btn" ng-click="toggleRight()"  ></ng-md-icon>
         </div>
     </div>
-    <md-button ng-click="toggleRight()" aria-label="menu">
-        <ng-md-icon icon="menu" id="menu" ></ng-md-icon>
-    </md-button>
-</div>
 </md-toolbar>
