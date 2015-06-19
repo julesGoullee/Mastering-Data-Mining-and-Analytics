@@ -1,8 +1,12 @@
 "use strict";
 
-angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $mdDialog, socket, keysWord ){
+angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $mdDialog, $timeout, socket, keysWord ){
     $scope.addedKeyWord = null;
     $scope.selectedKeyWord = null;
+
+    $timeout(function() {
+        angular.element('#keywordInput').focus();
+    }, 500);
 
     $scope.isValidInput = function( text ){
         if( text.length > 3 && text.indexOf(" ") === -1 ){
