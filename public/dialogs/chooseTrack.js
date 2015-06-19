@@ -43,7 +43,6 @@ angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $md
                 if( word.value === $scope.addedKeyWord.name ){
                     word.isMine = true;
                     keysWord.currentKeyWord( word.id );
-                    socket.emit( "setAlreadyTrackKeyWord", word.id );
                 }
             });
 
