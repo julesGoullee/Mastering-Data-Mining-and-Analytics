@@ -21,9 +21,9 @@ angularApp.controller("AppCtrl", function( $scope, $rootScope, socket, $mdDialog
     });
 
     socket.on("limitExceeded", function( keyWordLimit ){
-
+        var keyWordExceeded = keysWord.getById( keyWordLimit.id );
         $rootScope.$broadcast("limitExceeded", {
-            keyWord: keysWord.getById( keyWordLimit.id ),
+            keyWord: keyWordExceeded,
             timeRemaining: keyWordLimit.timeRemaining
         });
     });
