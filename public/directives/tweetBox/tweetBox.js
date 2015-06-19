@@ -44,6 +44,8 @@ angularApp.directive( "tweetBox",
             var contentElement = angular.element('.main-content');
             divElement.mousedown(function(e) {
 
+                if(e.which !== 1) return; // ignore right click
+
                 e.preventDefault();
 
                 var clickOffset = {
