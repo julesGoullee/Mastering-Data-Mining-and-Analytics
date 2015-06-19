@@ -4,6 +4,9 @@
             <h2 class="md-toolbar-tools"><span>Settings</span></h2>
         </md-toolbar>
         <md-content >
+            <div layout="row"  layout-align="center center">
+                <md-button ng-click="showPopup();toggleRight()" class="md-primary">Add #keyWord</md-button>
+            </div>
             <md-divider></md-divider>
 
             <md-list>
@@ -37,11 +40,6 @@
                 </md-list-item>
             </md-list>
 
-            <md-divider></md-divider>
-
-            <div layout="row"  layout-align="center center">
-                <md-button ng-click="showPopup();toggleRight()" class="md-primary">Add #keyWord</md-button>
-            </div>
         </md-content >
         <md-toolbar class="md-theme-light">
             <h2 class="md-toolbar-tools">
