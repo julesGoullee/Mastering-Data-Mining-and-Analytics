@@ -15,15 +15,15 @@
     <form name="trackForm" ng-submit="validate()">
         <md-dialog-content class="sticky-container">
                 <md-subheader class="md-sticky-no-effect">
-                    Please enter a keyword to stream.
+                    #keyword
                 </md-subheader>
                 <div>
                     <div layout="row">
                         <md-input-container flex="100">
-                            <label>#keyword</label>
+                            <label>Please enter a keyword to stream.</label>
                             <input name="keyword" id="keywordInput" ng-model="addedKeyWord.name" ng-minlength="4" required md-maxlength="15">
                             <div ng-messages="trackForm.keyword.$error">
-                                <div ng-message="required" ng-if="tried">Please enter a keyword.</div>
+                                <!--<div ng-message="required" ng-if="tried">Please enter a keyword.</div>-->
                                 <div ng-message="md-maxlength">Max size is 15 characters.</div>
                                 <div ng-message="minlength">Min size is 4 characters.</div>
                             </div>
