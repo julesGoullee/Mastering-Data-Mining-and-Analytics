@@ -36,7 +36,34 @@ angularApp.directive( "tweetBox",
 
                 fillBoxWithTweets(word.id);
                 scope.show();
-            })
+            });
+
+            // Drag&Drop
+            var divElement = angular.element('.tweet-box');
+            var topBarElement = angular.element('#topBar');
+            var contentElement = angular.element('.main-content');
+            divElement.mousedown(function(e) {
+
+                e.preventDefault();
+
+                var clickOffset = {
+                    left: e.offsetX,
+                    top : e.offsetY
+                };
+
+                contentElement.mousemove( function(e) {
+                    var position = {
+                        left: e.pageX - clickOffset.left,
+                        top: e.pageY - clickOffset.top
+                    };
+                    position.top = Math.max(position.top, topBarElement.height());
+                    divElement.css(position);
+                });
+            });
+
+            contentElement.mouseup(function(e) {
+                contentElement.off('mousemove');
+            });
         }
     };
 });
