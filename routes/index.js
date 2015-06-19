@@ -31,7 +31,7 @@ var dependances = {
         "controllers/mainController",
         "services/graphConfig/graphConfig",
         "services/socket/socket",
-        "services/representation/representation",
+        "services/representationService/representationService",
         "services/keysWord/keysWord",
         "dialogs/chooseTrack",
         "directives/representation/representation",
