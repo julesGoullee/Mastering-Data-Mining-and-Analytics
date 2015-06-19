@@ -4,7 +4,7 @@ angularApp.service("graphConfig",function($rootScope){
 
     var gravity = {
         enabled: true,
-        value: 0.1
+        value: 1
     };
 
     return {
