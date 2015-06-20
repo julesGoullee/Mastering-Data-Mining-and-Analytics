@@ -14,6 +14,10 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+md-toolbar md-icon {
+  width: 30px;
+  height: 30px;
+}
 .main-view {
   width: 100%;
   height: 100%;
@@ -45,16 +49,6 @@ body {
   fill: white;
 }
 #topBar .tweetCounter md-icon svg {
-  width: 36px;
-  height: 36px;
-}
-#topBar .menu-btn {
-  cursor: pointer;
-}
-#topBar .menu-btn path {
-  fill: white;
-}
-#topBar .menu-btn svg {
   width: 36px;
   height: 36px;
 }
