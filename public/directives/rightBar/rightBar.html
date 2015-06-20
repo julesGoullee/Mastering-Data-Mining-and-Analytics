@@ -18,25 +18,27 @@
                                 flex="10"
                             ></ng-md-icon>
 
-                    <div class="word-name" flex="70">{{word.value}}</div>
+                    <div class="word-name" flex>{{word.value}}</div>
 
-                    <ng-md-icon icon="play_arrow"
-                                class="play-icon"
-                                ng-show="word.isMine === true && word.isWait === true"
-                                ng-click="resumeWord(word)"
-                                flex="10"></ng-md-icon>
+                    <div flex="20">
+                        <ng-md-icon icon="play_arrow"
+                                    class="play-icon"
+                                    ng-show="word.isMine === true && word.isWait === true"
+                                    ng-click="resumeWord(word)"
+                                    flex="10"></ng-md-icon>
 
-                    <ng-md-icon icon="pause"
-                                class="pause-icon"
-                                ng-show="word.isMine === true && word.isWait === false"
-                                ng-click="pauseWord(word)"
-                                flex="10"></ng-md-icon>
+                        <ng-md-icon icon="pause"
+                                    class="pause-icon"
+                                    ng-show="word.isMine === true && word.isWait === false"
+                                    ng-click="pauseWord(word)"
+                                    flex="10"></ng-md-icon>
 
-                    <ng-md-icon icon="close"
-                                class="close-icon"
-                                ng-show="word.isMine === true"
-                                ng-click="deleteWord(word)"
-                                flex="10"></ng-md-icon>
+                        <ng-md-icon icon="close"
+                                    class="close-icon"
+                                    ng-show="word.isMine === true"
+                                    ng-click="deleteWord(word)"
+                                    flex="10"></ng-md-icon>
+                    </div>
                 </md-list-item>
             </md-list>
 
