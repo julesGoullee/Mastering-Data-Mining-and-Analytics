@@ -13,9 +13,8 @@
                 <md-list-item ng-repeat="word in words()" ng-click="changeWord(word)" class="word-line" ng-class="{'selected': runningWord().id === word.id }" layout="row" layout-align="center center">
 
                     <ng-md-icon icon="sync"
-                                flex="10"
                                 ng-class="{'running': !word.isWait }"
-                                flex="10"
+                                flex="5"
                             ></ng-md-icon>
 
                     <div class="word-name" flex>{{word.value}}</div>
