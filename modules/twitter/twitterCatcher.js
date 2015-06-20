@@ -20,7 +20,7 @@ module.exports = {
         keyWord.isReady = true;
         keyWord.onStack = false;
 
-        if( keyWord.tweetCount === 0){//premier lancement du mot
+        if( keyWord.tweetCount === 0 ){//premier lancement du mot
 
             esConnector.dropIndexByTag( keyWord.name );
         }

@@ -50,6 +50,8 @@ angularApp.factory( "graph", function( $rootScope ){
     var nodes = force.nodes();
     var links = force.links();
     var vis;
+    var dragStartDate;
+    var timeToClick = 100;
 
     function addSvg( rootElement, clientSize ){
 
@@ -275,6 +277,11 @@ angularApp.factory( "graph", function( $rootScope ){
     }
 
     function dragStart(){
+
+        dragStartDate = new Date().getTime();
+
+        console.log(" drag start");
+
         d3.event.sourceEvent.stopPropagation();
         force.stop();
     }
@@ -288,43 +295,52 @@ angularApp.factory( "graph", function( $rootScope ){
     }
 
     function dragEnd( d ){
-        d.fixed = true;
-        onTicks();
+
+        var dragEndDate = new Date().getTime();
+
+        if( dragStartDate && dragEndDate - dragStartDate > timeToClick ){
+
+            d.fixed = true;
+            onTicks();
+        }
         force.resume();
     }
 
-    function onClick(d){
-        d3.event.preventDefault();
+    function onClick( d ){
 
-        $rootScope.$apply(function() {
-            $rootScope.$broadcast( "openTweetBox", d );
-        })
+        if( !d3.event.defaultPrevented ){
+
+            $rootScope.$apply(function() {
+                $rootScope.$broadcast( "openTweetBox", d );
+            })
+        }
+        d3.event.preventDefault();
     }
 
     function setVisibilityFor( nodes, visibility ){
 
         vis.selectAll("g.node")
             .filter(function (d){
-                        for( var i = 0; i < nodes.length; i++ ){
-                            if( nodes[i] === d.id ){
-                                d.hidden = visibility;
-                                return true;
-                            }
-                        }
-                        return false;
-                    })
+                for( var i = 0; i < nodes.length; i++ ){
+                    if( nodes[i] === d.id ){
+                        d.hidden = visibility;
+                        return true;
+                    }
+                }
+                return false;
+            })
             .style("opacity", visibility ? "1" : "0.1");
 
         vis.selectAll("line.link")
             .filter(function( d ){
-                        for( var i = 0; i < nodes.length; i++ ){
-                            if( nodes[i] === d.source.id ){
-                                d.source.hidden = visibility;
-                                return true;
-                            }
-                        }
-                        return false;
-                    })
+                for( var i = 0; i < nodes.length; i++ ){
+                    if( nodes[i] === d.source.id ){
+                        d.source.hidden = visibility;
+                        return true;
+                    }
+                }
+                return false;
+            })
             .style("opacity", visibility ? "1" : "0.1");
     }
 
