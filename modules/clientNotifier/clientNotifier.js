@@ -80,7 +80,7 @@ module.exports = {
             socketHandler.on("resumeKeyWord", user.socket, function( idKeyWord ){
                 var keyWord = keysWord.getById( idKeyWord );
 
-                if( user.isMyKeyWord( keyWord.id ) && keysWord.resumeKeyWord( keyWord.id ) ){
+                if( user.isMyKeyWord( keyWord.id ) && keyWord.isReadyForStream() && keysWord.resumeKeyWord( keyWord.id ) ){
 
                     setTimeout(function () {
                         if( keyWord.stream && !keyWord.isWait ){
