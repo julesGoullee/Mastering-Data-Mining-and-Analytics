@@ -3,6 +3,7 @@
 angularApp.service("keysWord", function( $rootScope, socket ){
     var _keysWord = [];
     var _currentKeyWord;
+    var _limitUserMaxKeyWords = 2;
 
     function get(){
         return _keysWord;
@@ -43,6 +44,19 @@ angularApp.service("keysWord", function( $rootScope, socket ){
             }
         }
         return false;
+    }
+
+    function isReadyForStream(){
+        var nbRunning = 0;
+
+        for (var i = 0; i < _keysWord.length; i++) {
+            var keyWord = _keysWord[i];
+            if( !keyWord.isWait ){
+                nbRunning++;
+            }
+        }
+
+        return nbRunning <= _limitUserMaxKeyWords;
     }
 
     socket.on("keysWord", function( keysWord ){
@@ -87,6 +101,7 @@ angularApp.service("keysWord", function( $rootScope, socket ){
         currentKeyWord: currentKeyWord,
         getById : getById,
         add: add,
-        delById : delById
+        delById : delById,
+        isReadyForStream: isReadyForStream
     };
 });

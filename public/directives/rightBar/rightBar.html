@@ -19,24 +19,30 @@
 
                     <div class="word-name" flex>{{word.value}}</div>
 
-                    <div flex="20">
-                        <ng-md-icon icon="play_arrow"
-                                    class="play-icon"
+                    <div flex="20" layout="row" >
+                        <md-button  ng-disabled="!isReadyForStream()"
                                     ng-show="word.isMine === true && word.isWait === true"
                                     ng-click="resumeWord(word)"
-                                    flex="10"></ng-md-icon>
-
-                        <ng-md-icon icon="pause"
-                                    class="pause-icon"
-                                    ng-show="word.isMine === true && word.isWait === false"
-                                    ng-click="pauseWord(word)"
-                                    flex="10"></ng-md-icon>
-
-                        <ng-md-icon icon="close"
-                                    class="close-icon"
-                                    ng-show="word.isMine === true"
+                                    flex="50"
+                                    aria-label="play">
+                            <ng-md-icon icon="play_arrow"
+                                        class="play-icon"></ng-md-icon>
+                        </md-button>
+                        <md-button ng-show="word.isMine === true && word.isWait === false"
+                                   ng-click="pauseWord(word)"
+                                   flex="50"
+                                   aria-label="pausse">
+                            <ng-md-icon icon="pause"
+                                        class="pause-icon"></ng-md-icon>
+                        </md-button>
+                        <md-button  ng-show="word.isMine === true"
                                     ng-click="deleteWord(word)"
-                                    flex="10"></ng-md-icon>
+                                    flex="50"
+                                    aria-label="close">
+                            <ng-md-icon icon="close"
+                                        class="close-icon"></ng-md-icon>
+                        </md-button>
+
                     </div>
                 </md-list-item>
             </md-list>

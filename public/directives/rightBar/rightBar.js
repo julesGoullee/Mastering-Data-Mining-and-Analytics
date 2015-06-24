@@ -13,6 +13,7 @@ angularApp.directive( "rightBar",
             scope.showPopup = $rootScope.showPopup;
             scope.runningWord = keysWord.currentKeyWord;
             scope.words = keysWord.get;
+            scope.isReadyForStream = keysWord.isReadyForStream;
 
             scope.changeWord = function( word ){
                 if( scope.runningWord() !== word ){
@@ -30,11 +31,15 @@ angularApp.directive( "rightBar",
             scope.pauseWord = function( word ){
 
                 socket.emit( "pauseKeyWord", word.id );
+                word.loading = true;
             };
 
             scope.resumeWord = function( word ){
 
-                socket.emit( "resumeKeyWord", word.id );
+                if( keysWord.isReadyForStream() ){
+
+                    socket.emit( "resumeKeyWord", word.id );
+                }
             };
 
 

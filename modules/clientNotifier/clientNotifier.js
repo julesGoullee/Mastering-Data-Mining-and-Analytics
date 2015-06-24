@@ -40,10 +40,14 @@ module.exports = {
 
                         if( user.isReadyForStream() ){
                             var newKeyWord = keysWord.addKeyWord( data.newKeyWord, data.options.lang, data.options.occurence, user );
-                            newKeyWord.isMine = true;
-                            socketHandler.notifyOne( "newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket );
-                            newKeyWord.isMine = false;
-                            socketHandler.notifyAllWithoutMe( "newKeyWord", keysWord.getOneJson(newKeyWord) , user.socket );
+
+                            var newKeyWordJson = keysWord.getOneJson(newKeyWord);
+
+                            newKeyWordJson.isMine = true;
+                            socketHandler.notifyOne( "newKeyWord", newKeyWordJson, user.socket );
+
+                            newKeyWordJson.isMine = false;
+                            socketHandler.notifyAllWithoutMe( "newKeyWord", newKeyWordJson, user.socket );
 
                         }
                         else{
@@ -80,13 +84,11 @@ module.exports = {
             socketHandler.on("resumeKeyWord", user.socket, function( idKeyWord ){
                 var keyWord = keysWord.getById( idKeyWord );
 
-                if( user.isMyKeyWord( keyWord.id ) && keyWord.isReadyForStream() && keysWord.resumeKeyWord( keyWord.id ) ){
+                if( user.isMyKeyWord( keyWord.id ) && user.isReadyForStream() && keysWord.resumeKeyWord( keyWord.id ) ){
 
-                    setTimeout(function () {
-                        if( keyWord.stream && !keyWord.isWait ){
-                            socketHandler.notifyAll("resumeKeyWord", keyWord.id);
-                        }
-                    }, 3000);
+                    if( keyWord.stream && !keyWord.isWait ){
+                        socketHandler.notifyAll("resumeKeyWord", keyWord.id);
+                    }
                 }
             });
 
