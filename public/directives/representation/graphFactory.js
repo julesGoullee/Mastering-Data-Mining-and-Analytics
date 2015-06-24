@@ -280,8 +280,6 @@ angularApp.factory( "graph", function( $rootScope ){
 
         dragStartDate = new Date().getTime();
 
-        console.log(" drag start");
-
         d3.event.sourceEvent.stopPropagation();
         force.stop();
     }
