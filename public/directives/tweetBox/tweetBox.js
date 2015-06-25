@@ -66,6 +66,9 @@ angularApp.directive( "tweetBox",
                     fillBoxWithTweets( word.id );
                     scope.show();
                 }
+                else if( scope.visible === false ){
+                    scope.show();
+                }
             });
 
             // Drag&Drop
