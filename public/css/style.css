@@ -68,18 +68,22 @@ md-toolbar md-icon {
 #right-menu .word-line ng-md-icon {
   font-size: 46px;
 }
+#right-menu .word-line .md-button {
+  min-width: 0;
+  margin: 0;
+}
+#right-menu .word-line .md-button:hover {
+  background-color: rgba(183, 189, 191, 0.16);
+  cursor: pointer;
+}
+#right-menu .word-line .md-button:hover .selected-icon {
+  fill: #BBBBBB;
+}
 #right-menu .word-line .word-name {
   font-size: 17px;
   text-transform: uppercase;
   padding-left: 10%;
   margin: 0;
-}
-#right-menu .word-line:hover {
-  background-color: rgba(183, 189, 191, 0.16);
-  cursor: pointer;
-}
-#right-menu .word-line:hover .selected-icon {
-  fill: #BBBBBB;
 }
 #right-menu .word-line .selected-icon {
   fill: #BBBBBB;

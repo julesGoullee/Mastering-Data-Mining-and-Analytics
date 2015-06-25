@@ -93,6 +93,19 @@ md-toolbar {
       font-size: 46px;
     }
 
+    .md-button {
+      min-width: 0;
+      margin: 0;
+      &:hover {
+        background-color: rgba(183, 189, 191, 0.16);
+        cursor: pointer;
+
+        .selected-icon {
+          fill: #BBBBBB;
+        }
+      }
+    }
+
     .word-name{
       font-size: 17px;
       text-transform: uppercase;
@@ -100,16 +113,6 @@ md-toolbar {
       margin: 0;
 
     }
-
-    &:hover{
-      background-color: rgba(183, 189, 191, 0.16);
-      cursor: pointer;
-
-      .selected-icon{
-        fill: #BBBBBB;
-      }
-    }
-
 
     .selected-icon{
       fill: #BBBBBB;
