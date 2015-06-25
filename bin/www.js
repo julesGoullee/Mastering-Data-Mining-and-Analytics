@@ -4,10 +4,6 @@ var app = require("../app").app;
 var http = require("http");
 var config = require("../config/config.js");
 
-//var noIpConnector = require("../modules/serverConfig/noipConfig.js");
-//var debug = require('debug')('mastering-data-mining-and-analytics:server');
-//noIpConnector.updateIp();
-
 app.set( "port", config.port );
 var server = http.createServer( app );
 server.listen( config.port, "0.0.0.0" );
@@ -30,16 +26,16 @@ function onError( error ){
         throw error;
     }
 
-    var bind = typeof config.port === 'string'
-        ? 'Pipe ' + config.port
-        : 'Port ' + config.port;
+    var bind = typeof config.port === "string"
+        ? "Pipe " + config.port
+        : "Port " + config.port;
 
     switch( error.code ){
-        case 'EACCES':
+        case "EACCES":
             console.error( bind + " requires root privileges" );
             process.exit(1);
             break;
-        case 'EADDRINUSE':
+        case "EADDRINUSE":
             console.error( bind + " is already in use" );
             process.exit(1);
             break;
@@ -63,8 +59,8 @@ function onListening(){
             socketHandler.listen(_io);
             clientNotifier.connect();
 
-        }, function( error ){
-            console.log("Elasticsearch connection [FAIL]");
+        }, function( err ){
+            console.log("Elasticsearch connection [FAIL]: " + err );
         });
     }
 }

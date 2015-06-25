@@ -85,8 +85,8 @@ if( config.api.active ){
     app.use(passport.session());
     app.use("/auth", auth.router);
 }
-//routes
 
+//routes
 if( config.webServer.active ){
     app.use("/", routes);
 
@@ -94,32 +94,10 @@ if( config.webServer.active ){
 }
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    console.log(req.originalUrl);
-    var err = new Error("Not Found");
-    err.status = 404;
-    next(err);
-});
-
-// development error handler
-if( app.get("env") === "development" ){
-    app.use(function( err, req, res ){
-        res.status(err.status || 500);
-        res.render("error", {
-            message: err.message,
-            error: err
-        });
-    });
-}
-
-// production error handler
-app.use(function( err, req, res ){
-
-    res.status( err.status || 500 );
-    res.render("error", {
-        message: err.message,
-        error: {}
-    });
+app.use(function( req, res ){
+    console.log( "Not Found url: " + req.originalUrl );
+    res.status( 404 );
+    res.send("File not found!");
 });
 
 module.exports = {
