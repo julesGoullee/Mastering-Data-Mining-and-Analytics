@@ -28,7 +28,7 @@ module.exports = function(grunt) {
                     },
                     {
                         src: "bower_components/jquery/dist/jquery.min.map",
-                        dest: "public/external/jquery.min.js.map"
+                        dest: "public/external/jquery.min.map"
                     },
                     //angularjs
                     {
@@ -80,7 +80,7 @@ module.exports = function(grunt) {
                     },
                     {
                         src: "bower_components/angular-socket-io/socket.min.js.map",
-                        dest: "public/external/angular-socket-io.js.map"
+                        dest: "public/external/socket.min.js.map"
                     },
                     //angularjs-route
                     {
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
                         dest: "public/external/angular-route.js"
                     },
                     {
-                        src: "bower_components/angular-route/angular-route.js.map",
+                        src: "bower_components/angular-route/angular-route.min.js.map",
                         dest: "public/external/angular-route.min.js.map"
                     },
                     //D3.js
