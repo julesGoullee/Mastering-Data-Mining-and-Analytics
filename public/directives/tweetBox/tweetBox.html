@@ -12,7 +12,8 @@
     <div layout="row" >
         <md-content ng-show="!isLoading"  id="tweet-container" style="height: 400px; width: 500px;"></md-content>
         <div ng-show="isLoading" layout="row" layout-sm="column" layout-align="center center" flex style="height: 400px; width: 500px;">
-            <md-progress-circular md-mode="indeterminate" ></md-progress-circular>
+            <!--<md-progress-circular md-mode="indeterminate" ></md-progress-circular>-->
+            <md-progress-circular md-mode="determinate" value="{{progressTweet}}"></md-progress-circular>
         </div>
     </div>
 </div>

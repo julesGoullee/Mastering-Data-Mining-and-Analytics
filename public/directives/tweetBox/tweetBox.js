@@ -33,24 +33,30 @@ angularApp.directive( "tweetBox",
             };
 
             socket.on("getTweetByWord",function( tweets ){
-                //scope.tweets = tweets;
+                scope.tweets = tweets;
+                scope.progressTweet = 0;
                 tweetsContainer.empty();
                 scope.isLoading = true;
-                for( var i = 0; i < tweets.length; i++ ){
-                    (function(i) {
-                        var tweet = tweets[i];
-                        twttr.widgets.createTweet(
-                            tweet.id,
-                            tweetsContainer[0],
-                            {
-                                align: 'left'
-                            })
-                            .then(function (el) {
-                                if( i === tweets.length -1 ){
-                                    scope.isLoading = false;
-                                }
+                getOneTweet(0);
+
+                function getOneTweet( i ){
+                    var tweet = tweets[i];
+
+                    twttr.widgets.createTweet( tweet.id, tweetsContainer[0],{
+                        align: 'left'
+                    }).then(function (el) {
+                        if( i === tweets.length -1 ){
+                            scope.$apply(function(){
+                                scope.isLoading = false;
                             });
-                    })(i);
+                        }else{
+                            i = i+1;
+                            scope.$apply(function() {
+                                scope.progressTweet = Math.round( ( i / tweets.length ) * 100);
+                            });
+                            getOneTweet( i );
+                        }
+                    });
                 }
             });
 
