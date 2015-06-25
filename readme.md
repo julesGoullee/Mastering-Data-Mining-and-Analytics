@@ -1,5 +1,7 @@
 Mastering-Data-Mining-and-Analytics
 ==========
+
+[![Join the chat at https://gitter.im/julesGoullee/Mastering-Data-Mining-and-Analytics](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/julesGoullee/Mastering-Data-Mining-and-Analytics?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 Tweet tracker
 
 Nodejs-Express-socketio web app
