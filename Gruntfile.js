@@ -199,6 +199,9 @@ module.exports = function(grunt) {
                 }
             }
         },
+        clean: {
+            build: ["bower_components"]
+        },
         simplemocha: {
             all:{
                 options: {
@@ -242,7 +245,7 @@ module.exports = function(grunt) {
     grunt.registerTask("test_all", ["karma:singleRun","simplemocha:all"]);
 
     //INSTALLATION
-    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev"]);
-    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd"]);
+    grunt.registerTask("config_dev", ["bower:install", "copy:bowerDev", "clean:build"]);
+    grunt.registerTask("config_prod", ["bower:install", "copy:bowerProd", "clean:build"]);
 
 };

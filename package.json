@@ -9,6 +9,7 @@
   "devDependencies": {
     "chai": "*",
     "debug": "~2.1.1",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-watch": "*",
     "grunt-karma": "^0.11.0",
