@@ -1,0 +1,3 @@
+mongodb request:
+db.getCollection('sessions').remove({"session.passport.user.id": { $exists: false}})
+db.getCollection('sessions').find({"session.passport.user.id": { $exists: true}})

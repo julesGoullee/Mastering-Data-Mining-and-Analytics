@@ -93,7 +93,7 @@ if( config.webServer.active ){
     app.use(express.static(path.join(__dirname, "public")));
 }
 
-// catch 404 and forward to error handler
+// catch 404
 app.use(function( req, res ){
     console.log( "Not Found url: " + req.originalUrl );
     res.status( 404 );
