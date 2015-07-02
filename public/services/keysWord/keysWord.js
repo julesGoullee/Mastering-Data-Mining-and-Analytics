@@ -56,7 +56,7 @@ angularApp.service("keysWord", function( $rootScope, socket ){
             }
         }
 
-        return nbRunning <= _limitUserMaxKeyWords;
+        return nbRunning < _limitUserMaxKeyWords;
     }
 
     socket.on("keysWord", function( keysWord ){
