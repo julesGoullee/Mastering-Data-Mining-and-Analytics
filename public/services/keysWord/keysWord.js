@@ -51,7 +51,7 @@ angularApp.service("keysWord", function( $rootScope, socket ){
 
         for (var i = 0; i < _keysWord.length; i++) {
             var keyWord = _keysWord[i];
-            if( !keyWord.isWait ){
+            if( !keyWord.isWait && keyWord.isMine){
                 nbRunning++;
             }
         }
