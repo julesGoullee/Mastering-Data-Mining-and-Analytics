@@ -5,7 +5,10 @@
         </md-toolbar>
         <md-content >
             <div layout="row"  layout-align="center center">
-                <md-button ng-click="showPopup();toggleRight()" class="md-primary">Add #keyWord</md-button>
+                <md-button
+                        ng-click="showPopup();toggleRight()"
+                        class="md-primary"
+                        ng-disabled="!isReadyForStream()">Add #keyWord</md-button>
             </div>
             <md-divider></md-divider>
 
