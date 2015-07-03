@@ -3,8 +3,12 @@
 # Stopping servers
 echo -e "\n\nStopping servers..."
 
-sudo /etc/init.d/elasticsearch stop
+echo -e "\n\nStopping service..."
+sudo service mongod start
+sudo service elasticsearch start
 
-killall mongod
+echo -e "\n\nStopping node app..."
 
 forever stop bin/www.js
+
+echo -e "\n\nDone !"

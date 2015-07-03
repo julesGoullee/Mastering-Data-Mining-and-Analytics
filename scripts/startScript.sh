@@ -8,4 +8,7 @@ echo -e "\n\nStarting servers..."
 sudo service mongod start
 sudo service elasticsearch start
 
-//forever start bin/www.js
+
+echo -e "\n\nStarting node app..."
+forever start bin/www.js
+echo -e "\n\nDone !"

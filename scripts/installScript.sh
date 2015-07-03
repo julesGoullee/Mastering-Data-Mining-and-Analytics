@@ -1,12 +1,6 @@
 #!/bin/bash
 ## Config
-
-ES_Server=0
-ESVersion=1.5.2
 nodeVersion=0.12.4
-mongoVersion=3.0.3
-startOnBoot=false
-start=false
 
 ## Script
 
@@ -32,27 +26,17 @@ wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.25.4/install.sh | 
 . $HOME/.nvm/nvm.sh
 nvm install $nodeVersion
 nvm use "v"$nodeVersion
-echo "nvm use "$nodeVersion >> ~/.bashrc
-
-echo -e  "\n\nStart service mongodb & elsticsearch"
-sudo service mongod start
-sudo service elasticsearch start
+echo "nvm use "$nodeVersion" > /dev/null 2>&1" >> ~/.bashrc
 
 echo -e "\n\nInstalling npm globals..."
 npm install -g grunt-cli
 npm install -g bower
 npm install -g forever
 
-echo -e "\n\nInstalling dependencies..."
-npm install
-grunt config_dev
-
-
 # MDMA Configuration
 echo -e "\n\nConfiguring project..."
-
+npm install
+grunt config_dev
 echo -e "\n\nDone !"
 
-# TODO :
-# launch mongodb at start
 # todo launch mongodb as mongodb and set permissions
