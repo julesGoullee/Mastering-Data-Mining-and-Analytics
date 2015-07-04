@@ -9,6 +9,7 @@
                         ng-click="showPopup();toggleRight()"
                         class="md-primary"
                         ng-disabled="!isReadyForStream()">Add #keyWord</md-button>
+                <md-tooltip ng-show="!isReadyForStream()">Vous ne pouvez pas ajouter plus de 2 mots</md-tooltip>
             </div>
             <md-divider></md-divider>
 
