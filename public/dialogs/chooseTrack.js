@@ -1,6 +1,6 @@
 "use strict";
 
-angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $mdDialog, $timeout, socket, keysWord ){
+angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $mdDialog, $timeout, socket, keysWord, ga ){
     $scope.addedKeyWord = null;
     $scope.selectedKeyWord = null;
 
@@ -47,6 +47,7 @@ angularApp.controller("ChooseTrackController", function( $scope, $rootScope, $md
             });
 
             $mdDialog.hide();
+            ga('send', 'event', 'keyWord', 'addNew');
         }
         else {
             //todo erreur

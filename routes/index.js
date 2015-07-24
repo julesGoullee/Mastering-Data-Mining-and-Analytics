@@ -28,6 +28,7 @@ var dependances = {
         "config/const",
         "config/routes",
         "config/theme",
+        "config/appConfig",
         "controllers/mainController",
         "services/graphConfig/graphConfig",
         "services/socket/socket",

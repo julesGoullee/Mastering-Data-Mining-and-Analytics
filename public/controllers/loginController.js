@@ -2,6 +2,6 @@
 
 var angularApp = angular.module('Mastering-Data-Mining-and-Analytics', ['ngMaterial']);
 
-angularApp.controller("LoginCtrl", function( $scope){
-
+angularApp.controller("LoginCtrl", function( $scope, ga ){
+    ga('send', 'pageview', '/login');
 });

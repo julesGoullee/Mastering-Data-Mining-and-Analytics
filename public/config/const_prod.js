@@ -2,5 +2,6 @@
 
 angularApp.constant("config", {
     "url": "masteringdata.ddns.net",
-    "port": 80
+    "port": 80,
+    analitics: true
 });

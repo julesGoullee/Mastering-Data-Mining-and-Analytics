@@ -1,7 +1,7 @@
 "use strict";
 
 angularApp.directive( "tweetBox",
-    function( socket, representation ){
+    function( socket, representation, ga ){
     return {
         restrict: "E",
         scope: {},
@@ -28,6 +28,7 @@ angularApp.directive( "tweetBox",
                 if( wordId !== representation.getCurrentTag() ){
                     var message = { nameKeyWordTracked: representation.getCurrentTag(), word: wordId };
                     socket.emit("getTweetByWord", message);
+                    ga('send', 'event', 'word', 'getTweets');
                 }
 
             };
