@@ -32,6 +32,7 @@ var dependances = {
         "services/socket/socket",
         "services/representationService/representationService",
         "services/keysWord/keysWord",
+        "services/analitics/analitics",
         "dialogs/chooseTrack",
         "directives/representation/representation",
         "directives/representation/graphFactory",

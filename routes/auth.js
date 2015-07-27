@@ -16,9 +16,10 @@ var dependances = {
         //modules
         "../controllers/loginApp",
         "../config/appConfig",
-        "../controllers/loginController",
         "../config/const",
         "../config/theme",
+        "../controllers/loginController",
+        "../services/analitics/analitics",
         "../directives/login/login"
     ],
     css:[
