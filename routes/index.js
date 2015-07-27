@@ -20,8 +20,6 @@ var dependances = {
         "external/angular-socket-io",
         "external/d3",
         "external/angular-material-icons.min",
-        "external/ng-context-menu.min",
-
 
         //modules
         "main",
