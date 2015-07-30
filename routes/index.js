@@ -28,6 +28,7 @@ var dependances = {
         "config/theme",
         "config/appConfig",
         "controllers/mainController",
+        "controllers/feedbackController",
         "services/graphConfig/graphConfig",
         "services/socket/socket",
         "services/representationService/representationService",

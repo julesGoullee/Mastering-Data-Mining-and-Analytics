@@ -11,7 +11,6 @@ var bodyParser = require("body-parser");
 //app.use(logger("dev"));
 
 var routes = require("./routes/index");
-var feedback = require("./routes/feedback");
 
 var sessionMiddleware = {};
 
@@ -91,7 +90,6 @@ if( config.api.active ){
 //routes
 if( config.webServer.active ){
     app.use("/", routes);
-    app.use("/feedback", feedback);
 
     app.use(express.static(path.join(__dirname, "public")));
 }

@@ -4,5 +4,9 @@ angularApp.config(function($routeProvider) {
             templateUrl: 'views/main.html',
             controller: 'AppCtrl'
         })
+        .when('/feedback', {
+            templateUrl: 'views/feedback.html',
+            controller: 'FeedbackCtrl'
+        })
         .otherwise('/');
 });
