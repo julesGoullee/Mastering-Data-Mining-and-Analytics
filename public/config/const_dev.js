@@ -1,7 +1,7 @@
 "use strict";
 
 angularApp.constant("config", {
-    "url": "masteringdata.ddns.net",
-    "port": 80,
+    "url": "127.0.0.1",
+    "port": 3000,
     analitics: true
 });

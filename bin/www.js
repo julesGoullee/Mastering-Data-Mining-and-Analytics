@@ -1,5 +1,4 @@
 'use strict';
-
 var app = require("../app").app;
 var http = require("http");
 var config = require("../config/config.js");
@@ -13,8 +12,20 @@ if( config.api.active ) {
     var io = require("socket.io");
     var socketHandler = require("../modules/socketHandler/socketHandler.js");
     var clientNotifier = require("../modules/clientNotifier/clientNotifier.js");
+    var User = require('../modules/users/modelUser');
     var _io = io( server ).use(function( socket, next ){
-        sessionMiddleware( socket.request, {}, next );
+        sessionMiddleware(socket.request, {}, function(a, b){
+            if( socket.request.session &&
+              socket.request.session.passport &&
+              socket.request.session.passport.user ) {
+                User.findById(socket.request.session.passport.user, function (err, user) {
+                    socket.request.profile = user;
+                    next(err);
+                });
+            } else{
+                next(false);
+            }
+        });
     });
 }
 server.on( "error", onError );
@@ -54,13 +65,13 @@ function onListening(){
 
         esConnector.connect().then(function (){
 
-            console.log("Elasticsearch connection [OK]");
+            console.info("Elasticsearch connection [OK]");
 
             socketHandler.listen(_io);
             clientNotifier.connect();
 
         }, function( err ){
-            console.log("Elasticsearch connection [FAIL]: " + err );
+            console.error("Elasticsearch connection [FAIL]: " + err );
         });
     }
 }

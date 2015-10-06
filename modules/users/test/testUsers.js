@@ -17,11 +17,7 @@ describe("User", function() {
         var socket = sinon.stub();
         socket.returns({
             request: {
-                session:{
-                    passport:{
-                        user: {}
-                    }
-                }
+                profile: {}
             }
         });
         user = users.addUser( socket() );

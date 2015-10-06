@@ -16,8 +16,8 @@ module.exports = {
         user.client = user.client || new twitter({
             consumer_key: accounts.TWITTER_CONSUMER_KEY,
             consumer_secret: accounts.TWITTER_CONSUMER_SECRET,
-            access_token_key: user.session.token,
-            access_token_secret: user.session.tokenSecret
+            access_token_key: user.profile.twitter.token,
+            access_token_secret: user.profile.twitter.tokenSecret
         });
 
         user.client.stream( 'statuses/filter', {track: keyWord.name },  function( stream ){
