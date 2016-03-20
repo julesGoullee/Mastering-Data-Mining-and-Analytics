@@ -1,0 +1,16 @@
+#chcon -Rt svirt_sandbox_file_t ${HOME}/docker/mdma/mongo
+
+docker run --name es-mdma \
+	-d -p 172.17.0.1:9200:9200 -p 172.17.0.1:9300:9300 elasticsearch:latest
+
+
+docker run --name mongo-mdma \
+	-v ${HOME}/docker/mdma/mongo:/data/db \
+	-d -p 172.17.0.1:27017:27017 mongo:latest
+
+docker build -t jg/mdma:latest .
+
+docker run --name app-mdma \
+	-p 0.0.0.0:80:3000 \
+	jg/mdma:V2
+	

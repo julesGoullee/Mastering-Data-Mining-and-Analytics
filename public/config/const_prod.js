@@ -1,7 +1,7 @@
 "use strict";
 
 angularApp.constant("config", {
-    "url": "127.0.0.1",
+    "url": "vps259493.ovh.net",
     "port": 80,
     analitics: true
 });

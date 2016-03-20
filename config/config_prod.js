@@ -12,7 +12,7 @@ module.exports = {
     },
     webServer: {
         active: true,
-        apiAddress: "127.0.0.1",
+        apiAddress: "vps259493.ovh.net",
         apiPort: 80
     }
 };
