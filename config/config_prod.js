@@ -4,15 +4,15 @@ module.exports = {
     log: true,
     api : {
         active : true,
-        esAddress: "127.0.0.1:9200",
+        esAddress: "172.17.0.1:9200",
         mongo: {
-            ip: "127.0.0.1",
+            ip: "172.17.0.1",
             base: "mdma"
         }
     },
     webServer: {
         active: true,
-        apiAddress: "masteringdata.ddns.net",
+        apiAddress: "127.0.0.1",
         apiPort: 80
     }
 };
