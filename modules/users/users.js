@@ -10,7 +10,7 @@ function User( socket ) {
     var _keysWord = [];
 
     self.socket = socket;
-    self.session = socket.request.session.passport.user;
+    self.profile = socket.request.profile;
     self.tweetCount = 0;
     self.client = false;
     self.id = utils.guid();
@@ -86,7 +86,7 @@ module.exports = {
     },
     getBySessionId: function( sessionId ){
         for( var i = 0; i < _users.length; i++ ){
-            if( _users[i].session.id === sessionId ){
+            if( _users[i].socket.request.session.id === sessionId ){
                 return _users[i];
             }
         }

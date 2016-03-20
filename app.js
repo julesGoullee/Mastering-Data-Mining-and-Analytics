@@ -16,9 +16,9 @@ var sessionMiddleware = {};
 
 
 if( config.api.active ) {
+    var User = require('./modules/users/modelUser');
     var jf = require('jsonfile');
     var accounts = jf.readFileSync( __dirname + "/config/account.json");
-
     var session = require("express-session");
     var TwitterStrategy = require("passport-twitter").Strategy;
     var methodOverride = require("method-override");
@@ -28,31 +28,43 @@ if( config.api.active ) {
     var auth = require("./routes/auth");
 
     passport.serializeUser(function( user, done ){
-        done(null, user);
+        done(null, user.id);
     });
 
-    passport.deserializeUser(function( obj, done ){
-        done(null, obj);
+    passport.deserializeUser(function( id, done ){
+        User.findById(id, function (err, user) {
+            done(err, user);
+        });
     });
 
     passport.use(new TwitterStrategy({
-            consumerKey: accounts.TWITTER_CONSUMER_KEY,
-            consumerSecret: accounts.TWITTER_CONSUMER_SECRET,
-            callbackURL: "http://" + config.webServer.apiAddress + ":" + config.webServer.apiPort + "/auth/twitter/callback"
-        },
-        function( token, tokenSecret, profile, done ){
-
-            process.nextTick(function(){
-                var profileSave = {
-                    id: profile.id,
-                    username: profile.username,
-                    token: token,
-                    tokenSecret: tokenSecret,
-                    photoUrl: profile.photos[0].value
-                };
-                return done(null, profileSave);
-            });
-        }
+          consumerKey: accounts.TWITTER_CONSUMER_KEY,
+          consumerSecret: accounts.TWITTER_CONSUMER_SECRET,
+          callbackURL: "http://" + config.webServer.apiAddress + ":" + config.webServer.apiPort + "/auth/twitter/callback"
+      },
+      function( token, tokenSecret, profile, done ){
+          process.nextTick(function(){
+              User.findOne({ "tiwtter.id": profile.id}, function(err, user){
+                  if(!user){
+                      User.create({
+                          twitter:{
+                              id: profile.id,
+                              username: profile.username,
+                              token: token,
+                              tokenSecret: tokenSecret,
+                              photo: {
+                                  url: profile.photos[0].value
+                              }
+                          }
+                      },function(err, user){
+                          done(err, user);
+                      });
+                  } else{
+                      done(err, user);
+                  }
+              });
+          });
+      }
     ));
     sessionMiddleware = session({
         secret: "keyboard cat",
@@ -74,6 +86,11 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(favicon(__dirname + "/public/images/favicon.ico"));
 
+//routes
+if( config.webServer.active ){
+    app.use(express.static(path.join(__dirname, "public")));
+}
+
 if( config.api.active ){
     app.use(bodyParser.json());
     app.use(methodOverride());
@@ -90,8 +107,6 @@ if( config.api.active ){
 //routes
 if( config.webServer.active ){
     app.use("/", routes);
-
-    app.use(express.static(path.join(__dirname, "public")));
 }
 
 // catch 404
