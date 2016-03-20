@@ -38,7 +38,7 @@ RUN git clone "https://github.com/julesGoullee/Mastering-Data-Mining-and-Analyti
 
 WORKDIR /Mastering-Data-Mining-and-Analytics
 
-RUN git checkout jg-collection-userAuth \
+RUN git checkout v1 \
 	&& npm install
 
 RUN npm run postinstall
