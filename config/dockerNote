@@ -12,5 +12,5 @@ docker build -t jg/mdma:latest .
 
 docker run --name app-mdma \
 	-p 0.0.0.0:80:3000 \
-	jg/mdma:V2
+	jg/mdma:latest
 	
