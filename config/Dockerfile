@@ -24,7 +24,7 @@ RUN set -ex \
 
 
 ENV NPM_CONFIG_LOGLEVEL info
-ENV NODE_VERSION 0.12.12
+ENV NODE_VERSION 5.9.0
 ENV NODE_ENV=production
 
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
