@@ -44,7 +44,7 @@ if( config.api.active ) {
       },
       function( token, tokenSecret, profile, done ){
           process.nextTick(function(){
-              User.findOne({ "tiwtter.id": profile.id}, function(err, user){
+              User.findOne({ "twitter.id": profile.id}, function(err, user){
                   if(!user){
                       User.create({
                           twitter:{

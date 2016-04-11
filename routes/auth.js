@@ -40,11 +40,24 @@ router.get("/twitter",
     passport.authenticate("twitter")
 );
 
-router.get("/twitter/callback",
-    passport.authenticate("twitter", { failureRedirect: "auth/login" }),
-    function( req, res ){
-        res.redirect("/");
+router.get("/twitter/callback", function (req, res, next){
+
+    passport.authenticate("twitter", { failureRedirect: "auth/login" })(req, res, function(err){
+
+        if(err){
+
+            req.logout();
+            req.session.destroy();
+            res.redirect("/auth/login");
+
+        } else {
+
+            res.redirect("/");
+        }
+
     });
+
+});
 
 router.get("/logout", function( req, res ){
     req.logout();
