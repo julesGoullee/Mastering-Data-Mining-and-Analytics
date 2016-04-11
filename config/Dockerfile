@@ -34,11 +34,13 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
 	&& tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
 	&& rm "node-v$NODE_VERSION-linux-x64.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
+RUN echo "Version 1.0"
+
 RUN git clone "https://github.com/julesGoullee/Mastering-Data-Mining-and-Analytics.git"
 
 WORKDIR /Mastering-Data-Mining-and-Analytics
 
-RUN git checkout v1 \
+RUN git checkout 1.0 \
 	&& npm install
 
 RUN npm run postinstall
