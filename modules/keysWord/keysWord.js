@@ -7,7 +7,7 @@ var _keysWord = [];
 
 var keyWordContraint = {
     minLength: 4,
-    maxLength: 15,
+    maxLength: 30,
     lang: ["en", "fr"],
     minOccurence: 5,
     maxOccurence: 100
